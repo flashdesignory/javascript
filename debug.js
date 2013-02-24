@@ -23,7 +23,7 @@ var Debug = (function(window) {
 				try {
 					console.log(channel + ": " + message);
 				} catch(e) {
-					//do something smart here..
+					
 				}
 			}
 		}
