@@ -6,9 +6,7 @@
  */
  
 var Debug = (function(window) {
-
-  var _debug = true;
-
+	var _debug = true;
 	return{
 		getDebug: function(){
 			return _debug;
@@ -16,14 +14,18 @@ var Debug = (function(window) {
 		setDebug: function(value){
 			_debug = value;
 		},
-		log: function(channel, message){
+		log: function(channel, message, css){
 			if(!_debug) return;
 
 			if(window.console) {
 				try {
-					console.log(channel + ": " + message);
+					if(css){
+						console.log("%c" + channel + ": " + message, css);
+					}else{
+						console.log(channel + ": " + message);
+					}
 				} catch(e) {
-					
+					//do something smart here..
 				}
 			}
 		}
