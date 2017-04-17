@@ -1,2 +1,1 @@
-javascript
-==========
+Simple js file for debugging.
