@@ -57,7 +57,7 @@ SinglyList.prototype.log = function(){
  		return current;
  	}
 
- 	while(current){
+ 	while(current.next){
  		if(current.value == value){
  			previous.next = current.next;
  			return current;
