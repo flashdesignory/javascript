@@ -70,6 +70,76 @@ SinglyList.prototype.log = function(){
  	return null;
  }
 
+SinglyList.prototype.reverse = function(){
+	if(!this.head) return null;
+
+	var current = this.head;
+	var previous = null;
+	var next;
+
+	while(current){
+		next = current.next;
+		current.next = previous;
+		previous = current;
+		current = next;
+	}
+
+	this.head = previous;
+}
+
+SinglyList.prototype.middle = function(){
+   if(!this.head || !this.head.next || !this.head.next.next) return null;
+   
+   var slow = this.head;
+   var fast = this.head.next.next;
+   
+   while(fast.next && fast.next.next){
+     fast = fast.next.next;
+     slow = slow.next;
+   }
+   
+   slow = slow.next;
+   
+   return slow.value;
+}
+
+SinglyList.prototype.findFromEnd = function(index){
+	if(!this.head) return null;
+
+	var fast = this.head;
+	var slow = this.head;
+
+	for(var i = 0; i< index; i++){
+		if(fast.next){
+			fast = fast.next;
+		}else{
+			return null;
+		}
+	}
+
+	while(fast.next){
+		fast = fast.next;
+		slow = slow.next;
+	}
+
+	return slow.value;
+}
+
+SinglyList.prototype.findByIndex = function(index){
+	if(!this.head) return null;
+
+	var current = this.head;
+	for(var i = 1; i<index; i++){
+		if(current.next){
+			current = current.next;
+		}else{
+			return null;
+		}
+	}
+
+	return current.value;
+}
+
 //example
 var list = new SinglyList();
 list.add(1);
@@ -81,4 +151,6 @@ list.log();
 list.remove(1);
 list.log();
 list.remove(3);
+list.log();
+list.reverse();
 list.log();
