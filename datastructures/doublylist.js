@@ -16,16 +16,30 @@ function DoublyList(){
   this.tail = null;
 }
 
-DoublyList.prototype.log = function(){
+DoublyList.prototype.log = function(direction){
   if(!this.head) return;
   
   var values = [];
-  var current = this.head;
+  var current;
   
-  values.push(current.value);
-  while(current.next){
-    current = current.next;
+  if(direction === undefined) direction = "forwards";
+  
+  if(direction == "forwards"){
+    current = this.head;
     values.push(current.value);
+  
+    while(current.next){
+      current = current.next;
+      values.push(current.value);
+    }
+  }else{
+    current = this.tail;
+    values.push(current.value);
+    
+    while(current.previous){
+      current = current.previous;
+      values.push(current.value);
+    }
   }
   
   console.log(values);
@@ -85,4 +99,5 @@ list.add(4);
 list.add(5);
 list.log();
 list.remove(5);
-list.log();
+list.log("forwards");
+list.log("reverse");
