@@ -1,6 +1,6 @@
 /*
  * @title: Queue
- * @description: Generic Stack Class
+ * @description: Generic Queue Class
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */

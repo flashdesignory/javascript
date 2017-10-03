@@ -1,6 +1,6 @@
 /*
  * @title: Doubly List
- * @description: Generic Stack Class
+ * @description: Simple Doubly Linked List
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */

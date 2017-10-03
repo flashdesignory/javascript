@@ -1,6 +1,6 @@
 /*
  * @title: Singly List
- * @description: Generic Stack Class
+ * @description:Simple Singly Linked List
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
