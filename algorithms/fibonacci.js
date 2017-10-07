@@ -13,7 +13,7 @@
  * F = (n-1) + (n-2)
  */
 
-//iteration
+//iteration / O(n)
 function fibonacci_one(n){
 	var arr = [0,1];
 
@@ -30,7 +30,7 @@ function fibonacci_one(n){
 console.log(fibonacci_one(12));
 
 
-//recursive
+//recursive / O(2n)
 function fibonacci_two(n){
 	if(n <= 1) return n;
 	else return fibonacci_two(n-1) + fibonacci_two(n-2);
@@ -39,12 +39,12 @@ function fibonacci_two(n){
 //example
 console.log(fibonacci_two(12));
 
-//recursive with memo
+//recursive with memoization
 function fibonacci_three(n, memo){
 	memo = memo || {};
 	if(memo[n]) return memo[n];
 	if(n<= 1) return n;
-	return fibonacci_three(n-1, memo) + fibonacci_three(n-2, memo);
+	return  memo[n] = fibonacci_three(n-1, memo) + fibonacci_three(n-2, memo);
 }
 
 //example
