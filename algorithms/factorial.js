@@ -32,3 +32,16 @@ console.log(factorial_one(4));
  }
 
  console.log(factorial_two(4));
+
+ //while loop
+function factorial_three(n){
+ 	var result = n;
+
+ 	while(n > 1){
+ 		result *= --n;
+ 	}
+
+ 	return result;
+ }
+
+ console.log(factorial_three(4));
