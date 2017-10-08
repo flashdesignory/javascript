@@ -12,6 +12,7 @@
 
 var nums = [1,2,3,4,5,6,7,8];             
 
+// O(n) time & space
 function rotateArray_one(arr, k){
 	var result = [];
 	var i;
@@ -31,6 +32,7 @@ function rotateArray_one(arr, k){
 
 console.log(rotateArray_one(nums, 3));
 
+// O(n) time & space
 function rotateArray_two(arr, k){
 	var result = [];
 	var i;
@@ -52,6 +54,7 @@ function rotateArray_two(arr, k){
 
 console.log(rotateArray_two(nums, 3));
 
+// O(n*k) time O(1) space
 function rotateArray_three(arr, k){
 	for(var i = 0; i<k; i++){
 		for(var j = arr.length-1; j> 0; j--){
