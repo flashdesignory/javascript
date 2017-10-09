@@ -1,3 +1,10 @@
+/*
+ * @title: Crossbrowser Class Utils
+ * @description: collection of class functions
+ * @author: Thorsten Kober
+ * @email: info@flashdesignory.com
+ */
+ 
 var Classes = (function(){
 	return {
 		addClass:function(element, value){
