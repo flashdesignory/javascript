@@ -30,7 +30,6 @@ var Events = (function(){
 		preventDefault:function(_event){
 			if(window.event != null) window.event.returnValue = false;
 			else _event.preventDefault();
-
 		},
 		dispatchEvent:function(_obj, _type){
 			var event = null;

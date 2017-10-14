@@ -40,7 +40,6 @@ Stack.prototype.pop = function(){
 	return temp;
 }
 
-
 function Node(value){
 	this.value = value;
 	this.right = null;
