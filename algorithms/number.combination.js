@@ -1,6 +1,6 @@
 /*
  * @title: Combinations
- * @description: Calcualte Combinations
+ * @description: Calculate Combinations
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */

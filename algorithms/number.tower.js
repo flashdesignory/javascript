@@ -1,6 +1,6 @@
 /*
  * @title: Tower of Hanoi
- * @description: Calcualte Tower of Hanoi
+ * @description: Calculate Tower of Hanoi
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
