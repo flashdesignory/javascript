@@ -5,6 +5,27 @@
  * @email: info@flashdesignory.com
  */
 
+ function Stack(){
+ 	this.data = {};
+ 	this.size = 0;
+ }
+
+ Stack.prototype.push = function(value){
+ 	this.data[this.size] = value;
+ 	this.size++;
+ }
+
+ Stack.prototype.pop = function(){
+ 	var temp = this.data[this.size-1];
+ 	delete this.data[this.size-1];
+ 	this.size--;
+ 	return temp;
+ }
+
+ Stack.prototype.peek = function(){
+ 	return this.data[this.size-1];
+ }
+
  function Node(value){
  	this.value = value;
  	this.next = null;
@@ -140,6 +161,32 @@ SinglyList.prototype.findByIndex = function(index){
 	return current.value;
 }
 
+SinglyList.prototype.isPalindrome = function(){
+  if(!this.head) return false;
+
+  var stack = new Stack();
+  var last = null;
+  var current = this.head;
+  
+  stack.push(current);
+  while(current.next){
+    current = current.next;
+    stack.push(current);
+  }
+  
+  current = this.head;
+  last = stack.pop();
+  if(current.value != last.value) return false;
+  
+  while(current.next){
+    current = current.next;
+    last = stack.pop();
+    if(current.value != last.value) return false;
+  }
+  
+  return true;
+}
+
 //example
 var list = new SinglyList();
 list.add(1);
@@ -154,3 +201,7 @@ list.remove(3);
 list.log();
 list.reverse();
 list.log();
+list.add(4);
+list.add(5);
+list.log();
+console.log(list.isPalindrome());
