@@ -162,12 +162,13 @@ SinglyList.prototype.findByIndex = function(index){
 }
 
 SinglyList.prototype.isPalindrome = function(){
+	//Big O(n) time & O(n) space
   if(!this.head) return false;
 
   var stack = new Stack();
   var last = null;
   var current = this.head;
-  
+
   stack.push(current);
   while(current.next){
     current = current.next;
@@ -185,6 +186,25 @@ SinglyList.prototype.isPalindrome = function(){
   }
   
   return true;
+}
+
+SinglyList.prototype.hasCycle = function(){
+	if(!this.head || !this.head.next) return false;
+	if(this.head.value == this.head.next.value){
+		return true;
+	}
+
+	var slow = this.head;
+	var fast = this.head;
+
+	while(fast.next && fast.next.next){
+		fast = fast.next.next;
+		slow = slow.next;
+
+		if(slow.value == fast.value) return true;
+	}
+
+	return false;
 }
 
 //example
@@ -205,3 +225,4 @@ list.add(4);
 list.add(5);
 list.log();
 console.log(list.isPalindrome());
+console.log(list.hasCycle());
