@@ -12,7 +12,6 @@ function removeDuplicates(arr){
     if(!seen[arr[i]]){
       seen[arr[i]] = true;
     }else{
-      console.log("already there");
       arr.splice(i, 1);
     }
     i--;

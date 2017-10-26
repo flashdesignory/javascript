@@ -40,12 +40,14 @@ function rotateArray_two(arr, k){
 
 	for(i = 0; i<k; i++){
 		//console.log(arr[arr.length-k+i]);
-    	result[i] = arr[arr.length-k+i];
+		result.push(arr[arr.length-k+i]);
+    	//result[i] = arr[arr.length-k+i];
 	}
 
 	for(i = k; i<arr.length; i++){
 		//console.log(arr[index]);
-		result[i] = arr[index];
+		result.push(arr[index]);
+		//result[i] = arr[index];
 		index++;
 	}
 
