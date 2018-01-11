@@ -88,6 +88,11 @@ SinglyList.prototype.log = function(){
  		}
  	}
 
+ 	if(current == value){
+ 		previous.next = null;
+ 		return current;
+ 	}
+
  	return null;
  }
 
