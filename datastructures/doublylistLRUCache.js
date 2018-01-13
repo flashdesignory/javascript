@@ -5,6 +5,9 @@
  * @email: info@flashdesignory.com
  */
 
+//Time: BigO(1);
+//Space: BigO(n);
+
  function Node(key, value){
   this.key = key;
   this.value = value;

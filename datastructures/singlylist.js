@@ -88,7 +88,7 @@ SinglyList.prototype.log = function(){
  		}
  	}
 
- 	if(current == value){
+ 	if(current.value == value){
  		previous.next = null;
  		return current;
  	}
