@@ -20,7 +20,7 @@
 			console.log("init()");
 		}
 		
-	}s
+	}
 	window.Base = Base;
 })();
 
