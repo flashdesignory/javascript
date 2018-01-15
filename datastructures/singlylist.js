@@ -114,19 +114,18 @@ SinglyList.prototype.reverse = function(){
 }
 
 SinglyList.prototype.middle = function(){
-   if(!this.head || !this.head.next || !this.head.next.next) return null;
-   
-   var slow = this.head;
-   var fast = this.head.next.next;
-   
-   while(fast.next && fast.next.next){
-     fast = fast.next.next;
-     slow = slow.next;
-   }
-   
-   slow = slow.next;
-   
-   return slow.value;
+	if(!this.head || !this.head.next || !this.head.next.next) return null;
+
+	var slow = this.head;
+	var fast = this.head;
+
+	while(fast && fast.next){
+		fast = fast.next.next;
+		if(!fast) break;//even numbers don't go passed middle
+		slow = slow.next;
+	}
+
+	return slow.value;
 }
 
 SinglyList.prototype.findFromEnd = function(index){
