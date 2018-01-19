@@ -33,25 +33,28 @@ function rotateArray_one(arr, k){
 console.log(rotateArray_one(nums, 3));
 
 // O(n) time & space
+function rotate(arr, left, right){
+	//console.log("rotate(" + arr + ", left: " + left + ", right: " + right + ")");
+	while(left < right){
+		var temp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = temp;
+		left++;
+		right--;
+	}
+}
+
 function rotateArray_two(arr, k){
-	var result = [];
-	var i;
-	var index = 0;
+	if(arr.length < 2) return arr;
+	k = k%arr.length; //if k is larger than arr.length
+	if(k === 0) return arr;
 
-	for(i = 0; i<k; i++){
-		//console.log(arr[arr.length-k+i]);
-		result.push(arr[arr.length-k+i]);
-    	//result[i] = arr[arr.length-k+i];
-	}
+	arr.reverse();
 
-	for(i = k; i<arr.length; i++){
-		//console.log(arr[index]);
-		result.push(arr[index]);
-		//result[i] = arr[index];
-		index++;
-	}
+	rotate(arr, 0, k-1);
+	rotate(arr, k, arr.length-1)
 
-	return result;
+	return arr;
 }
 
 console.log(rotateArray_two(nums, 3));
