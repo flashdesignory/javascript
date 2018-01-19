@@ -128,6 +128,19 @@ SinglyList.prototype.middle = function(){
 	return slow.value;
 }
 
+SinglyList.prototype.length = function(){
+	if(!this.head) return;
+
+	var length = 0;
+	var current = this.head;
+	while(current){
+		current = current.next;
+		length++;
+	}
+
+	return length;
+}
+
 SinglyList.prototype.findFromEnd = function(index){
 	if(!this.head) return null;
 
@@ -230,3 +243,4 @@ list.add(5);
 list.log();
 console.log(list.isPalindrome());
 console.log(list.hasCycle());
+console.log(list.length());
