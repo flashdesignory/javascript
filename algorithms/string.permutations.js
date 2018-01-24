@@ -47,8 +47,7 @@ function permute (alphabets, startIndex, endIndex) {
   if (startIndex === endIndex) {
 	console.log(alphabets.join(''));
   } else {
-    var i;
-    for (i = startIndex; i <= endIndex; i++) {
+    for (var i = startIndex; i <= endIndex; i++) {
       swap(alphabets, startIndex, i);
       permute(alphabets, startIndex + 1, endIndex);
       swap(alphabets, i, startIndex); // backtrack
