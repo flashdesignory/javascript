@@ -293,6 +293,40 @@ Tree.prototype.findNodesAtLevel = function(node, k){
 	}
 }
 
+Tree.prototype.levelOrder = function(node){
+	var q = new Queue();
+	q.push(this.root);
+	var current = q.shift();
+	var levelValues = [];
+	var currentLevel = 1;
+	var nextLevel = 0;
+	var levelCount = 1;
+
+	while(current){
+		levelValues.push(current.value);
+		currentLevel--;
+
+		if(current.left){
+		  q.push(current.left);
+		  nextLevel++;
+		}
+		if(current.right){
+		  q.push(current.right);
+		  nextLevel++;
+		}
+
+		if(currentLevel === 0){
+		  console.log(levelValues + ", " + levelCount);
+		  currentLevel = nextLevel;
+		  nextLevel = 0;
+		  levelCount++;
+		  levelValues = [];
+		}
+		
+		current = q.shift();
+	}
+}
+
 Tree.prototype.height = function(node){
 	if(node == null){
 		return 0;
