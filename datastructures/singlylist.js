@@ -40,10 +40,14 @@ SinglyList.prototype.log = function(){
 
  	var values = [];
  	var current = this.head;
- 	values.push(current.value);
+ 	/*values.push(current.value);
  	while(current.next){
  		current = current.next;
  		values.push(current.value);
+ 	}*/
+ 	while(current){
+ 		values.push(current.value);
+ 		current = current.next;
  	}
 
  	console.log(values);
