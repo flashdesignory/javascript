@@ -322,7 +322,7 @@ Tree.prototype.levelOrder = function(node){
 		  levelCount++;
 		  levelValues = [];
 		}
-		
+
 		current = q.shift();
 	}
 }
@@ -333,6 +333,34 @@ Tree.prototype.height = function(node){
 	}
 
 	return 1 + Math.max(this.height(node.left), this.height(node.right));
+}
+
+Tree.prototype.longestConsecutive = function(node){
+	var max = 0;
+
+	function find(node){
+		if(!node){
+			return 0;
+		}
+
+		var length = 1;
+		var left = find(node.left);
+		var right = find(node.right);
+
+		if(node.left && node.value === node.left.value-1){
+			length = Math.max(length, 1+left);
+		}
+
+		if(node.right && node.value === node.right.value-1){
+			length = Math.max(length, 1+right);
+		}
+
+		max = Math.max(max, length);
+		return length;
+	}
+
+	find(node);
+	return max;
 }
 
 Tree.prototype.toObject = function(){
