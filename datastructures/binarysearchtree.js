@@ -363,6 +363,28 @@ Tree.prototype.longestConsecutive = function(node){
 	return max;
 }
 
+Tree.prototype.sumLeaves = function(node){
+	var result = 0;
+
+	function find(node){
+      if(node != null){
+        if(node.left == null && node.right == null){
+          result += node.value;
+        }else{
+          if(node.left){
+            find(node.left);
+          }
+          if(node.right){
+            find(node.right);
+          }
+        }
+      }
+    }
+
+	find(node);
+	return result;
+}
+
 Tree.prototype.toObject = function(){
 	return this.root.serialize();
 }
@@ -397,5 +419,6 @@ tree.add(17);
 //           2		  12   17
 //             3
 
-tree.findNodesAtLevel(tree.root, 2);
+//tree.findNodesAtLevel(tree.root, 2);
+console.log("sum leaves: " + tree.sumLeaves(tree.root));
 console.log("height: " + tree.height(tree.root));
