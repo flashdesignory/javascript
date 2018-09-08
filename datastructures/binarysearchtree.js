@@ -385,6 +385,33 @@ Tree.prototype.sumLeaves = function(node){
 	return result;
 }
 
+Tree.prototype.isBinarySearchTree = function(node){
+	var prevNode = null;
+
+	function validate(node){
+		if(!node) return true;
+		if(!validate(node.left)){
+			return false;
+		}
+
+		if(prevNode){
+			if(prevNode.value > node.value){
+				return false;
+			}
+		}
+
+		prevNode = node;
+
+		if(!validate(node.right)){
+			return false;
+		}
+
+		return true;
+	}
+
+	return validate(node);
+}
+
 Tree.prototype.toObject = function(){
 	return this.root.serialize();
 }
@@ -422,3 +449,4 @@ tree.add(17);
 //tree.findNodesAtLevel(tree.root, 2);
 console.log("sum leaves: " + tree.sumLeaves(tree.root));
 console.log("height: " + tree.height(tree.root));
+console.log("is binary search tree: " + tree.isBinarySearchTree(tree.root));
