@@ -228,9 +228,9 @@ Tree.prototype.postOrderTraversal = function(node){
 	console.log(node.value);
 }
 
-Tree.prototype.searchBF = function(){
+Tree.prototype.searchBF = function(node){
 	var queue = new Queue();
-	queue.push(this.root);
+	queue.push(node);
 	var current = queue.shift();
 	var result = [];
 
@@ -244,9 +244,9 @@ Tree.prototype.searchBF = function(){
 	console.log(result);
 }
 
-Tree.prototype.searchDF = function(){
+Tree.prototype.searchDF = function(node){
 	var stack = new Stack();
-	stack.push(this.root);
+	stack.push(node);
 	var current = stack.pop();
 	var result = [];
 
@@ -260,24 +260,24 @@ Tree.prototype.searchDF = function(){
 	console.log(result);
 }
 
-Tree.prototype.findMin = function(){
-	var current = this.root;
+Tree.prototype.findMin = function(node){
+	var current = node;
 
 	while(current.left){
 		current = current.left;
 	}
 
-	console.log(current.value);
+	return current;
 }
 
-Tree.prototype.findMax = function(){
-	var current = this.root;
+Tree.prototype.findMax = function(node){
+	var current = node;
 
 	while(current.right){
 		current = current.right;
 	}
 
-	console.log(current.value);
+	return current;
 }
 
 Tree.prototype.findNodesAtLevel = function(node, k){
@@ -333,6 +333,50 @@ Tree.prototype.height = function(node){
 	}
 
 	return 1 + Math.max(this.height(node.left), this.height(node.right));
+}
+
+Tree.prototype.inOrderSuccessor = function(node){
+	var successor;
+
+	if(node.right){
+		return this.findMin(node.right);
+	}
+
+	var current = this.root;
+	while(current){
+		if(node.value < current.value){
+			successor = current;
+			current = current.left;
+		}else if(node.value > current.value){
+			current = current.right;
+		}else{
+			current = null;
+		}
+	}
+	return successor;
+}
+
+Tree.prototype.inOrderPredecessor = function(node){
+	var predecessor;
+
+	if(node.left){
+		return this.findMax(node.left);
+	}
+
+	var current = this.root;
+	while(current){
+		if(node.value > current.value){
+			predecessor = current;
+			current = current.right;
+		}else if(node.value < current.value){
+			current = current.left;
+		}else if(node.value === current.value){
+			return predecessor;
+		}else{
+			return null;
+		}
+	}
+	return predecessor;
 }
 
 Tree.prototype.longestConsecutive = function(node){
@@ -418,11 +462,11 @@ Tree.prototype.toObject = function(){
 
 var tree = new Tree();
 tree.add(10);
-tree.add(15);
-tree.add(5);
+var fifteen = tree.add(15);
+var five = tree.add(5);
 tree.add(2);
 tree.add(3);
-tree.add(12);
+var twelve = tree.add(12);
 tree.add(17);
 //console.log(tree.toObject());
 //tree.preOrderTraversal(tree.root);
@@ -433,10 +477,10 @@ tree.add(17);
 //console.log(tree.contains(12));
 //console.log(tree.contains(11));
 //console.log(tree.contains(17));
-//tree.searchBF();
-//tree.searchDF();
-//tree.findMin();
-//tree.findMax();
+tree.searchBF(tree.root);
+tree.searchDF(tree.root);
+tree.findMin(tree.root);
+tree.findMax(tree.root);
 //tree.remove(15);
 //console.log("-------------------------------");
 //tree.inOrderTraversal(tree.root);
@@ -450,3 +494,9 @@ tree.add(17);
 console.log("sum leaves: " + tree.sumLeaves(tree.root));
 console.log("height: " + tree.height(tree.root));
 console.log("is binary search tree: " + tree.isBinarySearchTree(tree.root));
+console.log("successor: " + tree.inOrderSuccessor(tree.root).value)
+console.log("successor: " + tree.inOrderSuccessor(twelve).value);
+console.log("successor: " + tree.inOrderSuccessor(five).value);
+console.log("predecessor: " + tree.inOrderPredecessor(tree.root).value);
+console.log("predecessor: " + tree.inOrderPredecessor(fifteen).value);
+console.log("predecessor: " + tree.inOrderPredecessor(twelve).value);
