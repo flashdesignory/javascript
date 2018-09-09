@@ -456,6 +456,18 @@ Tree.prototype.isBinarySearchTree = function(node){
 	return validate(node);
 }
 
+Tree.prototype.isBalanced = function(node){
+	if(!node) return true;
+	var leftHeight = this.height(node.left);
+	var rightHeight = this.height(node.right);
+	var difference = Math.abs(leftHeight - rightHeight);
+	if(difference > 1){
+		return false;
+	}else{
+		return this.isBalanced(node.left) && this.isBalanced(node.right);
+	}
+}
+
 Tree.prototype.toObject = function(){
 	return this.root.serialize();
 }
@@ -494,6 +506,7 @@ tree.findMax(tree.root);
 console.log("sum leaves: " + tree.sumLeaves(tree.root));
 console.log("height: " + tree.height(tree.root));
 console.log("is binary search tree: " + tree.isBinarySearchTree(tree.root));
+console.log("is balanced: " + tree.isBalanced(tree.root));
 console.log("successor: " + tree.inOrderSuccessor(tree.root).value)
 console.log("successor: " + tree.inOrderSuccessor(twelve).value);
 console.log("successor: " + tree.inOrderSuccessor(five).value);
