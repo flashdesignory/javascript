@@ -429,6 +429,16 @@ Tree.prototype.sumLeaves = function(node){
 	return result;
 }
 
+Tree.prototype.findSumPath = function(node, sum){
+	if(node == null) return false;
+
+	if(node.value === sum && node.left == null && node.right == null){
+		return true;
+	}
+
+	return this.findSumPath(node.left, sum - node.value) || this.findSumPath(node.right, sum-node.value);
+}
+
 Tree.prototype.isBinarySearchTree = function(node){
 	var prevNode = null;
 
@@ -513,3 +523,4 @@ console.log("successor: " + tree.inOrderSuccessor(five).value);
 console.log("predecessor: " + tree.inOrderPredecessor(tree.root).value);
 console.log("predecessor: " + tree.inOrderPredecessor(fifteen).value);
 console.log("predecessor: " + tree.inOrderPredecessor(twelve).value);
+console.log("findSumPath: " + tree.findSumPath(tree.root, 42))
