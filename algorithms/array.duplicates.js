@@ -22,3 +22,20 @@ function removeDuplicates(arr){
 var nums = [1,3,5,2,3,4,8,6,4,5,5,3];
 var result = removeDuplicates(nums);
 console.log(result);
+
+function removeDuplicates2(arr){
+  function remove(arr, index, seen){
+    if(index < 0) return arr;
+    seen = seen || {};
+    if(seen[arr[index]]){
+      arr.splice(index, 1);
+    }
+    else seen[arr[index]] = true;
+    return remove(arr, index-1, seen);
+  }
+  return remove(arr, arr.length-1);
+}
+
+var nums = [1,3,5,2,3,4,8,6,4,5,5,3];
+var result = removeDuplicates2(nums);
+console.log(result);
