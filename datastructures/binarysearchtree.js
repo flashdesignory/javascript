@@ -87,6 +87,39 @@ Tree.prototype.add = function(value){
 	return node;
 }
 
+//recursive removing node
+Tree.prototype.delete = function(value){
+	var that = this;
+	function removeNode(node, value){
+		if(!node) return null;
+		if(node.value === value){
+			//no children
+			if(!node.left && !node.right){
+				return null;
+			}
+			//one child
+			if(!node.left){
+				return node.right;
+			}
+			if(!node.right){
+				return node.left;
+			}
+			//two children
+			var parent = that.min(node.right);
+			node.value = parent.value;
+			node.right = removeNode(node.right, parent.value);
+			return node;
+		}else if(value < node.value){
+			node.left = removeNode(node.left, value);
+			return node;
+		}else{
+			node.right = removeNode(node.right, value);
+			return node;
+		}
+	}
+	this.root = removeNode(this.root, value);
+}
+
 Tree.prototype.remove = function(value){
 	var current = this.root;
 	var found = false;
