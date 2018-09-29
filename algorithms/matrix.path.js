@@ -21,9 +21,9 @@ class Queue {
     this.last++;
   }
   dequeue() {
-    let temp = this.storage[this.last - 1];
-    delete this.storage[this.last - 1];
-    this.last--;
+    let temp = this.storage[this.first];
+    delete this.storage[this.first];
+    this.first++;
     return temp;
   }
   empty() {
