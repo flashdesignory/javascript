@@ -105,7 +105,7 @@ Tree.prototype.delete = function(value){
 				return node.left;
 			}
 			//two children
-			var parent = that.min(node.right);
+			var parent = that.findMin(node.right);
 			node.value = parent.value;
 			node.right = removeNode(node.right, parent.value);
 			return node;
