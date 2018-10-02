@@ -34,3 +34,32 @@
 
  var result = findCommon(one, two);
  console.log(result);
+
+// example with three Arrays
+var arr1 = [2,6,9,11,13,17];
+var arr2 = [3,6,7,10,13,18];
+var arr3 = [4,5,6,9,11,13];
+
+function findIntersections(arr1,arr2,arr3){
+  var result = [];
+  var i = 0;
+  var j = 0;
+  var k = 0;
+  while(i < arr1.length && j < arr2.length && k < arr3.length){
+    if(arr1[i] === arr2[j] && arr2[j] === arr3[k]){
+      result.push(arr1[i]);
+      i++;
+      j++;
+      k++;
+    }else if(arr1[i] < arr2[j]){
+      i++;
+    }else if(arr2[j] < arr3[k]){
+      j++;
+    }else{
+      k++;
+    }
+  }
+  return result;
+}
+
+findIntersections(arr1,arr2,arr3) //[6,13];
