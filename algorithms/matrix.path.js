@@ -5,9 +5,9 @@
  * @email: info@flashdesignory.com
  */
 
-/*Given a MxN matrix where each element can either be 0 or 1. 
- We need to find the shortest path between a given source cell 
- to a destination cell. The path can only be created out of a 
+/*Given a MxN matrix where each element can either be 0 or 1.
+ We need to find the shortest path between a given source cell
+ to a destination cell. The path can only be created out of a
  cell if its value is 1.*/
 
 class Queue {
@@ -56,8 +56,8 @@ const matrix = [
 ];
 
 function bfs(matrix, src, dst) {
-  let rowLength = matrix.length;
-  let columnLength = matrix[0].length;
+  const rowLength = matrix.length;
+  const columnLength = matrix[0].length;
 
   if (!matrix[src.r][src.c] || !matrix[dst.r][dst.c]) {
     return; //points don't exist
@@ -65,8 +65,8 @@ function bfs(matrix, src, dst) {
 
   const visited = [];
   let points = [];
-  let rowNum = [-1, 0, 0, 1]; //results in left and right
-  let colNum = [0, -1, 1, 0]; //results in top and bottom
+  const rowNum = [-1, 0, 0, 1]; //results in left and right
+  const colNum = [0, -1, 1, 0]; //results in top and bottom
   for (let r = 0; r < matrix.length; r++) {
     visited[r] = [];
     for (let c = 0; c < matrix[r].length; c++) {
