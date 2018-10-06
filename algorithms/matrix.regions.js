@@ -1,6 +1,6 @@
 /*
- * @title: Matrix largest Area
- * @description: find largest connected region
+ * @title: Matrix num regions
+ * @description: find number of regions
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
@@ -17,21 +17,19 @@ function isValid(row, column, rowLength, columnLength){
   return row >= 0 && row < rowLength && column >= 0 && column < columnLength;
 }
 
-function dfs(matrix, r, c, visited, count){
+function dfs(matrix, r, c, visited){
   visited[r][c] = true;
   for(let i = 0; i<8; i++){
     let current = matrix[r][c]
     let nextRow = r + rowNum[i];
     let nextCol = c + colNum[i];
     if(isValid(nextRow, nextCol, matrix.length, matrix[0].length) && matrix[nextRow][nextCol] && !visited[nextRow][nextCol]){
-      count++;
-      count =  dfs(matrix, nextRow, nextCol, visited, count);
+      dfs(matrix, nextRow, nextCol, visited);
     }
   }
-  return count;
 }
 
-function largestRegion(matrix){
+function numRegions(matrix){
   const visited = [];
   for(let r = 0; r<matrix.length; r++){
     visited[r] = [];
@@ -44,10 +42,9 @@ function largestRegion(matrix){
 
   for(let r = 0; r<matrix.length; r++){
     for(let c = 0; c<matrix[r].length; c++){
-      //matrix[r][c] returns true if value is 1, false if value is 0
       if(matrix[r][c] && !visited[r][c]){
-        let count = dfs(matrix, r, c, visited, 1);
-        result = Math.max(result, count);
+        dfs(matrix, r, c, visited);
+        result++;
       }
     }
   }
@@ -55,4 +52,4 @@ function largestRegion(matrix){
   return result;
 }
 
-console.log(largestRegion(matrix)); //6
+console.log(numRegions(matrix)); //2
