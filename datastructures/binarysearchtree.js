@@ -424,7 +424,7 @@ Tree.prototype.longestConsecutive = function(node){
 		var left = find(node.left);
 		var right = find(node.right);
 
-		if(node.left && node.value === node.left.value-1){
+		if(node.left && node.value === node.left.value+1){
 			length = Math.max(length, 1+left);
 		}
 
