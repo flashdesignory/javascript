@@ -39,9 +39,7 @@
      for(let i = 0; i<vertices.length; i++){
        let result = vertices[i] + " -> ";
        let edges = this.adjList[vertices[i]];
-       for(let i = 0; i<edges.length; i++){
-         result += edges[i] + ",";
-       }
+       result += edges.join(',');
        console.log(result);
      }
    }
