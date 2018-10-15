@@ -55,7 +55,7 @@
    while(left <= right){
      middle = (left + right)/2;
      if(matrix[row][middle] === num){
-       console.log("found at: " + row + ", " + middle);
+       console.log("found in row: " + row + ", column: " + middle);
        return;
      }
 
@@ -86,7 +86,7 @@
    while((minRow+1) < maxRow){ //left <= right ????
      let middleRow = (minRow + maxRow)/2;
      if(matrix[middleRow][middleColumn] === num){
-       console.log("found at: " + middleRow + ", " + middleColumn);
+       console.log("found in row: " + middleRow + ", column: " + middleColumn);
        return;
      }
      if(matrix[middleRow][middleColumn] > num){
@@ -99,9 +99,9 @@
    //check remaining two rows
    //if element is in middle column of those two rows
    if(matrix[minRow][middleColumn] === num){
-     console.log("found at: " + minRow + ", " + middleColumn);
+     console.log("found in row: " + minRow + ", column: " + middleColumn);
    }else if(matrix[maxRow][middleColumn] === num){
-     console.log("found at: " + maxRow + ", " + middleColumn);
+     console.log("found in row: " + maxRow + ", column: " + middleColumn);
    }
 
    //search first half of min row
@@ -127,3 +127,24 @@
    }
  }
  binaryMatrixSearch(matrix, 14);
+
+ //recursive / diagonal
+ function searchMatrix(matrix, num){
+   //start left bottom to right top
+   let row = matrix.length-1;
+   let column = 0;
+
+   while(row>= 0 && column <= matrix[0].length-1){
+     if(matrix[row][column] === num){
+       console.log("found in row: " + row + ", column: " + column);
+       return true;
+     };
+     if(matrix[row][column] < num){
+       column += 1;
+     }else if(matrix[row][column] > num){
+       row -= 1;
+     }
+   }
+   return false;
+ }
+ searchMatrix(matrix, 14);
