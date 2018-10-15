@@ -29,6 +29,10 @@ Queue.prototype.peek = function(){
 	return this.data[this.first];
 }
 
+Queue.prototype.empty = function(){
+	return this.first === this.last;
+}
+
 //example
 var queue = new Queue();
 queue.push(1);

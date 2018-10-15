@@ -28,6 +28,10 @@
  	return this.data[this.size-1];
  }
 
+ Stack.prototype.empty = function(){
+   return this.size === 0;
+ }
+
 //example
 var stack = new Stack();
 stack.push(1);
