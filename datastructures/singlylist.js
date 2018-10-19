@@ -195,17 +195,17 @@ SinglyList.prototype.isPalindrome = function(){
     current = current.next;
     stack.push(current);
   }
-  
+
   current = this.head;
   last = stack.pop();
   if(current.value != last.value) return false;
-  
+
   while(current.next){
     current = current.next;
     last = stack.pop();
     if(current.value != last.value) return false;
   }
-  
+
   return true;
 }
 
@@ -226,6 +226,39 @@ SinglyList.prototype.hasCycle = function(){
 	}
 
 	return false;
+}
+
+SinglyList.prototype.removeDuplicates = function(){
+  var seen = {};
+  var current = this.head;
+  var previous = null;
+
+  while(current){
+    if(seen[current.value]){
+      previous.next = current.next;
+    }else{
+      seen[current.value] = true;
+      previous = current;
+    }
+    current = current.next;
+  }
+}
+
+SinglyList.prototype.removeDuplicates2 = function(){
+  var current = this.head;
+  while(current.next){
+    var runner = current.next;
+    var previous = current;
+    while(runner){
+      if(runner.value === current.value){
+        previous.next = runner.next;
+      }else{
+        previous = runner;
+      }
+      runner = runner.next;
+    }
+    current = current.next;
+  }
 }
 
 //example
