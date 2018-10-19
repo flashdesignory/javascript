@@ -6,12 +6,12 @@
  */
 
  //big O(log n);
- 
+
 function binarySearch(arr, item){
-  var min = 0; 
+  var min = 0;
   var max = arr.length-1;
   var middle;
-  
+
   while(min <= max){
     middle = Math.floor((min+max)/2);
     if(arr[middle] == item){
@@ -22,7 +22,7 @@ function binarySearch(arr, item){
       max = middle-1;
     }
   }
-  
+
   return -1;
 }
 
@@ -35,9 +35,9 @@ var items = ["a","b","c","d","e","f","g","h","i","j"];
 function bsRecurse(arr, value, start, end){
   if(start >= end) return -1;
   let middle = Math.floor((start+end)/2);
-  
+
   if(arr[middle] === value) return middle;
-  
+
   if(arr[middle] > value) return bsRecurse(arr, value, start, middle-1);
   else return bsRecurse(arr, value, middle+1, end);
 }
