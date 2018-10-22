@@ -5,35 +5,34 @@
  * @email: info@flashdesignory.com
  */
 
-let matrix = [[ 1, 8, 9,16,17],
-              [ 2, 7,10,15,18],
-              [ 3, 6,11,14,19],
-              [ 4, 5,12,13,20]]
+ let matrix = [[ 1, 8, 9,16,17],
+               [ 2, 7,10,15,18],
+               [ 3, 6,11,14,19],
+               [ 4, 5,12,13,20]]
 
-function print(numRows, numCols){
-  let matrix = [];
-  for(let i = 0; i<numRows; i++){
-    for(let i = 0; i<numRows; i++){
-      matrix[i] = [];
-    }
-  }
+ function print(numRows, numCols){
+   let matrix = [];
+   for(let i = 0; i<numCols; i++){
+     for(let i = 0; i<numRows; i++){
+       matrix[i] = [];
+     }
+   }
 
-  let count = 1;
+   let count = 1;
 
-  for(let i = 0; i<numCols; i++){
-    let even = i%2;
-    if(even){
-      for(let j = numRows-1; j>=0; j--){
-        matrix[j][i] = count++;
-      }
-    }else{
-      for(let j = 0; j<numRows; j++){
-        matrix[j][i] = count++;
-      }
-    }
-  }
+   for(let i = 0; i<numCols; i++){
+     if(i%2){
+       for(let j = numRows-1; j>=0; j--){
+         matrix[j][i] = count++;
+       }
+     }else{
+       for(let j = 0; j<numRows; j++){
+         matrix[j][i] = count++;
+       }
+     }
+   }
 
-  console.log(matrix);
-}
+   console.log(matrix);
+ }
 
-print(5,4)
+ print(4,5)
