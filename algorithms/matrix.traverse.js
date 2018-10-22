@@ -12,10 +12,8 @@
 
  function print(numRows, numCols){
    let matrix = [];
-   for(let i = 0; i<numCols; i++){
-     for(let i = 0; i<numRows; i++){
-       matrix[i] = [];
-     }
+   for(let i = 0; i<numRows; i++){
+     matrix[i] = [];
    }
 
    let count = 1;
@@ -35,4 +33,4 @@
    console.log(matrix);
  }
 
- print(4,5)
+ print(5,4)
