@@ -11,12 +11,12 @@ function Queue(){
 	this.last = 0;
 }
 
-Queue.prototype.push = function(value){
+Queue.prototype.enqueue = function(value){
 	this.data[this.last] = value;
 	this.last++;
 }
 
-Queue.prototype.shift = function(){
+Queue.prototype.dequeue = function(){
 	var temp = this.data[this.first];
 	delete this.data[this.first];
 	this.first++;
@@ -53,11 +53,11 @@ Node.prototype.serialize = function(){
 	return result;
 }
 
-function Tree(){
+function BinarySearchTree(){
 	this.root = null;
 }
 
-Tree.prototype.add = function(value){
+BinarySearchTree.prototype.add = function(value){
 	var node = new Node(value);
 
 	if(!this.root){
@@ -88,7 +88,7 @@ Tree.prototype.add = function(value){
 }
 
 //recursive removing node
-Tree.prototype.delete = function(value){
+BinarySearchTree.prototype.delete = function(value){
 	var that = this;
 	function removeNode(node, value){
 		if(!node) return null;
@@ -105,7 +105,7 @@ Tree.prototype.delete = function(value){
 				return node.left;
 			}
 			//two children
-			var parent = that.findMin(node.right);
+			var parent = that.min(node.right);
 			node.value = parent.value;
 			node.right = removeNode(node.right, parent.value);
 			return node;
@@ -120,7 +120,7 @@ Tree.prototype.delete = function(value){
 	this.root = removeNode(this.root, value);
 }
 
-Tree.prototype.remove = function(value){
+BinarySearchTree.prototype.remove = function(value){
 	var current = this.root;
 	var found = false;
 	var parent;
@@ -209,7 +209,7 @@ Tree.prototype.remove = function(value){
 	}
 }
 
-Tree.prototype.contains = function(value){
+BinarySearchTree.prototype.contains = function(value){
 	var current = this.root;
 	while(current){
 		if(value == current.value){
@@ -224,7 +224,7 @@ Tree.prototype.contains = function(value){
 }
 
 
-Tree.prototype.preOrderTraversal = function(node){
+BinarySearchTree.prototype.preOrderTraversal = function(node){
 
 	console.log(node.value);
 
@@ -237,7 +237,7 @@ Tree.prototype.preOrderTraversal = function(node){
 	}
 }
 
-Tree.prototype.inOrderTraversal = function(node){
+BinarySearchTree.prototype.inOrderTraversal = function(node){
 	if(node.left){
 		this.inOrderTraversal(node.left);
 	}
@@ -249,7 +249,7 @@ Tree.prototype.inOrderTraversal = function(node){
 	}
 }
 
-Tree.prototype.postOrderTraversal = function(node){
+BinarySearchTree.prototype.postOrderTraversal = function(node){
 	if(node.left){
 		this.postOrderTraversal(node.left);
 	}
@@ -261,23 +261,23 @@ Tree.prototype.postOrderTraversal = function(node){
 	console.log(node.value);
 }
 
-Tree.prototype.searchBF = function(node){
+BinarySearchTree.prototype.searchBF = function(node){
 	var queue = new Queue();
-	queue.push(node);
-	var current = queue.shift();
+	queue.enqueue(node);
+	var current = queue.dequeue();
 	var result = [];
 
 	while(current){
 		result.push(current.value);
-		if(current.left) queue.push(current.left);
-		if(current.right) queue.push(current.right);
-		current = queue.shift();
+		if(current.left) queue.enqueue(current.left);
+		if(current.right) queue.enqueue(current.right);
+		current = queue.dequeue();
 	}
 
 	console.log(result);
 }
 
-Tree.prototype.searchDF = function(node){
+BinarySearchTree.prototype.searchDF = function(node){
 	var stack = new Stack();
 	stack.push(node);
 	var current = stack.pop();
@@ -293,7 +293,7 @@ Tree.prototype.searchDF = function(node){
 	console.log(result);
 }
 
-Tree.prototype.findMin = function(node){
+BinarySearchTree.prototype.min = function(node){
 	var current = node;
 
 	while(current.left){
@@ -303,7 +303,7 @@ Tree.prototype.findMin = function(node){
 	return current;
 }
 
-Tree.prototype.findMax = function(node){
+BinarySearchTree.prototype.max = function(node){
 	var current = node;
 
 	while(current.right){
@@ -313,7 +313,7 @@ Tree.prototype.findMax = function(node){
 	return current;
 }
 
-Tree.prototype.findNodesAtLevel = function(node, k){
+BinarySearchTree.prototype.findNodesAtLevel = function(node, k){
 	if(node == null){
 		return;
 	}
@@ -326,10 +326,10 @@ Tree.prototype.findNodesAtLevel = function(node, k){
 	}
 }
 
-Tree.prototype.levelOrder = function(node){
-	var q = new Queue();
-	q.push(this.root);
-	var current = q.shift();
+BinarySearchTree.prototype.levelOrder = function(node){
+	var queue = new Queue();
+	queue.enqueue(this.root);
+	var current = queue.dequeue();
 	var levelValues = [];
 	var currentLevel = 1;
 	var nextLevel = 0;
@@ -340,11 +340,11 @@ Tree.prototype.levelOrder = function(node){
 		currentLevel--;
 
 		if(current.left){
-		  q.push(current.left);
+		  queue.enqueue(current.left);
 		  nextLevel++;
 		}
 		if(current.right){
-		  q.push(current.right);
+		  queue.enqueue(current.right);
 		  nextLevel++;
 		}
 
@@ -356,11 +356,37 @@ Tree.prototype.levelOrder = function(node){
 		  levelValues = [];
 		}
 
-		current = q.shift();
+		current = queue.dequeue();
 	}
 }
 
-Tree.prototype.height = function(node){
+BinarySearchTree.prototype.collectNodesAtLevel = function(node, k, arr, reverse){
+    if(!node) return arr;
+    if(k === 0){
+      if(arr){
+        arr.push(node.value);
+      }
+    }else{
+      if(reverse){
+        arr = this.collectNodesAtLevel(node.right, k-1, arr, reverse);
+        arr = this.collectNodesAtLevel(node.left, k-1, arr, reverse);
+      }else{
+        arr = this.collectNodesAtLevel(node.left, k-1, arr, reverse);
+        arr = this.collectNodesAtLevel(node.right, k-1, arr, reverse);
+      }
+
+    }
+    return arr;
+  }
+
+BinarySearchTree.prototype.printLevelOrderZigZag = function(node){
+    let height = this.height(node);
+    for(let i = 0; i<height; i++){
+      console.log(this.collectNodesAtLevel(node, i, [], i%2 === 0));
+    }
+  }
+
+BinarySearchTree.prototype.height = function(node){
 	if(node == null){
 		return 0;
 	}
@@ -368,11 +394,11 @@ Tree.prototype.height = function(node){
 	return 1 + Math.max(this.height(node.left), this.height(node.right));
 }
 
-Tree.prototype.inOrderSuccessor = function(node){
+BinarySearchTree.prototype.inOrderSuccessor = function(node){
 	var successor;
 
 	if(node.right){
-		return this.findMin(node.right);
+		return this.min(node.right);
 	}
 
 	var current = this.root;
@@ -389,11 +415,11 @@ Tree.prototype.inOrderSuccessor = function(node){
 	return successor;
 }
 
-Tree.prototype.inOrderPredecessor = function(node){
+BinarySearchTree.prototype.inOrderPredecessor = function(node){
 	var predecessor;
 
 	if(node.left){
-		return this.findMax(node.left);
+		return this.max(node.left);
 	}
 
 	var current = this.root;
@@ -412,7 +438,7 @@ Tree.prototype.inOrderPredecessor = function(node){
 	return predecessor;
 }
 
-Tree.prototype.longestConsecutive = function(node){
+BinarySearchTree.prototype.longestConsecutive = function(node){
 	var max = 0;
 
 	function find(node){
@@ -440,7 +466,7 @@ Tree.prototype.longestConsecutive = function(node){
 	return max;
 }
 
-Tree.prototype.sumLeaves = function(node){
+BinarySearchTree.prototype.sumLeaves = function(node){
 	var result = 0;
 
 	function find(node){
@@ -462,7 +488,7 @@ Tree.prototype.sumLeaves = function(node){
 	return result;
 }
 
-Tree.prototype.findSumPath = function(node, sum){
+BinarySearchTree.prototype.findSumPath = function(node, sum){
 	if(node == null) return false;
 
 	if(node.value === sum && node.left == null && node.right == null){
@@ -472,7 +498,19 @@ Tree.prototype.findSumPath = function(node, sum){
 	return this.findSumPath(node.left, sum - node.value) || this.findSumPath(node.right, sum-node.value);
 }
 
-Tree.prototype.isBinarySearchTree = function(node){
+BinarySearchTree.prototype.findAncestors = function(node, value){
+  if(!node) return false;
+  if(node.value === value) return true;
+
+  if(this.findAncestors(node.left, value) || this.findAncestors(node.right, value)){
+    console.log(node.value);
+    return true;
+  }
+
+  return false;
+}
+
+BinarySearchTree.prototype.isBinarySearchTree = function(node){
 	var prevNode = null;
 
 	function validate(node){
@@ -499,7 +537,7 @@ Tree.prototype.isBinarySearchTree = function(node){
 	return validate(node);
 }
 
-Tree.prototype.isBalanced = function(node){
+BinarySearchTree.prototype.isBalanced = function(node){
 	if(!node) return true;
 	var leftHeight = this.height(node.left);
 	var rightHeight = this.height(node.right);
@@ -511,11 +549,11 @@ Tree.prototype.isBalanced = function(node){
 	}
 }
 
-Tree.prototype.toObject = function(){
+BinarySearchTree.prototype.toObject = function(){
 	return this.root.serialize();
 }
 
-var tree = new Tree();
+var tree = new BinarySearchTree();
 tree.add(10);
 var fifteen = tree.add(15);
 var five = tree.add(5);
@@ -534,8 +572,8 @@ tree.add(17);
 //console.log(tree.contains(17));
 tree.searchBF(tree.root);
 tree.searchDF(tree.root);
-tree.findMin(tree.root);
-tree.findMax(tree.root);
+tree.min(tree.root);
+tree.max(tree.root);
 //tree.remove(15);
 //console.log("-------------------------------");
 //tree.inOrderTraversal(tree.root);
@@ -545,7 +583,8 @@ tree.findMax(tree.root);
 //           2		  12   17
 //             3
 
-//tree.findNodesAtLevel(tree.root, 2);
+console.log("notes at level 2: ");
+tree.findNodesAtLevel(tree.root, 2);
 console.log("sum leaves: " + tree.sumLeaves(tree.root));
 console.log("height: " + tree.height(tree.root));
 console.log("is binary search tree: " + tree.isBinarySearchTree(tree.root));
@@ -557,3 +596,6 @@ console.log("predecessor: " + tree.inOrderPredecessor(tree.root).value);
 console.log("predecessor: " + tree.inOrderPredecessor(fifteen).value);
 console.log("predecessor: " + tree.inOrderPredecessor(twelve).value);
 console.log("findSumPath: " + tree.findSumPath(tree.root, 42))
+console.log("ancestors of 3: ");
+tree.findAncestors(tree.root, 3);
+tree.printLevelOrderZigZag(tree.root);
