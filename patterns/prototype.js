@@ -6,34 +6,34 @@
  */
 
  function Base(id){
- 	this.id = id;
+   this.id = id;
  }
 
  Base.prototype.getId = function(){
- 	return this.id;
+   return this.id;
  }
 
  Base.prototype.setId = function(value){
- 	this.id = value;
+   this.id = value;
  }
 
  Base.prototype.init = function(){
- 	console.log("init()");
+   console.log("init()");
  }
 
  function ExtendedBase(id){
- 	this.id = id;	
+   this.id = id;
  }
 
  ExtendedBase.prototype = Object.create(Base.prototype);
  ExtendedBase.prototype.constructor = ExtendedBase;
 
  ExtendedBase.prototype.setName = function(value){
- 	this.name = value;
+   this.name = value;
  }
 
  ExtendedBase.prototype.getName = function(){
- 	return this.name;
+   return this.name;
  }
 
 var b = new Base("foo");
