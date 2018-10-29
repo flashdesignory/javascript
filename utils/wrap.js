@@ -5,24 +5,22 @@
  * @email: info@flashdesignory.com
  */
 
- function wrap(fn){
-  return function(){
-    try{
+function wrap(fn) {
+  return function () {
+    try {
       return fn.call(this);
-    }catch(e){
-      fn = function(){return null;}
+    } catch (e) {
+      fn = function () { return null; };
       return null;
     }
-  }
- }
+  };
+}
 
- var errorFunction = wrap(function(){
-   throw new Error('Error');
- })
+const errorFunction = wrap(() => {
+  throw new Error('Error');
+});
 
- var resultFunction = wrap(function(){
-   return "Foo";
- })
+const resultFunction = wrap(() => 'Foo');
 
- console.log(errorFunction && errorFunction());
- console.log(resultFunction && resultFunction());
+console.log(errorFunction && errorFunction());
+console.log(resultFunction && resultFunction());

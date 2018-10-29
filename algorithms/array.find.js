@@ -5,29 +5,29 @@
  * @email: info@flashdesignory.com
  */
 function countItems(arr, item) {
-    var count = 0;
-    var result = [];
+  let count = 0;
+  const result = [];
 
-    function flattenArray(arr){
-      for(var i = 0; i<arr.length; i++){
-        Array.isArray(arr[i]) ? flattenArray(arr[i]) : result.push(arr[i]);
-      }
+  function flattenArray(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      Array.isArray(arr[i]) ? flattenArray(arr[i]) : result.push(arr[i]);
     }
-    
-    flattenArray(arr);
-    
-    for(var i = 0; i<result.length; i++){
-      if(result[i].indexOf(item) != -1){
-        count++;
-      }
+  }
+
+  flattenArray(arr);
+
+  for (let i = 0; i < result.length; i++) {
+    if (result[i].indexOf(item) !== -1) {
+      count++;
     }
-    
-    return count;
+  }
+
+  return count;
 }
 
-var arr = [
-  "apple",
-  ["banana", "strawberry", "apple"]
+const arr = [
+  'apple',
+  ['banana', 'strawberry', 'apple'],
 ];
 
-console.log(countItems(arr, "apple"));
+console.log(countItems(arr, 'apple'));

@@ -5,36 +5,36 @@
  * @email: info@flashdesignory.com
  */
 
- var nums = [1,2,3,4,5,6,7];
+const nums = [1, 2, 3, 4, 5, 6, 7];
 
- function reverseArray_one(arr){
-    var left = 0;
-    var right = arr.length-1;
+function reverseArrayOne(arr) {
+  let left = 0;
+  let right = arr.length - 1;
 
-    while(left < right){
-      var temp = arr[left];
-      arr[left] = arr[right];
-      arr[right] = temp;
-      left++;
-      right--;
-    }
+  while (left < right) {
+    const temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+    left++;
+    right--;
+  }
 
-    return arr;
- }
-
-console.log(reverseArray_one(nums));
-
-function reverseArray_two(arr){
-	var len = arr.length;
-	var middle = Math.floor(len/2);
-
-	for(var i = 0; i<middle; i++){
-		var temp = arr[i];
-		arr[i] = arr[len-1-i];
-		arr[len-1-i] = temp;
-	}
-
-	return arr;
+  return arr;
 }
 
-console.log(reverseArray_two(nums));
+console.log(reverseArrayOne(nums));
+
+function reverseArrayTwo(arr) {
+  const len = arr.length;
+  const middle = Math.floor(len / 2);
+
+  for (let i = 0; i < middle; i++) {
+    const temp = arr[i];
+    arr[i] = arr[len - 1 - i];
+    arr[len - 1 - i] = temp;
+  }
+
+  return arr;
+}
+
+console.log(reverseArrayTwo(nums));

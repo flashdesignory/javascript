@@ -5,17 +5,17 @@
  * @email: info@flashdesignory.com
  */
 
- function merge_one(left, right){
-  var result = [];
-  var lLen = left.length;
-  var rLen = right.length;
-  var l = 0;
-  var r = 0;
+function mergeOne(left, right) {
+  const result = [];
+  const lLen = left.length;
+  const rLen = right.length;
+  let l = 0;
+  let r = 0;
 
-  while(l < lLen && r < rLen){
-    if(left[l] < right[r]){
+  while (l < lLen && r < rLen) {
+    if (left[l] < right[r]) {
       result.push(left[l++]);
-    }else{
+    } else {
       result.push(right[r++]);
     }
   }
@@ -23,34 +23,34 @@
   return result.concat(left.slice(l)).concat(right.slice(r));
 }
 
-console.log(merge_one([2,5,6,9], [1,2,3,29])); // [1, 2, 2, 3, 5, 6, 9, 29]
+console.log(mergeOne([2, 5, 6, 9], [1, 2, 3, 29])); // [1, 2, 2, 3, 5, 6, 9, 29]
 
-function merge_two(left, right){
-	var result = [];
-	var a = left[0];
-	var b = right[0];
-	var i = 1;
-	var j = 1;
+function mergeTwo(left, right) {
+  const result = [];
+  let a = left[0];
+  let b = right[0];
+  let i = 1;
+  let j = 1;
 
-	if(left.length == 0){
-		return right;
-	}
+  if (left.length === 0) {
+    return right;
+  }
 
-	if(right.length == 0){
-		return left;
-	}
+  if (right.length === 0) {
+    return left;
+  }
 
-	while(a || b){
-		if(a && a < b){
-			result.push(a);
-			a = left[i++];
-		}else{
-			result.push(b);
-			b = right[j++];
-		}
-	}
+  while (a || b) {
+    if (a && a < b) {
+      result.push(a);
+      a = left[i++];
+    } else {
+      result.push(b);
+      b = right[j++];
+    }
+  }
 
-	return result;
+  return result;
 }
 
-console.log(merge_two([2,5,6,9], [1,2,3,29])); // [1, 2, 2, 3, 5, 6, 9, 29]
+console.log(mergeTwo([2, 5, 6, 9], [1, 2, 3, 29])); // [1, 2, 2, 3, 5, 6, 9, 29]
