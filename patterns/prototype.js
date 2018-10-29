@@ -5,45 +5,45 @@
  * @email: info@flashdesignory.com
  */
 
- function Base(id){
-   this.id = id;
- }
+function Base(id) {
+  this.id = id;
+}
 
- Base.prototype.getId = function(){
-   return this.id;
- }
+Base.prototype.getId = function () {
+  return this.id;
+};
 
- Base.prototype.setId = function(value){
-   this.id = value;
- }
+Base.prototype.setId = function (value) {
+  this.id = value;
+};
 
- Base.prototype.init = function(){
-   console.log("init()");
- }
+Base.prototype.init = function () {
+  console.log('init()');
+};
 
- function ExtendedBase(id){
-   this.id = id;
- }
+function ExtendedBase(id) {
+  this.id = id;
+}
 
- ExtendedBase.prototype = Object.create(Base.prototype);
- ExtendedBase.prototype.constructor = ExtendedBase;
+ExtendedBase.prototype = Object.create(Base.prototype);
+ExtendedBase.prototype.constructor = ExtendedBase;
 
- ExtendedBase.prototype.setName = function(value){
-   this.name = value;
- }
+ExtendedBase.prototype.setName = function (value) {
+  this.name = value;
+};
 
- ExtendedBase.prototype.getName = function(){
-   return this.name;
- }
+ExtendedBase.prototype.getName = function () {
+  return this.name;
+};
 
-var b = new Base("foo");
+const b = new Base('foo');
 b.init();
 console.log(b.getId());
-console.log("--------------------");
+console.log('--------------------');
 
-var c = new ExtendedBase("baba");
+const c = new ExtendedBase('baba');
 c.init();
 console.log(c.getId());
-c.setName("bo");
+c.setName('bo');
 console.log(c.getName());
-console.log("--------------------");
+console.log('--------------------');

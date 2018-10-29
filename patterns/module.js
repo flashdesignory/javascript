@@ -5,58 +5,59 @@
  * @email: info@flashdesignory.com
  */
 
-var Module = (function(){
-	var _privateVar = "foo";
+const Module = (function () {
+  let _privateVar = 'foo';
 
-	function privateFunction(){
-		console.log("privateFunction()");
-	}
+  function privateFunction() {
+    console.log('privateFunction()');
+  }
 
-	return {
-		setPrivateVar:function(value){
-			_privateVar = value;
-		},
-		getPrivateVar:function(){
-			return _privateVar;
-		},
-		publicFunction:function(){
-			console.log("publicFunction()");
-		},
-		callPrivateFunction:function(){
-			privateFunction();
-		}
-	}
+  return {
+    setPrivateVar: function (value) {
+      _privateVar = value;
+    },
+    getPrivateVar: function () {
+      return _privateVar;
+    },
+    publicFunction: function () {
+      console.log('publicFunction()');
+    },
+    callPrivateFunction: function () {
+      privateFunction();
+    },
+  };
 })();
 
-//example
+// example
 Module.publicFunction();
 console.log(Module.getPrivateVar());
-console.log(Module._privateVar); //undefined
+console.log(Module._privateVar); // undefined
 
-var ModuleTwo = (function(){
-	var _privateVar = "foo";
+const ModuleTwo = (function () {
+  let _privateVar = 'foo';
+  let publicInterface;
 
-	function privateFunction(){
-		console.log("privateFunction()");
-		console.log(publicInterface.getPrivateVar());
-	}
+  function privateFunction() {
+    console.log('privateFunction()');
+    console.log(publicInterface.getPrivateVar());
+  }
 
-	var publicInterface = {
-		setPrivateVar:function(value){
-			_privateVar = value;
-		},
-		getPrivateVar:function(){
-			return _privateVar;
-		},
-		publicFunction:function(){
-			console.log("publicFunction()");
-			privateFunction();
-		}
-	};
+  publicInterface = {
+    setPrivateVar: function (value) {
+      _privateVar = value;
+    },
+    getPrivateVar: function () {
+      return _privateVar;
+    },
+    publicFunction: function () {
+      console.log('publicFunction()');
+      privateFunction();
+    },
+  };
 
-	return publicInterface;
+  return publicInterface;
 })();
 
-//example
+// example
 ModuleTwo.publicFunction();
-console.log(ModuleTwo._privateVar); //undefined
+console.log(ModuleTwo._privateVar); // undefined

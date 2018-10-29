@@ -4,59 +4,58 @@
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
-(function(){
-	function Base(id){
-		var _id = id;
+(function () {
+  function Base(id) {
+    let _id = id;
 
-		this.getId = function(){
-			return _id;
-		}
+    this.getId = function () {
+      return _id;
+    };
 
-		this.setId = function(value){
-			_id = value;
-		}
+    this.setId = function (value) {
+      _id = value;
+    };
 
-		this.init = function(){
-			console.log("init()");
-		}
-
-	}
-	window.Base = Base;
+    this.init = function () {
+      console.log('init()');
+    };
+  }
+  window.Base = Base;
 })();
 
-(function(){
-	function ExtendedBase(id){
-		var _super = new window.Base(id);
+(function () {
+  function ExtendedBase(id) {
+    const _super = new window.Base(id);
+    let _name;
 
-		var _name;
+    /* eslint-disable-next-line */
+    for (let name in _super) {
+      this[name] = _super[name];
+    }
 
-		for(var name in _super){
-			this[name] = _super[name];
-		}
+    this.setName = function (value) {
+      _name = value;
+    };
 
-		this.setName = function(value){
-			_name = value;
-		}
+    this.getName = function () {
+      return _name;
+    };
 
-		this.getName = function(){
-			return _name;
-		}
-
-		this.constructor = window.Base;
-	}
-	window.ExtendedBase = ExtendedBase;
+    this.constructor = window.Base;
+  }
+  window.ExtendedBase = ExtendedBase;
 })();
 
-var b = new window.Base("foo");
+const b = new window.Base('foo');
 b.init();
 console.log(b.getId());
-b.setId("baba");
+b.setId('baba');
 console.log(b.getId());
-console.log("--------------------");
+console.log('--------------------');
 
-var c = new window.ExtendedBase("baba");
+const c = new window.ExtendedBase('baba');
 c.init();
 console.log(c.getId());
-c.setName("bo");
+c.setName('bo');
 console.log(c.getName());
-console.log("--------------------");
+console.log('--------------------');

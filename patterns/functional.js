@@ -5,40 +5,42 @@
  * @email: info@flashdesignory.com
  */
 
- function base(id){
-  var _id = id;
+function base(id) {
+  const _id = id;
 
   return {
-    getId:function(){
+    getId: function () {
       return _id;
     },
-      init:function(){
-      console.log("init()");
-    }
-  }
- }
+    init: function () {
+      console.log('init()');
+    },
+  };
+}
 
- function extendedBase(id){
-    var _base = base(id);
-    var _name;
+function extendedBase(id) {
+  const _base = base(id);
+  let _name;
 
-    _base.setName = function(value){
-      _name = value;
-    }
-    _base.getName = function(){
-      return _name;
-    }
-    return _base;
- }
+  base.setName = function (value) {
+    _name = value;
+  };
 
-var b = base("foo");
+  _base.getName = function () {
+    return _name;
+  };
+
+  return _base;
+}
+
+const b = base('foo');
 b.init();
 console.log(b.getId());
-console.log("--------------------");
+console.log('--------------------');
 
-var c = extendedBase("baba");
+const c = extendedBase('baba');
 c.init();
 console.log(c.getId());
-c.setName("bo");
+c.setName('bo');
 console.log(c.getName());
-console.log("--------------------");
+console.log('--------------------');
