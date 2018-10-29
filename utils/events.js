@@ -5,22 +5,22 @@
  * @email: info@flashdesignory.com
  */
 
-var Events = (function(){
+var Events = (function(){ // eslint-disable-line
 	return {
 		addListener:function(_obj, _type, _function, _capture){
 			if(document.addEventListener){
-				_obj.addEventListener(_type, _function, _capture);	
+				_obj.addEventListener(_type, _function, _capture);
 			}else if(document.attachEvent){
-				_obj.attachEvent('on' + _type, _function);	
+				_obj.attachEvent('on' + _type, _function);
 			}else{
-				_obj['on' + _type] = _function;	
+				_obj['on' + _type] = _function;
 			}
 		},
 		removeListener:function(_obj, _type, _function){
 			if(document.removeEventListener){
-				_obj.removeEventListener(_type, _function);	
+				_obj.removeEventListener(_type, _function);
 			}else if(document.detachEvent){
-				_obj.detachEvent('on' + _type, _function);	
+				_obj.detachEvent('on' + _type, _function);
 			}
 		},
 		getEventTarget:function(_event){

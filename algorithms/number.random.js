@@ -6,12 +6,12 @@
  */
 
  function randomInRange(min, max){
- 	if(min > max){
- 		max = max - min;
- 		min = min + max;
- 		max = min - max;
- 	}
- 	return Math.random() * (max-min) + min;
+  if(min > max){
+    max = max - min;
+    min = min + max;
+    max = min - max;
+  }
+  return Math.random() * (max-min) + min;
  }
 
  console.log(randomInRange(5,7));

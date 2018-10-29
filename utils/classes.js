@@ -4,8 +4,8 @@
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
- 
-var Classes = (function(){
+
+var Classes = (function(){// eslint-disable-line
 	return {
 		addClass:function(element, value){
 			if(element){

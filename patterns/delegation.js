@@ -7,27 +7,27 @@
 
  if(!Object.create){
   Object.create = function(o){
-    function F(){};
+    function F(){}
     F.prototype = o;
     return new F();
   }
 }
 
  var Base = {
- 	init:function(id){
- 		this.id = id;
- 	},
- 	getId:function(){
- 		return this.id;
- 	}
+  init:function(id){
+    this.id = id;
+  },
+  getId:function(){
+    return this.id;
+  }
  }
 
  var ExtendedBase = Object.create(Base);
  ExtendedBase.setName = function(name){
- 	this.name = name;
+   this.name = name;
  }
  ExtendedBase.getName = function(){
- 	return this.name;
+   return this.name;
  }
 
 var b = Object.create(Base);

@@ -19,14 +19,14 @@
 		this.init = function(){
 			console.log("init()");
 		}
-		
+
 	}
 	window.Base = Base;
 })();
 
 (function(){
 	function ExtendedBase(id){
-		var _super = new Base(id);
+		var _super = new window.Base(id);
 
 		var _name;
 
@@ -42,19 +42,19 @@
 			return _name;
 		}
 
-		this.constructor = Base;
+		this.constructor = window.Base;
 	}
 	window.ExtendedBase = ExtendedBase;
 })();
 
-var b = new Base("foo");
+var b = new window.Base("foo");
 b.init();
 console.log(b.getId());
 b.setId("baba");
 console.log(b.getId());
 console.log("--------------------");
 
-var c = new ExtendedBase("baba");
+var c = new window.ExtendedBase("baba");
 c.init();
 console.log(c.getId());
 c.setName("bo");

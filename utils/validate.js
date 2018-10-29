@@ -6,7 +6,7 @@
  */
 
  /**
-  * A primitive (primitive value, primitive data type) is data that is not an object and has no methods. 
+  * A primitive (primitive value, primitive data type) is data that is not an object and has no methods.
   * In JavaScript, there are 6 primitive data types: string, number, boolean, null, undefined, symbol (new in ECMAScript 2015).
   * Most of the time, a primitive value is represented directly at the lowest level of the language implementation.
   * All primitives are immutable (cannot be changed).
@@ -25,7 +25,7 @@
 
 
  function isPrimitive(value){
- 	return (value !== Object(value));
+   return (value !== Object(value));
  }
 
  //examples
@@ -47,6 +47,6 @@ function getType (elem) {
   //return Object.prototype.toString.call(elem);
   //remove the first 'Object' trace '[object Object]'
   return Object.prototype.toString.call(elem).slice(8, -1);
-};
+}
 
 console.log(getType([]));

@@ -7,26 +7,26 @@
 
 //input arrays have to be sorted
  function findCommon(one, two){
- 	var i = 0;
- 	var j = 0;
- 	var result = [];
+    var i = 0;
+    var j = 0;
+    var result = [];
 
- 	one.sort();
- 	two.sort();
+    one.sort();
+    two.sort();
 
- 	while(i < one.length && j < two.length){
- 		if(one[i] < two[j]){
- 			i++;
- 		}else if(one[i] > two[j]){
- 			j++;
- 		}else{
- 			result.push(one[i]);
- 			i++;
- 			j++;
- 		}
- 	}
+    while(i < one.length && j < two.length){
+      if(one[i] < two[j]){
+        i++;
+      }else if(one[i] > two[j]){
+        j++;
+      }else{
+        result.push(one[i]);
+        i++;
+        j++;
+      }
+    }
 
- 	return result;
+    return result;
  }
 
  var one = [1,4,7,9];

@@ -6,22 +6,22 @@
  */
 
  function wrap(fn){
- 	return function(){
- 		try{
- 			return fn.call(this);
- 		}catch(e){
- 			fn = function(){return null;}
- 			return null;
- 		}
- 	}
+  return function(){
+    try{
+      return fn.call(this);
+    }catch(e){
+      fn = function(){return null;}
+      return null;
+    }
+  }
  }
 
  var errorFunction = wrap(function(){
- 	throw new Error('Error');
+   throw new Error('Error');
  })
 
  var resultFunction = wrap(function(){
- 	return "Foo";
+   return "Foo";
  })
 
  console.log(errorFunction && errorFunction());

@@ -328,7 +328,7 @@ BinarySearchTree.prototype.findNodesAtLevel = function(node, k){
 
 BinarySearchTree.prototype.levelOrder = function(node){
 	var queue = new Queue();
-	queue.enqueue(this.root);
+	queue.enqueue(node);
 	var current = queue.dequeue();
 	var levelValues = [];
 	var currentLevel = 1;
@@ -340,20 +340,20 @@ BinarySearchTree.prototype.levelOrder = function(node){
 		currentLevel--;
 
 		if(current.left){
-		  queue.enqueue(current.left);
-		  nextLevel++;
+			queue.enqueue(current.left);
+			nextLevel++;
 		}
 		if(current.right){
-		  queue.enqueue(current.right);
-		  nextLevel++;
+			queue.enqueue(current.right);
+			nextLevel++;
 		}
 
 		if(currentLevel === 0){
-		  console.log(levelValues + ", " + levelCount);
-		  currentLevel = nextLevel;
-		  nextLevel = 0;
-		  levelCount++;
-		  levelValues = [];
+			console.log(levelValues + ", " + levelCount);
+			currentLevel = nextLevel;
+			nextLevel = 0;
+			levelCount++;
+			levelValues = [];
 		}
 
 		current = queue.dequeue();
@@ -580,8 +580,8 @@ tree.max(tree.root);
 
 //					10
 //				5		15
-//           2		  12   17
-//             3
+//     2	  12   17
+//       3
 
 console.log("notes at level 2: ");
 tree.findNodesAtLevel(tree.root, 2);

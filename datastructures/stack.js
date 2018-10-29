@@ -8,24 +8,24 @@
 //last-in first-out (LIFO)
 
  function Stack(){
- 	this.data = {};
- 	this.size = 0;
+  this.data = {};
+  this.size = 0;
  }
 
  Stack.prototype.push = function(value){
- 	this.data[this.size] = value;
- 	this.size++;
+  this.data[this.size] = value;
+  this.size++;
  }
 
  Stack.prototype.pop = function(){
- 	var temp = this.data[this.size-1];
- 	delete this.data[this.size-1];
- 	this.size--;
- 	return temp;
+  var temp = this.data[this.size-1];
+  delete this.data[this.size-1];
+  this.size--;
+  return temp;
  }
 
  Stack.prototype.peek = function(){
- 	return this.data[this.size-1];
+   return this.data[this.size-1];
  }
 
  Stack.prototype.empty = function(){

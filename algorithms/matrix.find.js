@@ -11,12 +11,12 @@
  The designed algorithm should have linear time complexity.
  */
 
- var matrix = [[10,20,30,40],
+ var matrixOne = [[10,20,30,40],
                [15,25,35,45],
                [27,29,37,48],
                [32,33,39,50]];
 
- findPosition = function(matrix, num){
+  function findPosition(matrix, num){
    let i = 0;
    let j = matrix.length-1;
    console.log(matrix[i][j]);
@@ -34,7 +34,7 @@
    return [];
  }
 
- findPosition(matrix, 29); //[2,1];
+ findPosition(matrixOne, 29); //[2,1];
 
 
  /*Given a sorted matrix mat[n][m] and an element ‘x’.
@@ -44,7 +44,7 @@
  element of row 'i' is greater than or equal to the last element of
  row 'i-1'. The approach should have O(log n + log m) time complexity.*/
 
- var matrix = [
+ var matrixTwo = [
    [1,5,9],
    [14,20,21],
    [30,34,43]
@@ -126,7 +126,7 @@
      binarySearch(matrix, maxRow, middleColumn+1, columnLength-1, num);
    }
  }
- binaryMatrixSearch(matrix, 14);
+ binaryMatrixSearch(matrixTwo, 14);
 
  //recursive / diagonal
  function searchMatrix(matrix, num){
@@ -138,7 +138,7 @@
      if(matrix[row][column] === num){
        console.log("found in row: " + row + ", column: " + column);
        return true;
-     };
+     }
      if(matrix[row][column] < num){
        column += 1;
      }else if(matrix[row][column] > num){
@@ -147,4 +147,4 @@
    }
    return false;
  }
- searchMatrix(matrix, 14);
+ searchMatrix(matrixTwo, 14);

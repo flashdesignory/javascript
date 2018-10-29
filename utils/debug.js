@@ -4,8 +4,8 @@
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
- 
-var Debug = (function(window) {
+
+var Debug = (function(window) { // eslint-disable-line
 	var _debug = true;
 	return{
 		getDebug: function(){

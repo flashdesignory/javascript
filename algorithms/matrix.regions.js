@@ -20,7 +20,6 @@ function isValid(row, column, rowLength, columnLength){
 function dfs(matrix, r, c, visited){
   visited[r][c] = true;
   for(let i = 0; i<8; i++){
-    let current = matrix[r][c]
     let nextRow = r + rowNum[i];
     let nextCol = c + colNum[i];
     if(isValid(nextRow, nextCol, matrix.length, matrix[0].length) && matrix[nextRow][nextCol] && !visited[nextRow][nextCol]){

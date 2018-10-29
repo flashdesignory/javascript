@@ -27,21 +27,21 @@ console.log(factorial_one(4));
 
  //reursive
  function factorial_two(n){
- 	if(n <= 1) return 1;
- 	return n * factorial_two(n-1);
+	if(n <= 1) return 1;
+	return n * factorial_two(n-1);
  }
 
  console.log(factorial_two(4));
 
  //while loop
 function factorial_three(n){
- 	var result = n;
+	var result = n;
 
- 	while(n > 1){
- 		result *= --n;
- 	}
+	while(n > 1){
+		result *= --n;
+	}
 
- 	return result;
+	return result;
  }
 
  console.log(factorial_three(4));

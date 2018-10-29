@@ -1,0 +1,23 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "collection of algorithms, datastructures and utilities",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint **/*.{js} --quiet",
+    "lint-win": "node node_modules\\eslint\\bin\\eslint **/*.{js} --quiet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flashdesignory/javascript.git"
+  },
+  "author": "Thorsten Kober",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flashdesignory/javascript/issues"
+  },
+  "homepage": "https://github.com/flashdesignory/javascript#readme",
+  "dependencies": {
+    "eslint": "^5.8.0"
+  }
+}

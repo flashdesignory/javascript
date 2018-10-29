@@ -6,29 +6,29 @@
  */
 
  function base(id){
- 	var _id = id;
+  var _id = id;
 
- 	return {
- 		getId:function(){
- 			return _id;
- 		},
- 		init:function(){
- 			console.log("init()");
- 		}
- 	}
+  return {
+    getId:function(){
+      return _id;
+    },
+      init:function(){
+      console.log("init()");
+    }
+  }
  }
 
  function extendedBase(id){
     var _base = base(id);
     var _name;
-   
- 	_base.setName = function(value){
+
+    _base.setName = function(value){
       _name = value;
     }
     _base.getName = function(){
       return _name;
     }
- 	return _base;
+    return _base;
  }
 
 var b = base("foo");
@@ -42,4 +42,3 @@ console.log(c.getId());
 c.setName("bo");
 console.log(c.getName());
 console.log("--------------------");
-

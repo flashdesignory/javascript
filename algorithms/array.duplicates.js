@@ -4,7 +4,9 @@
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
- 
+
+ var nums = [1,3,5,2,3,4,8,6,4,5,5,3];
+
 function removeDuplicates(arr){
   var i = arr.length-1;
   var seen = {};
@@ -19,9 +21,7 @@ function removeDuplicates(arr){
   return arr;
 }
 
-var nums = [1,3,5,2,3,4,8,6,4,5,5,3];
-var result = removeDuplicates(nums);
-console.log(result);
+removeDuplicates(nums);
 
 function removeDuplicates2(arr){
   function remove(arr, index, seen){
@@ -36,6 +36,4 @@ function removeDuplicates2(arr){
   return remove(arr, arr.length-1);
 }
 
-var nums = [1,3,5,2,3,4,8,6,4,5,5,3];
-var result = removeDuplicates2(nums);
-console.log(result);
+removeDuplicates2(nums);

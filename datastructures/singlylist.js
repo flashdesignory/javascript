@@ -6,98 +6,102 @@
  */
 
  function Stack(){
- 	this.data = {};
- 	this.size = 0;
+  this.data = {};
+  this.size = 0;
  }
 
  Stack.prototype.push = function(value){
- 	this.data[this.size] = value;
- 	this.size++;
+  this.data[this.size] = value;
+  this.size++;
  }
 
  Stack.prototype.pop = function(){
- 	var temp = this.data[this.size-1];
- 	delete this.data[this.size-1];
- 	this.size--;
- 	return temp;
+  var temp = this.data[this.size-1];
+  delete this.data[this.size-1];
+  this.size--;
+  return temp;
  }
 
  Stack.prototype.peek = function(){
- 	return this.data[this.size-1];
+   return this.data[this.size-1];
+ }
+
+ Stack.prototype.empty = function(){
+   return this.size === 0;
  }
 
  function Node(value){
- 	this.value = value;
- 	this.next = null;
+  this.value = value;
+  this.next = null;
  }
 
  function SinglyList(){
- 	this.head = null;
+   this.head = null;
  }
 
 SinglyList.prototype.log = function(){
- 	if(!this.head) return;
+  if(!this.head) return;
 
- 	var values = [];
- 	var current = this.head;
- 	/*values.push(current.value);
- 	while(current.next){
- 		current = current.next;
- 		values.push(current.value);
- 	}*/
- 	while(current){
- 		values.push(current.value);
- 		current = current.next;
- 	}
+  var values = [];
+  var current = this.head;
+  /*values.push(current.value);
+  while(current.next){
+  current = current.next;
+  values.push(current.value);
+  }*/
+  while(current){
+    values.push(current.value);
+    current = current.next;
+  }
 
- 	console.log(values);
+  console.log(values);
  }
 
  SinglyList.prototype.add = function(value){
- 	var node = new Node(value);
+  var node = new Node(value);
 
- 	if(this.head == null){
- 		this.head = node;
- 		return node;
- 	}
+  if(this.head == null){
+    this.head = node;
+    return node;
+  }
 
- 	var current = this.head;
+  var current = this.head;
 
- 	while(current.next){
- 		current = current.next;
- 	}
+  while(current.next){
+    current = current.next;
+  }
 
- 	current.next = node;
- 	return node;
+  current.next = node;
+  return node;
  }
 
  SinglyList.prototype.remove = function(value){
- 	if(!this.head) return null;
+  if(!this.head) return null;
 
- 	var current = this.head;
- 	var previous = this.head;
+  var current = this.head;
+  var previous = this.head;
 
- 	if(current.value == value){
- 		this.head = current.next;
- 		return current;
- 	}
+  if(current.value == value){
+    this.head = current.next;
+    return current;
+  }
 
- 	while(current.next){
- 		if(current.value == value){
- 			previous.next = current.next;
- 			return current;
- 		}else{
- 			previous = current;
- 			current = current.next;
- 		}
- 	}
+  while(current.next){
+    if(current.value == value){
+      previous.next = current.next;
+      return current;
+    }else{
+      previous = current;
+      current = current.next;
+    }
+  }
 
- 	if(current.value == value){
- 		previous.next = null;
- 		return current;
- 	}
+  if(current.value == value){
+    previous.next = null;
+    return current;
+  }
 
- 	return null;
+  return null;
  }
 
 SinglyList.prototype.reverse = function(){

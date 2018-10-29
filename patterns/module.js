@@ -21,6 +21,9 @@ var Module = (function(){
 		},
 		publicFunction:function(){
 			console.log("publicFunction()");
+		},
+		callPrivateFunction:function(){
+			privateFunction();
 		}
 	}
 })();

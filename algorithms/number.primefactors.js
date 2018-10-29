@@ -6,19 +6,19 @@
  */
 
  function findPrimes(n){
- 	var factors = [];
- 	var divisor = 2;
+  var factors = [];
+  var divisor = 2;
 
- 	while(n > 2){
- 		if(n % divisor === 0){
- 			factors.push(divisor);
- 			n = n/divisor;
- 		}else{
- 			divisor ++;
- 		}
- 	}
+  while(n > 2){
+    if(n % divisor === 0){
+      factors.push(divisor);
+      n = n/divisor;
+    }else{
+      divisor ++;
+    }
+  }
 
- 	return factors;
+  return factors;
  }
 
  console.log(findPrimes(69));//[3,23];

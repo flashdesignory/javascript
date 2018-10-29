@@ -11,7 +11,7 @@
   var rLen = right.length;
   var l = 0;
   var r = 0;
-  
+
   while(l < lLen && r < rLen){
     if(left[l] < right[r]){
       result.push(left[l++]);
@@ -19,12 +19,11 @@
       result.push(right[r++]);
     }
   }
-  
+
   return result.concat(left.slice(l)).concat(right.slice(r));
 }
 
-var result = merge_one([2,5,6,9], [1,2,3,29]);
-console.log(result) // [1, 2, 2, 3, 5, 6, 9, 29]
+console.log(merge_one([2,5,6,9], [1,2,3,29])); // [1, 2, 2, 3, 5, 6, 9, 29]
 
 function merge_two(left, right){
 	var result = [];
@@ -54,5 +53,4 @@ function merge_two(left, right){
 	return result;
 }
 
-var result = merge_two([2,5,6,9], [1,2,3,29]);
-console.log(result) // [1, 2, 2, 3, 5, 6, 9, 29]
+console.log(merge_two([2,5,6,9], [1,2,3,29])); // [1, 2, 2, 3, 5, 6, 9, 29]
