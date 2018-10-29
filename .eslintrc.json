@@ -1,7 +1,11 @@
 {
-  "extends": "eslint:recommended",
+  "extends": "airbnb-base",
   "rules": {
-    "no-console": [0]
+    "no-plusplus": [0],
+    "func-names": ["error", "never"],
+    "no-console": [0],
+    "no-shadow": ["error", { "builtinGlobals": false, "hoist": "functions", "allow": ["value", "node"] }],
+    "no-param-reassign": [0]
   },
   "env": {
     "es6": true,
