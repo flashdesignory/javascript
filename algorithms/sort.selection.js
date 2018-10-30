@@ -5,30 +5,29 @@
  * @email: info@flashdesignory.com
  */
 
-//Big O(n2) time Big O(1) space
-function selectionSort(arr){
-	var len = arr.length;
-	var min;
-	var temp;
+// Big O(n2) time Big O(1) space
+function selectionSort(arr) {
+  const len = arr.length;
+  let min;
+  let temp;
 
-	for(var i = 0; i<len; i++){
-		min = i;
-		for(var j = i+1; j<len; j++){
-			if(arr[j] < arr[min]){
-				min = j;
-			}
-		}
+  for (let i = 0; i < len; i++) {
+    min = i;
+    for (let j = i + 1; j < len; j++) {
+      if (arr[j] < arr[min]) {
+        min = j;
+      }
+    }
 
-		if(i != min){
-			temp = arr[i];
-			arr[i] = arr[min];
-			arr[min] = temp;
-		}
-	}
+    if (i !== min) {
+      temp = arr[i];
+      arr[i] = arr[min];
+      arr[min] = temp;
+    }
+  }
 
-	return arr;
+  return arr;
 }
 
-//
-var nums = [7,9,3,4,2,8,5,1];
+const nums = [7, 9, 3, 4, 2, 8, 5, 1];
 console.log(selectionSort(nums));

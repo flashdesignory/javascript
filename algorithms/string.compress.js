@@ -5,37 +5,35 @@
  * @email: info@flashdesignory.com
  */
 
-function stringCompression(str){
-
+function stringCompression(str) {
   let start = 0;
   let end = 0;
   let count = 1;
-  let result = "";
+  let result = '';
 
-  for(let i = 1; i<str.length; i++){
-    if(str[i] == str[i-1]){
+  for (let i = 1; i < str.length; i++) {
+    if (str[i] === str[i - 1]) {
       end++;
-    }else{
-      count = (end-start+1);
-      if(start === end){
+    } else {
+      count = (end - start + 1);
+      if (start === end) {
         result += str[start] + count;
-      }else{
+      } else {
         result += str[start] + count;
-
       }
-       start = i;
-        end = i;
+      start = i;
+      end = i;
     }
   }
 
-  count = (end-start+1);
-  if(start === end){
+  count = (end - start + 1);
+  if (start === end) {
     result += str[start] + count;
-  }else{
+  } else {
     result += str[start] + count;
   }
 
   return result;
 }
 
-stringCompression('aabcccccaaa'); //a2b1c5a3
+stringCompression('aabcccccaaa'); // a2b1c5a3

@@ -5,23 +5,23 @@
  * @email: info@flashdesignory.com
  */
 
-//helper functions
-function swap(arr, a, b){
-  var temp = arr[a];
+// helper functions
+function swap(arr, a, b) {
+  const temp = arr[a];
   arr[a] = arr[b];
   arr[b] = temp;
 }
 
-function permutations(arr){
-  var result = [];
+function permutations(arr) {
+  const result = [];
 
-  function permute(n){
-    if(n == 1){
+  function permute(n) {
+    if (n === 1) {
       result.push(arr.join());
-    }else{
-      for(var i = 0; i<n; i++){
-        permute(n-1);
-        swap(arr, n % 2 ? 0 : i, n-1);
+    } else {
+      for (let i = 0; i < n; i++) {
+        permute(n - 1);
+        swap(arr, n % 2 ? 0 : i, n - 1);
       }
     }
   }
@@ -30,18 +30,18 @@ function permutations(arr){
   return result;
 }
 
-console.log(permutations(["a", "b", "c", "d"]));
+console.log(permutations(['a', 'b', 'c', 'd']));
 
-//heaps
-function permutations_one(array, n, result){
+// heaps
+function permutationsOne(array, n, result) {
   n = n || array.length;
   result = result || [];
-  var i,j;
+  let i; let j;
   if (n === 1) {
     console.log(array);
   } else {
     for (i = 1; i <= n; i++) {
-      permutations_one(array, n - 1, result);
+      permutationsOne(array, n - 1, result);
       if (n % 2) {
         j = 1;
       } else {
@@ -49,54 +49,53 @@ function permutations_one(array, n, result){
       }
       swap(array, j - 1, n - 1);
     }
-   
   }
 }
 
-permutations_one(['a', 'b', 'c', 'd']);
+permutationsOne(['a', 'b', 'c', 'd']);
 
-//variation
-function permutations_two(arr){
-  var result = [];
-  var stack = [];
-  
-  function permute(){
-    if(arr.length === 0){
+// variation
+function permutationsTwo(arr) {
+  const result = [];
+  const stack = [];
+
+  function permute() {
+    if (arr.length === 0) {
       result.push(stack.slice());
     }
-    for(var i = 0; i<arr.length; i++){
-      var x = arr.splice(i, 1);
+    for (let i = 0; i < arr.length; i++) {
+      const x = arr.splice(i, 1);
       stack.push(x);
       permute();
       stack.pop();
       arr.splice(i, 0, x);
     }
   }
-  
+
   permute();
-  
-  for (var i = 0; i < result.length; i++) {
-      result[i] = result[i].join('');
+
+  for (let i = 0; i < result.length; i++) {
+    result[i] = result[i].join('');
   }
 
   return result;
 }
 
-console.log(permutations_two(['a', 'b', 'c', 'd']));
+console.log(permutationsTwo(['a', 'b', 'c', 'd']));
 
-//backtracking
-//O (n*n!)
-function permutations_three (alphabets, startIndex, endIndex) {
+// backtracking
+// O (n*n!)
+function permutationsThree(alphabets, startIndex, endIndex) {
   if (startIndex === endIndex) {
-	console.log(alphabets.join(''));
+    console.log(alphabets.join(''));
   } else {
-    for (var i = startIndex; i <= endIndex; i++) {
+    for (let i = startIndex; i <= endIndex; i++) {
       swap(alphabets, startIndex, i);
-      permutations_three(alphabets, startIndex + 1, endIndex);
+      permutationsThree(alphabets, startIndex + 1, endIndex);
       swap(alphabets, i, startIndex); // backtrack
     }
   }
 }
 
-var alphabets = ['A','B','C', 'D'];
-permutations_three(alphabets, 0, alphabets.length-1); // ABC, ACB, BAC, BCA, CBA, CAB
+const alphabets = ['A', 'B', 'C', 'D'];
+permutationsThree(alphabets, 0, alphabets.length - 1); // ABC, ACB, BAC, BCA, CBA, CAB

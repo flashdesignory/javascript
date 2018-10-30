@@ -10,15 +10,15 @@ const str2 = 'GXTXAYB';
 const index1 = str1.length;
 const index2 = str2.length;
 
-function lcs(str1, str2, index1, index2){
-  if(index1 === 0 || index2 === 0) return 0;
-  if(str1[index1-1] === str2[index2-1]){
-    return 1 + lcs(str1, str2, index1-1, index2-1);
-  }else{
-    return Math.max(
-      lcs(str1, str2, index1, index2-1),
-      lcs(str1, str2, index1-1, index2));
+function lcs(str1, str2, index1, index2) {
+  if (index1 === 0 || index2 === 0) return 0;
+  if (str1[index1 - 1] === str2[index2 - 1]) {
+    return 1 + lcs(str1, str2, index1 - 1, index2 - 1);
   }
+  return Math.max(
+    lcs(str1, str2, index1, index2 - 1),
+    lcs(str1, str2, index1 - 1, index2),
+  );
 }
 
 lcs(str1, str2, index1, index2);

@@ -5,33 +5,33 @@
  * @email: info@flashdesignory.com
  */
 
-function isSubsequence(str1, str2){
-  let m = str1.length;
-  let n = str2.length;
+function isSubsequence(str1, str2) {
+  const m = str1.length;
+  const n = str2.length;
   let j = 0;
   let i = 0;
-  while(i < n && j < m){
-    if(str1[j] === str2[i]){
-      //found same character, let's increment word index;
+  while (i < n && j < m) {
+    if (str1[j] === str2[i]) {
+      // found same character, let's increment word index;
       console.log(str1[j]);
       j++;
     }
     i++;
   }
-  //all characters from word found from 0 to length
-  return (j == m);
+  // all characters from word found from 0 to length
+  return (j === m);
 }
 
-function findLongestString(arr, str){
+function findLongestString(arr, str) {
   let result = '';
   let length = 0;
 
-  arr.forEach(word => {
-    if(length < word.length && isSubsequence(word, str)){
+  arr.forEach((word) => {
+    if (length < word.length && isSubsequence(word, str)) {
       result = word;
-      length = word.length;
+      length = word.length; //eslint-disable-line
     }
-  })
+  });
 
   return result;
 }

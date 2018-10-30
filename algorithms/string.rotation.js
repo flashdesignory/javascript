@@ -5,10 +5,10 @@
  * @email: info@flashdesignory.com
  */
 
-function isStringRotation(str1, str2){
-  if(str1.length !== str2.length) return false;
-  let temp = str1.concat(str1);
-  if(temp.indexOf(str2) === -1) return false;
+function isStringRotation(str1, str2) {
+  if (str1.length !== str2.length) return false;
+  const temp = str1.concat(str1);
+  if (temp.indexOf(str2) === -1) return false;
   return true;
 }
 

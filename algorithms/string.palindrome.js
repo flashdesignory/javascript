@@ -5,12 +5,12 @@
  * @email: info@flashdesignory.com
  */
 
-function isPalindrome(str){
-  var len = str.length;
-  var middle = Math.floor(len/2);
+function isPalindrome(str) {
+  const len = str.length;
+  const middle = Math.floor(len / 2);
 
-  for(var i = 0; i<middle; i++){
-    if(str[i] != str[len-1-i]){
+  for (let i = 0; i < middle; i++) {
+    if (str[i] !== str[len - 1 - i]) {
       return false;
     }
   }
@@ -18,5 +18,5 @@ function isPalindrome(str){
   return true;
 }
 
-console.log(isPalindrome("madam"));
-console.log(isPalindrome("fire"));
+console.log(isPalindrome('madam'));
+console.log(isPalindrome('fire'));
