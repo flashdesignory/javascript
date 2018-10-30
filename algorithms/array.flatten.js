@@ -5,6 +5,11 @@
  * @email: info@flashdesignory.com
  */
 
+/*
+ * input: [1, 2, 3, [4, 5], [6, [7, 8]]]
+ * output: [1, 2, 3, 4, 5, 6, 7, 8]
+ */
+
 function flattenArray(arr, result) {
   result = result || [];
   for (let i = 0; i < arr.length; i++) {
@@ -13,5 +18,8 @@ function flattenArray(arr, result) {
   return result;
 }
 
-const nums = [1, 2, 3, [4, 5], [6, [7, 8]]];
-console.log(flattenArray(nums));
+// npx jest algorithms/array.flatten.js
+test('flattenArray()', () => {
+  const nums = [1, 2, 3, [4, 5], [6, [7, 8]]];
+  expect(flattenArray(nums)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+});
