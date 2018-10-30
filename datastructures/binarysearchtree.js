@@ -554,14 +554,13 @@ BinarySearchTree.prototype.toObject = function () {
   return this.root.serialize();
 };
 
-/* eslint-disable */
-var tree = new BinarySearchTree();
+const tree = new BinarySearchTree();
 tree.add(10);
-var fifteen = tree.add(15);
-var five = tree.add(5);
+const fifteen = tree.add(15);
+const five = tree.add(5);
 tree.add(2);
 tree.add(3);
-var twelve = tree.add(12);
+const twelve = tree.add(12);
 tree.add(17);
 // console.log(tree.toObject());
 // tree.preOrderTraversal(tree.root);
@@ -579,12 +578,6 @@ tree.max(tree.root);
 // tree.remove(15);
 // console.log("-------------------------------");
 // tree.inOrderTraversal(tree.root);
-
-//					10
-//				5		15
-//     2	  12   17
-//       3
-
 console.log('notes at level 2: ');
 tree.findNodesAtLevel(tree.root, 2);
 console.log(`sum leaves: ${tree.sumLeaves(tree.root)}`);
