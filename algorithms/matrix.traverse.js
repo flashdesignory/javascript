@@ -12,27 +12,27 @@
      [ 4, 5,12,13,20]]
 */
 
- function print(numRows, numCols){
-   let matrix = [];
-   for(let i = 0; i<numRows; i++){
-     matrix[i] = [];
-   }
+function print(numRows, numCols) {
+  const matrix = [];
+  for (let i = 0; i < numRows; i++) {
+    matrix[i] = [];
+  }
 
-   let count = 1;
+  let count = 1;
 
-   for(let i = 0; i<numCols; i++){
-     if(i%2){
-       for(let j = numRows-1; j>=0; j--){
-         matrix[j][i] = count++;
-       }
-     }else{
-       for(let j = 0; j<numRows; j++){
-         matrix[j][i] = count++;
-       }
-     }
-   }
+  for (let i = 0; i < numCols; i++) {
+    if (i % 2) {
+      for (let j = numRows - 1; j >= 0; j--) {
+        matrix[j][i] = count++;
+      }
+    } else {
+      for (let j = 0; j < numRows; j++) {
+        matrix[j][i] = count++;
+      }
+    }
+  }
 
-   console.log(matrix);
- }
+  console.log(matrix);
+}
 
- print(5,4)
+print(5, 4);

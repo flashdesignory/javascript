@@ -5,7 +5,7 @@
     "func-names": ["error", "never"],
     "no-console": [0],
     "no-shadow": ["error", { "builtinGlobals": false, "hoist": "functions",
-      "allow": ["value", "node", "arr", "arr1", "arr2", "arr3", "list"] }],
+      "allow": ["value", "node", "arr", "arr1", "arr2", "arr3", "list", "matrix"] }],
     "no-unused-expressions": ["error", { "allowShortCircuit": false, "allowTernary": true }],
     "no-param-reassign": [0],
     "object-shorthand": ["error", "never"],
