@@ -5,13 +5,13 @@
  * @email: info@flashdesignory.com
  */
 
- function randomInRange(min, max){
-  if(min > max){
-    max = max - min;
-    min = min + max;
+function randomInRange(min, max) {
+  if (min > max) {
+    max = max - min; //eslint-disable-line
+    min = min + max; //eslint-disable-line
     max = min - max;
   }
-  return Math.random() * (max-min) + min;
- }
+  return Math.random() * (max - min) + min;
+}
 
- console.log(randomInRange(5,7));
+console.log(randomInRange(5, 7));

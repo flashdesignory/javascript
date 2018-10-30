@@ -5,64 +5,64 @@
  * @email: info@flashdesignory.com
  */
 
- //itteration
- function combinations(str){
-    var result = [];
+// itteration
+function combinations(str) {
+  const result = [];
 
-    for(var i = 0; i<str.length; i++){
-      var resultLength = result.length;
-      for(var j = 0; j<resultLength; j++){
-        result.push(str[i] + result[j]);
-      }
-      result.push(str[i]);
+  for (let i = 0; i < str.length; i++) {
+    const resultLength = result.length;
+    for (let j = 0; j < resultLength; j++) {
+      result.push(str[i] + result[j]);
     }
+    result.push(str[i]);
+  }
 
-    console.log(result.length);
-    return result;
- }
+  console.log(result.length);
+  return result;
+}
 
- //example
- console.log(combinations("abcd"));
+// example
+console.log(combinations('abcd'));
 
- //recursive
- function combinations_two(str){
-  var result = [];
+// recursive
+function combinationsTwo(str) {
+  const result = [];
 
-  function combine(used, unused){
-    if(!used && !unused) return;
-    if(!unused) result.push(used);
-    else{
+  function combine(used, unused) {
+    if (!used && !unused) return;
+    if (!unused) result.push(used);
+    else {
       combine(used + unused[0], unused.slice(1));
       combine(used, unused.slice(1));
     }
- }
+  }
 
-  combine("", str);
+  combine('', str);
   console.log(result.length);
   return result;
- }
+}
 
- //example
- console.log(combinations_two("abcd"));
+// example
+console.log(combinationsTwo('abcd'));
 
- //recursive with factorial
- //Formula: n! / k!(n- k)!
+// recursive with factorial
+// Formula: n! / k!(n- k)!
 
- function factorial(n){
-  if(n <= 1) return 1;
-  return n * factorial(n-1);
- }
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
 
- function combinationsCount(n, k){
-  var result = 1;
+function combinationsCount(n, k) {
+  let result = 1;
 
-  var divisor = (factorial(k) * factorial(n-k));
-  if(divisor){
-   result = factorial(n)/divisor;
+  const divisor = (factorial(k) * factorial(n - k));
+  if (divisor) {
+    result = factorial(n) / divisor;
   }
 
   return result;
- }
+}
 
- //example
-  console.log(combinationsCount(4, 2));
+// example
+console.log(combinationsCount(4, 2));

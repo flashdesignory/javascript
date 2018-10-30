@@ -5,20 +5,20 @@
  * @email: info@flashdesignory.com
  */
 
- function findPrimes(n){
-  var factors = [];
-  var divisor = 2;
+function findPrimes(n) {
+  const factors = [];
+  let divisor = 2;
 
-  while(n > 2){
-    if(n % divisor === 0){
+  while (n > 2) {
+    if (n % divisor === 0) {
       factors.push(divisor);
-      n = n/divisor;
-    }else{
-      divisor ++;
+      n = n / divisor; // eslint-disable-line
+    } else {
+      divisor++;
     }
   }
 
   return factors;
- }
+}
 
- console.log(findPrimes(69));//[3,23];
+console.log(findPrimes(69)); // [3,23];

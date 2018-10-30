@@ -5,14 +5,14 @@
  * @email: info@flashdesignory.com
  */
 
-function greatestCommonDivisor(a,b){
-  if(a < 2 || b < 2) return 1;
+function greatestCommonDivisor(a, b) {
+  if (a < 2 || b < 2) return 1;
 
   let divisor = 2;
   let greatest = 1;
 
-  while(a >= divisor && b >= divisor){
-    if(a%divisor === 0 && b%divisor === 0){
+  while (a >= divisor && b >= divisor) {
+    if (a % divisor === 0 && b % divisor === 0) {
       greatest = divisor;
     }
     divisor++;
@@ -20,14 +20,14 @@ function greatestCommonDivisor(a,b){
   return greatest;
 }
 
-greatestCommonDivisor(14, 21); //7
+greatestCommonDivisor(14, 21); // 7
 
-function greatestCommonDivisor2(a,b){
-  if(b === 0){
+function greatestCommonDivisor2(a, b) {
+  if (b === 0) {
     return a;
   }
 
-  return greatestCommonDivisor2(b, a%b);
+  return greatestCommonDivisor2(b, a % b);
 }
 
-greatestCommonDivisor2(14, 21); //7
+greatestCommonDivisor2(14, 21); // 7

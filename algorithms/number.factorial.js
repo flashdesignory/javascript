@@ -5,43 +5,44 @@
  * @email: info@flashdesignory.com
  */
 
- /**
-  * The result of multiplying a sequence of descending natural numbers down to 1 (such as 4 × 3 × 2 × 1)
-  * 4! = 4 × 3 × 2 × 1 = 24
-  */
+/*
+ * The result of multiplying a sequence of descending natural numbers down to 1
+ * (such as 4 × 3 × 2 × 1)
+ * 4! = 4 × 3 × 2 × 1 = 24
+*/
 
-//iteration
-function factorial_one(n){
-	var result = 1;
+// iteration
+function factorialOne(n) {
+  let result = 1;
 
-	//limit > 0 since we can't multiply by 0
-	for(var i = n; i>0; i--){
-		result *= i;
-	}
+  // limit > 0 since we can't multiply by 0
+  for (let i = n; i > 0; i--) {
+    result *= i;
+  }
 
-	return result;
+  return result;
 }
 
-//example
-console.log(factorial_one(4));
+// example
+console.log(factorialOne(4));
 
- //reursive
- function factorial_two(n){
-	if(n <= 1) return 1;
-	return n * factorial_two(n-1);
- }
+// reursive
+function factorialTwo(n) {
+  if (n <= 1) return 1;
+  return n * factorialTwo(n - 1);
+}
 
- console.log(factorial_two(4));
+console.log(factorialTwo(4));
 
- //while loop
-function factorial_three(n){
-	var result = n;
+// while loop
+function factorialThree(n) {
+  let result = n;
 
-	while(n > 1){
-		result *= --n;
-	}
+  while (n > 1) {
+    result *= --n;
+  }
 
-	return result;
- }
+  return result;
+}
 
- console.log(factorial_three(4));
+console.log(factorialThree(4));

@@ -5,20 +5,20 @@
  * @email: info@flashdesignory.com
  */
 
- function swapNumbers_one(a,b){
-  b = b-a;
-  a = a+b;
-  b = a-b;
-  return [a,b];
- }
+function swapNumbersOne(a, b) {
+  b = b-a; //eslint-disable-line
+  a = a+b; //eslint-disable-line
+  b = a-b; //eslint-disable-line
+  return [a, b];
+}
 
- console.log(swapNumbers_one(3,5));
+console.log(swapNumbersOne(3, 5));
 
- function swapNumbers_two(a,b){
-  a = a^b;
-  b = a^b;
-  a = a^b;
-  return [a,b];
- }
+function swapNumbersTwo(a, b) {
+  a = a^b; //eslint-disable-line
+  b = a^b; //eslint-disable-line
+  a = a^b; //eslint-disable-line
+  return [a, b];
+}
 
- console.log(swapNumbers_two(4,6));
+console.log(swapNumbersTwo(4, 6));
