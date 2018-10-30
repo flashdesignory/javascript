@@ -5,15 +5,16 @@
  * @email: info@flashdesignory.com
  */
 
- class Node{
-  constructor(value){
+class Node {
+  constructor(value) {
     this.value = value;
     this.left = null;
     this.right = null;
   }
-  serialize(){
+
+  serialize() {
     console.log(this.value);
-    let result = {};
+    const result = {};
     result.value = this.value;
     result.left = this.left ? this.left.serialize() : null;
     result.right = this.right ? this.right.serialize() : null;
@@ -21,43 +22,46 @@
   }
 }
 
-class BinarySearchTree{
-  constructor(){
+class BinarySearchTree {
+  constructor() {
     this.root = null;
   }
-  print(){
+
+  print() {
     this.root.serialize();
   }
-  add(value){
-    let node = new Node(value);
-    if(!this.root){
+
+  add(value) {
+    const node = new Node(value);
+    if (!this.root) {
       this.root = node;
       return node;
     }
 
     let current = this.root;
-    while(current){
-      if(value < current.value){
-        if(!current.left){
+    while (current) {
+      if (value < current.value) {
+        if (!current.left) {
           current.left = node;
           return node;
         }
         current = current.left;
-      }else if(value > current.value){
-        if(!current.right){
+      } else if (value > current.value) {
+        if (!current.right) {
           current.right = node;
           return node;
         }
         current = current.right;
       }
     }
+    return null;
   }
-  flattenPreOrder(node){
-    //pre-order traversal
-    if(!node) return node;
 
-    let left = node.left;
-    let right = node.right;
+  flattenPreOrder(node) {
+    // pre-order traversal
+    if (!node) return node;
+
+    const { left, right } = node;
 
     this.flattenPreOrder(left);
     this.flattenPreOrder(right);
@@ -66,53 +70,52 @@ class BinarySearchTree{
     node.left = null;
 
     let current = node;
-    while(current.right){
+    while (current.right) {
       current = current.right;
     }
 
     current.right = right;
     return node;
   }
-  flattenPreOrder2(node){
-    if(!node) return node;
 
-    let right = node.right;
-    let left = node.left;
+  flattenPreOrder2(node) {
+    if (!node) return node;
 
-    if(left){
+    const { left, right } = node;
+
+    if (left) {
       node.right = left;
       node.left = null;
       node = this.flattenPreOrder2(node.right);
     }
 
-    if(right){
+    if (right) {
       node.right = right;
       node = this.flattenPreOrder2(node.right);
     }
 
     return node;
   }
-  flatten(node){
-    let current = node;
-    while(current){
-      if(current.left){
 
-        if(current.right){
+  /* eslint-disable-next-line */
+  flatten(node) {
+    let current = node;
+    while (current) {
+      if (current.left) {
+        if (current.right) {
           let next = current.left;
-          while(next.right) next = next.right;
+          while (next.right) next = next.right;
           next.right = current.right;
         }
-
         current.right = current.left;
         current.left = null;
-
       }
       current = current.right;
     }
   }
 }
 
-let tree = new BinarySearchTree();
+const tree = new BinarySearchTree();
 tree.add(10);
 tree.add(5);
 tree.add(15);
@@ -121,13 +124,13 @@ tree.add(3);
 tree.add(12);
 tree.add(17);
 tree.add(7);
-//tree.print();
-console.log("************");
+// tree.print();
+console.log('************');
 tree.flattenPreOrder(tree.root);
-tree.print(); /*10-5-2-3-7-15-12-17*/
-console.log("************");
+tree.print(); /* 10-5-2-3-7-15-12-17 */
+console.log('************');
 tree.flattenPreOrder2(tree.root);
-tree.print(); /*10-5-2-3-7-15-12-17*/
-console.log("************");
+tree.print(); /* 10-5-2-3-7-15-12-17 */
+console.log('************');
 tree.flatten(tree.root);
-tree.print(); /*10-5-2-3-7-15-12-17*/
+tree.print(); /* 10-5-2-3-7-15-12-17 */

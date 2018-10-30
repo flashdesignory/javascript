@@ -5,69 +5,71 @@
  * @email: info@flashdesignory.com
  */
 
-class Node{
-  constructor(value){
+class Node {
+  constructor(value) {
     this.value = value;
     this.children = {};
     this.isLast = false;
   }
 }
 
-class Trie{
-  constructor(){
+class Trie {
+  constructor() {
     this.root = new Node('');
   }
-  insert(word){
+
+  insert(word) {
     let current = this.root;
 
-    for(let i = 0; i<word.length; i++){
-      let letter = word[i];
-      if(!current.children[letter]){
-        let node = new Node(letter);
+    for (let i = 0; i < word.length; i++) {
+      const letter = word[i];
+      if (!current.children[letter]) {
+        const node = new Node(letter);
         current.children[letter] = node;
         current = node;
-      }else{
+      } else {
         current = current.children[letter];
       }
     }
     current.isLast = true;
   }
-  contains(word){
+
+  contains(word) {
     let current = this.root;
 
-    for(let i = 0; i<word.length; i++){
-      if(!current.children[word[i]]){
+    for (let i = 0; i < word.length; i++) {
+      if (!current.children[word[i]]) {
         return false;
-      }else{
-        current = current.children[word[i]];
       }
+      current = current.children[word[i]];
     }
 
     return true;
   }
-  findWords(word){
-    let current = this.root;
-    let result = [];
-    let letters = "";
 
-    for(let i = 0; i<word.length; i++){
-      if(!current.children[word[i]]){
+  findWords(word) {
+    let current = this.root;
+    const result = [];
+    let letters = '';
+
+    for (let i = 0; i < word.length; i++) {
+      if (!current.children[word[i]]) {
         return result;
-      }else{
-        current = current.children[word[i]];
-        letters += current.value;
       }
+      current = current.children[word[i]];
+      letters += current.value;
     }
 
-    function traverse(node, chars){
-      Object.values(node.children).forEach(child => {
+    function traverse(node, chars) {
+      // eslint-disable-next-line
+      Object.values(node.children).forEach((child) => {
         chars += child.value;
-        if(child.isLast){
+        if (child.isLast) {
           return result.push(chars);
         }
-        traverse(child, chars)
-        chars = chars.substring(0, chars.length-1);
-      })
+        traverse(child, chars);
+        chars = chars.substring(0, chars.length - 1);
+      });
     }
 
     traverse(current, letters);
@@ -76,7 +78,7 @@ class Trie{
   }
 }
 
-let trie = new Trie();
+const trie = new Trie();
 trie.insert('hello');
 trie.insert('hi');
 trie.insert('helographinator');

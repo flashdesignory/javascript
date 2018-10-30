@@ -5,36 +5,36 @@
  * @email: info@flashdesignory.com
  */
 
-//first-in first-out (FIFO)
+// first-in first-out (FIFO)
 
-function Queue(){
-	this.data = {};
-	this.first = 0;
-	this.last = 0;
+function Queue() {
+  this.data = {};
+  this.first = 0;
+  this.last = 0;
 }
 
-Queue.prototype.push = function(value){
-	this.data[this.last] = value;
-	this.last++;
-}
+Queue.prototype.push = function (value) {
+  this.data[this.last] = value;
+  this.last++;
+};
 
-Queue.prototype.shift = function(){
-	var temp = this.data[this.first];
-	delete this.data[this.first];
-	this.first++;
-	return temp;
-}
+Queue.prototype.shift = function () {
+  const temp = this.data[this.first];
+  delete this.data[this.first];
+  this.first++;
+  return temp;
+};
 
-Queue.prototype.peek = function(){
-	return this.data[this.first];
-}
+Queue.prototype.peek = function () {
+  return this.data[this.first];
+};
 
-Queue.prototype.empty = function(){
-	return this.first === this.last;
-}
+Queue.prototype.empty = function () {
+  return this.first === this.last;
+};
 
-//example
-var queue = new Queue();
+// example
+const queue = new Queue();
 queue.push(1);
 queue.push(2);
 queue.push(3);
