@@ -23,6 +23,14 @@ Queue.prototype.dequeue = function () {
   return temp;
 };
 
+Queue.prototype.peek = function () {
+  return this.data[this.first];
+};
+
+Queue.prototype.empty = function () {
+  return this.first === this.last;
+};
+
 function Stack() {
   this.data = {};
   this.size = 0;

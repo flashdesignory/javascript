@@ -13,12 +13,12 @@ function Queue() {
   this.last = 0;
 }
 
-Queue.prototype.push = function (value) {
+Queue.prototype.enqueue = function (value) {
   this.data[this.last] = value;
   this.last++;
 };
 
-Queue.prototype.shift = function () {
+Queue.prototype.dequeue = function () {
   const temp = this.data[this.first];
   delete this.data[this.first];
   this.first++;
@@ -35,9 +35,9 @@ Queue.prototype.empty = function () {
 
 // example
 const queue = new Queue();
-queue.push(1);
-queue.push(2);
-queue.push(3);
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
 console.log(queue.peek());
-console.log(queue.shift());
+console.log(queue.dequeue());
 console.log(queue.peek());
