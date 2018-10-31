@@ -96,14 +96,14 @@ list.add(10);
 function createFromLinkedList(list) {
   const n = list.length();
 
-  function buildFromList(index) {
-    if (index <= 0) return null;
-    const middle = Math.floor(index / 2);
+  function buildFromList(length) {
+    if (length <= 0) return null;
+    const middle = Math.floor(length / 2);
     const left = buildFromList(middle);
     const node = new Node(list.head.value);
     node.left = left;
     list.head = list.head.next;
-    node.right = buildFromList(index - middle - 1);
+    node.right = buildFromList(length - middle - 1);
     return node;
   }
   return buildFromList(n);
