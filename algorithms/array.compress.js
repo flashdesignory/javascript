@@ -5,7 +5,10 @@
  * @email: info@flashdesignory.com
  */
 
-const nums = [1, 2, 3, 10, 25, 26, 30, 31, 32, 33];
+/*
+  * input: [1, 2, 3, 10, 25, 26, 30, 31, 32, 33];
+  * output: '1-3,10,25-26,30-33'
+  */
 
 function compressArray(arr) {
   let start = arr[0];
@@ -34,4 +37,8 @@ function compressArray(arr) {
   return result;
 }
 
-console.log(compressArray(nums)); // 1-3,10,25-26,30-33
+// npx jest algorithms/array.compress.js
+test('compressArray()', () => {
+  expect(compressArray([1, 2, 3, 10, 25, 26, 30, 31, 32, 33]))
+    .toEqual('1-3,10,25-26,30-33');
+});

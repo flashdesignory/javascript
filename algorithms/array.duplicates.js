@@ -5,7 +5,10 @@
  * @email: info@flashdesignory.com
  */
 
-const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
+/*
+ * input: [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
+ * output: [ 1, 2, 8, 6, 4, 5, 3 ]
+ */
 
 function removeDuplicates(arr) {
   let i = arr.length - 1;
@@ -21,8 +24,6 @@ function removeDuplicates(arr) {
   return arr;
 }
 
-removeDuplicates(nums);
-
 function removeDuplicates2(arr) {
   function remove(arr, index, seen) {
     if (index < 0) return arr;
@@ -37,4 +38,14 @@ function removeDuplicates2(arr) {
   return remove(arr, arr.length - 1);
 }
 
-removeDuplicates2(nums);
+// npx jest algorithms/array.duplicates.js
+describe('remove duplicates in array', () => {
+  const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
+
+  test('removeDuplicates()', () => {
+    expect(removeDuplicates(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
+  });
+  test('removeDuplicates2()', () => {
+    expect(removeDuplicates2(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
+  });
+});

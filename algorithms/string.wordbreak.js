@@ -34,21 +34,23 @@ function wordBreak(str) {
 }
 
 // npx jest algorithms/string.wordBreak.js
-test('wordBreak(ilikesamsung)', () => {
-  expect(wordBreak('ilikesamsung')).toEqual(true);
-});
-test('wordBreak(iiiiiiii)', () => {
-  expect(wordBreak('iiiiiiii')).toEqual(true);
-});
-test('wordBreak()', () => {
-  expect(wordBreak('')).toEqual(true);
-});
-test('wordBreak(ilikelikeimangoiii)', () => {
-  expect(wordBreak('ilikelikeimangoiii')).toEqual(true);
-});
-test('wordBreak(samsungandmango)', () => {
-  expect(wordBreak('samsungandmango')).toEqual(true);
-});
-test('wordBreak(samsungandmangok)', () => {
-  expect(wordBreak('samsungandmangok')).toEqual(false);
+describe('wordbreak()', () => {
+  test('wordBreak(ilikesamsung)', () => {
+    expect(wordBreak('ilikesamsung')).toEqual(true);
+  });
+  test('wordBreak(iiiiiiii)', () => {
+    expect(wordBreak('iiiiiiii')).toEqual(true);
+  });
+  test('wordBreak()', () => {
+    expect(wordBreak('')).toEqual(true);
+  });
+  test('wordBreak(ilikelikeimangoiii)', () => {
+    expect(wordBreak('ilikelikeimangoiii')).toEqual(true);
+  });
+  test('wordBreak(samsungandmango)', () => {
+    expect(wordBreak('samsungandmango')).toEqual(true);
+  });
+  test('wordBreak(samsungandmangok)', () => {
+    expect(wordBreak('samsungandmangok')).toEqual(false);
+  });
 });
