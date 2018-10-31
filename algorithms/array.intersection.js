@@ -29,16 +29,6 @@ function findCommon(one, two) {
   return result;
 }
 
-const one = [1, 4, 7, 9];
-const two = [1, 3, 7, 8];
-
-console.log(findCommon(one, two));
-
-// example with three Arrays
-const arr1 = [2, 6, 9, 11, 13, 17];
-const arr2 = [3, 6, 7, 10, 13, 18];
-const arr3 = [4, 5, 6, 9, 11, 13];
-
 function findIntersections(arr1, arr2, arr3) {
   const result = [];
   let i = 0;
@@ -61,4 +51,17 @@ function findIntersections(arr1, arr2, arr3) {
   return result;
 }
 
-findIntersections(arr1, arr2, arr3); // [6,13];
+// npx jest algorithms/array.intersection.js
+describe('find common elements in arrays', () => {
+  test('findCommon()', () => {
+    const one = [1, 4, 7, 9];
+    const two = [1, 3, 7, 8];
+    expect(findCommon(one, two)).toEqual([1, 7]);
+  });
+  test('findIntersections()', () => {
+    const arr1 = [2, 6, 9, 11, 13, 17];
+    const arr2 = [3, 6, 7, 10, 13, 18];
+    const arr3 = [4, 5, 6, 9, 11, 13];
+    expect(findIntersections(arr1, arr2, arr3)).toEqual([6, 13]);
+  });
+});

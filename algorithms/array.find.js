@@ -25,9 +25,12 @@ function countItems(arr, item) {
   return count;
 }
 
-const arr = [
-  'apple',
-  ['banana', 'strawberry', 'apple'],
-];
+// npx jest algorithms/array.find.js
+test('count items in array', () => {
+  const arr = [
+    'apple',
+    ['banana', 'strawberry', 'apple'],
+  ];
 
-console.log(countItems(arr, 'apple'));
+  expect(countItems(arr, 'apple')).toEqual(2);
+});

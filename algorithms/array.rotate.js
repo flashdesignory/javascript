@@ -10,31 +10,24 @@
 // if(arr.length == 0 ) return;
 // if(k > arr.length)k = k%arr.length;
 
-const nums = [1, 2, 3, 4, 5, 6, 7, 8];
-
 // O(n) time & space
 function rotateArrayOne(arr, k) {
   const result = [];
   let i;
 
   for (i = 0; i < k; i++) {
-    // console.log(arr[arr.length-k+i]);
     result.push(arr[arr.length - k + i]);
   }
 
   for (i = 0; i < arr.length - k; i++) {
-    // console.log(arr[i]);
     result.push(arr[i]);
   }
 
   return result;
 }
 
-console.log(rotateArrayOne(nums, 3));
-
 // O(n) time & space
 function rotate(arr, left, right) {
-  // console.log("rotate(" + arr + ", left: " + left + ", right: " + right + ")");
   while (left < right) {
     const temp = arr[left];
     arr[left] = arr[right];
@@ -57,8 +50,6 @@ function rotateArrayTwo(arr, k) {
   return arr;
 }
 
-console.log(rotateArrayTwo(nums, 3));
-
 // O(n*k) time O(1) space
 function rotateArrayThree(arr, k) {
   for (let i = 0; i < k; i++) {
@@ -72,4 +63,18 @@ function rotateArrayThree(arr, k) {
   return arr;
 }
 
-console.log(rotateArrayThree(nums, 3));
+// npx jest algorithms/array.rotate.js
+describe('array rotations', () => {
+  test('rotateArrayOne()', () => {
+    const nums = [1, 2, 3, 4, 5, 6, 7, 8];
+    expect(rotateArrayOne(nums, 3)).toEqual([6, 7, 8, 1, 2, 3, 4, 5]);
+  });
+  test('rotateArrayTwo()', () => {
+    const nums = [1, 2, 3, 4, 5, 6, 7, 8];
+    expect(rotateArrayTwo(nums, 3)).toEqual([6, 7, 8, 1, 2, 3, 4, 5]);
+  });
+  test('rotateArrayThree()', () => {
+    const nums = [1, 2, 3, 4, 5, 6, 7, 8];
+    expect(rotateArrayThree(nums, 3)).toEqual([6, 7, 8, 1, 2, 3, 4, 5]);
+  });
+});

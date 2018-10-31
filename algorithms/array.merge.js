@@ -23,8 +23,6 @@ function mergeOne(left, right) {
   return result.concat(left.slice(l)).concat(right.slice(r));
 }
 
-console.log(mergeOne([2, 5, 6, 9], [1, 2, 3, 29])); // [1, 2, 2, 3, 5, 6, 9, 29]
-
 function mergeTwo(left, right) {
   const result = [];
   let a = left[0];
@@ -53,4 +51,12 @@ function mergeTwo(left, right) {
   return result;
 }
 
-console.log(mergeTwo([2, 5, 6, 9], [1, 2, 3, 29])); // [1, 2, 2, 3, 5, 6, 9, 29]
+// npx jest algorithms/array.merge.js
+describe('merge two arrays', () => {
+  test('mergeOne()', () => {
+    expect(mergeOne([2, 5, 6, 9], [1, 2, 3, 29])).toEqual([1, 2, 2, 3, 5, 6, 9, 29]);
+  });
+  test('mergeTwo', () => {
+    expect(mergeTwo([2, 5, 6, 9], [1, 2, 3, 29])).toEqual([1, 2, 2, 3, 5, 6, 9, 29]);
+  });
+});

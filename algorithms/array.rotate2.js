@@ -35,9 +35,24 @@ function findMin(arr) {
   return find(arr, 0, arr.length - 1);
 }
 
-console.log(findMin([4, 5, 6, 7, 0, 1, 2]));
-console.log(findMin([4, 5, 6, 7, 8, 9, 1, 2, 3]));
-console.log(findMin([7]));
-console.log(findMin([]));
-console.log(findMin([3, 4, 2]));
-console.log(findMin([1, 2, 3]));
+// npx jest algorithms/array.rotate2.js
+describe('find rotation point in array', () => {
+  test('findMin([4, 5, 6, 7, 0, 1, 2])', () => {
+    expect(findMin([4, 5, 6, 7, 0, 1, 2])).toEqual(0);
+  });
+  test('findMin([4, 5, 6, 7, 8, 9, 1, 2, 3])', () => {
+    expect(findMin([4, 5, 6, 7, 8, 9, 1, 2, 3])).toEqual(1);
+  });
+  test('findMin([7])', () => {
+    expect(findMin([7])).toEqual(7);
+  });
+  test('findMin([])', () => {
+    expect(findMin([])).toEqual(-1);
+  });
+  test('findMin([3, 4, 2])', () => {
+    expect(findMin([3, 4, 2])).toEqual(2);
+  });
+  test('findMin([1,2,3])', () => {
+    expect(findMin([1, 2, 3])).toEqual(1);
+  });
+});

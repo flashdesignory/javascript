@@ -5,7 +5,6 @@
  * @email: info@flashdesignory.com
  */
 
-const nums = [0, 4, 3, 5, 7, 1, 2, 3, 4, 9, 11, 14, 15, 16, 17, 18, 19, 21];
 function findLongestSequence(arr) {
   let start = 0;
   let end = 0;
@@ -30,4 +29,9 @@ function findLongestSequence(arr) {
   }
   return greatestArray;
 }
-findLongestSequence(nums); // [14,15,16,17,18,19];
+
+// npx jest algorithms/array.sequence.js
+test('findLongestSequence()', () => {
+  const nums = [0, 4, 3, 5, 7, 1, 2, 3, 4, 9, 11, 14, 15, 16, 17, 18, 19, 21];
+  expect(findLongestSequence(nums)).toEqual([14, 15, 16, 17, 18, 19]);
+});

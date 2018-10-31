@@ -5,8 +5,6 @@
  * @email: info@flashdesignory.com
  */
 
-const nums = [1, 2, 3, 4, 5, 6, 7];
-
 function reverseArrayOne(arr) {
   let left = 0;
   let right = arr.length - 1;
@@ -22,8 +20,6 @@ function reverseArrayOne(arr) {
   return arr;
 }
 
-console.log(reverseArrayOne(nums));
-
 function reverseArrayTwo(arr) {
   const len = arr.length;
   const middle = Math.floor(len / 2);
@@ -37,4 +33,14 @@ function reverseArrayTwo(arr) {
   return arr;
 }
 
-console.log(reverseArrayTwo(nums));
+// npx jest algorithms/array.reverse.js
+describe('reverse array', () => {
+  test('reverseArrayOne()', () => {
+    const nums = [1, 2, 3, 4, 5, 6, 7];
+    expect(reverseArrayOne(nums)).toEqual([7, 6, 5, 4, 3, 2, 1]);
+  });
+  test('reverseArrayTwo()', () => {
+    const nums = [1, 2, 3, 4, 5, 6, 7];
+    expect(reverseArrayTwo(nums)).toEqual([7, 6, 5, 4, 3, 2, 1]);
+  });
+});
