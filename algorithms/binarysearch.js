@@ -27,14 +27,7 @@ function binarySearch(arr, item) {
   return -1;
 }
 
-const primes = [
-  2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
-];
-const result = binarySearch(primes, 53);
-console.log(result);
-
 // recursive
-const items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 function bsRecurse(arr, value, start, end) {
   if (start >= end) return -1;
   const middle = Math.floor((start + end) / 2);
@@ -45,4 +38,15 @@ function bsRecurse(arr, value, start, end) {
   return bsRecurse(arr, value, middle + 1, end);
 }
 
-console.log(bsRecurse(items, 'h', 0, items.length - 1));
+// npx jest algorithms/binarysearch.js
+describe('binary search examples', () => {
+  test('binarySearch()', () => {
+    const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,
+      47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
+    expect(binarySearch(primes, 53)).toEqual(15);
+  });
+  test('bsRecurse()', () => {
+    const items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+    expect(bsRecurse(items, 'h', 0, items.length - 1)).toEqual(7);
+  });
+});

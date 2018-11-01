@@ -9,11 +9,11 @@ function findMagicIndexSimple(arr) {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === i) {
       console.log(arr[i], i);
+      return i;
     }
   }
+  return -1;
 }
-
-findMagicIndexSimple([-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13]);
 
 function findMagicIndex(arr) {
   function binarySearch(arr, start, end) {
@@ -32,4 +32,12 @@ function findMagicIndex(arr) {
   return binarySearch(arr, 0, arr.length - 1);
 }
 
-findMagicIndex([-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13]);
+// npx jest algorithms/binarysearch.magic.js
+describe('binary search magic index', () => {
+  test('linear', () => {
+    expect(findMagicIndexSimple([-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13])).toEqual(7);
+  });
+  test('binary', () => {
+    expect(findMagicIndex([-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13])).toEqual(7);
+  });
+});
