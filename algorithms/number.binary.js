@@ -30,7 +30,6 @@ function findUniqueNumber(arr) {
 
   for (let i = 0; i < arr.length; i++) {
     uniqueId ^= arr[i]; //eslint-disable-line
-    console.log(uniqueId);
   }
   return uniqueId;
 }
