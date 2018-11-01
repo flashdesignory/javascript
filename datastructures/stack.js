@@ -32,11 +32,32 @@ Stack.prototype.empty = function () {
   return this.size === 0;
 };
 
+Stack.prototype.sort = function () {
+  const temp = new Stack();
+
+  while (!this.empty()) {
+    const lastValue = this.pop();
+
+    while (!temp.empty() && temp.peek() < lastValue) {
+      this.push(temp.pop());
+    }
+
+    temp.push(lastValue);
+  }
+
+  while (!temp.empty()) {
+    this.push(temp.pop());
+  }
+};
+
 // example
 const stack = new Stack();
+stack.push(3);
+stack.push(6);
 stack.push(1);
 stack.push(2);
-stack.push(3);
-console.log(stack.peek());
-console.log(stack.pop());
-console.log(stack.peek());
+stack.push(5);
+stack.push(4);
+console.log(stack);
+stack.sort();
+console.log(stack);

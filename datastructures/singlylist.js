@@ -265,23 +265,39 @@ SinglyList.prototype.removeDuplicates2 = function () {
   }
 };
 
+SinglyList.prototype.partition = function (value) {
+  const before = new SinglyList();
+  const after = new SinglyList();
+
+  let current = this.head;
+  while (current) {
+    if (current.value < value) {
+      before.add(current.value);
+    } else if (current.value >= value) {
+      after.add(current.value);
+    }
+    current = current.next;
+  }
+
+  this.head = before.head;
+  current = this.head;
+  while (current.next) {
+    current = current.next;
+  }
+
+  current.next = after.head;
+
+  return this.head;
+};
+
 // example
 const list = new SinglyList();
-list.add(1);
+list.add(7);
+list.add(10);
+list.add(5);
+list.add(11);
 list.add(2);
-list.add(3);
 list.add(4);
-list.add(5);
 list.log();
-list.remove(1);
+list.partition(5);
 list.log();
-list.remove(3);
-list.log();
-list.reverse();
-list.log();
-list.add(4);
-list.add(5);
-list.log();
-console.log(list.isPalindrome());
-console.log(list.hasCycle());
-console.log(list.length());
