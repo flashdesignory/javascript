@@ -21,4 +21,7 @@ function findPrimes(n) {
   return factors;
 }
 
-console.log(findPrimes(69)); // [3,23];
+// npx jest algorithms/number.primefactors.js
+test('findPrimes()', () => {
+  expect(findPrimes(69)).toEqual([3, 23]);
+});

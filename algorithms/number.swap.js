@@ -12,8 +12,6 @@ function swapNumbersOne(a, b) {
   return [a, b];
 }
 
-console.log(swapNumbersOne(3, 5));
-
 function swapNumbersTwo(a, b) {
   a = a^b; //eslint-disable-line
   b = a^b; //eslint-disable-line
@@ -21,4 +19,12 @@ function swapNumbersTwo(a, b) {
   return [a, b];
 }
 
-console.log(swapNumbersTwo(4, 6));
+// npx jest algorithms/number.swap.js
+describe('swap numbers', () => {
+  test('swapNumbersOne', () => {
+    expect(swapNumbersOne(3, 5)).toEqual([5, 3]);
+  });
+  test('swapNumbersTwo', () => {
+    expect(swapNumbersTwo(4, 6)).toEqual([6, 4]);
+  });
+});

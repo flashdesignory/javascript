@@ -28,17 +28,11 @@ function fibonacciOne(n) {
   return arr[n];
 }
 
-// example
-console.log(fibonacciOne(12));
-
 // recursive / O(2n)
 function fibonacciTwo(n) {
   if (n <= 1) return n;
   return fibonacciTwo(n - 1) + fibonacciTwo(n - 2);
 }
-
-// example
-console.log(fibonacciTwo(12));
 
 // recursive with memoization
 function fibonacciThree(n, memo) {
@@ -46,8 +40,18 @@ function fibonacciThree(n, memo) {
   if (memo[n]) return memo[n];
   if (n <= 1) return n;
   memo[n] = fibonacciThree(n - 1, memo) + fibonacciThree(n - 2, memo);
-  return memo;
+  return memo[n];
 }
 
-// example
-console.log(fibonacciThree(12));
+// npx jest algorithms/number.fibonacci.js
+describe('fibonacci solutions', () => {
+  test('fibonacciOne', () => {
+    expect(fibonacciOne(12)).toEqual(144);
+  });
+  test('fibonacciTwo', () => {
+    expect(fibonacciTwo(12)).toEqual(144);
+  });
+  test('fibonacciThree', () => {
+    expect(fibonacciThree(12)).toEqual(144);
+  });
+});

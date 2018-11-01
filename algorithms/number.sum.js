@@ -18,4 +18,7 @@ function findSum(arr, sum) {
   return false;
 }
 
-findSum([3, 4, 1, 2, 9], 10);
+// npx jest algorithms/number.sum.js
+test('findSum()', () => {
+  expect(findSum([3, 4, 1, 2, 9], 10)).toEqual([1, 9]);
+});

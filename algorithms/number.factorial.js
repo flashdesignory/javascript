@@ -23,16 +23,11 @@ function factorialOne(n) {
   return result;
 }
 
-// example
-console.log(factorialOne(4));
-
 // reursive
 function factorialTwo(n) {
   if (n <= 1) return 1;
   return n * factorialTwo(n - 1);
 }
-
-console.log(factorialTwo(4));
 
 // while loop
 function factorialThree(n) {
@@ -45,4 +40,15 @@ function factorialThree(n) {
   return result;
 }
 
-console.log(factorialThree(4));
+// npx jest algorithms/number.factorial.js
+describe('factorial solutions', () => {
+  test('factorialOne', () => {
+    expect(factorialOne(4)).toEqual(24);
+  });
+  test('factorialTwo', () => {
+    expect(factorialTwo(4)).toEqual(24);
+  });
+  test('factorialThree', () => {
+    expect(factorialThree(4)).toEqual(24);
+  });
+});

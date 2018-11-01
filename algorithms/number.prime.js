@@ -44,3 +44,19 @@ function isPrimeTwo(number) {
 
 console.log(isPrimeTwo(137));
 console.log(isPrimeTwo(237));
+
+// npx jest algorithms/number.prime.js
+describe('isPrime solutions', () => {
+  test('isPrimeOne(137)', () => {
+    expect(isPrimeOne(137)).toEqual(true);
+  });
+  test('isPrimeOne(237)', () => {
+    expect(isPrimeOne(237)).toEqual(false);
+  });
+  test('isPrimeTwo(137)', () => {
+    expect(isPrimeTwo(137)).toEqual(true);
+  });
+  test('isPrimeTwo(237)', () => {
+    expect(isPrimeTwo(237)).toEqual(false);
+  });
+});

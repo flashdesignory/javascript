@@ -14,4 +14,8 @@ function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-console.log(randomInRange(5, 7));
+// npx jest algorithms/number.random.js
+test('randomInRange()', () => {
+  expect(randomInRange(5, 7)).toBeGreaterThanOrEqual(5);
+  expect(randomInRange(5, 7)).toBeLessThanOrEqual(7);
+});

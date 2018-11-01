@@ -5,7 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-function greatestCommonDivisor(a, b) {
+function greatestCommonDivisorOne(a, b) {
   if (a < 2 || b < 2) return 1;
 
   let divisor = 2;
@@ -20,14 +20,20 @@ function greatestCommonDivisor(a, b) {
   return greatest;
 }
 
-greatestCommonDivisor(14, 21); // 7
-
-function greatestCommonDivisor2(a, b) {
+function greatestCommonDivisorTwo(a, b) {
   if (b === 0) {
     return a;
   }
 
-  return greatestCommonDivisor2(b, a % b);
+  return greatestCommonDivisorTwo(b, a % b);
 }
 
-greatestCommonDivisor2(14, 21); // 7
+// npx jest algorithms/number.greatest.js
+describe('greatest common divisor', () => {
+  test('greatestCommonDivisorOne', () => {
+    expect(greatestCommonDivisorOne(14, 21)).toEqual(7);
+  });
+  test('greatestCommonDivisorTwo', () => {
+    expect(greatestCommonDivisorTwo(14, 21)).toEqual(7);
+  });
+});

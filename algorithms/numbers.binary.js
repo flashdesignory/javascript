@@ -35,4 +35,7 @@ function findUniqueNumber(arr) {
   return uniqueId;
 }
 
-findUniqueNumber([4, 6, 4, 6, 5, 8, 9, 7, 7, 8, 9]);
+// npx jest algorithms/number.binary.js
+test('findUniqueNumber()', () => {
+  expect(findUniqueNumber([4, 6, 4, 6, 5, 8, 9, 7, 7, 8, 9])).toEqual(5);
+});
