@@ -29,5 +29,8 @@ function selectionSort(arr) {
   return arr;
 }
 
-const nums = [7, 9, 3, 4, 2, 8, 5, 1];
-console.log(selectionSort(nums));
+// npx jest algorithms/sort.selection.js
+test('selectionSort()', () => {
+  const nums = [7, 9, 3, 4, 2, 8, 5, 1];
+  expect(selectionSort(nums)).toEqual([1, 2, 3, 4, 5, 7, 8, 9]);
+});

@@ -19,5 +19,8 @@ function insertionSort(arr) {
   return arr;
 }
 
-const nums = [7, 9, 3, 4, 2, 8, 5, 1];
-console.log(insertionSort(nums));
+// npx jest algorithms/sort.insertion.js
+test('insertionSort()', () => {
+  const nums = [7, 9, 3, 4, 2, 8, 5, 1];
+  expect(insertionSort(nums)).toEqual([1, 2, 3, 4, 5, 7, 8, 9]);
+});
