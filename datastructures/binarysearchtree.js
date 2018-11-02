@@ -65,6 +65,96 @@ function BinarySearchTree() {
   this.root = null;
 }
 
+BinarySearchTree.prototype.toObject = function () {
+  if (!this.root) return null;
+  return this.root.serialize();
+};
+
+BinarySearchTree.prototype.min = function (node) {
+  let current = node;
+
+  while (current.left) {
+    current = current.left;
+  }
+
+  return current;
+};
+
+BinarySearchTree.prototype.max = function (node) {
+  let current = node;
+
+  while (current.right) {
+    current = current.right;
+  }
+
+  return current;
+};
+
+BinarySearchTree.prototype.height = function (node) {
+  if (node == null) {
+    return 0;
+  }
+
+  return 1 + Math.max(this.height(node.left), this.height(node.right));
+};
+
+BinarySearchTree.prototype.contains = function (value) {
+  let current = this.root;
+  while (current) {
+    if (value === current.value) {
+      return true;
+    }
+
+    if (value < current.value) {
+      current = current.left;
+    } else if (value > current.value) {
+      current = current.right;
+    }
+  }
+  return false;
+};
+
+BinarySearchTree.prototype.isBinarySearchTree = function (node) {
+  let prevNode = null;
+
+  function validate(node) {
+    if (!node) return true;
+    if (!validate(node.left)) {
+      return false;
+    }
+
+    if (prevNode) {
+      if (prevNode.value > node.value) {
+        return false;
+      }
+    }
+
+    prevNode = node;
+
+    if (!validate(node.right)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  return validate(node);
+};
+
+BinarySearchTree.prototype.isBalanced = function (node) {
+  if (!node) return true;
+
+  const leftHeight = this.height(node.left);
+  const rightHeight = this.height(node.right);
+  const difference = Math.abs(leftHeight - rightHeight);
+
+  if (difference > 1) {
+    return false;
+  }
+
+  return this.isBalanced(node.left) && this.isBalanced(node.right);
+};
+
 BinarySearchTree.prototype.add = function (value) {
   const node = new Node(value);
 
@@ -217,22 +307,6 @@ BinarySearchTree.prototype.remove = function (value) {
   }
 };
 
-BinarySearchTree.prototype.contains = function (value) {
-  let current = this.root;
-  while (current) {
-    if (value === current.value) {
-      return true;
-    }
-
-    if (value < current.value) {
-      current = current.left;
-    } else if (value > current.value) {
-      current = current.right;
-    }
-  }
-  return false;
-};
-
 BinarySearchTree.prototype.preOrderTraversal = function (node) {
   console.log(node.value);
 
@@ -298,26 +372,6 @@ BinarySearchTree.prototype.searchDF = function (node) {
   }
 
   console.log(result);
-};
-
-BinarySearchTree.prototype.min = function (node) {
-  let current = node;
-
-  while (current.left) {
-    current = current.left;
-  }
-
-  return current;
-};
-
-BinarySearchTree.prototype.max = function (node) {
-  let current = node;
-
-  while (current.right) {
-    current = current.right;
-  }
-
-  return current;
 };
 
 BinarySearchTree.prototype.findNodesAtLevel = function (node, k) {
@@ -392,14 +446,6 @@ BinarySearchTree.prototype.printLevelOrderZigZag = function (node) {
   }
 };
 
-BinarySearchTree.prototype.height = function (node) {
-  if (node == null) {
-    return 0;
-  }
-
-  return 1 + Math.max(this.height(node.left), this.height(node.right));
-};
-
 BinarySearchTree.prototype.inOrderSuccessor = function (node) {
   let successor;
 
@@ -442,6 +488,20 @@ BinarySearchTree.prototype.inOrderPredecessor = function (node) {
     }
   }
   return predecessor;
+};
+
+BinarySearchTree.prototype.lowestCommonAncestor = function (node, n1, n2) {
+  if (!node) return null;
+
+  if (node.value > n1 && node.value > n2) {
+    return this.lowestCommonAncestor(node.left, n1, n2);
+  }
+
+  if (node.value < n1 && node.value < n2) {
+    return this.lowestCommonAncestor(node.right, n1, n2);
+  }
+
+  return node;
 };
 
 BinarySearchTree.prototype.longestConsecutive = function (node) {
@@ -517,49 +577,15 @@ BinarySearchTree.prototype.findAncestors = function (node, value) {
   return false;
 };
 
-BinarySearchTree.prototype.isBinarySearchTree = function (node) {
-  let prevNode = null;
+BinarySearchTree.prototype.deleteTree = function (node) {
+  if (!node) return null;
 
-  function validate(node) {
-    if (!node) return true;
-    if (!validate(node.left)) {
-      return false;
-    }
+  this.deleteTree(node.left);
+  this.deleteTree(node.right);
 
-    if (prevNode) {
-      if (prevNode.value > node.value) {
-        return false;
-      }
-    }
-
-    prevNode = node;
-
-    if (!validate(node.right)) {
-      return false;
-    }
-
-    return true;
-  }
-
-  return validate(node);
-};
-
-BinarySearchTree.prototype.isBalanced = function (node) {
-  if (!node) return true;
-
-  const leftHeight = this.height(node.left);
-  const rightHeight = this.height(node.right);
-  const difference = Math.abs(leftHeight - rightHeight);
-
-  if (difference > 1) {
-    return false;
-  }
-
-  return this.isBalanced(node.left) && this.isBalanced(node.right);
-};
-
-BinarySearchTree.prototype.toObject = function () {
-  return this.root.serialize();
+  this.delete(node.value);
+  this.root = null;
+  return this.root;
 };
 
 const tree = new BinarySearchTree();
@@ -602,3 +628,5 @@ console.log(`findSumPath: ${tree.findSumPath(tree.root, 42)}`);
 console.log('ancestors of 3: ');
 tree.findAncestors(tree.root, 3);
 tree.printLevelOrderZigZag(tree.root);
+tree.deleteTree(tree.root);
+tree.toObject();
