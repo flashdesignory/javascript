@@ -11,33 +11,23 @@
  The designed algorithm should have linear time complexity.
  */
 
-const matrixOne = [
-  [10, 20, 30, 40],
-  [15, 25, 35, 45],
-  [27, 29, 37, 48],
-  [32, 33, 39, 50],
-];
-
 function findPosition(matrix, num) {
-  let i = 0;
-  let j = matrix.length - 1;
-  console.log(matrix[i][j]);
-  while (i < matrix.length && j >= 0) {
-    if (matrix[i][j] === num) {
-      return [i, j];
+  // start right top to let bottom
+  let row = 0;
+  let column = matrix.length - 1;
+  while (row < matrix.length && column >= 0) {
+    if (matrix[row][column] === num) {
+      return [row, column];
     }
 
-    if (matrix[i][j] > num) {
-      j--;
+    if (matrix[row][column] > num) {
+      column--;
     } else {
-      i++;
+      row++;
     }
   }
   return [];
 }
-
-findPosition(matrixOne, 29); // [2,1];
-
 
 /* Given a sorted matrix mat[n][m] and an element ‘x’.
  Find position of x in the matrix if it is present, else print -1.
@@ -46,27 +36,42 @@ findPosition(matrixOne, 29); // [2,1];
  element of row 'i' is greater than or equal to the last element of
  row 'i-1'. The approach should have O(log n + log m) time complexity. */
 
-const matrixTwo = [
-  [1, 5, 9],
-  [14, 20, 21],
-  [30, 34, 43],
-];
+// diagonal binary search
+function searchMatrix(matrix, num) {
+  // start left bottom to right top
+  let row = matrix.length - 1;
+  let column = 0;
 
+  while (row >= 0 && column <= matrix[0].length - 1) {
+    if (matrix[row][column] === num) {
+      console.log(`found in row: ${row}, column: ${column}`);
+      return [row, column];
+    }
+    if (matrix[row][column] < num) {
+      column += 1;
+    } else if (matrix[row][column] > num) {
+      row -= 1;
+    }
+  }
+  return [];
+}
+
+// select middle two rows and evaluate
 function binarySearch(matrix, row, left, right, num) {
   let middle;
   while (left <= right) {
     middle = (left + right) / 2;
     if (matrix[row][middle] === num) {
       console.log(`found in row: ${row}, column: ${middle}`);
-      return;
+      return [row, middle];
     }
-
     if (matrix[row][middle] > num) {
       right = middle - 1;
     } else {
       left = middle + 1;
     }
   }
+  return [];
 }
 
 function binaryMatrixSearch(matrix, num) {
@@ -75,8 +80,7 @@ function binaryMatrixSearch(matrix, num) {
 
   // single row - perform bs on row
   if (rowLength === 1) {
-    binarySearch(matrix, 0, 0, columnLength - 1, num);
-    return;
+    return binarySearch(matrix, 0, 0, columnLength - 1, num);
   }
 
   // bs on middle row and column.
@@ -89,7 +93,7 @@ function binaryMatrixSearch(matrix, num) {
     const middleRow = (minRow + maxRow) / 2;
     if (matrix[middleRow][middleColumn] === num) {
       console.log(`found in row: ${middleRow}, column: ${middleColumn}`);
-      return;
+      return [middleRow, middleColumn];
     }
     if (matrix[middleRow][middleColumn] > num) {
       maxRow = middleRow;
@@ -102,40 +106,58 @@ function binaryMatrixSearch(matrix, num) {
   // if element is in middle column of those two rows
   if (matrix[minRow][middleColumn] === num) {
     console.log(`found in row: ${minRow}, column: ${middleColumn}`);
-  } else if (matrix[maxRow][middleColumn] === num) {
+    return [minRow, middleColumn];
+  }
+  if (matrix[maxRow][middleColumn] === num) {
     console.log(`found in row: ${maxRow}, column: ${middleColumn}`);
-  } else if (num <= matrix[minRow][middleColumn - 1]) { // search first half of min row
-    binarySearch(matrix, minRow, 0, middleColumn - 1, num);
-  } else if (num >= matrix[minRow][middleColumn + 1]
+    return [maxRow, middleColumn];
+  }
+  if (num <= matrix[minRow][middleColumn - 1]) { // search first half of min row
+    return binarySearch(matrix, minRow, 0, middleColumn - 1, num);
+  }
+  if (num >= matrix[minRow][middleColumn + 1]
     && num <= matrix[minRow][columnLength - 1]) { // search second half of min row
-    binarySearch(matrix, minRow, middleColumn + 1, columnLength - 1, num);
-  } else if (num <= matrix[maxRow][middleColumn - 1]) { // search first half of max row
-    binarySearch(matrix, maxRow, 0, middleColumn - 1, num);
-  } else if (num >= matrix[maxRow][middleColumn + 1]
+    return binarySearch(matrix, minRow, middleColumn + 1, columnLength - 1, num);
+  }
+  if (num <= matrix[maxRow][middleColumn - 1]) { // search first half of max row
+    return binarySearch(matrix, maxRow, 0, middleColumn - 1, num);
+  }
+  if (num >= matrix[maxRow][middleColumn + 1]
     && num <= matrix[maxRow][columnLength - 1]) { // search second half of max row
-    binarySearch(matrix, maxRow, middleColumn + 1, columnLength - 1, num);
+    return binarySearch(matrix, maxRow, middleColumn + 1, columnLength - 1, num);
   }
+
+  return [];
 }
 
-binaryMatrixSearch(matrixTwo, 14);
+// npx jest algorithms/matrix.find.js
+describe('binary search for matrix', () => {
+  test('findPosition()', () => {
+    const matrix = [
+      [10, 20, 30, 40],
+      [15, 25, 35, 45],
+      [27, 29, 37, 48],
+      [32, 33, 39, 50],
+    ];
 
-// recursive / diagonal
-function searchMatrix(matrix, num) {
-  // start left bottom to right top
-  let row = matrix.length - 1;
-  let column = 0;
+    expect(findPosition(matrix, 29)).toEqual([2, 1]);
+  });
+  test('searchMatrix()', () => {
+    const matrix = [
+      [1, 5, 9],
+      [14, 20, 21],
+      [30, 34, 43],
+    ];
 
-  while (row >= 0 && column <= matrix[0].length - 1) {
-    if (matrix[row][column] === num) {
-      console.log(`found in row: ${row}, column: ${column}`);
-      return true;
-    }
-    if (matrix[row][column] < num) {
-      column += 1;
-    } else if (matrix[row][column] > num) {
-      row -= 1;
-    }
-  }
-  return false;
-}
-searchMatrix(matrixTwo, 14);
+    expect(searchMatrix(matrix, 14)).toEqual([1, 0]);
+  });
+  test('binaryMatrixSearch()', () => {
+    const matrix = [
+      [1, 5, 9],
+      [14, 20, 21],
+      [30, 34, 43],
+    ];
+
+    expect(binaryMatrixSearch(matrix, 14)).toEqual([1, 0]);
+  });
+});
