@@ -28,7 +28,10 @@ function isIsomorphic(str1, str2) {
   return true;
 }
 
-console.log(isIsomorphic('foo', 'app')); // true;
-console.log(isIsomorphic('bar', 'foo')); // false;
-console.log(isIsomorphic('turtle', 'tletur')); // true;
-console.log(isIsomorphic('ab', 'ca'));// true
+// npx jest algorithms/string.isomorphic.js
+test('isIsomorphic()', () => {
+  expect(isIsomorphic('foo', 'app')).toBe(true);
+  expect(isIsomorphic('bar', 'foo')).toBe(false);
+  expect(isIsomorphic('turtle', 'tletur')).toBe(true);
+  expect(isIsomorphic('ab', 'ca')).toBe(true);
+});

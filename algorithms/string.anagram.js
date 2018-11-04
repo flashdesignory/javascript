@@ -27,5 +27,8 @@ function anagram(s, t) {
   return true;
 }
 
-console.log(anagram('anagram', 'nagaram')); // true
-console.log(anagram('rat', 'car')); // false
+// npx jest algorithms/string.anagram.js
+test('anagram()', () => {
+  expect(anagram('anagram', 'nagaram')).toEqual(true);
+  expect(anagram('rat', 'car')).toEqual(false);
+});

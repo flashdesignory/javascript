@@ -6,20 +6,20 @@
  */
 
 function isSubsequence(str1, str2) {
-  const m = str1.length;
-  const n = str2.length;
-  let j = 0;
-  let i = 0;
-  while (i < n && j < m) {
-    if (str1[j] === str2[i]) {
+  const length1 = str1.length;
+  const length2 = str2.length;
+  let index1 = 0;
+  let index2 = 0;
+  while (index1 < length1 && index2 < length2) {
+    if (str1[index1] === str2[index2]) {
       // found same character, let's increment word index;
-      console.log(str1[j]);
-      j++;
+      // console.log(str1[index1]);
+      index1++;
     }
-    i++;
+    index2++;
   }
   // all characters from word found from 0 to length
-  return (j === m);
+  return (index1 === length1);
 }
 
 function findLongestString(arr, str) {
@@ -36,6 +36,9 @@ function findLongestString(arr, str) {
   return result;
 }
 
-const dict = ['ale', 'apple', 'monkey', 'plea'];
-const str = 'abpcplea';
-findLongestString(dict, str);
+// npx jest algorithms/string.lcs2.js
+test('findLongestString()', () => {
+  const dict = ['ale', 'apple', 'monkey', 'plea'];
+  const str = 'abpcplea';
+  expect(findLongestString(dict, str)).toEqual('apple');
+});

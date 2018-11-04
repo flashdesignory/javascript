@@ -16,7 +16,7 @@ function contains(str, sub) {
       currentLength++;
       if (currentLength === subLength) {
         console.log(`found: ${start}, ${currentLength}, ${str.substr(start, currentLength)}`);
-        return;
+        return true;
       }
     } else {
       if (currentLength > 0) i = start + 1;
@@ -26,14 +26,17 @@ function contains(str, sub) {
 
     i++;
   }
-  console.log('not found');
+  return false;
 }
 
-contains('geeksforgeeks', 'for');
-contains('jkflsioijljl', 'jkfl');
-contains('fooballs', 'arg');
-contains('abbcdabbbbbck', 'ab');
-contains('abbcdabbbbbck', 'bck');
-contains('abbcdabbbbbck', 'bbbck');
-contains('abbcdabbbbbck', 'cdabb');
-contains('abbcdabbbbbck', 'bbbb');
+// npx jest algorithms/string.contains.js
+test('contains()', () => {
+  expect(contains('geeksforgeeks', 'for')).toBe(true);
+  expect(contains('jkflsioijljl', 'jkfl')).toBe(true);
+  expect(contains('fooballs', 'arg')).toBe(false);
+  expect(contains('abbcdabbbbbck', 'ab')).toBe(true);
+  expect(contains('abbcdabbbbbck', 'bck')).toBe(true);
+  expect(contains('abbcdabbbbbck', 'bbbck')).toBe(true);
+  expect(contains('abbcdabbbbbck', 'cdabb')).toBe(true);
+  expect(contains('abbcdabbbbbck', 'bbbb')).toBe(true);
+});

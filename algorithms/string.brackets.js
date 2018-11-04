@@ -30,10 +30,13 @@ function bracketsAreBalanced(str) {
   return stack.length === 0;
 }
 
-console.log('{}([]) true', bracketsAreBalanced('{}([])'));
-// console.log('{{ false', bracketsAreBalanced('{{'));
-// console.log('[(]) false', bracketsAreBalanced('[(])'));
-// console.log("{}([]) true", bracketsAreBalanced("{}([])"));
-// console.log("([}]) false", bracketsAreBalanced("([}])"));
-// console.log("([]) true", bracketsAreBalanced("([])"));
-// console.log("()[]{}[][]", bracketsAreBalanced("()[]{}[][]"));
+// npx jest algorithms/string.brackets.js
+test('bracketsAreBalanced()', () => {
+  expect(bracketsAreBalanced('{}([])')).toBe(true);
+  expect(bracketsAreBalanced('{{')).toBe(false);
+  expect(bracketsAreBalanced('[(])')).toBe(false);
+  expect(bracketsAreBalanced('{}([])')).toBe(true);
+  expect(bracketsAreBalanced('([}])')).toBe(false);
+  expect(bracketsAreBalanced('([])')).toBe(true);
+  expect(bracketsAreBalanced('()[]{}[][]')).toBe(true);
+});
