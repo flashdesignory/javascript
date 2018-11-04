@@ -5,13 +5,6 @@
  * @email: info@flashdesignory.com
  */
 
-const tiles = [
-  [-4, -3, -1, 1],
-  [-2, -2, 1, 2],
-  [-1, 1, 2, 3],
-  [0, 1, 2, 3],
-];
-
 function countNegativeTiles(matrix) {
   let row = 0;
   let col = matrix[0].length - 1;
@@ -33,4 +26,13 @@ function countNegativeTiles(matrix) {
   return count;
 }
 
-countNegativeTiles(tiles);
+// npx jest algorithms/matrix.negative.js
+test('countNegativeTiles()', () => {
+  const tiles = [
+    [-4, -3, -1, 1],
+    [-2, -2, 1, 2],
+    [-1, 1, 2, 3],
+    [0, 1, 2, 3],
+  ];
+  expect(countNegativeTiles(tiles)).toEqual(6);
+});

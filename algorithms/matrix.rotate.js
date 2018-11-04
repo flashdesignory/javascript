@@ -5,7 +5,14 @@
  * @email: info@flashdesignory.com
  */
 
-const arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+/* [ 1, 2, 3 ],
+   [ 4, 5, 6 ],
+   [ 7, 8, 9 ]
+
+   [ 7, 4, 1 ],
+   [ 8, 5, 2 ],
+   [ 9, 6, 3 ] */
+
 function rotateMatrixClockwise(arr) {
   console.log(arr);
   const n = arr.length;
@@ -18,20 +25,16 @@ function rotateMatrixClockwise(arr) {
       arr[j][n - 1 - i] = temp;
     }
   }
-  console.log(arr);
+  return arr;
 }
 
-rotateMatrixClockwise(arr);
-// [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ] // before
-// [ [ 7, 4, 1 ], [ 8, 5, 2 ], [ 9, 6, 3 ] ] // after
-
 /* [ 1, 2, 3 ],
-[ 4, 5, 6 ],
-[ 7, 8, 9 ]
+   [ 4, 5, 6 ],
+   [ 7, 8, 9 ]
 
-[ 7, 4, 1 ],
-[ 8, 5, 2 ],
-[ 9, 6, 3 ] */
+   [ 3, 6, 9 ],
+   [ 2, 5, 8 ],
+   [ 1, 4, 7 ] */
 
 function rotateMatrixCounterClock(arr) {
   console.log(arr);
@@ -46,17 +49,22 @@ function rotateMatrixCounterClock(arr) {
     }
   }
 
-  console.log(arr);
+  return arr;
 }
 
-rotateMatrixCounterClock(arr);
-// [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ] // before
-// [ [ 3, 6, 9 ], [ 2, 5, 8 ], [ 1, 4, 7 ] ] // after
+// npx jest algorithms/matrix.rotate.js
+describe('test matrix rotations', () => {
+  test('matrix clockwise rotations', () => {
+    const arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+    expect(rotateMatrixClockwise(arr)).toEqual([
+      [7, 4, 1], [8, 5, 2], [9, 6, 3],
+    ]);
+  });
 
-/* [ 1, 2, 3 ],
-[ 4, 5, 6 ],
-[ 7, 8, 9 ]
-
-[ 3, 6, 9 ],
-[ 2, 5, 8 ],
-[ 1, 4, 7 ] */
+  test('matrix counter clockwise rotations', () => {
+    const arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+    expect(rotateMatrixCounterClock(arr)).toEqual([
+      [3, 6, 9], [2, 5, 8], [1, 4, 7],
+    ]);
+  });
+});

@@ -35,13 +35,6 @@ class Stack {
   }
 }
 
-const matrix = [
-  [0, 0, 1, 1, 0],
-  [1, 0, 1, 1, 0],
-  [0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1],
-];
-
 const rowNum = [-1, -1, -1, 0, 0, 1, 1, 1];
 const colNum = [-1, 0, 1, -1, 1, -1, 0, 1];
 
@@ -70,7 +63,7 @@ function dfs(matrix, r, c, visited) {
       }
     }
   }
-  console.log(points);
+  // console.log(points);
   return count;
 }
 
@@ -98,4 +91,13 @@ function largestRegion(matrix) {
   return result;
 }
 
-console.log(largestRegion(matrix));
+// npx jest algorithms/matrix.region2.js
+test('largestRegion()', () => {
+  const matrix = [
+    [0, 0, 1, 1, 0],
+    [1, 0, 1, 1, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1],
+  ];
+  expect(largestRegion(matrix)).toEqual(6);
+});

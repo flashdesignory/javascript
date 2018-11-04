@@ -5,13 +5,6 @@
  * @email: info@flashdesignory.com
  */
 
-const matrix = [
-  [0, 0, 1, 1, 0],
-  [1, 0, 1, 1, 0],
-  [0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1],
-];
-
 const rowNum = [-1, -1, -1, 0, 0, 1, 1, 1];
 const colNum = [-1, 0, 1, -1, 1, -1, 0, 1];
 
@@ -58,4 +51,14 @@ function largestRegion(matrix) {
   return result;
 }
 
-console.log(largestRegion(matrix)); // 6
+// npx jest algorithms/matrix.region.js
+test('largestRegion()', () => {
+  const matrix = [
+    [0, 0, 1, 1, 0],
+    [1, 0, 1, 1, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1],
+  ];
+
+  expect(largestRegion(matrix)).toEqual(6);
+});

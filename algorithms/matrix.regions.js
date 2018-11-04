@@ -5,13 +5,6 @@
  * @email: info@flashdesignory.com
  */
 
-const matrix = [
-  [0, 0, 1, 1, 0],
-  [1, 0, 1, 1, 0],
-  [0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1],
-];
-
 const rowNum = [-1, -1, -1, 0, 0, 1, 1, 1];
 const colNum = [-1, 0, 1, -1, 1, -1, 0, 1];
 
@@ -55,4 +48,13 @@ function numRegions(matrix) {
   return result;
 }
 
-console.log(numRegions(matrix)); // 2
+// npx jest algorithms/matrix.regions.js
+test('numRegions()', () => {
+  const matrix = [
+    [0, 0, 1, 1, 0],
+    [1, 0, 1, 1, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1],
+  ];
+  expect(numRegions(matrix)).toEqual(2);
+});

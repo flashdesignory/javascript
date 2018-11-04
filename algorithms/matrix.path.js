@@ -58,7 +58,7 @@ const matrix = [
   [1, 1, 0, 0, 0, 0, 1, 0, 0, 1],
 ];
 
-function bfs(matrix, src, dst) {
+function findPathInMatrix(matrix, src, dst) {
   const rowLength = matrix.length;
   const columnLength = matrix[0].length;
 
@@ -112,4 +112,7 @@ function bfs(matrix, src, dst) {
   return 0;
 }
 
-bfs(matrix, { r: 0, c: 0 }, { r: 3, c: 4 });
+// npx jest algorithms/matrix.path.js
+test('findPathInMatrix()', () => {
+  expect(findPathInMatrix(matrix, { r: 0, c: 0 }, { r: 3, c: 4 })).toEqual(11);
+});

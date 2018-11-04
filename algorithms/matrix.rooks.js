@@ -5,13 +5,6 @@
  * @email: info@flashdesignory.com
  */
 
-const board = [
-  [0, 0, 0, 1],
-  [0, 0, 1, 0],
-  [0, 0, 0, 0],
-  [1, 0, 0, 0],
-];
-
 function rooksAreSafe(matrix) {
 // NxN board
   const numRows = matrix.length;
@@ -26,21 +19,28 @@ function rooksAreSafe(matrix) {
       sumRows += matrix[i][j];
       if (sumRows > 1) return false;
     }
-    console.log(sumRows);
+    // console.log(sumRows);
   }
-
-  console.log('******');
 
   for (let i = 0; i < numRows; i++) {
     for (let j = 0; j < numCols; j++) {
       if (j === 0) sumCols = 0; // reset for each col
       sumCols += matrix[j][i];
       if (sumCols > 1) return false;
-      if (j === numCols - 1) console.log(sumCols);
+      // if (j === numCols - 1) console.log(sumCols);
     }
   }
 
   return true;
 }
 
-rooksAreSafe(board);
+// npx jest algorithms/matrix.rooks.js
+test('rooksAreSafe()', () => {
+  const board = [
+    [0, 0, 0, 1],
+    [0, 0, 1, 0],
+    [0, 0, 0, 0],
+    [1, 0, 0, 0],
+  ];
+  expect(rooksAreSafe(board)).toBe(true);
+});

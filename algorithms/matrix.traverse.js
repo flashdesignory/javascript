@@ -12,7 +12,7 @@
      [ 4, 5,12,13,20]]
 */
 
-function print(numRows, numCols) {
+function traverseSnake(numRows, numCols) {
   const matrix = [];
   for (let i = 0; i < numRows; i++) {
     matrix[i] = [];
@@ -32,7 +32,16 @@ function print(numRows, numCols) {
     }
   }
 
-  console.log(matrix);
+  return matrix;
 }
 
-print(5, 4);
+// npx jest algorithms/matrix.traverse.js
+test('traverseSnake()', () => {
+  expect(traverseSnake(4, 5)).toEqual(
+    [[1, 8, 9, 16, 17],
+      [2, 7, 10, 15, 18],
+      [3, 6, 11, 14, 19],
+      [4, 5, 12, 13, 20],
+    ],
+  );
+});
