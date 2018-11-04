@@ -18,5 +18,8 @@ function isPalindrome(str) {
   return true;
 }
 
-console.log(isPalindrome('madam'));
-console.log(isPalindrome('fire'));
+// npx jest algorithms/string.palindrome.js
+test('isPalindrome()', () => {
+  expect(isPalindrome('madam')).toBe(true);
+  expect(isPalindrome('fire')).toBe(false);
+});

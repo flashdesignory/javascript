@@ -12,4 +12,7 @@ function isStringRotation(str1, str2) {
   return true;
 }
 
-isStringRotation('waterbottle', 'rbottlewate');
+// npx jest algorithms/string.rotation.js
+test('isStringRotation()', () => {
+  expect(isStringRotation('waterbottle', 'rbottlewate')).toBe(true);
+});

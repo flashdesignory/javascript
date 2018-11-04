@@ -13,8 +13,6 @@ function reverseStringOne(str) {
   return result;
 }
 
-console.log(reverseStringOne('hello'));
-
 function reverseStringTwo(str) {
   const middle = Math.floor(str.length / 2);
   const chars = str.split('');
@@ -27,8 +25,6 @@ function reverseStringTwo(str) {
 
   return chars.join('');
 }
-
-console.log(reverseStringTwo('hello'));
 
 function reverseStringThree(str) {
   const chars = str.split('');
@@ -46,16 +42,12 @@ function reverseStringThree(str) {
   return chars.join('');
 }
 
-console.log(reverseStringThree('hello'));
-
 function reverseStringFour(str) {
   if (str === '') {
     return '';
   }
   return reverseStringFour(str.substr(1)) + str.charAt(0);
 }
-
-console.log(reverseStringFour('hello'));
 
 function reverseStringFive(str) {
   if (str.length <= 1) {
@@ -67,4 +59,11 @@ function reverseStringFive(str) {
   return right + reverseStringFive(str.substring(1, str.length - 1)) + left;
 }
 
-console.log(reverseStringFive('hello'));
+// npx jest algorithms/string.reverse.js
+test('test reverse string', () => {
+  expect(reverseStringOne('hello')).toEqual('olleh');
+  expect(reverseStringTwo('hello')).toEqual('olleh');
+  expect(reverseStringThree('hello')).toEqual('olleh');
+  expect(reverseStringFour('hello')).toEqual('olleh');
+  expect(reverseStringFive('hello')).toEqual('olleh');
+});

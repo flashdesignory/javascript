@@ -41,8 +41,11 @@ function oneEditAway(str1, str2) {
   return numEdits === 1;
 }
 
-console.log(oneEditAway('car', 'cart')); // true
-console.log(oneEditAway('car', 'cto')); // false
-console.log(oneEditAway('car', 'com')); // false;
-console.log(oneEditAway('car', 'mar')); // true;
-console.log(oneEditAway('pale', 'ple')); // true
+// npx jest algorithms/string.onedit.js
+test('oneEditAway()', () => {
+  expect(oneEditAway('car', 'cart')).toBe(true);
+  expect(oneEditAway('car', 'cto')).toBe(false);
+  expect(oneEditAway('car', 'com')).toBe(false);
+  expect(oneEditAway('car', 'mar')).toBe(true);
+  expect(oneEditAway('pale', 'ple')).toBe(true);
+});

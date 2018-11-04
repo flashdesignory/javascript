@@ -18,6 +18,7 @@ function permutationOfOther(a, b) {
   }
 
   for (i = 0; i < b.length; i++) {
+    if (!letters[b[i]]) return false;
     letters[b[i]] -= 1;
     if (letters[b[i]] < 0) {
       return false;
@@ -26,8 +27,6 @@ function permutationOfOther(a, b) {
 
   return true;
 }
-
-console.log(permutationOfOther('abcd', 'bcad'));
 
 // permutation of palindrome
 function permutationOfPalindrome(a) {
@@ -48,3 +47,11 @@ function permutationOfPalindrome(a) {
 }
 
 console.log(permutationOfPalindrome('ottoffsg'));
+
+// npx jest algorithms/string.permutation.js
+test('test permutations', () => {
+  expect(permutationOfOther('abcd', 'bcad')).toBe(true);
+  expect(permutationOfOther('abcd', 'bcaf')).toBe(false);
+  expect(permutationOfPalindrome('ottoffsg')).toBe(false);
+  expect(permutationOfPalindrome('oott')).toBe(true);
+});

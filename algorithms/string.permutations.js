@@ -12,12 +12,12 @@ function swap(arr, a, b) {
   arr[b] = temp;
 }
 
-function permutations(arr) {
+function permutationsFour(arr) {
   const result = [];
 
   function permute(n) {
     if (n === 1) {
-      result.push(arr.join());
+      result.push(arr.join(''));
     } else {
       for (let i = 0; i < n; i++) {
         permute(n - 1);
@@ -30,29 +30,32 @@ function permutations(arr) {
   return result;
 }
 
-console.log(permutations(['a', 'b', 'c', 'd']));
-
 // heaps
-function permutationsOne(array, n, result) {
-  n = n || array.length;
-  result = result || [];
-  let i; let j;
-  if (n === 1) {
-    console.log(array);
-  } else {
-    for (i = 1; i <= n; i++) {
-      permutationsOne(array, n - 1, result);
-      if (n % 2) {
-        j = 1;
-      } else {
-        j = i;
+function permutationsOne(arr) {
+  const result = [];
+
+  function permute(array, n, string) {
+    n = n || array.length;
+    string = string || [];
+    let i; let j;
+    if (n === 1) {
+      result.push(array.join(''));
+    } else {
+      for (i = 1; i <= n; i++) {
+        permute(array, n - 1, string);
+        if (n % 2) {
+          j = 1;
+        } else {
+          j = i;
+        }
+        swap(array, j - 1, n - 1);
       }
-      swap(array, j - 1, n - 1);
     }
   }
-}
 
-permutationsOne(['a', 'b', 'c', 'd']);
+  permute(arr);
+  return result;
+}
 
 // variation
 function permutationsTwo(arr) {
@@ -81,21 +84,59 @@ function permutationsTwo(arr) {
   return result;
 }
 
-console.log(permutationsTwo(['a', 'b', 'c', 'd']));
-
 // backtracking
 // O (n*n!)
-function permutationsThree(alphabets, startIndex, endIndex) {
-  if (startIndex === endIndex) {
-    console.log(alphabets.join(''));
-  } else {
-    for (let i = startIndex; i <= endIndex; i++) {
-      swap(alphabets, startIndex, i);
-      permutationsThree(alphabets, startIndex + 1, endIndex);
-      swap(alphabets, i, startIndex); // backtrack
+function permutationsThree(arr) {
+  const result = [];
+
+  function permute(arr, startIndex, endIndex) {
+    if (startIndex === endIndex) {
+      result.push(arr.join(''));
+    } else {
+      for (let i = startIndex; i <= endIndex; i++) {
+        swap(arr, startIndex, i);
+        permute(arr, startIndex + 1, endIndex);
+        swap(arr, i, startIndex); // backtrack
+      }
     }
   }
+
+  permute(arr, 0, arr.length - 1);
+  return result;
 }
 
-const alphabets = ['A', 'B', 'C', 'D'];
-permutationsThree(alphabets, 0, alphabets.length - 1); // ABC, ACB, BAC, BCA, CBA, CAB
+// npx jest algorithms/string.permutations.js
+test('test permutation', () => {
+  expect(permutationsFour(['a', 'b', 'c', 'd'])).toEqual([
+    'abcd', 'bacd', 'cabd', 'acbd',
+    'bcad', 'cbad', 'dbca', 'bdca',
+    'cdba', 'dcba', 'bcda', 'cbda',
+    'dacb', 'adcb', 'cdab', 'dcab',
+    'acdb', 'cadb', 'dabc', 'adbc',
+    'bdac', 'dbac', 'abdc', 'badc',
+  ]);
+  expect(permutationsOne(['a', 'b', 'c', 'd'])).toEqual([
+    'abcd', 'bacd', 'cabd', 'acbd',
+    'bcad', 'cbad', 'dbca', 'bdca',
+    'cdba', 'dcba', 'bcda', 'cbda',
+    'dacb', 'adcb', 'cdab', 'dcab',
+    'acdb', 'cadb', 'dabc', 'adbc',
+    'bdac', 'dbac', 'abdc', 'badc',
+  ]);
+  expect(permutationsTwo(['a', 'b', 'c', 'd'])).toEqual([
+    'abcd', 'abdc', 'acbd', 'acdb',
+    'adbc', 'adcb', 'bacd', 'badc',
+    'bcad', 'bcda', 'bdac', 'bdca',
+    'cabd', 'cadb', 'cbad', 'cbda',
+    'cdab', 'cdba', 'dabc', 'dacb',
+    'dbac', 'dbca', 'dcab', 'dcba',
+  ]);
+  expect(permutationsThree(['a', 'b', 'c', 'd'])).toEqual([
+    'abcd', 'abdc', 'acbd', 'acdb',
+    'adcb', 'adbc', 'bacd', 'badc',
+    'bcad', 'bcda', 'bdca', 'bdac',
+    'cbad', 'cbda', 'cabd', 'cadb',
+    'cdab', 'cdba', 'dbca', 'dbac',
+    'dcba', 'dcab', 'dacb', 'dabc',
+  ]);
+});
