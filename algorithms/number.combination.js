@@ -17,12 +17,8 @@ function combinations(str) {
     result.push(str[i]);
   }
 
-  console.log(result.length);
   return result;
 }
-
-// example
-console.log(combinations('abcd'));
 
 // recursive
 function combinationsTwo(str) {
@@ -38,16 +34,11 @@ function combinationsTwo(str) {
   }
 
   combine('', str);
-  console.log(result.length);
   return result;
 }
 
-// example
-console.log(combinationsTwo('abcd'));
-
 // recursive with factorial
 // Formula: n! / k!(n- k)!
-
 function factorial(n) {
   if (n <= 1) return 1;
   return n * factorial(n - 1);
@@ -64,5 +55,17 @@ function combinationsCount(n, k) {
   return result;
 }
 
-// example
-console.log(combinationsCount(4, 2));
+// npx jest algorithms/number.combination.js
+test('combinations()', () => {
+  const result = ['a', 'ba', 'b', 'ca', 'cba', 'cb', 'c', 'da', 'dba', 'db', 'dca', 'dcba', 'dcb', 'dc', 'd'];
+  expect(combinations('abcd')).toEqual(result);
+});
+
+test('combinationsTwo', () => {
+  const result = ['abcd', 'abc', 'abd', 'ab', 'acd', 'ac', 'ad', 'a', 'bcd', 'bc', 'bd', 'b', 'cd', 'c', 'd'];
+  expect(combinationsTwo('abcd')).toEqual(result);
+});
+
+test('combinationsCount()', () => {
+  expect(combinationsCount(4, 2)).toEqual(6);
+});
