@@ -35,7 +35,7 @@ class BinaryMinHeap {
   }
 
   bubbleDown(index) {
-    while (true) {
+    while (true) { // eslint-disable-line
       const child = (index + 1) * 2;
       const sibling = child - 1;
       let toSwap = null;

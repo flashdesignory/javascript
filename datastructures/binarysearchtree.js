@@ -580,6 +580,7 @@ BinarySearchTree.prototype.findAncestors = function (node, value) {
 BinarySearchTree.prototype.deleteTree = function (node) {
   if (!node) return null;
 
+  // post order traversal
   this.deleteTree(node.left);
   this.deleteTree(node.right);
 
