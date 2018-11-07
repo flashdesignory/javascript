@@ -63,68 +63,109 @@ class Graph {
     this.adjList[two].push(one);
   }
 
-  bfs(v) {
+  breadthfirstSearch(v) {
     const visited = [];
     for (let i = 0; i < this.numVertices; i++) {
       visited[i] = false;
     }
 
-    const q = new Queue();
-    q.enqueue(v);
+    const queue = new Queue();
+    queue.enqueue(v);
     visited[v] = true;
 
-    while (!q.empty()) {
-      const current = q.dequeue();
-      console.log(current);
+    const result = [];
+
+    while (!queue.empty()) {
+      const current = queue.dequeue();
+      result.push(current);
       const edges = this.adjList[current];
       for (let i = 0; i < edges.length; i++) {
         const edge = edges[i];
         if (!visited[edge]) {
           visited[edge] = true;
-          q.enqueue(edge);
+          queue.enqueue(edge);
         }
       }
     }
+    return result;
   }
 
-  dfs(v) {
+  depthFirstSearch(v) {
     const visited = [];
     for (let i = 0; i < this.numVertices; i++) {
       visited[i] = false;
     }
-    this.traverse(v, visited);
+    return this.traverse(v, visited, []);
   }
 
-  traverse(v, visited) {
+  traverse(v, visited, result) {
     visited[v] = true;
-    console.log(v);
+    result.push(v);
     const edges = this.adjList[v];
     for (let i = 0; i < edges.length; i++) {
       const edge = edges[i];
       if (!visited[edge]) {
-        this.traverse(edge, visited);
+        return this.traverse(edge, visited, result);
+      }
+    }
+    return result;
+  }
+
+  pathFromTo(source, target) {
+    const visited = [];
+    for (let i = 0; i < this.numVertices; i++) {
+      visited[i] = false;
+    }
+
+    const queue = new Queue();
+    queue.enqueue(source);
+    visited[source] = true;
+
+    const predecessor = {};
+
+    while (!queue.empty()) {
+      let current = queue.dequeue();
+      const edges = this.adjList[current];
+
+      for (let i = 0; i < edges.length; i++) {
+        const edge = edges[i];
+        if (!visited[edge]) {
+          visited[edge] = true;
+          if (edge === target) {
+            const path = [edge];
+            path.push(current);
+            while (current !== source) {
+              current = predecessor[current];
+              path.push(current);
+            }
+            path.reverse();
+            return path;
+          }
+          predecessor[edge] = current;
+          queue.enqueue(edge);
+        }
       }
     }
   }
 }
 
-const g = new Graph();
-g.addVertex('a');
-g.addVertex('b');
-g.addVertex('c');
-g.addVertex('d');
-g.addVertex('e');
-g.addVertex('f');
-g.addEdge('a', 'b');
-g.addEdge('a', 'd');
-g.addEdge('a', 'e');
-g.addEdge('b', 'c');
-g.addEdge('d', 'e');
-g.addEdge('e', 'f');
-g.addEdge('e', 'c');
-g.addEdge('c', 'f');
-g.print();
-console.log('************');
-g.bfs('a');
-console.log('************');
-g.dfs('a');
+const graph = new Graph();
+graph.addVertex(1);
+graph.addVertex(2);
+graph.addVertex(3);
+graph.addVertex(4);
+graph.addVertex(5);
+graph.addVertex(6);
+graph.print(); // 1 -> | 2 -> | 3 -> | 4 -> | 5 -> | 6 ->
+graph.addEdge(1, 2);
+graph.addEdge(1, 5);
+graph.addEdge(2, 3);
+graph.addEdge(2, 5);
+graph.addEdge(3, 4);
+graph.addEdge(4, 5);
+graph.addEdge(4, 6);
+graph.print(); // 1 -> 2, 5 | 2 -> 1, 3, 5 | 3 -> 2, 4 | 4 -> 3, 5, 6 | 5 -> 1, 2, 4 | 6 -> 4
+console.log('bfs from 1: ', graph.breadthfirstSearch(1)); // => 1 2 3 4 5 6
+console.log('dfs from 1: ', graph.depthFirstSearch(1));
+console.log('path from 6 to 1:', graph.pathFromTo(6, 1)); // => 6-4-5-1
+console.log('path from 3 to 5:', graph.pathFromTo(3, 5)); // => 3-2-5
