@@ -102,12 +102,12 @@ class Graph {
     visited[v] = true;
     result.push(v);
     const edges = this.adjList[v];
-    for (let i = 0; i < edges.length; i++) {
-      const edge = edges[i];
+    edges.forEach((edge) => {
       if (!visited[edge]) {
         return this.traverse(edge, visited, result);
       }
-    }
+      return null;
+    });
     return result;
   }
 
@@ -146,6 +146,7 @@ class Graph {
         }
       }
     }
+    return [];
   }
 }
 
