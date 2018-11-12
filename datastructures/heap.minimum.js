@@ -17,13 +17,13 @@ class BinaryMinHeap {
 
   bubbleUp(index) {
     while (index > 0) {
-      const parentIndex = Math.floor((index + 1) / 2) - 1;
-      if (this.data[parentIndex] > this.data[index]) {
-        const temp = this.data[parentIndex];
-        this.data[parentIndex] = this.data[index];
+      const parent = Math.floor((index - 1) / 2);
+      if (this.data[parent] > this.data[index]) {
+        const temp = this.data[parent];
+        this.data[parent] = this.data[index];
         this.data[index] = temp;
       }
-      index = parentIndex;
+      index = parent;
     }
   }
 
@@ -36,33 +36,27 @@ class BinaryMinHeap {
 
   bubbleDown(index) {
     while (true) { // eslint-disable-line
-      const child = (index + 1) * 2;
-      const sibling = child - 1;
-      let toSwap = null;
+      const left = Math.floor((index * 2) + 1);
+      const right = Math.floor((index * 2) + 2);
 
-      // if current is greater than child
-      if (this.data[index] > this.data[child]) {
-        toSwap = child;
+      let smallest = index;
+
+      if (this.data[index] > this.data[left]) {
+        smallest = left;
+      }
+      if (this.data[index] > this.data[right]) {
+        smallest = right;
       }
 
-      // if sibling is smaller than child, but also smaller than current
-      if (this.data[index] > this.data[sibling]
-        && (this.data[child] == null
-        || (this.data[child] !== null
-        && this.data[sibling] < this.data[child]))) {
-        toSwap = sibling;
-      }
+      if (smallest !== index) {
+        const temp = this.data[smallest];
+        this.data[smallest] = this.data[index];
+        this.data[index] = temp;
 
-      // if we don't need to swap, then break.
-      if (toSwap == null) {
+        index = smallest;
+      } else {
         break;
       }
-
-      const temp = this.data[toSwap];
-      this.data[toSwap] = this.data[index];
-      this.data[index] = temp;
-
-      index = toSwap;
     }
   }
 }

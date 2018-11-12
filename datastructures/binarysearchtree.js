@@ -114,6 +114,24 @@ BinarySearchTree.prototype.contains = function (value) {
   return false;
 };
 
+BinarySearchTree.prototype.findNode = function (value) {
+  if (!this.root) return null;
+  let current = this.root;
+  while (current) {
+    if (current.value === value) {
+      return current;
+    }
+    if (current.value > value) {
+      if (current.left) {
+        current = current.left;
+      }
+    } else if (current.right) {
+      current = current.right;
+    }
+  }
+  return null;
+};
+
 BinarySearchTree.prototype.isBinarySearchTree = function (node) {
   let prevNode = null;
 
@@ -446,45 +464,43 @@ BinarySearchTree.prototype.printLevelOrderZigZag = function (node) {
   }
 };
 
-BinarySearchTree.prototype.inOrderSuccessor = function (node) {
-  let successor;
-
-  if (node.right) {
-    return this.min(node.right);
+BinarySearchTree.prototype.inOrderSuccessor = function (value) {
+  const node = this.findNode(value);
+  if (node === this.root) {
+    if (node.right) {
+      return this.min(node.right);
+    }
+    return null;
   }
-
   let current = this.root;
+  let successor = null;
   while (current) {
-    if (node.value < current.value) {
+    if (current.value > value) {
       successor = current;
       current = current.left;
-    } else if (node.value > current.value) {
-      current = current.right;
     } else {
-      current = null;
+      current = current.right;
     }
   }
   return successor;
 };
 
-BinarySearchTree.prototype.inOrderPredecessor = function (node) {
-  let predecessor;
-
-  if (node.left) {
-    return this.max(node.left);
+BinarySearchTree.prototype.inOrderPredecessor = function (value) {
+  const node = this.findNode(value);
+  if (node === this.root) {
+    if (node.left) {
+      return this.max(node.left);
+    }
+    return null;
   }
-
   let current = this.root;
+  let predecessor = null;
   while (current) {
-    if (node.value > current.value) {
+    if (current.value < value) {
       predecessor = current;
       current = current.right;
-    } else if (node.value < current.value) {
-      current = current.left;
-    } else if (node.value === current.value) {
-      return predecessor;
     } else {
-      return null;
+      current = current.left;
     }
   }
   return predecessor;
@@ -578,24 +594,25 @@ BinarySearchTree.prototype.findAncestors = function (node, value) {
 };
 
 BinarySearchTree.prototype.deleteTree = function (node) {
-  if (!node) return null;
+  if (!node) return;
 
-  // post order traversal
+  // post order traversals
   this.deleteTree(node.left);
   this.deleteTree(node.right);
+  this.remove(this.root, node.value);
 
-  this.delete(node.value);
-  this.root = null;
-  return this.root;
+  if (this.height(this.root) === 1) {
+    this.root = null;
+  }
 };
 
 const tree = new BinarySearchTree();
 tree.add(10);
-const fifteen = tree.add(15);
-const five = tree.add(5);
+tree.add(15);
+tree.add(5);
 tree.add(2);
 tree.add(3);
-const twelve = tree.add(12);
+tree.add(12);
 tree.add(17);
 // console.log(tree.toObject());
 // tree.preOrderTraversal(tree.root);
@@ -619,12 +636,12 @@ console.log(`sum leaves: ${tree.sumLeaves(tree.root)}`);
 console.log(`height: ${tree.height(tree.root)}`);
 console.log(`is binary search tree: ${tree.isBinarySearchTree(tree.root)}`);
 console.log(`is balanced: ${tree.isBalanced(tree.root)}`);
-console.log(`successor: ${tree.inOrderSuccessor(tree.root).value}`);
-console.log(`successor: ${tree.inOrderSuccessor(twelve).value}`);
-console.log(`successor: ${tree.inOrderSuccessor(five).value}`);
-console.log(`predecessor: ${tree.inOrderPredecessor(tree.root).value}`);
-console.log(`predecessor: ${tree.inOrderPredecessor(fifteen).value}`);
-console.log(`predecessor: ${tree.inOrderPredecessor(twelve).value}`);
+console.log(`successor: ${tree.inOrderSuccessor(10).value}`);
+console.log(`successor: ${tree.inOrderSuccessor(12).value}`);
+console.log(`successor: ${tree.inOrderSuccessor(5).value}`);
+console.log(`predecessor: ${tree.inOrderPredecessor(10).value}`);
+console.log(`predecessor: ${tree.inOrderPredecessor(15).value}`);
+console.log(`predecessor: ${tree.inOrderPredecessor(12).value}`);
 console.log(`findSumPath: ${tree.findSumPath(tree.root, 42)}`);
 console.log('ancestors of 3: ');
 tree.findAncestors(tree.root, 3);
