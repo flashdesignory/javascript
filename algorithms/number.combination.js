@@ -37,6 +37,24 @@ function combinationsTwo(str) {
   return result;
 }
 
+function combinationsThree(str) {
+  const result = [];
+
+  function combine(str, temp, index) { // eslint-disable-line
+    for (let i = index; i < str.length; i++) {
+      temp = temp.concat(str.charAt(i));
+      result.push(temp);
+
+      combine(str, temp, i + 1);
+
+      temp = temp.substr(0, temp.length - 1);
+    }
+  }
+
+  combine(str, '', 0);
+  return result;
+}
+
 // recursive with factorial
 // Formula: n! / k!(n- k)!
 function factorial(n) {
@@ -64,6 +82,11 @@ test('combinations()', () => {
 test('combinationsTwo', () => {
   const result = ['abcd', 'abc', 'abd', 'ab', 'acd', 'ac', 'ad', 'a', 'bcd', 'bc', 'bd', 'b', 'cd', 'c', 'd'];
   expect(combinationsTwo('abcd')).toEqual(result);
+});
+
+test('combinationsThree()', () => {
+  const result = ['a', 'ab', 'abc', 'abcd', 'abd', 'ac', 'acd', 'ad', 'b', 'bc', 'bcd', 'bd', 'c', 'cd', 'd'];
+  expect(combinationsThree('abcd')).toEqual(result);
 });
 
 test('combinationsCount()', () => {
