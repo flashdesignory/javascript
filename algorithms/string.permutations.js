@@ -12,7 +12,7 @@ function swap(arr, a, b) {
   arr[b] = temp;
 }
 
-function permutationsFour(arr) {
+function permutationsOne(arr) {
   const result = [];
 
   function permute(n) {
@@ -31,7 +31,7 @@ function permutationsFour(arr) {
 }
 
 // heaps
-function permutationsOne(arr) {
+function permutationsTwo(arr) {
   const result = [];
 
   function permute(array, n, string) {
@@ -58,7 +58,7 @@ function permutationsOne(arr) {
 }
 
 // variation
-function permutationsTwo(arr) {
+function permutationsThree(arr) {
   const result = [];
   const stack = [];
 
@@ -86,7 +86,7 @@ function permutationsTwo(arr) {
 
 // backtracking
 // O (n*n!)
-function permutationsThree(arr) {
+function permutationsFour(arr) {
   const result = [];
 
   function permute(arr, startIndex, endIndex) {
@@ -105,16 +105,26 @@ function permutationsThree(arr) {
   return result;
 }
 
+function permutationsFive(str) {
+  const result = {};
+
+  function permute(word, remainder) { // eslint-disable-line
+    if (remainder.length === 0) {
+      return result[word] = true; // eslint-disable-line
+    }
+
+    for (let i = 0; i < remainder.length; i++) {
+      permute(word + remainder[i], (remainder.substr(0, i) + remainder.substr(i + 1)));
+    }
+  }
+
+  permute('', str);
+
+  return Object.keys(result);
+}
+
 // npx jest algorithms/string.permutations.js
 test('test permutation', () => {
-  expect(permutationsFour(['a', 'b', 'c', 'd'])).toEqual([
-    'abcd', 'bacd', 'cabd', 'acbd',
-    'bcad', 'cbad', 'dbca', 'bdca',
-    'cdba', 'dcba', 'bcda', 'cbda',
-    'dacb', 'adcb', 'cdab', 'dcab',
-    'acdb', 'cadb', 'dabc', 'adbc',
-    'bdac', 'dbac', 'abdc', 'badc',
-  ]);
   expect(permutationsOne(['a', 'b', 'c', 'd'])).toEqual([
     'abcd', 'bacd', 'cabd', 'acbd',
     'bcad', 'cbad', 'dbca', 'bdca',
@@ -124,6 +134,14 @@ test('test permutation', () => {
     'bdac', 'dbac', 'abdc', 'badc',
   ]);
   expect(permutationsTwo(['a', 'b', 'c', 'd'])).toEqual([
+    'abcd', 'bacd', 'cabd', 'acbd',
+    'bcad', 'cbad', 'dbca', 'bdca',
+    'cdba', 'dcba', 'bcda', 'cbda',
+    'dacb', 'adcb', 'cdab', 'dcab',
+    'acdb', 'cadb', 'dabc', 'adbc',
+    'bdac', 'dbac', 'abdc', 'badc',
+  ]);
+  expect(permutationsThree(['a', 'b', 'c', 'd'])).toEqual([
     'abcd', 'abdc', 'acbd', 'acdb',
     'adbc', 'adcb', 'bacd', 'badc',
     'bcad', 'bcda', 'bdac', 'bdca',
@@ -131,12 +149,20 @@ test('test permutation', () => {
     'cdab', 'cdba', 'dabc', 'dacb',
     'dbac', 'dbca', 'dcab', 'dcba',
   ]);
-  expect(permutationsThree(['a', 'b', 'c', 'd'])).toEqual([
+  expect(permutationsFour(['a', 'b', 'c', 'd'])).toEqual([
     'abcd', 'abdc', 'acbd', 'acdb',
     'adcb', 'adbc', 'bacd', 'badc',
     'bcad', 'bcda', 'bdca', 'bdac',
     'cbad', 'cbda', 'cabd', 'cadb',
     'cdab', 'cdba', 'dbca', 'dbac',
     'dcba', 'dcab', 'dacb', 'dabc',
+  ]);
+  expect(permutationsFive('abcd')).toEqual([
+    'abcd', 'abdc', 'acbd', 'acdb',
+    'adbc', 'adcb', 'bacd', 'badc',
+    'bcad', 'bcda', 'bdac', 'bdca',
+    'cabd', 'cadb', 'cbad', 'cbda',
+    'cdab', 'cdba', 'dabc', 'dacb',
+    'dbac', 'dbca', 'dcab', 'dcba',
   ]);
 });
