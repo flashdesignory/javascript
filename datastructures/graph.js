@@ -63,7 +63,7 @@ class Graph {
     this.adjList[two].push(one);
   }
 
-  breadthfirstSearch(v) {
+  breadthFirstSearch(v) {
     const visited = [];
     for (let i = 0; i < this.numVertices; i++) {
       visited[i] = false;
@@ -166,7 +166,7 @@ graph.addEdge(3, 4);
 graph.addEdge(4, 5);
 graph.addEdge(4, 6);
 graph.print(); // 1 -> 2, 5 | 2 -> 1, 3, 5 | 3 -> 2, 4 | 4 -> 3, 5, 6 | 5 -> 1, 2, 4 | 6 -> 4
-console.log('bfs from 1: ', graph.breadthfirstSearch(1)); // => 1 2 3 4 5 6
-console.log('dfs from 1: ', graph.depthFirstSearch(1));
+console.log('bfs from 1: ', graph.breadthFirstSearch(1)); // => 1 2 5 3 4 6
+console.log('dfs from 1: ', graph.depthFirstSearch(1)); // => 1 2 3 4 5 6
 console.log('path from 6 to 1:', graph.pathFromTo(6, 1)); // => 6-4-5-1
 console.log('path from 3 to 5:', graph.pathFromTo(3, 5)); // => 3-2-5
