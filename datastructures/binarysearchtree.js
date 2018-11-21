@@ -606,6 +606,30 @@ BinarySearchTree.prototype.deleteTree = function (node) {
   }
 };
 
+BinarySearchTree.prototype.findSecondLargest = function (node) {
+  if (!node) return null;
+
+  let current = node;
+
+  while (current) {
+    // current is largest and has left subtree
+    // 2nd largest is max in left subtree
+    if (current.left && !current.right) {
+      return this.max(current.left);
+    }
+
+    // current is parent of largest and largest has no children
+    // current is 2nd largest
+    if (current.right && !current.right.left && !current.right.right) {
+      return current;
+    }
+
+    current = current.right;
+  }
+
+  return null;
+};
+
 const tree = new BinarySearchTree();
 tree.add(10);
 tree.add(15);
@@ -648,3 +672,4 @@ tree.findAncestors(tree.root, 3);
 tree.printLevelOrderZigZag(tree.root);
 tree.deleteTree(tree.root);
 tree.toObject();
+console.log(`findSecondLargest: ${tree.findSecondLargest(tree.root).value}`);
