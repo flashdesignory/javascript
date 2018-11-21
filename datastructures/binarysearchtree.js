@@ -175,63 +175,57 @@ BinarySearchTree.prototype.isBalanced = function (node) {
 
 BinarySearchTree.prototype.add = function (value) {
   const node = new Node(value);
-
   if (!this.root) {
     this.root = node;
-  } else {
-    let current = this.root;
-    // while(true) {
-    while (current) {
-      if (current.value > value) {
-        if (current.left) {
-          current = current.left;
-        } else {
-          current.left = node;
-          break;
-        }
-      } if (current.right) {
-        current = current.right;
+    return node;
+  }
+  let current = this.root;
+
+  while (current) {
+    if (current.value > value) {
+      if (current.left) {
+        current = current.left;
       } else {
-        current.right = node;
-        break;
+        current.left = node;
+        return node;
       }
+    } else if (current.right) {
+      current = current.right;
+    } else {
+      current.right = node;
+      return node;
     }
   }
-
   return node;
 };
 
 // recursive removing node
-BinarySearchTree.prototype.delete = function (value) {
-  const that = this;
-  function removeNode(node, value) {
-    if (!node) return null;
-    if (node.value === value) {
-      // no children
-      if (!node.left && !node.right) {
-        return null;
-      }
-      // one child
-      if (!node.left) {
-        return node.right;
-      }
-      if (!node.right) {
-        return node.left;
-      }
-      // two children
-      const parent = that.min(node.right);
-      node.value = parent.value;
-      node.right = removeNode(node.right, parent.value);
-      return node;
+BinarySearchTree.prototype.delete = function (node, value) {
+  if (!node) return null;
+  if (node.value === value) {
+    // no children
+    if (!node.left && !node.right) {
+      return null;
     }
-    if (value < node.value) {
-      node.left = removeNode(node.left, value);
-      return node;
+    // one child
+    if (!node.left) {
+      return node.right;
     }
-    node.right = removeNode(node.right, value);
+    if (!node.right) {
+      return node.left;
+    }
+    // two children
+    const parent = this.min(node.right);
+    node.value = parent.value;
+    node.right = this.delete(node.right, parent.value);
     return node;
   }
-  this.root = removeNode(this.root, value);
+  if (value < node.value) {
+    node.left = this.delete(node.left, value);
+    return node;
+  }
+  node.right = this.delete(node.right, value);
+  return node;
 };
 
 BinarySearchTree.prototype.remove = function (value) {
@@ -599,7 +593,7 @@ BinarySearchTree.prototype.deleteTree = function (node) {
   // post order traversals
   this.deleteTree(node.left);
   this.deleteTree(node.right);
-  this.remove(this.root, node.value);
+  this.delete(this.root, node.value);
 
   if (this.height(this.root) === 1) {
     this.root = null;
@@ -630,14 +624,12 @@ BinarySearchTree.prototype.findSecondLargest = function (node) {
   return null;
 };
 
+const values = [10, 15, 5, 2, 3, 12, 17];
 const tree = new BinarySearchTree();
-tree.add(10);
-tree.add(15);
-tree.add(5);
-tree.add(2);
-tree.add(3);
-tree.add(12);
-tree.add(17);
+for (let i = 0; i < values.length; i++) {
+  tree.add(values[i]);
+}
+
 // console.log(tree.toObject());
 // tree.preOrderTraversal(tree.root);
 // console.log("--------------------------");
@@ -647,29 +639,29 @@ tree.add(17);
 // console.log(tree.contains(12));
 // console.log(tree.contains(11));
 // console.log(tree.contains(17));
-tree.searchBF(tree.root);
-tree.searchDF(tree.root);
-tree.min(tree.root);
-tree.max(tree.root);
+// tree.searchBF(tree.root);
+// tree.searchDF(tree.root);
+// tree.min(tree.root);
+// tree.max(tree.root);
 // tree.remove(15);
 // console.log("-------------------------------");
 // tree.inOrderTraversal(tree.root);
-console.log('notes at level 2: ');
-tree.findNodesAtLevel(tree.root, 2);
-console.log(`sum leaves: ${tree.sumLeaves(tree.root)}`);
-console.log(`height: ${tree.height(tree.root)}`);
-console.log(`is binary search tree: ${tree.isBinarySearchTree(tree.root)}`);
-console.log(`is balanced: ${tree.isBalanced(tree.root)}`);
-console.log(`successor: ${tree.inOrderSuccessor(10).value}`);
-console.log(`successor: ${tree.inOrderSuccessor(12).value}`);
-console.log(`successor: ${tree.inOrderSuccessor(5).value}`);
-console.log(`predecessor: ${tree.inOrderPredecessor(10).value}`);
-console.log(`predecessor: ${tree.inOrderPredecessor(15).value}`);
-console.log(`predecessor: ${tree.inOrderPredecessor(12).value}`);
-console.log(`findSumPath: ${tree.findSumPath(tree.root, 42)}`);
-console.log('ancestors of 3: ');
-tree.findAncestors(tree.root, 3);
-tree.printLevelOrderZigZag(tree.root);
+// console.log('notes at level 2: ');
+// tree.findNodesAtLevel(tree.root, 2);
+// console.log(`sum leaves: ${tree.sumLeaves(tree.root)}`);
+// console.log(`height: ${tree.height(tree.root)}`);
+// console.log(`is binary search tree: ${tree.isBinarySearchTree(tree.root)}`);
+// console.log(`is balanced: ${tree.isBalanced(tree.root)}`);
+// console.log(`successor: ${tree.inOrderSuccessor(10).value}`);
+// console.log(`successor: ${tree.inOrderSuccessor(12).value}`);
+// console.log(`successor: ${tree.inOrderSuccessor(5).value}`);
+// console.log(`predecessor: ${tree.inOrderPredecessor(10).value}`);
+// console.log(`predecessor: ${tree.inOrderPredecessor(15).value}`);
+// console.log(`predecessor: ${tree.inOrderPredecessor(12).value}`);
+// console.log(`findSumPath: ${tree.findSumPath(tree.root, 42)}`);
+// console.log('ancestors of 3: ');
+// tree.findAncestors(tree.root, 3);
+// tree.printLevelOrderZigZag(tree.root);
+// console.log(`findSecondLargest: ${tree.findSecondLargest(tree.root).value}`);
 tree.deleteTree(tree.root);
 tree.toObject();
-console.log(`findSecondLargest: ${tree.findSecondLargest(tree.root).value}`);
