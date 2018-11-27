@@ -7,37 +7,56 @@
 
 // first-in first-out (FIFO)
 
-function Queue() {
-  this.data = {};
-  this.first = 0;
-  this.last = 0;
+class Queue {
+  constructor() {
+    this.data = {};
+    this.first = 0;
+    this.last = 0;
+  }
+
+  enqueue(value) {
+    this.data[this.last] = value;
+    this.last++;
+  }
+
+  dequeue() {
+    const temp = this.data[this.first];
+    delete this.data[this.first];
+    this.first++;
+    return temp;
+  }
+
+  peek() {
+    return this.data[this.first];
+  }
+
+  empty() {
+    return this.first === this.last;
+  }
+
+  print() {
+    const result = [];
+    Object.values(this.data).forEach((value) => {
+      result.push(value);
+    });
+    return result;
+  }
 }
 
-Queue.prototype.enqueue = function (value) {
-  this.data[this.last] = value;
-  this.last++;
-};
-
-Queue.prototype.dequeue = function () {
-  const temp = this.data[this.first];
-  delete this.data[this.first];
-  this.first++;
-  return temp;
-};
-
-Queue.prototype.peek = function () {
-  return this.data[this.first];
-};
-
-Queue.prototype.empty = function () {
-  return this.first === this.last;
-};
-
-// example
-const queue = new Queue();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
-console.log(queue.peek());
-console.log(queue.dequeue());
-console.log(queue.peek());
+// npx jest datastructures/queue.js
+describe('queue data structure', () => {
+  const queue = new Queue();
+  const values = [3, 6, 1, 2, 5, 4];
+  for (let i = 0; i < values.length; i++) {
+    queue.enqueue(values[i]);
+  }
+  it('print() should equal [3, 6, 1, 2, 5, 4]', () => {
+    expect(queue.print()).toEqual(values);
+  });
+  it('peek() should equal 3', () => {
+    expect(queue.peek()).toEqual(3);
+  });
+  it('dequeue() should equal 3', () => {
+    expect(queue.dequeue()).toEqual(3);
+  });
+});

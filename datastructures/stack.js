@@ -7,57 +7,55 @@
 
 // last-in first-out (LIFO)
 
-function Stack() {
-  this.data = {};
-  this.size = 0;
+class Stack {
+  constructor() {
+    this.data = {};
+    this.size = 0;
+  }
+
+  push(value) {
+    this.data[this.size] = value;
+    this.size++;
+  }
+
+  pop() {
+    const temp = this.data[this.size - 1];
+    delete this.data[this.size - 1];
+    this.size--;
+    return temp;
+  }
+
+  peek() {
+    return this.data[this.size - 1];
+  }
+
+  empty() {
+    return this.size === 0;
+  }
+
+  print() {
+    const result = [];
+    Object.values(this.data).forEach((value) => {
+      result.push(value);
+    });
+    return result;
+  }
 }
 
-Stack.prototype.push = function (value) {
-  this.data[this.size] = value;
-  this.size++;
-};
-
-Stack.prototype.pop = function () {
-  const temp = this.data[this.size - 1];
-  delete this.data[this.size - 1];
-  this.size--;
-  return temp;
-};
-
-Stack.prototype.peek = function () {
-  return this.data[this.size - 1];
-};
-
-Stack.prototype.empty = function () {
-  return this.size === 0;
-};
-
-Stack.prototype.sort = function () {
-  const temp = new Stack();
-
-  while (!this.empty()) {
-    const lastValue = this.pop();
-
-    while (!temp.empty() && temp.peek() < lastValue) {
-      this.push(temp.pop());
-    }
-
-    temp.push(lastValue);
+// npx jest datastructures/stack.js
+describe('stack data structure', () => {
+  const stack = new Stack();
+  const values = [3, 6, 1, 2, 5, 4];
+  for (let i = 0; i < values.length; i++) {
+    stack.push(values[i]);
   }
-
-  while (!temp.empty()) {
-    this.push(temp.pop());
-  }
-};
-
-// example
-const stack = new Stack();
-stack.push(3);
-stack.push(6);
-stack.push(1);
-stack.push(2);
-stack.push(5);
-stack.push(4);
-console.log(stack);
-stack.sort();
-console.log(stack);
+  it('print() should equal [3, 6, 1, 2, 5, 4]', () => {
+    expect(stack.print()).toEqual(values);
+  });
+  it('peek() should equal 4', () => {
+    expect(stack.peek()).toEqual(4);
+  });
+  it('pop() should equal 4', () => {
+    expect(stack.pop()).toEqual(4);
+  });
+});
