@@ -5,16 +5,20 @@
  * @email: info@flashdesignory.com
  */
 
-function Node(value) {
-  this.value = value;
-  this.next = null;
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
 }
 
-function SinglyList() {
-  this.head = null;
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+  }
 }
 
-function getLength(head) {
+const getLength = (head) => {
   if (!head) return 0;
   let length = 0;
   let current = head;
@@ -23,9 +27,9 @@ function getLength(head) {
     length++;
   }
   return length;
-}
+};
 
-function getIntersectionNodeOne(headA, headB) {
+const getIntersectingNodeOne = (headA, headB) => {
   let lengthA = getLength(headA);
   let lengthB = getLength(headB);
   let nodeA = headA;
@@ -52,11 +56,10 @@ function getIntersectionNodeOne(headA, headB) {
     nodeA = nodeA.next;
     nodeB = nodeB.next;
   }
-
   return null;
-}
+};
 
-function getIntersectionNodeTwo(headA, headB) {
+const getIntersectingNodeTwo = (headA, headB) => {
   let nodeA = headA;
   let nodeB = headB;
 
@@ -66,33 +69,38 @@ function getIntersectionNodeTwo(headA, headB) {
   }
 
   return nodeA;
-}
+};
 
-const node19 = new Node(19);
-const node21 = new Node(21);
+// npx jest datastructures/singlylist.intersection.js
+describe('find intersecting node of two SinglyLinkedLists', () => {
+  it('should return node44 for intersection', () => {
+    const node19 = new Node(19);
+    const node21 = new Node(21);
 
-const node16 = new Node(16);
-const node18 = new Node(18);
-const node30 = new Node(30);
+    const node16 = new Node(16);
+    const node18 = new Node(18);
+    const node30 = new Node(30);
 
-const node44 = new Node(44);
-const node55 = new Node(55);
-const node66 = new Node(66);
+    const node44 = new Node(44);
+    const node55 = new Node(55);
+    const node66 = new Node(66);
 
-const listA = new SinglyList();
-listA.head = node19;
-listA.head.next = node21;
-listA.head.next.next = node44;
-listA.head.next.next.next = node55;
-listA.head.next.next.next.next = node66;
+    const listA = new SinglyLinkedList();
+    listA.head = node19;
+    listA.head.next = node21;
+    listA.head.next.next = node44;
+    listA.head.next.next.next = node55;
+    listA.head.next.next.next.next = node66;
 
-const listB = new SinglyList();
-listB.head = node16;
-listB.head.next = node18;
-listB.head.next.next = node30;
-listB.head.next.next.next = node44;
-listB.head.next.next.next.next = node55;
-listB.head.next.next.next.next.next = node66;
+    const listB = new SinglyLinkedList();
+    listB.head = node16;
+    listB.head.next = node18;
+    listB.head.next.next = node30;
+    listB.head.next.next.next = node44;
+    listB.head.next.next.next.next = node55;
+    listB.head.next.next.next.next.next = node66;
 
-console.log(getIntersectionNodeOne(listA.head, listB.head));
-console.log(getIntersectionNodeTwo(listA.head, listB.head));
+    expect(getIntersectingNodeOne(listA.head, listB.head)).toBe(node44);
+    expect(getIntersectingNodeTwo(listA.head, listB.head)).toBe(node44);
+  });
+});
