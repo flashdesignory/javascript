@@ -8,113 +8,127 @@
 // Time: BigO(1);
 // Space: BigO(n);
 
-function Node(key, value) {
-  this.key = key;
-  this.value = value;
-  this.next = null;
-  this.prev = null;
+class Node {
+  constructor(key, value) {
+    this.key = key;
+    this.value = value;
+    this.next = null;
+    this.previous = null;
+  }
 }
 
-function LRUCache(limit) {
-  this.limit = limit;
-  this.head = null;
-  this.tail = null;
-  this.map = {};
-  this.size = 0;
-}
-
-LRUCache.prototype.set = function (key, value) {
-  console.log(`set(${key}, ${value})`);
-  let node;
-  if (this.map[key]) {
-    node = this.map[key];
-    this.map[key].value = value;
-
-    if (node.prev) {
-      node.prev.next = node.next;
-    }
-
-    if (node.next) {
-      node.next.prev = node.prev;
-    }
-  } else {
-    if (this.size >= this.limit) {
-      const keyToDelete = this.tail.key;
-      this.tail = this.tail.prev;
-      if (this.tail) this.tail.next = null;
-      delete this.map[keyToDelete];
-    } else {
-      this.size++;
-    }
-    node = new Node(key, value);
-    this.map[key] = node;
+class LRUCache {
+  constructor(limit) {
+    this.limit = limit;
+    this.head = null;
+    this.tail = null;
+    this.map = {};
+    this.size = 0;
   }
 
-  if (this.head) {
-    this.head.prev = node;
-    node.next = this.head;
+  print() {
+    const result = [];
+    let current = this.head;
+    while (current) {
+      result.push([current.key, current.value]);
+      current = current.next;
+    }
+    return result;
   }
 
-  this.head = node;
-  if (!this.tail) this.tail = node;
-  return node.value;
-};
+  set(key, value) {
+    let node;
+    if (this.map[key]) {
+      node = this.map[key];
+      this.map[key].value = value;
 
-LRUCache.prototype.get = function (key) {
-  if (this.map[key]) {
-    const node = this.map[key];
+      if (node.previous) {
+        node.previous.next = node.next;
+      }
 
-    if (node.prev) {
-      node.prev.next = node.next;
-    }
-
-    if (node.next) {
-      node.next.prev = node.prev;
+      if (node.next) {
+        node.next.previous = node.previous;
+      }
     } else {
-      this.tail = node.prev;
+      if (this.size >= this.limit) {
+        const key = this.tail.key; // eslint-disable-line
+        this.tail = this.tail.previous;
+        if (this.tail) this.tail.next = null;
+        delete this.map[key];
+      } else {
+        this.size++;
+      }
+
+      node = new Node(key, value);
+      this.map[key] = node;
     }
 
     if (this.head) {
-      this.head.prev = node;
+      this.head.previous = node;
       node.next = this.head;
     }
 
     this.head = node;
     if (!this.tail) this.tail = node;
-    console.log(`get(${key}, ${this.map[key].value})`);
-    return this.map[key].value;
+    return node;
   }
-  console.log(`get(${key}, -1)`);
-  return -1;
-};
 
-LRUCache.prototype.log = function () {
-  const temp = [];
-  let current = this.head;
-  while (current) {
-    const d = { key: current.key, value: current.value };
-    temp.push(d);
-    current = current.next;
+  get(key) {
+    if (!this.map[key]) return null;
+
+    const node = this.map[key];
+
+    if (node.previous) {
+      node.previous.next = node.next;
+    }
+
+    if (node.next) {
+      node.next.previous = node.previous;
+    } else {
+      this.tail = node;
+    }
+
+    if (this.head) {
+      this.head.previous = node;
+      node.next = this.head;
+    }
+
+    this.head = node;
+    if (!this.tail) this.tail = node;
+    return node;
   }
-  console.log(temp);
-};
+}
 
-const cache = new LRUCache(2);
-cache.set(1, 1); // returns 1
-cache.log();
-cache.set(2, 2); // returns 2
-cache.log();
-cache.get(1); // returns 1
-cache.log();
-cache.set(3, 3); // evicts key 2
-cache.log();
-cache.get(2); // returns -1 (not found)
-cache.log();
-cache.set(4, 4); // evicts key 1
-cache.log();
-cache.get(1); // returns -1 (not found)
-cache.log();
-cache.get(3); // returns 3
-cache.log();
-cache.get(4); // returns 4
-cache.log();
+// npx jest datastructures/doublylist.lrucache.js
+describe('LRUCache should hold 5 most recent values', () => {
+  it('adding 1-5, should equal [[5,5], [4,4], [3,3], [2,2], [1,1]]', () => {
+    const cache = new LRUCache(5);
+    cache.set(1, 1);
+    cache.set(2, 2);
+    cache.set(3, 3);
+    cache.set(4, 4);
+    cache.set(5, 5);
+    expect(cache.print()).toEqual([[5, 5], [4, 4], [3, 3], [2, 2], [1, 1]]);
+  });
+  it('adding (6,6) should equal [[6,6], [5,5], [4,4], [3,3], [2,2]]', () => {
+    const cache = new LRUCache(5);
+    cache.set(1, 1);
+    cache.set(2, 2);
+    cache.set(3, 3);
+    cache.set(4, 4);
+    cache.set(5, 5);
+    cache.set(6, 6);
+    expect(cache.print()).toEqual([[6, 6], [5, 5], [4, 4], [3, 3], [2, 2]]);
+  });
+  it('getting (3) should equal [[3,3], [6,6], [5,5], [4,4], [2,2]]', () => {
+    const cache = new LRUCache(5);
+    cache.set(1, 1);
+    cache.set(2, 2);
+    cache.set(3, 3);
+    cache.set(4, 4);
+    cache.set(5, 5);
+    cache.set(6, 6);
+    cache.get(3);
+    expect(cache.print()).toEqual([[3, 3], [6, 6], [5, 5], [4, 4], [2, 2]]);
+  });
+});
