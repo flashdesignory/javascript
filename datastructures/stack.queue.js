@@ -5,60 +5,75 @@
  * @email: info@flashdesignory.com
  */
 
-function Stack() {
-  this.data = {};
-  this.size = 0;
-}
-
-Stack.prototype.push = function (value) {
-  this.data[this.size] = value;
-  this.size++;
-  return value;
-};
-
-Stack.prototype.pop = function () {
-  const temp = this.data[this.size - 1];
-  delete this.data[this.size - 1];
-  this.size--;
-  return temp;
-};
-
-Stack.prototype.peek = function () {
-  return this.data[this.size - 1];
-};
-
-Stack.prototype.empty = function () {
-  return this.size === 0;
-};
-
-function StackQueue() {
-  this.inStack = new Stack();
-  this.outStack = new Stack();
-}
-
-StackQueue.prototype.push = function (value) {
-  return this.inStack.push(value);
-};
-
-StackQueue.prototype.pop = function () {
-  if (this.outStack.size === 0) {
-    while (this.inStack.size > 0) {
-      const item = this.inStack.pop();
-      this.outStack.push(item);
-    }
-
-    if (this.outStack.size === 0) {
-      return null;
-    }
+class Stack {
+  constructor() {
+    this.data = {};
+    this.size = 0;
   }
 
-  return this.outStack.pop();
-};
+  push(value) {
+    this.data[this.size] = value;
+    this.size++;
+  }
 
-// example
-const sq = new StackQueue();
-console.log(sq.push(1));
-console.log(sq.push(2));
-console.log(sq.push(3));
-console.log(sq.push(4));
-console.log(sq.pop());
+  pop() {
+    const temp = this.data[this.size - 1];
+    delete this.data[this.size - 1];
+    this.size--;
+    return temp;
+  }
+
+  peek() {
+    return this.data[this.size - 1];
+  }
+
+  empty() {
+    return this.size === 0;
+  }
+
+  print() {
+    const result = [];
+    Object.values(this.data).forEach((value) => {
+      result.push(value);
+    });
+    return result;
+  }
+}
+
+class StackQueue {
+  constructor() {
+    this.inStack = new Stack();
+    this.outStack = new Stack();
+  }
+
+  push(value) {
+    this.inStack.push(value);
+  }
+
+  pop() {
+    if (this.outStack.empty()) {
+      while (!this.inStack.empty()) {
+        const item = this.inStack.pop();
+        this.outStack.push(item);
+      }
+
+      if (this.outStack.empty()) {
+        return null;
+      }
+    }
+
+    return this.outStack.pop();
+  }
+}
+
+// npx jest datastructures/stack.queue.js
+describe('stack queue data structure', () => {
+  const stackqueue = new StackQueue();
+  const values = [3, 6, 1, 2, 5, 4];
+  for (let i = 0; i < values.length; i++) {
+    stackqueue.push(values[i]);
+  }
+  it('pop() should equal 3', () => {
+    expect(stackqueue.pop()).toEqual(3);
+  });
+});
