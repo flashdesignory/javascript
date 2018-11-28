@@ -379,6 +379,7 @@ describe('singly linked list data structure', () => {
     }
     expect(list.isPalindrome()).toBe(true);
   });
+
   it('hasCycle() should be true', () => {
     const list = new SinglyLinkedList();
     list.add(1);
@@ -390,6 +391,7 @@ describe('singly linked list data structure', () => {
     temp.next = dupe;
     expect(list.hasCycle()).toBe(true);
   });
+
   it('removeDuplicates() should remove all dupes', () => {
     const list = new SinglyLinkedList();
     const values = [3, 6, 1, 2, 3, 1, 6, 3, 3, 5, 4];
@@ -399,6 +401,7 @@ describe('singly linked list data structure', () => {
     list.removeDuplicates();
     expect(list.print()).toEqual([3, 6, 1, 2, 5, 4]);
   });
+
   it('removeDuplicates2() should remove all dupes', () => {
     const list = new SinglyLinkedList();
     const values = [3, 6, 1, 2, 3, 1, 6, 3, 3, 5, 4];
@@ -408,6 +411,7 @@ describe('singly linked list data structure', () => {
     list.removeDuplicates2();
     expect(list.print()).toEqual([3, 6, 1, 2, 5, 4]);
   });
+
   it('partition(3) should partition list', () => {
     const list = new SinglyLinkedList();
     const values = [3, 6, 1, 2, 5, 4];
