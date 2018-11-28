@@ -5,59 +5,77 @@
  * @email: info@flashdesignory.com
  */
 
-function Stack() {
-  this.data = {};
-  this.size = 0;
-}
-
-Stack.prototype.push = function (value) {
-  this.data[this.size] = value;
-  this.size++;
-};
-
-Stack.prototype.pop = function () {
-  const temp = this.data[this.size - 1];
-  delete this.data[this.size - 1];
-  this.size--;
-  return temp;
-};
-
-Stack.prototype.peek = function () {
-  return this.data[this.size - 1];
-};
-
-Stack.prototype.empty = function () {
-  return this.size === 0;
-};
-
-function MinStack() {
-  this.dataStack = new Stack();
-  this.minStack = new Stack();
-}
-
-MinStack.prototype.push = function (value) {
-  this.dataStack.push(value);
-  if (this.minStack.empty() || this.minStack.peek() > value) {
-    this.minStack.push(value);
-  } else {
-    this.minStack.push(this.minStack.peek());
+class Stack {
+  constructor() {
+    this.data = {};
+    this.size = 0;
   }
-};
 
-MinStack.prototype.pop = function () {
-  this.minStack.pop();
-  return this.dataStack.pop();
-};
+  push(value) {
+    this.data[this.size] = value;
+    this.size++;
+  }
 
-MinStack.prototype.min = function () {
-  return this.minStack.peek();
-};
+  pop() {
+    const temp = this.data[this.size - 1];
+    delete this.data[this.size - 1];
+    this.size--;
+    return temp;
+  }
 
-const stack = new MinStack();
-stack.push(1);
-console.log(stack.pop()); // return 1
-stack.push(2);
-stack.push(3);
-console.log(stack.min()); // return 2
-stack.push(1);
-console.log(stack.min()); // return 1
+  peek() {
+    return this.data[this.size - 1];
+  }
+
+  empty() {
+    return this.size === 0;
+  }
+
+  print() {
+    const result = [];
+    Object.values(this.data).forEach((value) => {
+      result.push(value);
+    });
+    return result;
+  }
+}
+
+class MinStack {
+  constructor() {
+    this.dataStack = new Stack();
+    this.minStack = new Stack();
+  }
+
+  push(value) {
+    this.dataStack.push(value);
+
+    if (this.minStack.empty() || this.minStack.peek() > value) {
+      this.minStack.push(value);
+    } else {
+      this.minStack.push(this.minStack.peek());
+    }
+  }
+
+  pop() {
+    this.minStack.pop();
+    return this.dataStack.pop();
+  }
+
+  min() {
+    return this.minStack.peek();
+  }
+}
+
+// npx jest datastructures/stack.minimum.js
+describe('min stack data structure', () => {
+  it('should keep track of min value', () => {
+    const minStack = new MinStack();
+    minStack.push(1);
+    minStack.pop();
+    minStack.push(2);
+    minStack.push(3);
+    expect(minStack.min()).toEqual(2);
+    minStack.push(1);
+    expect(minStack.min()).toEqual(1);
+  });
+});
