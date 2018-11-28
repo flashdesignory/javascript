@@ -7,57 +7,68 @@
 
 // last-in first-out (LIFO)
 
-function Stack() {
-  this.data = {};
-  this.size = 0;
-}
+class Stack {
+  constructor() {
+    this.data = {};
+    this.size = 0;
+  }
 
-Stack.prototype.push = function (value) {
-  this.data[this.size] = value;
-  this.size++;
-};
+  push(value) {
+    this.data[this.size] = value;
+    this.size++;
+  }
 
-Stack.prototype.pop = function () {
-  const temp = this.data[this.size - 1];
-  delete this.data[this.size - 1];
-  this.size--;
-  return temp;
-};
+  pop() {
+    const temp = this.data[this.size - 1];
+    delete this.data[this.size - 1];
+    this.size--;
+    return temp;
+  }
 
-Stack.prototype.peek = function () {
-  return this.data[this.size - 1];
-};
+  peek() {
+    return this.data[this.size - 1];
+  }
 
-Stack.prototype.empty = function () {
-  return this.size === 0;
-};
+  empty() {
+    return this.size === 0;
+  }
 
-Stack.prototype.sort = function () {
-  const temp = new Stack();
+  print() {
+    const result = [];
+    Object.values(this.data).forEach((value) => {
+      result.push(value);
+    });
+    return result;
+  }
 
-  while (!this.empty()) {
-    const lastValue = this.pop();
+  sort() {
+    const temp = new Stack();
 
-    while (!temp.empty() && temp.peek() < lastValue) {
-      this.push(temp.pop());
+    while (!this.empty()) {
+      const lastValue = this.pop();
+
+      while (!temp.empty() && temp.peek() < lastValue) {
+        this.push(temp.pop());
+      }
+
+      temp.push(lastValue);
     }
 
-    temp.push(lastValue);
+    while (!temp.empty()) {
+      this.push(temp.pop());
+    }
   }
+}
 
-  while (!temp.empty()) {
-    this.push(temp.pop());
+// npx jest datastructures/stack.sort.js
+describe('sorting stack data structure', () => {
+  const stack = new Stack();
+  const values = [3, 6, 1, 2, 5, 4];
+  for (let i = 0; i < values.length; i++) {
+    stack.push(values[i]);
   }
-};
-
-// example
-const stack = new Stack();
-stack.push(3);
-stack.push(6);
-stack.push(1);
-stack.push(2);
-stack.push(5);
-stack.push(4);
-console.log(stack);
-stack.sort();
-console.log(stack);
+  it('sort() should equal [1, 2, 3, 4, 5, 6]', () => {
+    stack.sort();
+    expect(stack.print()).toEqual([1, 2, 3, 4, 5, 6]);
+  });
+});
