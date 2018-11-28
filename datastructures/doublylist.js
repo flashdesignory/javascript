@@ -5,112 +5,172 @@
  * @email: info@flashdesignory.com
  */
 
-function Node(value) {
-  this.value = value;
-  this.next = null;
-  this.previous = null;
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.previous = null;
+  }
 }
 
-function DoublyList() {
-  this.head = null;
-  this.tail = null;
-}
-
-DoublyList.prototype.log = function (direction) {
-  if (!this.head) return;
-
-  const values = [];
-  let current;
-
-  if (direction === undefined) direction = 'forwards';
-
-  if (direction === 'forwards') {
-    current = this.head;
-    values.push(current.value);
-
-    while (current.next) {
-      current = current.next;
-      values.push(current.value);
-    }
-  } else {
-    current = this.tail;
-    values.push(current.value);
-
-    while (current.previous) {
-      current = current.previous;
-      values.push(current.value);
-    }
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
   }
 
-  console.log(values);
-};
+  print(reverse = false) {
+    const result = [];
 
-DoublyList.prototype.add = function (value) {
-  const node = new Node(value);
+    if (!reverse) {
+      let current = this.head;
+      while (current) {
+        result.push(current.value);
+        current = current.next;
+      }
+    } else {
+      let current = this.tail;
+      while (current) {
+        result.push(current.value);
+        current = current.previous;
+      }
+    }
 
-  if (!this.head) {
-    this.head = node;
+    return result;
+  }
+
+  add(value) {
+    const node = new Node(value);
+
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+      return node;
+    }
+
+    this.tail.next = node;
+    node.previous = this.tail;
     this.tail = node;
     return node;
   }
 
-  this.tail.next = node;
-  node.previous = this.tail;
-  this.tail = node;
-  return node;
-};
+  remove(value) {
+    if (!this.head) return null;
 
+    let current = this.head;
+    let previous = null;
 
-DoublyList.prototype.remove = function (value) {
-  if (!this.head) return;
-
-  let current = this.head;
-  let previous = this.head;
-
-  if (current.value === value) {
-    this.head = current.next;
-    if (this.head) this.head.previous = null;
-  }
-
-  while (current.next) {
-    if (current.value === value) {
-      previous.next = current.next;
-      current.next.previous = previous;
-    } else {
+    while (current.next) {
+      if (current.value === value) {
+        if (!previous) {
+          // node to remove is the head
+          this.head = current.next;
+          current.next.previous = null;
+          return current;
+        }
+        // node to remove is in the middle
+        previous.next = current.next;
+        current.next.previous = previous;
+        return current;
+      }
       previous = current;
       current = current.next;
     }
+
+    if (current.value === value) {
+      // node to remove is the tail
+      previous.next = null;
+      this.tail = previous;
+      return current;
+    }
+
+    return null;
   }
 
-  if (current.value === value) {
-    previous.next = null;
-    this.tail = previous;
+  reverse() {
+    if (!this.head) return;
+
+    let current = this.head;
+    let previous = null;
+    let next = null;
+
+    this.head = this.tail;
+    this.tail = current;
+
+    while (current) {
+      next = current.next; // eslint-disable-line
+
+      previous = current.previous; // eslint-disable-line
+      current.previous = current.next;
+      current.next = previous;
+
+      current = next;
+
+      /* previous = current.previous;
+     current.previous = current.next;
+     current.next = previous;
+     current = current.previous; */
+    }
   }
-};
+}
 
-DoublyList.prototype.reverse = function () {
-  let current = this.head;
-  let previous = null;
-  this.head = this.tail;
-  this.tail = current;
+// npx jest datastructures/doublylist.js
+describe('doubly linked list data structure', () => {
+  it('print() should equal [3, 6, 1, 2, 5, 4]', () => {
+    const list = new DoublyLinkedList();
+    const values = [3, 6, 1, 2, 5, 4];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    expect(list.print()).toEqual(values);
+  });
 
-  while (current) {
-    previous = current.previous; //eslint-disable-line
-    current.previous = current.next;
-    current.next = previous;
-    current = current.previous;
-  }
-};
+  it('print() should equal [4, 5, 2, 1, 6, 3]', () => {
+    const list = new DoublyLinkedList();
+    const values = [3, 6, 1, 2, 5, 4];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    expect(list.print(true)).toEqual([4, 5, 2, 1, 6, 3]);
+  });
 
-const list = new DoublyList();
-list.add(1);
-list.add(2);
-list.add(3);
-list.add(4);
-list.add(5);
-list.log();
-// list.remove(5);
-// list.log("forwards");
-// list.log("reverse");
-list.reverse();
-list.log();
+  it('removing head should equal [6, 1, 2, 5, 4]', () => {
+    const list = new DoublyLinkedList();
+    const values = [3, 6, 1, 2, 5, 4];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.remove(3);
+    expect(list.print()).toEqual([6, 1, 2, 5, 4]);
+  });
+
+  it('remove middle value should equal [3, 6, 1, 5, 4]', () => {
+    const list = new DoublyLinkedList();
+    const values = [3, 6, 1, 2, 5, 4];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.remove(2);
+    expect(list.print()).toEqual([3, 6, 1, 5, 4]);
+  });
+
+  it('remove tail should equal [3, 6, 1, 2, 5]', () => {
+    const list = new DoublyLinkedList();
+    const values = [3, 6, 1, 2, 5, 4];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.remove(4);
+    expect(list.print()).toEqual([3, 6, 1, 2, 5]);
+  });
+
+  it('should reverse the list', () => {
+    const list = new DoublyLinkedList();
+    const values = [3, 6, 1, 2, 5, 4];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.reverse();
+    expect(list.print()).toEqual([4, 5, 2, 1, 6, 3]);
+  });
+});
