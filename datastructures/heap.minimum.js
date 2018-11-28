@@ -15,6 +15,13 @@ class BinaryMinHeap {
     this.bubbleUp(this.data.length - 1);
   }
 
+  extractMin() {
+    const min = this.data[0];
+    this.data[0] = this.data.pop();
+    this.bubbleDown(0);
+    return min;
+  }
+
   bubbleUp(index) {
     while (index > 0) {
       const parent = Math.floor((index - 1) / 2);
@@ -27,15 +34,8 @@ class BinaryMinHeap {
     }
   }
 
-  extractMin() {
-    const min = this.data[0];
-    this.data[0] = this.data.pop();
-    this.bubbleDown(0);
-    return min;
-  }
-
   bubbleDown(index) {
-    while (true) { // eslint-disable-line
+    while (true) {
       const left = Math.floor((index * 2) + 1);
       const right = Math.floor((index * 2) + 2);
 
@@ -44,6 +44,7 @@ class BinaryMinHeap {
       if (this.data[index] > this.data[left]) {
         smallest = left;
       }
+
       if (this.data[index] > this.data[right]) {
         smallest = right;
       }
@@ -61,15 +62,14 @@ class BinaryMinHeap {
   }
 }
 
-const heap = new BinaryMinHeap();
-heap.add(5);
-heap.add(4);
-heap.add(8);
-heap.add(6);
-heap.add(1);
-heap.add(14);
-heap.add(2);
-heap.add(7);
-console.log(heap.data);
-heap.extractMin();
-console.log(heap.data);
+// npx jest datastructures/heap.minimum.js
+describe('min binary heap data structure', () => {
+  it('should return min value', () => {
+    const heap = new BinaryMinHeap();
+    const values = [5, 4, 8, 6, 1, 14, 2, 7];
+    for (let i = 0; i < values.length; i++) {
+      heap.add(values[i]);
+    }
+    expect(heap.extractMin()).toBe(1);
+  });
+});
