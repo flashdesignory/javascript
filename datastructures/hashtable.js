@@ -4,49 +4,63 @@
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
-function Dictionary() {
-  this.data = {};
-}
+class Dictionary {
+  constructor() {
+    this.data = {};
+  }
 
-Dictionary.prototype.set = function (key, value) {
-  this.data[key] = value;
-};
+  set(key, value) {
+    this.data[key] = value;
+  }
 
-Dictionary.prototype.get = function (key) {
-  return this.data[key];
-};
-
-function HashTable() {
-  this.size = 1000;
-  this.slots = [];
-  for (let i = 0; i < this.size; i++) {
-    this.slots[i] = new Dictionary();
+  get(key) {
+    return this.data[key];
   }
 }
 
-HashTable.prototype.hash = function (key) {
-  let hash = 0;
-  if (key.length === 0) return hash;
-  for (let i = 0; i < key.length; i++) {
-    hash = (hash << 5) - hash; //eslint-disable-line
-    hash += key.charCodeAt(i);
-    hash &= hash; //eslint-disable-line
+class HashTable {
+  constructor(size = 1000) {
+    this.size = size;
+    this.slots = [];
+    for (let i = 0; i < this.size; i++) {
+      this.slots[i] = new Dictionary();
+    }
   }
-  return hash;
-};
 
-HashTable.prototype.getSlotIndex = function (key) {
-  return this.hash(key) % this.size;
-};
+  getSlotIndex(key) {
+    return HashTable.hash(key) % this.size;
+  }
 
-HashTable.prototype.getSlot = function (key) {
-  return this.slots[this.getSlotIndex(key)];
-};
+  getSlot(key) {
+    return this.slots[this.getSlotIndex(key)];
+  }
 
-HashTable.prototype.set = function (key, value) {
-  this.getSlot(key).set(key, value);
-};
+  set(key, value) {
+    this.getSlot(key).set(key, value);
+  }
 
-HashTable.prototype.get = function (key) {
-  return this.getSlot(key).get(key);
-};
+  get(key) {
+    return this.getSlot(key).get(key);
+  }
+
+  static hash(key) {
+    let hash = 0;
+    if (key.length === 0) return hash;
+    for (let i = 0; i < key.length; i++) {
+      hash = (hash << 5) - hash; // eslint-disable-line
+      hash += key.charCodeAt(i);
+      hash &= hash; // eslint-disable-line
+    }
+    return hash;
+  }
+}
+
+// npx jest datastructures/hashtable.js
+describe('hashtable data structure', () => {
+  it('should return correct value when retrieving', () => {
+    const hashTable = new HashTable();
+    hashTable.set('one', 1);
+    hashTable.set('two', 2);
+    expect(hashTable.get('one')).toBe(1);
+  });
+});

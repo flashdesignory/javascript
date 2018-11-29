@@ -35,7 +35,7 @@ class BinaryMinHeap {
   }
 
   bubbleDown(index) {
-    while (true) {
+    while (true) { // eslint-disable-line
       const left = Math.floor((index * 2) + 1);
       const right = Math.floor((index * 2) + 2);
 
