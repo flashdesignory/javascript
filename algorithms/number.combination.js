@@ -40,14 +40,12 @@ function combinationsTwo(str) {
 function combinationsThree(str) {
   const result = [];
 
-  function combine(str, temp, index) { // eslint-disable-line
-    for (let i = index; i < str.length; i++) {
-      temp = temp.concat(str.charAt(i));
-      result.push(temp);
-
-      combine(str, temp, i + 1);
-
-      temp = temp.substr(0, temp.length - 1);
+  function combine(used, unused, index) {
+    for (let i = index; i < unused.length; i++) {
+      used = used + unused[i]; // eslint-disable-line
+      result.push(used);
+      combine(used, unused, i + 1);
+      used = used.substr(0, used.length - 1);
     }
   }
 
