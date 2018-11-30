@@ -49,7 +49,7 @@ function combinationsThree(str) {
     }
   }
 
-  combine(str, '', 0);
+  combine('', str, 0);
   return result;
 }
 
