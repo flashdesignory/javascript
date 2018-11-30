@@ -55,3 +55,15 @@ function getType(elem) {
 }
 
 console.log(getType([]));
+
+/* polyfill for Number.isNaN */
+Number.isNaN = Number.isNaN || function (value) {
+  return value !== value; //eslint-disable-line
+};
+
+/* validate integer */
+function isInteger(x) {
+  return typeof x === 'number' && (x % 1 === 0);
+}
+console.log(isInteger(5)); // true
+console.log(isInteger(0.001)); // false
