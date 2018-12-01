@@ -6,7 +6,7 @@
  */
 
 function clone(obj) {
-  if (obj == null || typeof obj !== 'object' || obj === undefined) return obj;
+  if (obj === null || typeof obj !== 'object' || obj === undefined) return obj;
 
   let copy;
 
@@ -30,9 +30,9 @@ function clone(obj) {
   if (obj instanceof Object) {
     copy = {};
     /* eslint-disable-next-line */
-    for (var attr in obj) {
+    for (var prop in obj) {
       /* eslint-disable-next-line */
-      if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+      if (obj.hasOwnProperty(prop)) copy[prop] = clone(obj[prop]);
     }
 
     return copy;
