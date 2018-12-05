@@ -10,14 +10,14 @@
 function cartesian(arr) {
   const result = [];
 
-  function create(arr, index, output){
-    for(let i = 0; i<arr[index].length; i++){
+  function create(arr, index, output) {
+    for (let i = 0; i < arr[index].length; i++) {
       const temp = output.slice(0);
       temp.push(arr[index][i]);
-      if(index === arr.length-1){
+      if (index === arr.length - 1) {
         result.push(temp);
-      }else{
-        create(arr, index+1, temp);
+      } else {
+        create(arr, index + 1, temp);
       }
     }
   }

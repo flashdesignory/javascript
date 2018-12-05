@@ -7,19 +7,19 @@
 
 const chars = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz'];
 
-function createCombinations(arr){
+function createKeypadWords(arr) {
   const result = [];
 
-  function create(arr, index, output){
-    if(index === arr.length){
+  function create(arr, index, output) {
+    if (index === arr.length) {
       result.push(output.join(''));
       return;
     }
 
     const key = chars[arr[index]];
-    for(let i = 0; i<key.length; i++){
+    for (let i = 0; i < key.length; i++) {
       output[index] = key[i];
-      create(arr, index+1, output);
+      create(arr, index + 1, output);
     }
   }
 

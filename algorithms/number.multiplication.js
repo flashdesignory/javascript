@@ -7,7 +7,7 @@
 
 
 function printMultiplicationTable(start, end) {
-  const numRows = (end - start)+1;
+  const numRows = (end - start) + 1;
   const numColumns = numRows;
   const result = [];
 
@@ -23,5 +23,5 @@ function printMultiplicationTable(start, end) {
 
 // npx jest algorithms/number.multiplication.js
 test('printMultiplicationTable()', () => {
-  expect(printMultiplicationTable(3, 5)).toEqual([[ 9, 12, 15], [12, 16, 20], [15, 20, 25]]);
+  expect(printMultiplicationTable(3, 5)).toEqual([[9, 12, 15], [12, 16, 20], [15, 20, 25]]);
 });
