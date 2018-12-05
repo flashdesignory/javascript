@@ -1,42 +1,35 @@
-/*
- * @title: Graph
- * @description: Generic Graph Class
- * @author: Thorsten Kober
- * @email: info@flashdesignory.com
- */
-
 class Queue {
   constructor() {
-    this.storage = {};
+    this.data = {};
     this.first = 0;
     this.last = 0;
   }
 
   enqueue(value) {
-    this.storage[this.last] = value;
+    this.data[this.last] = value;
     this.last++;
   }
 
   dequeue() {
-    const temp = this.storage[this.first];
-    delete this.storage[this.first];
+    const temp = this.data[this.first];
+    delete this.data[this.first];
     this.first++;
     return temp;
+  }
+
+  peek() {
+    return this.data[this.first];
   }
 
   empty() {
     return this.first === this.last;
   }
-
-  peek() {
-    return this.storage[this.first];
-  }
 }
 
 class Graph {
   constructor() {
-    this.numVertices = 0;
     this.adjList = {};
+    this.numVertices = 0;
   }
 
   print() {
@@ -49,18 +42,18 @@ class Graph {
     }
   }
 
-  contains(v) {
-    return !!this.adjList[v];
-  }
-
   addVertex(v) {
-    this.numVertices++;
     this.adjList[v] = [];
+    this.numVertices++;
   }
 
   addEdge(one, two) {
     this.adjList[one].push(two);
     this.adjList[two].push(one);
+  }
+
+  contains(v) {
+    return this.adjList[v];
   }
 
   breadthFirstSearch(v) {
@@ -95,6 +88,7 @@ class Graph {
     for (let i = 0; i < this.numVertices; i++) {
       visited[i] = false;
     }
+
     return this.traverse(v, visited, []);
   }
 
@@ -150,23 +144,37 @@ class Graph {
   }
 }
 
-const graph = new Graph();
-graph.addVertex(1);
-graph.addVertex(2);
-graph.addVertex(3);
-graph.addVertex(4);
-graph.addVertex(5);
-graph.addVertex(6);
-graph.print(); // 1 -> | 2 -> | 3 -> | 4 -> | 5 -> | 6 ->
-graph.addEdge(1, 2);
-graph.addEdge(1, 5);
-graph.addEdge(2, 3);
-graph.addEdge(2, 5);
-graph.addEdge(3, 4);
-graph.addEdge(4, 5);
-graph.addEdge(4, 6);
-graph.print(); // 1 -> 2, 5 | 2 -> 1, 3, 5 | 3 -> 2, 4 | 4 -> 3, 5, 6 | 5 -> 1, 2, 4 | 6 -> 4
-console.log('bfs from 1: ', graph.breadthFirstSearch(1)); // => 1 2 5 3 4 6
-console.log('dfs from 1: ', graph.depthFirstSearch(1)); // => 1 2 3 4 5 6
-console.log('path from 6 to 1:', graph.pathFromTo(6, 1)); // => 6-4-5-1
-console.log('path from 3 to 5:', graph.pathFromTo(3, 5)); // => 3-2-5
+describe('search algorithms for graph', () => {
+  const graph = new Graph();
+  const vertices = [1, 2, 3, 4, 5, 6];
+  for (let i = 0; i < vertices.length; i++) {
+    graph.addVertex(vertices[i]);
+  }
+  const edges = [{ one: 1, two: 2 }, { one: 1, two: 5 }, { one: 2, two: 3 },
+    { one: 2, two: 5 }, { one: 3, two: 4 }, { one: 4, two: 5 },
+    { one: 4, two: 6 }];
+  for (let i = 0; i < edges.length; i++) {
+    graph.addEdge(edges[i].one, edges[i].two);
+  }
+
+  graph.print();
+  // 1 -> 2, 5
+  // 2 -> 1, 3, 5
+  // 3 -> 2, 4
+  // 4 -> 3, 5, 6
+  // 5 -> 1, 2, 4
+  // 6 -> 4
+
+  it('should list values bfs', () => {
+    expect(graph.breadthFirstSearch(1)).toEqual([1, 2, 5, 3, 4, 6]);
+  });
+  it('should list values dfs', () => {
+    expect(graph.depthFirstSearch(1)).toEqual([1, 2, 3, 4, 5, 6]);
+  });
+  it('should list path from 6 to 1', () => {
+    expect(graph.pathFromTo(6, 1)).toEqual([6, 4, 5, 1]);
+  });
+  it('should list path from 3 to 5', () => {
+    expect(graph.pathFromTo(3, 5)).toEqual([3, 2, 5]);
+  });
+});
