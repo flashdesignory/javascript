@@ -144,6 +144,7 @@ class Graph {
   }
 }
 
+// npx jest datastructures/graph.js
 describe('search algorithms for graph', () => {
   const graph = new Graph();
   const vertices = [1, 2, 3, 4, 5, 6];
@@ -157,7 +158,7 @@ describe('search algorithms for graph', () => {
     graph.addEdge(edges[i].one, edges[i].two);
   }
 
-  graph.print();
+  // graph.print();
   // 1 -> 2, 5
   // 2 -> 1, 3, 5
   // 3 -> 2, 4
