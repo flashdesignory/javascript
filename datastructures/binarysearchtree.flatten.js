@@ -1,10 +1,3 @@
-/*
- * @title: Binary Search Tree Flattening
- * @description: bst to linked list flattening
- * @author: Thorsten Kober
- * @email: info@flashdesignory.com
- */
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -13,7 +6,6 @@ class Node {
   }
 
   serialize() {
-    console.log(this.value);
     const result = {};
     result.value = this.value;
     result.left = this.left ? this.left.serialize() : null;
@@ -28,7 +20,7 @@ class BinarySearchTree {
   }
 
   print() {
-    this.root.serialize();
+    return console.log(this.root.serialize());
   }
 
   add(value) {
@@ -56,81 +48,105 @@ class BinarySearchTree {
     }
     return null;
   }
+}
 
-  flattenPreOrder(node) {
-    // pre-order traversal
-    if (!node) return node;
 
-    const { left, right } = node;
+function flattenPreOrder1(node) {
+  // pre-order traversal
+  if (!node) return node;
 
-    this.flattenPreOrder(left);
-    this.flattenPreOrder(right);
+  const { left, right } = node;
 
+  this.flattenPreOrder1(left);
+  this.flattenPreOrder1(right);
+
+  node.right = left;
+  node.left = null;
+
+  let current = node;
+  while (current.right) {
+    current = current.right;
+  }
+
+  current.right = right;
+  return node;
+}
+
+function flattenPreOrder2(node) {
+  if (!node) return node;
+
+  const { left, right } = node;
+
+  if (left) {
     node.right = left;
     node.left = null;
-
-    let current = node;
-    while (current.right) {
-      current = current.right;
-    }
-
-    current.right = right;
-    return node;
+    node = this.flattenPreOrder2(node.right);
   }
 
-  flattenPreOrder2(node) {
-    if (!node) return node;
-
-    const { left, right } = node;
-
-    if (left) {
-      node.right = left;
-      node.left = null;
-      node = this.flattenPreOrder2(node.right);
-    }
-
-    if (right) {
-      node.right = right;
-      node = this.flattenPreOrder2(node.right);
-    }
-
-    return node;
+  if (right) {
+    node.right = right;
+    node = this.flattenPreOrder2(node.right);
   }
 
-  /* eslint-disable-next-line */
-  flatten(node) {
-    let current = node;
-    while (current) {
-      if (current.left) {
-        if (current.right) {
-          let next = current.left;
-          while (next.right) next = next.right;
-          next.right = current.right;
-        }
-        current.right = current.left;
-        current.left = null;
+  return node;
+}
+
+function flattenPreOrder3(node) {
+  let current = node;
+  while (current) {
+    if (current.left) {
+      if (current.right) {
+        let next = current.left;
+        while (next.right) next = next.right;
+        next.right = current.right;
       }
-      current = current.right;
+      current.right = current.left;
+      current.left = null;
     }
+    current = current.right;
   }
 }
 
-const tree = new BinarySearchTree();
-tree.add(10);
-tree.add(5);
-tree.add(15);
-tree.add(2);
-tree.add(3);
-tree.add(12);
-tree.add(17);
-tree.add(7);
-// tree.print();
-console.log('************');
-tree.flattenPreOrder(tree.root);
-tree.print(); /* 10-5-2-3-7-15-12-17 */
-console.log('************');
-tree.flattenPreOrder2(tree.root);
-tree.print(); /* 10-5-2-3-7-15-12-17 */
-console.log('************');
-tree.flatten(tree.root);
-tree.print(); /* 10-5-2-3-7-15-12-17 */
+function printList(node) {
+  const result = [];
+  let current = node;
+  result.push(current.value);
+
+  while (current.right) {
+    current = current.right;
+    result.push(current.value);
+  }
+
+  return result;
+}
+
+// npx jest datastructures/binarysearchtree.flatten.js
+describe('flatten a binary search tree', () => {
+  it('should flatten a bst to a linked list', () => {
+    const values = [10, 5, 15, 2, 3, 12, 17, 7];
+    const tree = new BinarySearchTree();
+    for (let i = 0; i < values.length; i++) {
+      tree.add(values[i]);
+    }
+    flattenPreOrder1(tree.root);
+    expect(printList(tree.root)).toEqual([10, 5, 2, 3, 7, 15, 12, 17]);
+  });
+  it('should flatten a bst to a linked list', () => {
+    const values = [10, 5, 15, 2, 3, 12, 17, 7];
+    const tree = new BinarySearchTree();
+    for (let i = 0; i < values.length; i++) {
+      tree.add(values[i]);
+    }
+    flattenPreOrder2(tree.root);
+    expect(printList(tree.root)).toEqual([10, 5, 2, 3, 7, 15, 12, 17]);
+  });
+  it('should flatten a bst to a linked list', () => {
+    const values = [10, 5, 15, 2, 3, 12, 17, 7];
+    const tree = new BinarySearchTree();
+    for (let i = 0; i < values.length; i++) {
+      tree.add(values[i]);
+    }
+    flattenPreOrder3(tree.root);
+    expect(printList(tree.root)).toEqual([10, 5, 2, 3, 7, 15, 12, 17]);
+  });
+});
