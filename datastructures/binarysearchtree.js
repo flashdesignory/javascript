@@ -60,6 +60,21 @@ class BinarySearchTree {
     }
   }
 
+  range(node, start, end) {
+    if (!node) return;
+    if (node.value > start) {
+      this.range(node.left, start, end);
+    }
+
+    if (node.value >= start && node.value <= end) {
+      console.log(node.value);
+    }
+
+    if (node.value < end) {
+      this.range(node.right, start, end);
+    }
+  }
+
   min(node) {
     let current = node;
     while (current.left) {
@@ -84,8 +99,13 @@ class BinarySearchTree {
     );
   }
 
+  distance(node, value) {
+    if (!node || node.value === value) return 0;
+    if (node.value > value) return 1 + this.distance(node.left, value);
+    return 1 + this.distance(node.right, value);
+  }
+
   contains(node, value) {
-    // recursive
     if (!node || node.value === value) {
       return node;
     }
@@ -119,8 +139,16 @@ class BinarySearchTree {
     return this.isBalanced(node.left) && this.isBalanced(node.right);
   }
 
+  isFull(node) {
+    if (!node) return true;
+    if (!node.left && !node.right) return true;
+    if (node.left && node.right) {
+      return this.isFull(node.left) && this.isFull(node.right);
+    }
+    return false;
+  }
+
   insert(node, value) {
-    // recursive
     if (!node) {
       node = new Node(value);
       if (!this.root) this.root = node;
@@ -139,7 +167,6 @@ class BinarySearchTree {
   }
 
   delete(node, value) {
-    // recursive
     if (!node) {
       return null;
     }
@@ -459,6 +486,123 @@ class BinarySearchTree {
     return result;
   }
 
+  shortestPath(node, src, dst) {
+    if (!node) return 0;
+
+    if (node.value > src && node.value > dst) {
+      return this.shortestPath(node.left, src, dst);
+    }
+
+    if (node.value < src && node.value < dst) {
+      return this.shortestPath(node.right, src, dst);
+    }
+
+    if (node.value >= src && node.value <= dst) {
+      return this.distance(node, src) + this.distance(node, dst);
+    }
+
+    return 0;
+  }
+
+  minDepth(node) {
+    if (!node) return 0;
+    if (!node.left && !node.right) return 1;
+
+    const length = 1;
+
+    if (!node.left) return this.minDepth(node.right) + length;
+    if (!node.right) return this.minDepth(node.left) + length;
+
+    return Math.min(this.minDepth(node.left), this.minDepth(node.right)) + length;
+  }
+
+  // eslint-disable-next-line
+  levelOrderMinDepth(node) {
+    const queue = new Queue();
+    queue.enqueue(node);
+    let numNodes = 1;
+    let numChildren = 0;
+    let height = 1;
+
+    while (!queue.empty()) {
+      const current = queue.dequeue();
+      numNodes--;
+
+      if (!current.right && !current.left) {
+        // console.log(`found leaf: ${current.value}`);
+        return height;
+      }
+
+      if (current.left) {
+        numChildren++;
+        queue.enqueue(current.left);
+      }
+      if (current.right) {
+        numChildren++;
+        queue.enqueue(current.right);
+      }
+
+      // console.log(current.value, numNodes);
+
+      if (numNodes === 0) {
+        // console.log('end of level');
+        numNodes = numChildren;
+        height++;
+      }
+    }
+    return null;
+  }
+
+  // eslint-disable-next-line
+  kSmallest(node, k) {
+    let index = 0;
+    let result = null;
+    // eslint-disable-next-line
+    function traverse(node, k) {
+      if (!node) return null;
+      traverse(node.left, k);
+      index++;
+      // console.log(node.value, k, index);
+      if (index === k) {
+        result = node;
+        return node;
+      }
+      traverse(node.right, k);
+      return node;
+    }
+
+    traverse(node, k);
+
+    return result;
+  }
+
+  // eslint-disable-next-line
+  kLargest(node, k) {
+    let index = 0;
+    let result = null;
+
+    // reverse inorder
+    // eslint-disable-next-line
+    function traverse(node, k) {
+      if (!node) return null;
+      // first right side
+      traverse(node.right, k);
+      index++;
+      // console.log(node.value, k, index);
+      if (index === k) {
+        result = node;
+        return node;
+      }
+      // then left side
+      traverse(node.left, k);
+      return node;
+    }
+
+    traverse(node, k);
+
+    return result;
+  }
+
   deleteTree(node) {
     if (!node) return null;
 
@@ -611,6 +755,7 @@ class BinarySearchTree {
   }
 }
 
+// npx jest datastructures/binarysearchtree.js
 describe('BinarySearchTree Methods', () => {
   const values = [10, 15, 5, 2, 3, 12, 17, 4, 6, 13, 11, 8, 1];
   const tree = new BinarySearchTree();
@@ -627,6 +772,9 @@ describe('BinarySearchTree Methods', () => {
   it('BinarySearchTree.height()', () => {
     expect(tree.height(tree.root)).toBe(5);
   });
+  it('BinarySearchTree.distance()', () => {
+    expect(tree.distance(tree.root, 11)).toBe(3);
+  });
   it('BinarySearchTree.contains()', () => {
     expect(tree.contains(tree.root, 3).value).toEqual(3);
   });
@@ -635,6 +783,9 @@ describe('BinarySearchTree Methods', () => {
   });
   it('BinarySearchTree.isBalanced()', () => {
     expect(tree.isBalanced(tree.root)).toBeTruthy();
+  });
+  it('BinarySearchTree.isFull()', () => {
+    expect(tree.isFull(tree.root)).toBeFalsy();
   });
   it('BinarySearchTree.preorderTraversal()', () => {
     expect(tree.preorderTraversal(tree.root))
@@ -684,7 +835,22 @@ describe('BinarySearchTree Methods', () => {
   it('BinarySearchTree.sumPath()', () => {
     expect(tree.sumPath(tree.root, 48)).toBe(true);
   });
+  it('BinarySearchTree.shortestPath()', () => {
+    expect(tree.shortestPath(tree.root, 3, 11)).toEqual(6);
+  });
   it('BinarySearchTree.longestConsecutive', () => {
     expect(tree.longestConsecutive(tree.root)).toBe(3);
+  });
+  it('BinarySearchTree.minDepth()', () => {
+    expect(tree.minDepth(tree.root)).toEqual(3);
+  });
+  it('BinarySearchTree.levelOrderMinDepth()', () => {
+    expect(tree.levelOrderMinDepth(tree.root)).toEqual(3);
+  });
+  it('BinarySearchTree.kSmallest()', () => {
+    expect(tree.kSmallest(tree.root, 2).value).toEqual(2);
+  });
+  it('BinarySearchTree.kLargest()', () => {
+    expect(tree.kLargest(tree.root, 3).value).toEqual(13);
   });
 });
