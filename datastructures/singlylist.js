@@ -290,6 +290,78 @@ class SinglyLinkedList {
 
     return this.head;
   }
+
+  reverseK(node, k) {
+    if (!node) return null;
+    let current = node;
+    let previous = null;
+    let next = null;
+    let count = 0;
+
+    while (current && count < k) {
+      next = current.next; //eslint-disable-line
+      current.next = previous;
+      previous = current;
+      current = next;
+      count++;
+    }
+
+    if (next) {
+      node.next = this.reverseK(next, k);
+    }
+    return previous;
+  }
+
+  rotate(k) {
+    if (!this.head) return;
+    let fast = this.head;
+    let slow = this.head;
+    let tail = null;
+    for (let i = 0; i < k - 1; i++) {
+      if (!fast.next) return;
+      fast = fast.next;
+    }
+
+    while (fast.next) {
+      fast = fast.next;
+      tail = slow;
+      slow = slow.next;
+    }
+
+    tail.next = null;
+    fast.next = this.head;
+    this.head = slow;
+  }
+
+  addSorted(value) {
+    const node = new Node(value);
+    if (!this.head) {
+      this.head = node;
+      return node;
+    }
+
+    if (this.head.value > value) {
+      node.next = this.head;
+      this.head = node;
+      return node;
+    }
+
+    let current = this.head;
+    let previous = null;
+
+    while (current) {
+      if (current.value < value) {
+        previous = current;
+        current = current.next;
+      } else {
+        previous.next = node;
+        node.next = current;
+        return node;
+      }
+    }
+    previous.next = node;
+    return node;
+  }
 }
 
 // npx jest datastructures/singlylist.js
@@ -420,5 +492,31 @@ describe('singly linked list data structure', () => {
     }
     list.partition(3);
     expect(list.print()).toEqual([1, 2, 3, 6, 5, 4]);
+  });
+  it('reverseK() should reverse in k sequence', () => {
+    const list = new SinglyLinkedList();
+    const values = [5, 10, 8, 6, 9, 11, 4, 2];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.head = list.reverseK(list.head, 3);
+    expect(list.print()).toEqual([8, 10, 5, 11, 9, 6, 2, 4]);
+  });
+  it('rotate() should rotate k elements', () => {
+    const list = new SinglyLinkedList();
+    const values = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.rotate(3);
+    expect(list.print()).toEqual([7, 8, 9, 1, 2, 3, 4, 5, 6]);
+  });
+  it('addSorted() should add elements low to high', () => {
+    const list = new SinglyLinkedList();
+    const values = [5, 10, 8, 6, 9, 11, 4, 2];
+    for (let i = 0; i < values.length; i++) {
+      list.addSorted(values[i]);
+    }
+    expect(list.print()).toEqual([2, 4, 5, 6, 8, 9, 10, 11]);
   });
 });
