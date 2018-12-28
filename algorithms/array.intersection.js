@@ -29,6 +29,29 @@ function findCommon(one, two) {
   return result;
 }
 
+function findCommon2(one, two) {
+  one.sort((a, b) => a - b);
+  two.sort((a, b) => a - b);
+
+  const result = [];
+
+  function find(one, two, oneIndex, twoIndex) { //eslint-disable-line
+    if (oneIndex === one.length || twoIndex === two.length) return;
+
+    if (one[oneIndex] === two[twoIndex]) {
+      result.push(one[oneIndex]);
+      find(one, two, oneIndex + 1, twoIndex + 1);
+    } else if (one[oneIndex] < two[twoIndex]) {
+      find(one, two, oneIndex + 1, twoIndex);
+    } else {
+      find(one, two, oneIndex, twoIndex + 1);
+    }
+  }
+
+  find(one, two, 0, 0);
+  return result;
+}
+
 function findIntersections(arr1, arr2, arr3) {
   const result = [];
   let i = 0;
@@ -57,6 +80,11 @@ describe('find common elements in arrays', () => {
     const one = [1, 4, 7, 9];
     const two = [1, 3, 7, 8];
     expect(findCommon(one, two)).toEqual([1, 7]);
+  });
+  test('findCommon2()', () => {
+    const one = [2, 5, 8, 11, 17, 21, 25];
+    const two = [1, 5, 9, 11, 14, 17, 18, 21, 25];
+    expect(findCommon2(one, two)).toEqual([5, 11, 17, 21, 25]);
   });
   test('findIntersections()', () => {
     const arr1 = [2, 6, 9, 11, 13, 17];
