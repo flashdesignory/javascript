@@ -7,22 +7,22 @@
 
 // input arrays have to be sorted
 function findCommon(one, two) {
-  let i = 0;
-  let j = 0;
+  one.sort((a, b) => a - b);
+  two.sort((a, b) => a - b);
+
   const result = [];
+  let oneIndex = 0;
+  let twoIndex = 0;
 
-  one.sort();
-  two.sort();
-
-  while (i < one.length && j < two.length) {
-    if (one[i] < two[j]) {
-      i++;
-    } else if (one[i] > two[j]) {
-      j++;
+  while (oneIndex < one.length && twoIndex < two.length) {
+    if (one[oneIndex] === two[twoIndex]) {
+      result.push(one[oneIndex]);
+      oneIndex++;
+      twoIndex++;
+    } else if (one[oneIndex] < two[twoIndex]) {
+      oneIndex++;
     } else {
-      result.push(one[i]);
-      i++;
-      j++;
+      twoIndex++;
     }
   }
 
