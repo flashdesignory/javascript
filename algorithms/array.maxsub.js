@@ -6,29 +6,37 @@
  */
 
 function maxSubArraySum(arr) {
-  let max = 0;
-  let current = 0;
+  let maxSum = 0;
+  let maxLength = 0;
+  let result = [];
   let start = 0;
   let end = 0;
-  let runner = 0;
+  let current = 0;
 
   for (let i = 0; i < arr.length; i++) {
     current += arr[i];
-    if (max < current) {
-      max = current;
-      start = runner;
+
+    if (maxSum < current) {
+      maxSum = current;
       end = i;
     }
+
     if (current < 0) {
       current = 0;
-      runner = i + 1;
+      start = i + 1;
     }
   }
-  console.log(start, end);
-  return (end - start + 1);
+
+  maxLength = (end - start + 1);
+  result = arr.slice(start, end + 1);
+  console.log(`max sum: ${maxSum}, max length: ${maxLength}, sub array: ${result}`);
+  return maxSum;
 }
 
 // npx jest algorithms/array.maxsub.js
-test('max sub array', () => {
-  expect(maxSubArraySum([-2, -3, 4, -1, -2, 1, 5, -3])).toEqual(5);
+test('maxSubArraySum()', () => {
+  expect(maxSubArraySum([-2, -3, 4, -1, -2, 1, 5, -3])).toEqual(7);
+});
+test('maxSubArraySum()', () => {
+  expect(maxSubArraySum([-2, 1, -3, 4, -1, 2, 1, -5, 4])).toEqual(6);
 });
