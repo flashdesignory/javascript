@@ -23,7 +23,7 @@ function isValid(row, column, rowLength, columnLength) {
 }
 
 function dfs(matrix, row, column, visited, length, output) {
-  // visited[row][column] = true;
+  visited[row][column] = true;
   for (let i = 0; i < 4; i++) {
     const nextRow = row + rowNum[i];
     const nextCol = column + colNum[i];
@@ -37,6 +37,7 @@ function dfs(matrix, row, column, visited, length, output) {
     }
   }
 
+  visited[row][column] = false;
   return length;
 }
 
