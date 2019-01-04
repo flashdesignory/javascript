@@ -124,7 +124,7 @@ class AVLTree {
     return node;
   }
 
-  rotateAfterDelete(node,value) {
+  rotateAfterDelete(node) {
     node.height = this.height(node);
     const difference = this.difference(node);
 
