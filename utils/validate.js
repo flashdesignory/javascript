@@ -67,3 +67,26 @@ function isInteger(x) {
 }
 console.log(isInteger(5)); // true
 console.log(isInteger(0.001)); // false
+
+
+/* alphanumeric */
+// using regex
+function isAlphaNumeric1(str) {
+  return /^[a-zA-Z0-9]+$/.test(str);
+}
+
+// using char code
+function isAlphaNumeric2(str) {
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58)// 0-9
+            && !(code > 64 && code < 91)// A-Z
+            && !(code > 96 && code < 123)) { // a-z
+      return false;
+    }
+  }
+  return true;
+}
+
+isAlphaNumeric1('huiwl490sk');
+isAlphaNumeric2('huiwl490sk');
