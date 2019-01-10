@@ -5,7 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-// Big O(n2) time Big O(1) space
+// Big O(n^2) time Big O(1) space
 function selectionSort(arr) {
   const len = arr.length;
   let min;

@@ -5,7 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-// Big O(n) time Big O(1) space
+// Big O(n^2) time Big O(1) space
 function insertionSort(arr) {
   for (let i = 1; i < arr.length; i++) {
     for (let j = 0; j < i; j++) {

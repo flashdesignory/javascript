@@ -10,18 +10,18 @@ function merge(left, right) {
   const result = [];
   const lLen = left.length;
   const rLen = right.length;
-  let l = 0;
-  let r = 0;
+  let lIndx = 0;
+  let rIndx = 0;
 
-  while (l < lLen && r < rLen) {
-    if (left[l] < right[r]) {
-      result.push(left[l++]);
+  while (lIndx < lLen && rIndx < rLen) {
+    if (left[lIndx] < right[rIndx]) {
+      result.push(left[lIndx++]);
     } else {
-      result.push(right[r++]);
+      result.push(right[rIndx++]);
     }
   }
 
-  return result.concat(left.slice(l)).concat(right.slice(r));
+  return result.concat(left.slice(lIndx)).concat(right.slice(rIndx));
 }
 
 function mergeSort(arr) {
@@ -31,10 +31,10 @@ function mergeSort(arr) {
   }
 
   const mid = Math.floor(len / 2);
-  const left = arr.slice(0, mid);
-  const right = arr.slice(mid);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
 
-  return merge(mergeSort(left), mergeSort(right));
+  return merge(left, right);
 }
 
 // npx jest algorithms/sort.merge.js
