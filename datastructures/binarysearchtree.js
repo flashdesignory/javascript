@@ -603,6 +603,30 @@ class BinarySearchTree {
     return result;
   }
 
+  isPairPresent(node, target) {
+    const sorted = this.inorderTraversal(node);
+    let start = 0;
+    let end = sorted.length - 1;
+
+    while (start < end) {
+      if (sorted[start] + sorted[end] === target) {
+        start++;
+        end--;
+        // console.log(`pair is: ${sorted[start]}, ${sorted[end]}`);
+        // return after first found pair - otherwise adjust logic
+        // and collect all matches
+        return true;
+      }
+      if (sorted[start] + sorted[end] > target) {
+        end--;
+      }
+      if (sorted[start] + sorted[end] < target) {
+        start++;
+      }
+    }
+    return false;
+  }
+
   deleteTree(node) {
     if (!node) return null;
 
@@ -852,5 +876,8 @@ describe('BinarySearchTree Methods', () => {
   });
   it('BinarySearchTree.kLargest()', () => {
     expect(tree.kLargest(tree.root, 3).value).toEqual(13);
+  });
+  it('BinarySearchTree.isPairPresent()', () => {
+    expect(tree.isPairPresent(tree.root, 21)).toBe(true);
   });
 });
