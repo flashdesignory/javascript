@@ -80,8 +80,8 @@ describe('priority queue with min heap', () => {
     const values = [['five', 5], ['four', 4], ['eight', 8], ['six', 6],
       ['one', 1], ['fourteen', 14], ['two', 2], ['seven', 7]];
     for (let i = 0; i < values.length; i++) {
-      pq.enqueue(values[i]);
+      pq.enqueue(values[i][0], values[i][1]);
     }
-    expect(pq.dequeue().value).toBe(1);
+    expect(pq.dequeue().value).toBe('one');
   });
 });
