@@ -44,7 +44,7 @@ class Queue {
 }
 
 // npx jest datastructures/queue.js
-describe('queue data structure', () => {
+describe('set data structure', () => {
   const queue = new Queue();
   const values = [3, 6, 1, 2, 5, 4];
   for (let i = 0; i < values.length; i++) {
