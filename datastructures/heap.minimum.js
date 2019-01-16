@@ -41,12 +41,16 @@ class BinaryMinHeap {
 
       let smallest = index;
 
-      if (this.data[index] > this.data[left]) {
-        smallest = left;
+      if (left < this.data.length - 1) {
+        if (this.data[index] > this.data[left]) {
+          smallest = left;
+        }
       }
 
-      if (this.data[index] > this.data[right]) {
-        smallest = right;
+      if (right < this.data.length - 1) {
+        if (this.data[index] > this.data[right]) {
+          smallest = right;
+        }
       }
 
       if (smallest !== index) {
