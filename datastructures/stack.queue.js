@@ -46,11 +46,11 @@ class StackQueue {
     this.outStack = new Stack();
   }
 
-  push(value) {
+  enqueue(value) {
     this.inStack.push(value);
   }
 
-  pop() {
+  dequeue() {
     if (this.outStack.empty()) {
       while (!this.inStack.empty()) {
         const item = this.inStack.pop();
@@ -71,9 +71,9 @@ describe('stack queue data structure', () => {
   const stackqueue = new StackQueue();
   const values = [3, 6, 1, 2, 5, 4];
   for (let i = 0; i < values.length; i++) {
-    stackqueue.push(values[i]);
+    stackqueue.enqueue(values[i]);
   }
-  it('pop() should equal 3', () => {
-    expect(stackqueue.pop()).toEqual(3);
+  it('dequeue() should equal 3', () => {
+    expect(stackqueue.dequeue()).toEqual(3);
   });
 });
