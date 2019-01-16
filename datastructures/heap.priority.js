@@ -52,12 +52,16 @@ class PriorityQueue {
 
       let smallest = index;
 
-      if (this.data[index].priority > this.data[left].priority) {
-        smallest = left;
+      if (left < this.data.length - 1) {
+        if (this.data[index].priority > this.data[left].priority) {
+          smallest = left;
+        }
       }
 
-      if (this.data[index].priority > this.data[right].priority) {
-        smallest = right;
+      if (right < this.data.length - 1) {
+        if (this.data[index].priority > this.data[right].priority) {
+          smallest = right;
+        }
       }
 
       if (smallest !== index) {
