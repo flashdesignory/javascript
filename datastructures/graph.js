@@ -142,6 +142,42 @@ class Graph {
     }
     return [];
   }
+
+  hasCycle() {
+    const visited = [];
+    Object.keys(this.adjList).forEach((vertex) => {
+      visited[vertex] = false;
+    });
+
+    const vertices = Object.keys(this.adjList);
+    for (let i = 0; i < this.numVertices; i++) {
+      const vertex = vertices[i];
+      if (!visited[vertex]) {
+        if (this.isCyclic(vertex, visited, null)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  isCyclic(vertex, visited, parent) {
+    visited[vertex] = true;
+    const edges = this.adjList[vertex];
+    for (let i = 0; i < edges.length; i++) {
+      const edge = edges[i];
+
+      if (!visited[edge]) {
+        if (this.isCyclic(edge, visited, vertex)) {
+          return true;
+        }
+      } else if (edge !== parent && parent !== null) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 // npx jest datastructures/graph.js
@@ -177,5 +213,8 @@ describe('search algorithms for graph', () => {
   });
   it('should list path from 3 to 5', () => {
     expect(graph.pathFromTo(3, 5)).toEqual([3, 2, 5]);
+  });
+  it('should detect cycle', () => {
+    expect(graph.hasCycle()).toBe(true);
   });
 });
