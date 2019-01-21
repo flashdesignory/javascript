@@ -38,6 +38,14 @@ function removeDuplicates2(arr) {
   return remove(arr, arr.length - 1);
 }
 
+function removeDuplicates3(arr) {
+  return arr.filter((elem, index) => index === arr.indexOf(elem));
+}
+
+function removeDuplicates4(arr) {
+  return [...new Set(arr)];
+}
+
 // npx jest algorithms/array.duplicates.js
 describe('remove duplicates in array', () => {
   const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
@@ -47,5 +55,11 @@ describe('remove duplicates in array', () => {
   });
   test('removeDuplicates2()', () => {
     expect(removeDuplicates2(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
+  });
+  test('removeDuplicates3()', () => {
+    expect(removeDuplicates3(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
+  });
+  test('removeDuplicates4()', () => {
+    expect(removeDuplicates4(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
   });
 });
