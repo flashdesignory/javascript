@@ -52,6 +52,15 @@ function createFromPostorderArray(arr, start, end) {
   return node;
 }
 
+function createBSTfromLevelOrder(arr, start, end) {
+  if (start <= end) {
+    const node = new BSTNode(arr[start]);
+    node.left = createBSTfromLevelOrder(arr, (2 * start + 1), end);
+    node.right = createBSTfromLevelOrder(arr, (2 * start + 2), end);
+    return node;
+  }
+}
+
 class ListNode {
   constructor(value) {
     this.value = value;
@@ -121,6 +130,11 @@ describe('create a binary search tree', () => {
     const values = [1, 7, 5, 50, 40, 10];
     const bst = createFromPostorderArray(values, 0, values.length - 1);
     expect(bst.value).toEqual(10);
+  });
+  it('should create bst from levelorder array', () => {
+    const values = [1, 2, 3, 4, 5, 6];
+    const bst = createBSTfromLevelOrder(values, 0, values.length - 1);
+    expect(bst.value).toEqual(1);
   });
   it('should create a bst from a linked list', () => {
     const list = new LinkedList();
