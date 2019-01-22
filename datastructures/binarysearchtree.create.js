@@ -59,6 +59,7 @@ function createBSTfromLevelOrder(arr, start, end) {
     node.right = createBSTfromLevelOrder(arr, (2 * start + 2), end);
     return node;
   }
+  return null;
 }
 
 class ListNode {
