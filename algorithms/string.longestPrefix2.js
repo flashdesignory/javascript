@@ -36,7 +36,7 @@ function findLongestString(arr, str) {
   return result;
 }
 
-// npx jest algorithms/string.lcs2.js
+// npx jest algorithms/string.longestPrefix2.js
 test('findLongestString()', () => {
   const dict = ['ale', 'apple', 'monkey', 'plea'];
   const str = 'abpcplea';
