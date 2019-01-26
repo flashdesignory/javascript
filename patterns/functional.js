@@ -22,7 +22,7 @@ function extendedBase(id) {
   const _base = base(id);
   let _name;
 
-  base.setName = function (value) {
+  _base.setName = function (value) {
     _name = value;
   };
 
