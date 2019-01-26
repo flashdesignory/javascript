@@ -1,6 +1,6 @@
 /*
  * @title: Longest Common Prefix
- * @description: Simple function to find longest common prefix
+ * @description: longest common prefix in array of words
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
