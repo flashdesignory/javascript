@@ -114,7 +114,7 @@ class SinglyLinkedList {
   }
 
   middle() {
-    if (!this.head || !this.head.next || !this.head.next.next) {
+    if (!this.head || !this.head.next) {
       return null;
     }
 
@@ -208,7 +208,7 @@ class SinglyLinkedList {
   }
 
   hasCycle() {
-    if (!this.head || !this.head.next || !this.head.next) return false;
+    if (!this.head || !this.head.next) return false;
     if (this.head.value === this.head.next.value) return true;
 
     let fast = this.head;
