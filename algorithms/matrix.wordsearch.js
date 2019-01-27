@@ -60,7 +60,9 @@ function findWords(matrix) {
 
   for (let i = 0; i < numRows; i++) {
     for (let j = 0; j < numCols; j++) {
-      dfs(matrix, i, j, visited, current, result);
+      if (!visited[i][j]) {
+        dfs(matrix, i, j, visited, current, result);
+      }
     }
   }
 
