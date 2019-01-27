@@ -12,6 +12,7 @@ function createFromInorderArray(arr, start, end) {
   // could also use Math.floor?
   const middle = Math.round((start + end) / 2);
   const node = new BSTNode(arr[middle]);
+
   node.left = createFromInorderArray(arr, start, middle - 1);
   node.right = createFromInorderArray(arr, middle + 1, end);
 
@@ -52,14 +53,16 @@ function createFromPostorderArray(arr, start, end) {
   return node;
 }
 
-function createBSTfromLevelOrder(arr, start, end) {
-  if (start <= end) {
-    const node = new BSTNode(arr[start]);
-    node.left = createBSTfromLevelOrder(arr, (2 * start + 1), end);
-    node.right = createBSTfromLevelOrder(arr, (2 * start + 2), end);
-    return node;
-  }
-  return null;
+function createFromLevelorderArray(arr, start, end) {
+  if (start > end) return null;
+
+  const node = new BSTNode(arr[start]);
+  if (start === end) return node;
+
+  node.left = createFromLevelorderArray(arr, (2 * start + 1), end);
+  node.right = createFromLevelorderArray(arr, (2 * start + 2), end);
+
+  return node;
 }
 
 class ListNode {
@@ -134,7 +137,7 @@ describe('create a binary search tree', () => {
   });
   it('should create bst from levelorder array', () => {
     const values = [1, 2, 3, 4, 5, 6];
-    const bst = createBSTfromLevelOrder(values, 0, values.length - 1);
+    const bst = createFromLevelorderArray(values, 0, values.length - 1);
     expect(bst.value).toEqual(1);
   });
   it('should create a bst from a linked list', () => {
