@@ -77,6 +77,7 @@ class LRUCache {
     if (!this.map[key]) return null;
 
     const node = this.map[key];
+    if (this.head === node) return node;
 
     if (node.previous) {
       node.previous.next = node.next;
