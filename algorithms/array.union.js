@@ -27,25 +27,26 @@ function binarySearch(arr, n) {
 function findUnion(one, two) {
   const oneLength = one.length;
   const twoLength = two.length;
-  let union;
+
+  let short;
+  let long;
 
   if (oneLength <= twoLength) {
-    one.sort((a, b) => a - b).slice(0);
-    union = one.slice(0);
-    for (let i = 0; i < two.length; i++) {
-      if (!binarySearch(one, two[i])) {
-        union.push(two[i]);
-      }
-    }
+    short = one.slice(0);
+    long = two.slice(0);
   } else {
-    two.sort((a, b) => a - b).slice(0);
-    union = two.slice(0);
-    for (let i = 0; i < one.length; i++) {
-      if (binarySearch(two, one[i]) === -1) {
-        union.push(one[i]);
-      }
+    short = two.slice(0);
+    long = one.slice(0);
+  }
+
+  short.sort((a, b) => a - b).slice(0);
+  const union = short.slice(0);
+  for (let i = 0; i < long.length; i++) {
+    if (binarySearch(short, long[i]) === -1) {
+      union.push(long[i]);
     }
   }
+
   return union.sort((a, b) => a - b);
 }
 
@@ -54,21 +55,24 @@ function findIntersection(one, two) {
   const twoLength = two.length;
   const intersection = [];
 
+  let short;
+  let long;
+
   if (oneLength <= twoLength) {
-    one.sort((a, b) => a - b).slice(0);
-    for (let i = 0; i < two.length; i++) {
-      if (!binarySearch(one, two[i])) {
-        intersection.push(two[i]);
-      }
-    }
+    short = one.slice(0);
+    long = two.slice(0);
   } else {
-    two.sort((a, b) => a - b).slice(0);
-    for (let i = 0; i < one.length; i++) {
-      if (binarySearch(two, one[i]) !== -1) {
-        intersection.push(one[i]);
-      }
+    short = two.slice(0);
+    long = one.slice(0);
+  }
+
+  short.sort((a, b) => a - b).slice(0);
+  for (let i = 0; i < long.length; i++) {
+    if (binarySearch(short, long[i]) !== -1) {
+      intersection.push(long[i]);
     }
   }
+
   return intersection.sort((a, b) => a - b);
 }
 

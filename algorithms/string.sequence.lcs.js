@@ -17,6 +17,27 @@ function lcs(str1, str2, index1, index2) {
   );
 }
 
+function print(str1, str2, result) {
+  let index1 = str1.length;
+  let index2 = str2.length;
+  const chars = {};
+
+  while (index1 > 0 && index2 > 0) {
+    if (result[index1 - 1] === result[index2 - 1]) {
+      const current = str1[index1 - 1];
+      chars[current] = true;
+      index1--;
+      index2--;
+    } else if (result[index1 - 1][index2] > result[index1][index2 - 1]) {
+      index1--;
+    } else {
+      index2--;
+    }
+  }
+
+  console.log(Object.keys(chars).reverse());
+}
+
 // time: O(mn);
 function lcs2(str1, str2) {
   const result = [];
@@ -36,6 +57,8 @@ function lcs2(str1, str2) {
       }
     }
   }
+
+  print(str1, str2, result);
   return result[str1.length][str2.length];
 }
 
