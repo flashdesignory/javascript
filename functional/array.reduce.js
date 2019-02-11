@@ -25,6 +25,10 @@ describe('various Array.reduce functions', () => {
       return acc + value / arr.length;
     }, 0)).toEqual(5.5);
   });
+  it('should reverse a string', () => {
+    const str = 'hello';
+    expect(str.split('').reduce((acc, char) => char + acc, '')).toEqual('olleh');
+  });
   it('should remove duplicates', () => {
     const values = [1, 2, 4, 2, 4, 1, 3];
     expect(values.reduce((acc, value) => (acc.indexOf(value) === -1
