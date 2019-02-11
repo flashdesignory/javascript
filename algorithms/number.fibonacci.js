@@ -16,15 +16,13 @@
  */
 
 // iteration / O(n)
+// tabulation - bottom up
 function fibonacciOne(n) {
   const arr = [0, 1];
-
   if (n <= 2) return 1;
-
   for (let i = 2; i <= n; i++) {
     arr[i] = arr[i - 1] + arr[i - 2];
   }
-
   return arr[n];
 }
 
@@ -34,7 +32,8 @@ function fibonacciTwo(n) {
   return fibonacciTwo(n - 1) + fibonacciTwo(n - 2);
 }
 
-// recursive with memoization
+// recursive
+// memoization - top down
 function fibonacciThree(n, memo) {
   memo = memo || {};
   if (memo[n]) return memo[n];

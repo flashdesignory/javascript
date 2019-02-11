@@ -14,12 +14,10 @@
 // iteration
 function factorialOne(n) {
   let result = 1;
-
   // limit > 0 since we can't multiply by 0
   for (let i = n; i > 0; i--) {
     result *= i;
   }
-
   return result;
 }
 
@@ -32,12 +30,29 @@ function factorialTwo(n) {
 // while loop
 function factorialThree(n) {
   let result = n;
-
   while (n > 1) {
     result *= --n;
   }
-
   return result;
+}
+
+// recursive
+// memoization - top down
+function factorialFour(n, memo) {
+  memo = memo || [];
+  if (n === 1) return 1;
+  if (memo[n]) return memo[n];
+  memo[n] = n * factorialFour(n - 1, memo);
+  return memo[n];
+}
+// iterative
+// tabulation - bottom up
+function factorialFive(n) {
+  const result = [1];
+  for (let i = 1; i <= n; i++) {
+    result[i] = result[i - 1] * i;
+  }
+  return result[n];
 }
 
 // npx jest algorithms/number.factorial.js
@@ -50,5 +65,11 @@ describe('factorial solutions', () => {
   });
   test('factorialThree', () => {
     expect(factorialThree(4)).toEqual(24);
+  });
+  test('factorialFour', () => {
+    expect(factorialFour(4)).toEqual(24);
+  });
+  test('factorialFive', () => {
+    expect(factorialFive(4)).toEqual(24);
   });
 });
