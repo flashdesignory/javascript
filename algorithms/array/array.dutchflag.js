@@ -42,7 +42,7 @@ function dutchFlag(arr) {
   return arr;
 }
 
-// npx jest algorithms/array.dutchflag.js
+// npx jest algorithms/array/array.dutchflag.js
 test('dutch flag sorting', () => {
   expect(dutchFlag([0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1]))
     .toEqual([0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2]);

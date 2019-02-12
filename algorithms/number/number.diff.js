@@ -28,7 +28,7 @@ function twoDiff(arr, n) {
   return false;
 }
 
-// npx jest algorithms/number.diff.js
+// npx jest algorithms/number/number.diff.js
 describe('twodiff()', () => {
   test('twoDiff([1, 2, 3, 4, 5], 3)', () => {
     expect(twoDiff([1, 2, 3, 4, 5], 3)).toBe(true);

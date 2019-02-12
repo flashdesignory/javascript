@@ -180,7 +180,7 @@ class Graph {
   }
 }
 
-// npx jest datastructures/graph.js
+// npx jest datastructures/graph/graph.js
 describe('search algorithms for graph', () => {
   const graph = new Graph();
   const vertices = [1, 2, 3, 4, 5, 6];

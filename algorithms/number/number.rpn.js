@@ -50,7 +50,7 @@ function reversePolishNotation(arr) {
   return parseInt(stack[0], 10);
 }
 
-// npx jest algorithms/number.rpn.js
+// npx jest algorithms/number/number.rpn.js
 describe('reverse polish notation', () => {
   test('reversePolishNotation()', () => {
     expect(reversePolishNotation(['2', '1', '+', '3', '*'])).toEqual(9);

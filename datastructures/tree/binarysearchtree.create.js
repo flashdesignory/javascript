@@ -118,7 +118,7 @@ function createFromLinkedList(list, length) {
   return node;
 }
 
-// npx jest datastructures/binarysearchtree.create.js
+// npx jest datastructures/tree/binarysearchtree.create.js
 describe('create a binary search tree', () => {
   it('should create a bst from preorder array()', () => {
     const values = [10, 5, 1, 7, 40, 50];

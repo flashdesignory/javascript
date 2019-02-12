@@ -56,7 +56,7 @@ function rotateOneStep(matrix) {
   return matrix;
 }
 
-// npx jest algorithms/matrix.rotate.step.js
+// npx jest algorithms/matrix/matrix.rotate.step.js
 describe('rotate matrix by one step', () => {
   it('rotateOneStep()', () => {
     const matrix = [

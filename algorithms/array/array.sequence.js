@@ -30,7 +30,7 @@ function findLongestSequence(arr) {
   return greatestArray;
 }
 
-// npx jest algorithms/array.sequence.js
+// npx jest algorithms/array/array.sequence.js
 test('findLongestSequence()', () => {
   const nums = [0, 4, 3, 5, 7, 1, 2, 3, 4, 9, 11, 14, 15, 16, 17, 18, 19, 21];
   expect(findLongestSequence(nums)).toEqual([14, 15, 16, 17, 18, 19]);

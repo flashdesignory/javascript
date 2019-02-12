@@ -27,7 +27,7 @@ function createKeypadWords(arr) {
   return result;
 }
 
-// npx jest algorithms/string.keypad.js
+// npx jest algorithms/string/string.keypad.js
 test('createKeypadWords', () => {
   expect(createKeypadWords([2, 3, 4], 3)).toEqual([
     'adg', 'adh', 'adi', 'aeg',

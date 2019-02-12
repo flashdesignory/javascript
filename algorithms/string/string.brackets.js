@@ -30,7 +30,7 @@ function bracketsAreBalanced(str) {
   return stack.length === 0;
 }
 
-// npx jest algorithms/string.brackets.js
+// npx jest algorithms/string/string.brackets.js
 test('bracketsAreBalanced()', () => {
   expect(bracketsAreBalanced('{}([])')).toBe(true);
   expect(bracketsAreBalanced('{{')).toBe(false);

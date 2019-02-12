@@ -30,7 +30,7 @@ function reverseWords(arr) {
   return arr.join('');
 }
 
-// npx jest algorithms/string.reverseWordOrder.js
+// npx jest algorithms/string/string.reverseWordOrder.js
 test('test reverse words', () => {
   const message = ['c', 'a', 'k', 'e', ' ',
     'p', 'o', 'u', 'n', 'd', ' ',

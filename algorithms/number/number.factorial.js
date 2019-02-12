@@ -55,7 +55,7 @@ function factorialFive(n) {
   return result[n];
 }
 
-// npx jest algorithms/number.factorial.js
+// npx jest algorithms/number/number.factorial.js
 describe('factorial solutions', () => {
   test('factorialOne', () => {
     expect(factorialOne(4)).toEqual(24);

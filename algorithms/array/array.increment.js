@@ -27,7 +27,7 @@ function increment(arr) {
   return arr;
 }
 
-// npx jest algorithms/array.increment.js
+// npx jest algorithms/array/array.increment.js
 describe('increment array value by one', () => {
   test('increment()', () => {
     expect(increment([2, 7, 2])).toEqual([2, 7, 3]);

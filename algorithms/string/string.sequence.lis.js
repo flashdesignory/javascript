@@ -35,7 +35,7 @@ function lis2(arr, i, max) {
   return Math.max(current, excl);
 }
 
-// npx jest algorithms/string.sequence.lis.js
+// npx jest algorithms/string/string.sequence.lis.js
 describe('lis tabulation', () => {
   test('lis([3, 10, 2, 1, 20])', () => {
     const nums = [3, 10, 2, 1, 20];

@@ -20,7 +20,7 @@ function findMissingNumber(nums) {
   return (expectedSum - actualSum);
 }
 
-// npx jest algorithms/number.missing.js
+// npx jest algorithms/number/number.missing.js
 test('findMissingNumber()', () => {
   expect(findMissingNumber([9, 8, 7, 6, 2, 0, 1, 5, 4])).toEqual(3);
 });

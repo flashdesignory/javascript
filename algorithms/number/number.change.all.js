@@ -30,7 +30,7 @@ function coinChange(coins, amount) {
   return result[amount];
 }
 
-// npx jest algorithms/number.change.all.js
+// npx jest algorithms/number/number.change.all.js
 test('coinChange()', () => {
   const denominations = [1, 5, 10, 25];
   expect(coinChange(denominations, 1)).toEqual(1);

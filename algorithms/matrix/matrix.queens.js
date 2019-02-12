@@ -156,7 +156,7 @@ const result = [
   [7, 2, 0, 5, 1, 4, 6, 3],
   [7, 3, 0, 2, 5, 1, 6, 4]];
 
-// npx jest algorithms/matrix.queens.js
+// npx jest algorithms/matrix/matrix.queens.js
 test('queens solutions', () => {
   expect(queenPuzzleOne(8)).toEqual(result);
 });

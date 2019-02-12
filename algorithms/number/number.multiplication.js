@@ -21,7 +21,7 @@ function printMultiplicationTable(start, end) {
   return result;
 }
 
-// npx jest algorithms/number.multiplication.js
+// npx jest algorithms/number/number.multiplication.js
 test('printMultiplicationTable()', () => {
   expect(printMultiplicationTable(3, 5)).toEqual([[9, 12, 15], [12, 16, 20], [15, 20, 25]]);
 });

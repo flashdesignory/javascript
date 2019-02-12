@@ -33,7 +33,7 @@ function numPattern(word, pattern) {
   return count;
 }
 
-// npx jest algorithms/string.patterns.js
+// npx jest algorithms/string/string.patterns.js
 test('numPattern()', () => {
   expect(numPattern('AAAAAAAAAAAAAAAAAB', 'AAAAB')).toEqual(1);
 });

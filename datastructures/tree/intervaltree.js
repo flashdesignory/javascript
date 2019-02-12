@@ -103,7 +103,7 @@ function printConflicts(arr) {
   return result;
 }
 
-// npx jest datastructures/intervaltree.js
+// npx jest datastructures/tree/intervaltree.js
 describe('intervaltree data structure', () => {
   it('should return interval that conflict', () => {
     const appointments = [[1, 5], [3, 7], [2, 6], [10, 15], [5, 6], [4, 100]];

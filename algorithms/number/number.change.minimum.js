@@ -18,7 +18,7 @@ function minCoinChange(coins, amount) {
 
 minCoinChange([1, 2, 5, 10, 25], 30);
 
-// npx jest algorithms/number.change.minimum.js
+// npx jest algorithms/number/number.change.minimum.js
 test('minCoinChange()', () => {
   expect(minCoinChange([1, 2, 5, 10, 25], 30)).toEqual([25, 5]);
 });

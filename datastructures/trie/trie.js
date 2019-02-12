@@ -113,7 +113,7 @@ class Trie {
   }
 }
 
-// npx jest datastructures/trie.js
+// npx jest datastructures/trie/trie.js
 describe('trie data structure', () => {
   it('should return all options for letter h', () => {
     const trie = new Trie();

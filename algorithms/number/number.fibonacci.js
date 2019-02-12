@@ -42,7 +42,7 @@ function fibonacciThree(n, memo) {
   return memo[n];
 }
 
-// npx jest algorithms/number.fibonacci.js
+// npx jest algorithms/number/number.fibonacci.js
 describe('fibonacci solutions', () => {
   test('fibonacciOne', () => {
     expect(fibonacciOne(12)).toEqual(144);

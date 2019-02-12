@@ -38,7 +38,7 @@ function reverseChars(str) {
   return chars.join('');
 }
 
-// npx jest algorithms/string.reverseAlphaNumeric.js
+// npx jest algorithms/string/string.reverseAlphaNumeric.js
 test('test alphanumeric reversal', () => {
   const str = "a!!!b.c.d,e'f,ghi";
   const output = "i!!!h.g.f,e'd,cba";

@@ -52,7 +52,7 @@ function rotateMatrixCounterClock(arr) {
   return arr;
 }
 
-// npx jest algorithms/matrix.rotate.js
+// npx jest algorithms/matrix/matrix.rotate.js
 describe('test matrix rotations', () => {
   test('matrix clockwise rotations', () => {
     const arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];

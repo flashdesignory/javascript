@@ -112,7 +112,7 @@ function findPathInMatrix(matrix, src, dst) {
   return 0;
 }
 
-// npx jest algorithms/matrix.path.js
+// npx jest algorithms/matrix/matrix.path.js
 test('findPathInMatrix()', () => {
   expect(findPathInMatrix(matrix, { r: 0, c: 0 }, { r: 3, c: 4 })).toEqual(11);
 });

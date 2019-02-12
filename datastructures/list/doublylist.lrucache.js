@@ -100,7 +100,7 @@ class LRUCache {
   }
 }
 
-// npx jest datastructures/doublylist.lrucache.js
+// npx jest datastructures/list/doublylist.lrucache.js
 describe('LRUCache should hold 5 most recent values', () => {
   it('adding 1-5, should equal [[5,5], [4,4], [3,3], [2,2], [1,1]]', () => {
     const cache = new LRUCache(5);

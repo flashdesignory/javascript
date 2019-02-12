@@ -37,7 +37,7 @@ function radixSort(arr) {
   return arr;
 }
 
-// npx jest algorithms/sort.radix.js
+// npx jest algorithms/sort/sort.radix.js
 test('radixSort()', () => {
   const nums = [7, 9, 3, 4, 2, 8, 5, 1];
   expect(radixSort(nums)).toEqual([1, 2, 3, 4, 5, 7, 8, 9]);

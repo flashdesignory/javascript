@@ -45,7 +45,7 @@ function urlify(str) {
   return chars.join('');
 }
 
-// npx jest algorithms/string.urlencode.js
+// npx jest algorithms/string/string.urlencode.js
 test('urlify()', () => {
   expect(urlify('Mr John Smith')).toEqual('Mr%20John%20Smith');
 });

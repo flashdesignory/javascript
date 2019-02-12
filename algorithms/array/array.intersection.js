@@ -74,7 +74,7 @@ function findIntersections(arr1, arr2, arr3) {
   return result;
 }
 
-// npx jest algorithms/array.intersection.js
+// npx jest algorithms/array/array.intersection.js
 describe('find common elements in arrays', () => {
   test('findCommon()', () => {
     const one = [1, 4, 7, 9];

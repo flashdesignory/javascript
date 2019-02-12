@@ -44,7 +44,7 @@ function quickSort(items, left, right) {
   return items;
 }
 
-// npx jest algorithms/sort.quick2.js
+// npx jest algorithms/sort/sort.quick2.js
 test('quickSort()', () => {
   const nums = [7, 9, 3, 4, 2, 8, 5, 1];
   expect(quickSort(nums, 0, nums.length - 1)).toEqual([1, 2, 3, 4, 5, 7, 8, 9]);

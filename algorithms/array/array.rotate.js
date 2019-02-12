@@ -63,7 +63,7 @@ function rotateArrayThree(arr, k) {
   return arr;
 }
 
-// npx jest algorithms/array.rotate.js
+// npx jest algorithms/array/array.rotate.js
 describe('array rotations', () => {
   test('rotateArrayOne()', () => {
     const nums = [1, 2, 3, 4, 5, 6, 7, 8];

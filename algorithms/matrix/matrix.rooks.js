@@ -34,7 +34,7 @@ function rooksAreSafe(matrix) {
   return true;
 }
 
-// npx jest algorithms/matrix.rooks.js
+// npx jest algorithms/matrix/matrix.rooks.js
 test('rooksAreSafe()', () => {
   const board = [
     [0, 0, 0, 1],

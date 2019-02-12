@@ -71,7 +71,7 @@ function combinationsCount(n, k) {
   return result;
 }
 
-// npx jest algorithms/number.combination.js
+// npx jest algorithms/string/string.combination.js
 test('combinations()', () => {
   const result = ['a', 'ba', 'b', 'ca', 'cba', 'cb', 'c', 'da', 'dba', 'db', 'dca', 'dcba', 'dcb', 'dc', 'd'];
   expect(combinations('abcd')).toEqual(result);

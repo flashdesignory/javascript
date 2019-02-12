@@ -38,7 +38,7 @@ function bsRecurse(arr, value, start, end) {
   return bsRecurse(arr, value, middle + 1, end);
 }
 
-// npx jest algorithms/binarysearch.js
+// npx jest algorithms/search/binarysearch.js
 describe('binary search examples', () => {
   test('binarySearch()', () => {
     const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43,

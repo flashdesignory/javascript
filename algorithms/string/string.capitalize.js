@@ -16,7 +16,7 @@ function capitalizeFirst(arr) {
   return result;
 }
 
-// npx jest algorithms/string.capitalize.js
+// npx jest algorithms/string/string.capitalize.js
 test('capitalizeFirst()', () => {
   expect(capitalizeFirst(['car', 'taco', 'banana'])).toEqual(['Car', 'Taco', 'Banana']);
 });

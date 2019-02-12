@@ -60,7 +60,7 @@ class Stack {
   }
 }
 
-// npx jest datastructures/stack.sort.js
+// npx jest datastructures/stack/stack.sort.js
 describe('sorting stack data structure', () => {
   const stack = new Stack();
   const values = [3, 6, 1, 2, 5, 4];

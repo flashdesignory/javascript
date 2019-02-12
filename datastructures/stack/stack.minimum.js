@@ -66,7 +66,7 @@ class MinStack {
   }
 }
 
-// npx jest datastructures/stack.minimum.js
+// npx jest datastructures/stack/stack.minimum.js
 describe('min stack data structure', () => {
   it('should keep track of min value', () => {
     const minStack = new MinStack();

@@ -51,7 +51,7 @@ function mergeTwo(left, right) {
   return result;
 }
 
-// npx jest algorithms/array.merge.js
+// npx jest algorithms/array/array.merge.js
 describe('merge two arrays', () => {
   test('mergeOne()', () => {
     expect(mergeOne([2, 5, 6, 9], [1, 2, 3, 29])).toEqual([1, 2, 2, 3, 5, 6, 9, 29]);

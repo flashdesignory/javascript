@@ -33,7 +33,7 @@ function reverseArrayTwo(arr) {
   return arr;
 }
 
-// npx jest algorithms/array.reverse.js
+// npx jest algorithms/array/array.reverse.js
 describe('reverse array', () => {
   test('reverseArrayOne()', () => {
     const nums = [1, 2, 3, 4, 5, 6, 7];

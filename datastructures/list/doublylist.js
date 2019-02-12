@@ -114,7 +114,7 @@ class DoublyLinkedList {
   }
 }
 
-// npx jest datastructures/doublylist.js
+// npx jest datastructures/list/doublylist.js
 describe('doubly linked list data structure', () => {
   it('print() should equal [3, 6, 1, 2, 5, 4]', () => {
     const list = new DoublyLinkedList();

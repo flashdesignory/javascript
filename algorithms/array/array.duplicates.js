@@ -46,7 +46,7 @@ function removeDuplicates4(arr) {
   return [...new Set(arr)];
 }
 
-// npx jest algorithms/array.duplicates.js
+// npx jest algorithms/array/array.duplicates.js
 describe('remove duplicates in array', () => {
   const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
 

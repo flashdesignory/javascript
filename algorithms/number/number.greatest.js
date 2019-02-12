@@ -44,7 +44,7 @@ function gcd4(a, b) {
   return gcd4(min, max % min);
 }
 
-// npx jest algorithms/number.greatest.js
+// npx jest algorithms/number/number.greatest.js
 describe('gcd1()', () => {
   test('greatestCommonDivisorOne', () => {
     expect(gcd1(14, 21)).toEqual(7);

@@ -55,7 +55,7 @@ function cartesian3(arr) {
   }, [[]]);
 }
 
-// npx jest algorithms/array.cartesian.js
+// npx jest algorithms/array/array.cartesian.js
 describe('tests for cartesian products', () => {
   test('cartesian()', () => {
     expect(cartesian([[1, 2, 3], [4], [5, 6]])).toEqual([

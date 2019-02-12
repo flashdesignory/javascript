@@ -31,7 +31,7 @@ function moveZeros2(arr) {
   return arr;
 }
 
-// npx jest algorithms/array.movezeros.js
+// npx jest algorithms/array/array.movezeros.js
 describe('move all zeros to the end', () => {
   it('moveZeros()', () => {
     const nums = [1, 2, 0, 3, 0, 1, 2];

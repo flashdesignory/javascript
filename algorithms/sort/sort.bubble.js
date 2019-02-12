@@ -30,7 +30,7 @@ function bubbleSort(arr) {
   return arr;
 }
 
-// npx jest algorithms/sort.bubble.js
+// npx jest algorithms/sort/sort.bubble.js
 test('bubbleSort()', () => {
   const nums = [7, 9, 3, 4, 2, 8, 5, 1];
   expect(bubbleSort(nums)).toEqual([1, 2, 3, 4, 5, 7, 8, 9]);

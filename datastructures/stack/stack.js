@@ -42,7 +42,7 @@ class Stack {
   }
 }
 
-// npx jest datastructures/stack.js
+// npx jest datastructures/stack/stack.js
 describe('stack data structure', () => {
   const stack = new Stack();
   const values = [3, 6, 1, 2, 5, 4];

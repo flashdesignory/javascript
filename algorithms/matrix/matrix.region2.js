@@ -91,7 +91,7 @@ function largestRegion(matrix) {
   return result;
 }
 
-// npx jest algorithms/matrix.region2.js
+// npx jest algorithms/matrix/matrix.region2.js
 test('largestRegion()', () => {
   const matrix = [
     [0, 0, 1, 1, 0],

@@ -47,7 +47,7 @@ function heapSort(arr) {
   return arr;
 }
 
-// npx jest algorithms/sort.heap.js
+// npx jest algorithms/sort/sort.heap.js
 test('heapSort()', () => {
   const nums = [2, 5, 3, 8, 10, 6, 4, 7, 9, 1];
   expect(heapSort(nums)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);

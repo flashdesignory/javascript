@@ -25,7 +25,7 @@ function countItems(arr, item) {
   return count;
 }
 
-// npx jest algorithms/array.find.js
+// npx jest algorithms/array/array.find.js
 test('count items in array', () => {
   const arr = [
     'apple',

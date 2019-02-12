@@ -76,7 +76,7 @@ function findIntersection(one, two) {
   return intersection.sort((a, b) => a - b);
 }
 
-// npx jest algorithms/array.union.js
+// npx jest algorithms/array/array.union.js
 test('findUnion()', () => {
   const one = [7, 1, 5, 2, 3, 6];
   const two = [3, 8, 6, 20, 7];

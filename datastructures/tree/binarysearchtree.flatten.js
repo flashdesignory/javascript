@@ -120,7 +120,7 @@ function printList(node) {
   return result;
 }
 
-// npx jest datastructures/binarysearchtree.flatten.js
+// npx jest datastructures/tree/binarysearchtree.flatten.js
 describe('flatten a binary search tree', () => {
   it('should flatten a bst to a linked list', () => {
     const values = [10, 5, 15, 2, 3, 12, 17, 7];

@@ -87,7 +87,7 @@ function parseString(str) {
   return result;
 }
 
-// npx jest algorithms/string.brackets2.js
+// npx jest algorithms/string/string.brackets2.js
 describe('parsing out brackets from string', () => {
   it('should remove brackets', () => {
     expect(parseString('abc(edf)hij{klmn}opq[rst]uvw'))

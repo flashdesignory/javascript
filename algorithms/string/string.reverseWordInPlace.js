@@ -28,7 +28,7 @@ function reverseInPlace(str) {
   return chars.join('');
 }
 
-// npx jest algorithms/string.reverseWordInPlace.js
+// npx jest algorithms/string/string.reverseWordInPlace.js
 test('test reverse words', () => {
   expect(reverseInPlace('I am the good boy')).toEqual('I ma eht doog yob');
 });

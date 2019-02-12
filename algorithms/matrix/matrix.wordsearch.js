@@ -69,7 +69,7 @@ function findWords(matrix) {
   return result;
 }
 
-// npx jest algorithms/matrix.wordsearch.js
+// npx jest algorithms/matrix/matrix.wordsearch.js
 test('findWords()', () => {
   const words = [
     ['G', 'I', 'Z'],

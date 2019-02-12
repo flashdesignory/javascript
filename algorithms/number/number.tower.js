@@ -15,7 +15,7 @@ function towerOfHanoi(height, from, to, buffer, result) {
   return result;
 }
 
-// npx jest algorithms/number.tower.js
+// npx jest algorithms/number/number.tower.js
 test('towerOfHanoi()', () => {
   expect(towerOfHanoi(3, 'a', 'b', 'c')).toEqual(
     ['move disk from tower: a, to tower: b',

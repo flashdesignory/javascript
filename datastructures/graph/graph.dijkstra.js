@@ -158,7 +158,7 @@ class Graph {
   }
 }
 
-// npx jest datastructures/graph.dijkstra.js
+// npx jest datastructures/graph/graph.dijkstra.js
 describe('find shortest path', () => {
   const graph = new Graph();
   graph.addVertex('A');

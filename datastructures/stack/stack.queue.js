@@ -66,7 +66,7 @@ class StackQueue {
   }
 }
 
-// npx jest datastructures/stack.queue.js
+// npx jest datastructures/stack/stack.queue.js
 describe('stack queue data structure', () => {
   const stackqueue = new StackQueue();
   const values = [3, 6, 1, 2, 5, 4];

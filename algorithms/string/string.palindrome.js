@@ -38,7 +38,7 @@ function isPalindrome4(str) {
   return isPalindrome4(str.substr(1, str.length - 2));
 }
 
-// npx jest algorithms/string.palindrome.js
+// npx jest algorithms/string/string.palindrome.js
 test('isPalindrome()', () => {
   expect(isPalindrome('madam')).toBe(true);
   expect(isPalindrome('fire')).toBe(false);

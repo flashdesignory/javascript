@@ -62,7 +62,7 @@ function lcs2(str1, str2) {
   return result[str1.length][str2.length];
 }
 
-// npx jest algorithms/string.sequence.lcs.js
+// npx jest algorithms/string/string.sequence.lcs.js
 test('lcs()', () => {
   const str1 = 'AGGTAB';
   const str2 = 'GXTXAYB';

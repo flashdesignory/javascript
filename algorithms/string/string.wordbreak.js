@@ -33,7 +33,7 @@ function wordBreak(str) {
   return false;
 }
 
-// npx jest algorithms/string.wordBreak.js
+// npx jest algorithms/string/string.wordBreak.js
 describe('wordbreak()', () => {
   test('wordBreak(ilikesamsung)', () => {
     expect(wordBreak('ilikesamsung')).toEqual(true);

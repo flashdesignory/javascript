@@ -25,7 +25,7 @@ function longestSubSequence(str) {
   return max;
 }
 
-// npx jest algorithms/string.sequence.norepeat.js
+// npx jest algorithms/string/string.sequence.norepeat.js
 describe('longest string sequence', () => {
   test("longestSubSequence('obamacare')", () => {
     expect(longestSubSequence('obamacare')).toEqual(4);

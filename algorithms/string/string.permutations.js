@@ -123,7 +123,7 @@ function permutationsFive(str) {
   return Object.keys(result);
 }
 
-// npx jest algorithms/string.permutations.js
+// npx jest algorithms/string/string.permutations.js
 test('test permutation', () => {
   expect(permutationsOne(['a', 'b', 'c', 'd'])).toEqual([
     'abcd', 'bacd', 'cabd', 'acbd',

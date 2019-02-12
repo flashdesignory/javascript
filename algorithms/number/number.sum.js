@@ -36,7 +36,7 @@ function findAllPair(arr, sum) {
   return result;
 }
 
-// npx jest algorithms/number.sum.js
+// npx jest algorithms/number/number.sum.js
 test('findSum()', () => {
   expect(findSum([3, 4, 1, 2, 9], 10)).toEqual([1, 9]);
 });

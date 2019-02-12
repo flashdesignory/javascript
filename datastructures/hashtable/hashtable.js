@@ -55,7 +55,7 @@ class HashTable {
   }
 }
 
-// npx jest datastructures/hashtable.js
+// npx jest datastructures/hashtable/hashtable.js
 describe('hashtable data structure', () => {
   it('should return correct value when retrieving', () => {
     const hashTable = new HashTable();

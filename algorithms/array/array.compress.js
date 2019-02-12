@@ -37,7 +37,7 @@ function compressArray(arr) {
   return result;
 }
 
-// npx jest algorithms/array.compress.js
+// npx jest algorithms/array/array.compress.js
 test('compressArray()', () => {
   expect(compressArray([1, 2, 3, 10, 25, 26, 30, 31, 32, 33]))
     .toEqual('1-3,10,25-26,30-33');

@@ -59,7 +59,7 @@ function reverseStringFive(str) {
   return right + reverseStringFive(str.substring(1, str.length - 1)) + left;
 }
 
-// npx jest algorithms/string.reverse.js
+// npx jest algorithms/string/string.reverse.js
 test('test reverse string', () => {
   expect(reverseStringOne('hello')).toEqual('olleh');
   expect(reverseStringTwo('hello')).toEqual('olleh');

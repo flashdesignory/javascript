@@ -33,7 +33,7 @@ function paintFill(matrix, point, value) {
   return matrix;
 }
 
-// npx jest algorithms/matrix.color.js
+// npx jest algorithms/matrix/matrix.color.js
 test('findPathInMatrix()', () => {
   const matrix = [
     [1, 1, 1, 1, 1, 1, 1],

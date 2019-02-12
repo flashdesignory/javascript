@@ -130,7 +130,7 @@ function binaryMatrixSearch(matrix, num) {
   return [];
 }
 
-// npx jest algorithms/matrix.find.js
+// npx jest algorithms/matrix/matrix.find.js
 describe('binary search for matrix', () => {
   test('findPosition()', () => {
     const matrix = [

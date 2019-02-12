@@ -194,7 +194,7 @@ class AVLTree {
   }
 }
 
-// npx jest datastructures/avltree.js
+// npx jest datastructures/tree/avltree.js
 describe('BinarySearchTree Methods', () => {
   it('BinarySearchTree.insert()', () => {
     const values = [10, 20, 30, 40, 50, 25];

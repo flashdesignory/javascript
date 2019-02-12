@@ -48,7 +48,7 @@ class Set {
   }
 }
 
-// npx jest datastructures/set.js
+// npx jest datastructures/set/set.js
 describe('queue data structure', () => {
   const mySet = new Set();
   const values = [3, 6, 1, 2, 5, 4];

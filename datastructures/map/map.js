@@ -48,7 +48,7 @@ class Dictionary {
   }
 }
 
-// npx jest datastructures/map.js
+// npx jest datastructures/map/map.js
 describe('map data structure', () => {
   const myMap = new Dictionary();
   myMap.set('John', 'john@john.com');

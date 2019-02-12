@@ -37,7 +37,7 @@ function mergeSort(arr) {
   return merge(left, right);
 }
 
-// npx jest algorithms/sort.merge.js
+// npx jest algorithms/sort/sort.merge.js
 test('mergeSort()', () => {
   const nums = [7, 9, 3, 4, 2, 8, 5, 1];
   expect(mergeSort(nums)).toEqual([1, 2, 3, 4, 5, 7, 8, 9]);

@@ -66,7 +66,7 @@ class BinaryMinHeap {
   }
 }
 
-// npx jest datastructures/heap.minimum.js
+// npx jest datastructures/heap/heap.minimum.js
 describe('min binary heap data structure', () => {
   it('should return min value', () => {
     const heap = new BinaryMinHeap();

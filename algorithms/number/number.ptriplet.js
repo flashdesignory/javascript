@@ -45,7 +45,7 @@ function isTriplet2(arr) {
   return false;
 }
 
-// npx jest algorithms/number.ptriplet.js
+// npx jest algorithms/number/number.ptriplet.js
 test('isTriplet()', () => {
   expect(isTriplet([3, 1, 4, 6, 5])).toBe(true);
   expect(isTriplet([10, 4, 6, 12, 5])).toBe(false);

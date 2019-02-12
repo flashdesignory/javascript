@@ -48,7 +48,7 @@ function numRegions(matrix) {
   return result;
 }
 
-// npx jest algorithms/matrix.regions.js
+// npx jest algorithms/matrix/matrix.regions.js
 test('numRegions()', () => {
   const matrix = [
     [0, 0, 1, 1, 0],

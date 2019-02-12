@@ -50,7 +50,7 @@ function longestSubSequenceRepeating2(str) {
   return seen[length][length];
 }
 
-// npx jest algorithms/string.sequence.repeat.js
+// npx jest algorithms/string/string.sequence.repeat.js
 describe('longest string sequence of repeating chars', () => {
   test("longestSubSequenceRepeating1('aabebcdd')", () => {
     expect(longestSubSequenceRepeating1('aabebcdd')).toEqual(3);

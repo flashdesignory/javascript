@@ -19,7 +19,7 @@ function swapNumbersTwo(a, b) {
   return [a, b];
 }
 
-// npx jest algorithms/number.swap.js
+// npx jest algorithms/number/number.swap.js
 describe('swap numbers', () => {
   test('swapNumbersOne', () => {
     expect(swapNumbersOne(3, 5)).toEqual([5, 3]);

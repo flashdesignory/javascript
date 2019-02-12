@@ -40,7 +40,7 @@ function spiral(array) {
   return result.join(',');
 }
 
-// npx jest algorithms/matrix.spiral.js
+// npx jest algorithms/matrix/matrix.spiral.js
 test('spiral()', () => {
   const matrix = [[1, 2, 3, 4],
     [5, 6, 7, 8],

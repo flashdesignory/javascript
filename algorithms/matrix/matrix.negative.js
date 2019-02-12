@@ -26,7 +26,7 @@ function countNegativeTiles(matrix) {
   return count;
 }
 
-// npx jest algorithms/matrix.negative.js
+// npx jest algorithms/matrix/matrix.negative.js
 test('countNegativeTiles()', () => {
   const tiles = [
     [-4, -3, -1, 1],

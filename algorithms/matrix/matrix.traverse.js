@@ -35,7 +35,7 @@ function traverseSnake(numRows, numCols) {
   return matrix;
 }
 
-// npx jest algorithms/matrix.traverse.js
+// npx jest algorithms/matrix/matrix.traverse.js
 test('traverseSnake()', () => {
   expect(traverseSnake(4, 5)).toEqual(
     [[1, 8, 9, 16, 17],

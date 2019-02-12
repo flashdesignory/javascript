@@ -30,7 +30,7 @@ function flattenArray2(arr) {
   return result;
 }
 
-// npx jest algorithms/array.flatten.js
+// npx jest algorithms/array/array.flatten.js
 test('flattenArray()', () => {
   const nums = [1, 2, 3, [4, 5], [6, [7, 8]]];
   expect(flattenArray(nums)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);

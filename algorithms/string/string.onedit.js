@@ -41,7 +41,7 @@ function oneEditAway(str1, str2) {
   return numEdits === 1;
 }
 
-// npx jest algorithms/string.onedit.js
+// npx jest algorithms/string/string.onedit.js
 test('oneEditAway()', () => {
   expect(oneEditAway('car', 'cart')).toBe(true);
   expect(oneEditAway('car', 'cto')).toBe(false);

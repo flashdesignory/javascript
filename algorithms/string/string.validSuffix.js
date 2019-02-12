@@ -27,7 +27,7 @@ function confirmEnding2(string, target) {
   return true;
 }
 
-// npx jest algorithms/string.validSuffix.js
+// npx jest algorithms/string/string.validSuffix.js
 describe('validate suffix of word', () => {
   test('confirmEnding1()', () => {
     expect(confirmEnding1('Bastian', 'n')).toBe(true);

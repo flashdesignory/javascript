@@ -364,7 +364,7 @@ class SinglyLinkedList {
   }
 }
 
-// npx jest datastructures/singlylist.js
+// npx jest datastructures/list/singlylist.js
 describe('singly linked list data structure', () => {
   it('print() should equal [3, 6, 1, 2, 5, 4]', () => {
     const list = new SinglyLinkedList();

@@ -108,7 +108,7 @@ function merge2(node1, node2) {
   return mergeUtil(node2, node1);
 }
 
-// npx jest datastructures/singlylist.merge.js
+// npx jest datastructures/list/singlylist.merge.js
 describe('merging two sorted linked lists', () => {
   it('should merge two linked lists recursively', () => {
     const listOne = new LinkedList();

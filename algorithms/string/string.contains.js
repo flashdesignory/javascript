@@ -29,7 +29,7 @@ function contains(str, sub) {
   return false;
 }
 
-// npx jest algorithms/string.contains.js
+// npx jest algorithms/string/string.contains.js
 test('contains()', () => {
   expect(contains('geeksforgeeks', 'for')).toBe(true);
   expect(contains('jkflsioijljl', 'jkfl')).toBe(true);

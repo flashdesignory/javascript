@@ -28,7 +28,7 @@ function isIsomorphic(str1, str2) {
   return true;
 }
 
-// npx jest algorithms/string.isomorphic.js
+// npx jest algorithms/string/string.isomorphic.js
 test('isIsomorphic()', () => {
   expect(isIsomorphic('foo', 'app')).toBe(true);
   expect(isIsomorphic('bar', 'foo')).toBe(false);

@@ -43,7 +43,7 @@ class Queue {
   }
 }
 
-// npx jest datastructures/queue.js
+// npx jest datastructures/queue/queue.js
 describe('set data structure', () => {
   const queue = new Queue();
   const values = [3, 6, 1, 2, 5, 4];

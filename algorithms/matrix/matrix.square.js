@@ -75,7 +75,7 @@ function printMaxSubSquare(matrix) {
   return maxSize;
 }
 
-// npx jest algorithms/matrix.square.js
+// npx jest algorithms/matrix/matrix.square.js
 test('maximum square of 1 in matrix', () => {
   const matrix = [
     [0, 1, 1, 0, 1],

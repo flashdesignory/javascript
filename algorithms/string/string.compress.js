@@ -36,7 +36,7 @@ function stringCompression(str) {
   return result;
 }
 
-// npx jest algorithms/string.compress.js
+// npx jest algorithms/string/string.compress.js
 test('stringCompression()', () => {
   expect(stringCompression('aabcccccaaa')).toEqual('a2b1c5a3');
 });

@@ -779,7 +779,7 @@ class BinarySearchTree {
   }
 }
 
-// npx jest datastructures/binarysearchtree.js
+// npx jest datastructures/tree/binarysearchtree.js
 describe('BinarySearchTree Methods', () => {
   const values = [10, 15, 5, 2, 3, 12, 17, 4, 6, 13, 11, 8, 1];
   const tree = new BinarySearchTree();

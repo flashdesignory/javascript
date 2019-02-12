@@ -77,7 +77,7 @@ class PriorityQueue {
   }
 }
 
-// npx jest datastructures/heap.priority.js
+// npx jest datastructures/heap/heap.priority.js
 describe('priority queue with min heap', () => {
   it('should return priority item', () => {
     const pq = new PriorityQueue();

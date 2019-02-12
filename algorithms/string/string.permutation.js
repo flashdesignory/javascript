@@ -48,7 +48,7 @@ function permutationOfPalindrome(a) {
 
 console.log(permutationOfPalindrome('ottoffsg'));
 
-// npx jest algorithms/string.permutation.js
+// npx jest algorithms/string/string.permutation.js
 test('test permutations', () => {
   expect(permutationOfOther('abcd', 'bcad')).toBe(true);
   expect(permutationOfOther('abcd', 'bcaf')).toBe(false);

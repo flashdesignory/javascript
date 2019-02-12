@@ -32,7 +32,7 @@ function findMagicIndex(arr) {
   return binarySearch(arr, 0, arr.length - 1);
 }
 
-// npx jest algorithms/binarysearch.magic.js
+// npx jest algorithms/search/binarysearch.magic.js
 describe('binary search magic index', () => {
   test('linear', () => {
     expect(findMagicIndexSimple([-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13])).toEqual(7);

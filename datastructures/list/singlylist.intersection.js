@@ -71,7 +71,7 @@ const getIntersectingNodeTwo = (headA, headB) => {
   return nodeA;
 };
 
-// npx jest datastructures/singlylist.intersection.js
+// npx jest datastructures/list/singlylist.intersection.js
 describe('find intersecting node of two SinglyLinkedLists', () => {
   it('should return node44 for intersection', () => {
     const node19 = new Node(19);

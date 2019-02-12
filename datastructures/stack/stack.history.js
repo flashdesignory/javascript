@@ -93,7 +93,7 @@ class History {
   }
 }
 
-// npx jest datastructures/stack.history.js
+// npx jest datastructures/stack/stack.history.js
 describe('it should implement undo and redo', () => {
   const history = new History(5);
   let countValue = 0;

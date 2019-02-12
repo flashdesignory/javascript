@@ -21,7 +21,7 @@ function findTwoSmallest(arr) {
   return [min1, min2];
 }
 
-// npx jest algorithms/number.smallest.js
+// npx jest algorithms/number/number.smallest.js
 test('findTwoSmallest()', () => {
   expect(findTwoSmallest([12, 13, 1, 10, 34, 1])).toEqual([1, 10]);
 });

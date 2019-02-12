@@ -77,7 +77,7 @@ function ticTacToeTraversal(matrix) {
   return result;
 }
 
-// npx jest algorithms/matrix.diagonal.js
+// npx jest algorithms/matrix/matrix.diagonal.js
 describe('various matrix traversals', () => {
   test('matrix traversal', () => {
     expect(traverseMatrix(tiles)).toEqual([
