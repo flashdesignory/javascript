@@ -16,7 +16,36 @@ function capitalizeFirst(arr) {
   return result;
 }
 
+function capitalizeFirst2(str) {
+  const result = [];
+  const words = str.split(' ');
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    result.push(word[0].toUpperCase() + word.slice(1));
+  }
+  return result.join(' ');
+}
+
+function capitalizeFirst3(str) {
+  let result = '';
+  for (let i = 0; i < str.length; i++) {
+    if (!str[i - 1] || str[i - 1] === ' ') {
+      result += str[i].toUpperCase();
+    } else {
+      result += str[i];
+    }
+  }
+  return result;
+}
+
 // npx jest algorithms/string/string.capitalize.js
 test('capitalizeFirst()', () => {
   expect(capitalizeFirst(['car', 'taco', 'banana'])).toEqual(['Car', 'Taco', 'Banana']);
+});
+test('capitalizeFirst2()', () => {
+  expect(capitalizeFirst2('look, it is working!')).toEqual('Look, It Is Working!');
+});
+test('capitalizeFirst3()', () => {
+  expect(capitalizeFirst3('look, it is working!')).toEqual('Look, It Is Working!');
 });
