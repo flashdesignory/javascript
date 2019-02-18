@@ -1,6 +1,6 @@
 /*
- * @title: Sum
- * @description: simple sum algo
+ * @title: Sum - With Duplicates
+ * @description: find pair that matches sum
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
@@ -71,7 +71,7 @@ function allPairMatchingSum(arr, sum) {
   return result;
 }
 
-// npx jest algorithms/number/number.sum2.js
+// npx jest algorithms/number/number.sum.pair.dupe.js
 test('pairMatchingSum()', () => {
   const unSortedArr = [2, 3, 2, 5, 4, 5, 5, 5, 5, 9, 6, 8, 8, 7];
   const sum = 10;
