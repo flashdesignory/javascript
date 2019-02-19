@@ -5,7 +5,32 @@
  * @email: info@flashdesignory.com
  */
 
+// one extra iteration in loop -  str[i] will be undefined
+// therefore won't equal str[start] and will trigger else statement
+
 function stringCompression(str) {
+  let result = '';
+  let start = 0;
+  let end = 0;
+
+  for (let i = 1; i <= str.length; i++) {
+    if (str[i] === str[start]) {
+      end++;
+    } else {
+      if (start === end) {
+        result += str[start] + 1;
+      } else {
+        result += str[start] + (end - start + 1);
+      }
+      start = i;
+      end = i;
+    }
+  }
+
+  return result;
+}
+
+/* function stringCompression(str) {
   let start = 0;
   let end = 0;
   let count = 1;
@@ -34,7 +59,7 @@ function stringCompression(str) {
   }
 
   return result;
-}
+} */
 
 // npx jest algorithms/string/string.compress.js
 test('stringCompression()', () => {
