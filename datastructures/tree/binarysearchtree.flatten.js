@@ -57,8 +57,8 @@ function flattenPreOrder1(node) {
 
   const { left, right } = node;
 
-  this.flattenPreOrder1(left);
-  this.flattenPreOrder1(right);
+  flattenPreOrder1(left);
+  flattenPreOrder1(right);
 
   node.right = left;
   node.left = null;
@@ -80,12 +80,12 @@ function flattenPreOrder2(node) {
   if (left) {
     node.right = left;
     node.left = null;
-    node = this.flattenPreOrder2(node.right);
+    node = flattenPreOrder2(node.right);
   }
 
   if (right) {
     node.right = right;
-    node = this.flattenPreOrder2(node.right);
+    node = flattenPreOrder2(node.right);
   }
 
   return node;

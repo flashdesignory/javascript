@@ -19,34 +19,33 @@ function reversePolishNotation(arr) {
     if (index < 0) {
       stack.push(arr[i]);
     } else {
-      let a; let
-        b;
+      let a;
+      let b;
       switch (index) {
         case 0:
-          a = Number(stack.pop());
-          b = Number(stack.pop());
+          a = parseInt(stack.pop(), 10);
+          b = parseInt(stack.pop(), 10);
           stack.push(a + b);
           break;
         case 1:
-          a = Number(stack.pop());
-          b = Number(stack.pop());
+          a = parseInt(stack.pop(), 10);
+          b = parseInt(stack.pop(), 10);
           stack.push(b - a);
           break;
         case 2:
-          a = Number(stack.pop());
-          b = Number(stack.pop());
+          a = parseInt(stack.pop(), 10);
+          b = parseInt(stack.pop(), 10);
           stack.push(a * b);
           break;
         case 3:
-          a = Number(stack.pop());
-          b = Number(stack.pop());
+          a = parseInt(stack.pop(), 10);
+          b = parseInt(stack.pop(), 10);
           stack.push(b / a);
           break;
         default:
       }
     }
   }
-  console.log(stack);
   return parseInt(stack[0], 10);
 }
 
