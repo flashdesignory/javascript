@@ -99,6 +99,13 @@ class BinarySearchTree {
     );
   }
 
+  width(node, level) {
+    if (!node) return 0;
+    if (level === 1) return 1;
+    return this.width(node.left, level - 1)
+      + this.width(node.right, level - 1);
+  }
+
   distance(node, value) {
     if (!node || node.value === value) return 0;
     if (node.value > value) return 1 + this.distance(node.left, value);
@@ -551,6 +558,17 @@ class BinarySearchTree {
       }
     }
     return null;
+  }
+
+  maxWidth(node) {
+    let max = 0;
+    let width = null;
+    const height = this.height(node);
+    for (let i = 1; i <= height; i++) {
+      width = this.width(node, i);
+      max = Math.max(width, max);
+    }
+    return max;
   }
 
   // eslint-disable-next-line
