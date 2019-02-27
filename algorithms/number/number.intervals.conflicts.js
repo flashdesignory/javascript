@@ -19,8 +19,8 @@ function findConflicts(arr) {
   return result;
 }
 
-// npx jest algorithms/number/number.intervals.js
-describe('find conflicting intervals', () => {
+// npx jest algorithms/number/number.intervals.conflicts.js
+describe('return conflicting intervals', () => {
   test('findConflicts()', () => {
     const nums = [[1, 5], [3, 7], [2, 6], [10, 15], [5, 6], [4, 100]];
     expect(findConflicts(nums)).toEqual([[2, 6], [3, 7], [4, 100], [5, 6]]);
