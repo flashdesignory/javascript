@@ -6,13 +6,17 @@
  */
 
 function findConflicts(arr) {
-  const byFirstNumber = (a, b) => a[0] - b[0];
-  const sorted = arr.sort(byFirstNumber);
+  if (!arr.length) return null;
+
+  arr.sort((a, b) => a[0] - b[0]);
+
   const result = [];
 
-  for (let i = 1; i < sorted.length; i++) {
-    if (sorted[i - 1][1] > sorted[i][0]) {
-      result.push(sorted[i]);
+  for (let i = 1; i < arr.length; i++) {
+    const prev = arr[i - 1];
+    const current = arr[i];
+    if (prev[1] > current[0]) {
+      result.push(current);
     }
   }
 

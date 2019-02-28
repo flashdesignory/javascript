@@ -37,6 +37,8 @@ function mergeIntervals(arr) {
 
   arr.sort((a, b) => a[0] - b[0]);
 
+  const result = [];
+
   const stack = new Stack();
   stack.push(arr[0]);
 
@@ -52,7 +54,6 @@ function mergeIntervals(arr) {
     }
   }
 
-  const result = [];
   while (!stack.empty()) {
     result.push(stack.pop());
   }
@@ -63,7 +64,7 @@ function mergeIntervals(arr) {
 // npx jest algorithms/number/number.intervals.merge.js
 describe('merge conflicting intervals', () => {
   test('mergeIntervals()', () => {
-    const values = [[6, 8], [1, 9], [2, 4], [4, 7]];
-    expect(mergeIntervals(values)).toEqual([[1, 9]]);
+    const nums = [[6, 8], [1, 9], [2, 4], [4, 7]];
+    expect(mergeIntervals(nums)).toEqual([[1, 9]]);
   });
 });
