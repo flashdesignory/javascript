@@ -98,18 +98,14 @@ class DoublyLinkedList {
     this.tail = current;
 
     while (current) {
-      next = current.next; // eslint-disable-line
-
-      previous = current.previous; // eslint-disable-line
-      current.previous = current.next;
+      // capture values
+      next = current.next; //eslint-disable-line
+      previous = current.previous; //eslint-disable-line
+      // switch next / previous
       current.next = previous;
-
+      current.previous = next;
+      // go to next node
       current = next;
-
-      /* previous = current.previous;
-     current.previous = current.next;
-     current.next = previous;
-     current = current.previous; */
     }
   }
 }
