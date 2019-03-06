@@ -46,17 +46,8 @@ function isValid(row, column, rowLength, columnLength) {
   return row >= 0 && row < rowLength && column >= 0 && column < columnLength;
 }
 
-const matrix = [
-  [1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
-  [1, 0, 1, 0, 1, 1, 1, 0, 1, 1],
-  [1, 1, 1, 0, 1, 1, 0, 1, 0, 1],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-  [1, 1, 1, 0, 1, 1, 1, 0, 1, 0],
-  [1, 0, 1, 1, 1, 1, 0, 1, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
-  [1, 1, 0, 0, 0, 0, 1, 0, 0, 1],
-];
+const rowNum = [-1, 0, 0, 1]; // results in left and right
+const colNum = [0, -1, 1, 0]; // results in top and bottom
 
 function findPathInMatrix(matrix, src, dst) {
   const rowLength = matrix.length;
@@ -67,15 +58,15 @@ function findPathInMatrix(matrix, src, dst) {
   }
 
   const visited = [];
-  const points = [];
-  const rowNum = [-1, 0, 0, 1]; // results in left and right
-  const colNum = [0, -1, 1, 0]; // results in top and bottom
   for (let r = 0; r < matrix.length; r++) {
     visited[r] = [];
     for (let c = 0; c < matrix[r].length; c++) {
       visited[r][c] = false;
     }
   }
+
+  const points = [];
+  const previous = {};
 
   // set src point to visited = true;
   visited[src.r][src.c] = true;
@@ -85,13 +76,16 @@ function findPathInMatrix(matrix, src, dst) {
   queue.enqueue(new Node(src.r, src.c, 0));
 
   while (!queue.empty()) {
-    const current = queue.dequeue();
-
-    points.push({ r: current.row, c: current.column });
+    let current = queue.dequeue();
 
     if (current.row === dst.r && current.column === dst.c) {
-      console.log(points);
-      return current.distance;
+      const { distance } = current;
+      while (current) {
+        points.push({ r: current.row, c: current.column });
+        current = previous[[current.row, current.column]];
+      }
+      console.log(points.reverse());
+      return distance;
     }
 
     for (let i = 0; i < 4; i++) {
@@ -100,10 +94,11 @@ function findPathInMatrix(matrix, src, dst) {
 
       if (
         isValid(row, column, rowLength, columnLength)
-        && matrix[row][column]
-        && !visited[row][column]
+         && matrix[row][column]
+         && !visited[row][column]
       ) {
         visited[row][column] = true;
+        previous[[row, column]] = current;
         const next = new Node(row, column, current.distance + 1);
         queue.enqueue(next);
       }
@@ -114,5 +109,16 @@ function findPathInMatrix(matrix, src, dst) {
 
 // npx jest algorithms/matrix/matrix.path.js
 test('findPathInMatrix()', () => {
+  const matrix = [
+    [1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 0, 1, 0, 1, 1, 1, 0, 1, 1],
+    [1, 1, 1, 0, 1, 1, 0, 1, 0, 1],
+    [0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+    [1, 1, 1, 0, 1, 1, 1, 0, 1, 0],
+    [1, 0, 1, 1, 1, 1, 0, 1, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+  ];
   expect(findPathInMatrix(matrix, { r: 0, c: 0 }, { r: 3, c: 4 })).toEqual(11);
 });
