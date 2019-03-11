@@ -101,7 +101,7 @@ class BinarySearchTree {
 
   width(node, level) {
     if (!node) return 0;
-    if (level === 1) return 1;
+    if (level === 0) return 1;
     return this.width(node.left, level - 1)
       + this.width(node.right, level - 1);
   }
@@ -282,10 +282,10 @@ class BinarySearchTree {
 
     if (k === 0) {
       result.push(node.value);
-    } else {
-      result = this.findNodesAtLevel(node.left, k - 1, result);
-      result = this.findNodesAtLevel(node.right, k - 1, result);
     }
+
+    this.findNodesAtLevel(node.left, k - 1, result);
+    this.findNodesAtLevel(node.right, k - 1, result);
 
     return result;
   }
@@ -294,36 +294,34 @@ class BinarySearchTree {
     const result = [];
     const queue = new Queue();
     queue.enqueue(node);
-    let current = queue.dequeue();
+
     let levelValues = [];
-    let currentLevel = 1;
-    let nextLevel = 0;
+    let numCurrentChildren = 1;
+    let numNextChildren = 0;
     let levelCount = 1;
 
-    while (current) {
+    while (!queue.empty()) {
+      const current = queue.dequeue();
       levelValues.push(current.value);
-      currentLevel--;
+      numCurrentChildren--;
 
       if (current.left) {
         queue.enqueue(current.left);
-        nextLevel++;
+        numNextChildren++;
       }
 
       if (current.right) {
         queue.enqueue(current.right);
-        nextLevel++;
+        numNextChildren++;
       }
 
-      if (currentLevel === 0) {
-        // console.log(`${levelValues},${levelCount}`);
+      if (numCurrentChildren === 0) {
         result[levelCount - 1] = levelValues;
-        currentLevel = nextLevel;
-        nextLevel = 0;
+        numCurrentChildren = numNextChildren;
+        numNextChildren = 0;
         levelCount++;
         levelValues = [];
       }
-
-      current = queue.dequeue();
     }
     return result;
   }
