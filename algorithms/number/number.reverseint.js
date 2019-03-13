@@ -8,10 +8,10 @@
 function reverseInt(n) {
   let reversed = n.toString().split('').reverse().join('');
   if (n < 0) {
-    reversed.substr(0, reversed.length - 1);
+    reversed = reversed.substr(0, reversed.length - 1);
   }
 
-  if (reversed.substr(-1) === '-') reversed = reversed.substr(0, reversed.length - 1);
+  // if (reversed.substr(-1) === '-') reversed = reversed.substr(0, reversed.length - 1);
   return Number(reversed) * Math.sign(n);
 }
 
