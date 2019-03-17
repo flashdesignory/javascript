@@ -18,11 +18,12 @@ function permutationsOne(arr) {
   function permute(n) {
     if (n === 1) {
       result.push(arr.join(''));
-    } else {
-      for (let i = 0; i < n; i++) {
-        permute(n - 1);
-        swap(arr, n % 2 ? 0 : i, n - 1);
-      }
+      return;
+    }
+
+    for (let i = 0; i < n; i++) {
+      permute(n - 1);
+      swap(arr, n % 2 ? 0 : i, n - 1);
     }
   }
 
