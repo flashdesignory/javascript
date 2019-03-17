@@ -55,10 +55,12 @@ function flattenPreOrder1(node) {
   // pre-order traversal
   if (!node) return node;
 
-  const { left, right } = node;
+  /* const { left, right } = node;
 
   flattenPreOrder1(left);
-  flattenPreOrder1(right);
+  flattenPreOrder1(right); */
+  const left = flattenPreOrder1(node.left);
+  const right = flattenPreOrder1(node.right);
 
   node.right = left;
   node.left = null;
