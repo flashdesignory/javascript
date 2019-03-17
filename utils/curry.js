@@ -5,17 +5,18 @@
  * @email: info@flashdesignory.com
  */
 
-function curry(fn) {
-  const args = Array.prototype.slice.call(arguments, 1); //eslint-disable-line
-  return function () {
-    return fn.apply(this, args.concat(
-      Array.prototype.slice.call(arguments, 0), //eslint-disable-line
-    ));
-  };
+function curry(fn, arity = fn.length) {
+  return function curried(args) {
+    return function (arg) {
+      args.push(arg);
+      if (args.length >= arity) {
+        return fn.apply(this, args);
+      }
+      return curried(args);
+    };
+  }([]);
 }
 
-const multiply = (a, b) => a * b;
-
-const double = curry(multiply, 2);
-
-double(3);
+const multiply = (a, b, c) => a * b * c;
+const double = curry(multiply);
+double(3)(2)(2);
