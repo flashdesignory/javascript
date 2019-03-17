@@ -52,13 +52,8 @@ class BinarySearchTree {
 
 
 function flattenPreOrder1(node) {
-  // pre-order traversal
   if (!node) return node;
 
-  /* const { left, right } = node;
-
-  flattenPreOrder1(left);
-  flattenPreOrder1(right); */
   const left = flattenPreOrder1(node.left);
   const right = flattenPreOrder1(node.right);
 
@@ -82,12 +77,12 @@ function flattenPreOrder2(node) {
   if (left) {
     node.right = left;
     node.left = null;
-    node = flattenPreOrder2(node.right);
+    node = flattenPreOrder2(left);
   }
 
   if (right) {
     node.right = right;
-    node = flattenPreOrder2(node.right);
+    node = flattenPreOrder2(right);
   }
 
   return node;
