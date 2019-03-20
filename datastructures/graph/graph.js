@@ -115,27 +115,37 @@ class Graph {
     queue.enqueue(source);
     visited[source] = true;
 
-    const predecessor = {};
+    const previous = {};
 
     while (!queue.empty()) {
       let current = queue.dequeue();
+
+      if (current === target) {
+        const path = [];
+        while (current) {
+          path.push(current);
+          current = previous[current];
+        }
+        return path.reverse();
+      }
+
       const edges = this.adjList[current];
 
       for (let i = 0; i < edges.length; i++) {
         const edge = edges[i];
         if (!visited[edge]) {
           visited[edge] = true;
-          if (edge === target) {
+          /* if (edge === target) {
             const path = [edge];
             path.push(current);
             while (current !== source) {
-              current = predecessor[current];
+              current = previous[current];
               path.push(current);
             }
             path.reverse();
             return path;
-          }
-          predecessor[edge] = current;
+          } */
+          previous[edge] = current;
           queue.enqueue(edge);
         }
       }
