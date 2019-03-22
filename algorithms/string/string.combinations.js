@@ -26,11 +26,13 @@ function combinationsTwo(str) {
 
   function combine(used, unused) {
     if (!used && !unused) return;
-    if (!unused) result.push(used);
-    else {
-      combine(used + unused[0], unused.slice(1));
-      combine(used, unused.slice(1));
+    if (!unused) {
+      result.push(used);
+      return;
     }
+
+    combine(used + unused[0], unused.slice(1));
+    combine(used, unused.slice(1));
   }
 
   combine('', str);
@@ -71,7 +73,7 @@ function combinationsCount(n, k) {
   return result;
 }
 
-// npx jest algorithms/string/string.combination.js
+// npx jest algorithms/string/string.combinations.js
 test('combinations()', () => {
   const result = ['a', 'ba', 'b', 'ca', 'cba', 'cb', 'c', 'da', 'dba', 'db', 'dca', 'dcba', 'dcb', 'dc', 'd'];
   expect(combinations('abcd')).toEqual(result);
