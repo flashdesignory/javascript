@@ -93,12 +93,13 @@ function permutationsFour(arr) {
   function permute(arr, startIndex, endIndex) {
     if (startIndex === endIndex) {
       result.push(arr.join(''));
-    } else {
-      for (let i = startIndex; i <= endIndex; i++) {
-        swap(arr, startIndex, i);
-        permute(arr, startIndex + 1, endIndex);
-        swap(arr, i, startIndex); // backtrack
-      }
+      return;
+    }
+
+    for (let i = startIndex; i <= endIndex; i++) {
+      swap(arr, startIndex, i);
+      permute(arr, startIndex + 1, endIndex);
+      swap(arr, i, startIndex); // backtrack
     }
   }
 
