@@ -31,7 +31,7 @@ function curry2(fn, arity = fn.length) {
 }
 
 const multiply = (a, b, c) => a * b * c;
-const double = curry(multiply);
-const double2 = curry2(multiply);
-double(3)(2)(2);
-double2(3)(2)(2);
+const curried = curry(multiply);
+const curried2 = curry2(multiply);
+curried(3)(2)(2);
+curried2(3)(2)(2);
