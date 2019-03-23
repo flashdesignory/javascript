@@ -5,7 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-function curry(fn) {
+function partial(fn) {
   const args = Array.prototype.slice.call(arguments, 1); //eslint-disable-line
   return function () {
     return fn.apply(this, args.concat(
@@ -16,6 +16,6 @@ function curry(fn) {
 
 const multiply = (a, b) => a * b;
 
-const double = curry(multiply, 2);
+const double = partial(multiply, 2);
 
 double(3);
