@@ -40,7 +40,7 @@ class LRUCache {
     let node;
     if (this.map[key]) {
       node = this.map[key];
-      this.map[key].value = value;
+      node.value = value;
 
       if (node.previous) {
         node.previous.next = node.next;
