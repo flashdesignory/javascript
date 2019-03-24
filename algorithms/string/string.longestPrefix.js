@@ -21,7 +21,7 @@ function getPrefix(arr) {
 
   for (let i = 0; i < minLength; i++) {
     const current = arr[0][i];
-    for (let j = 1; j < minLength; j++) {
+    for (let j = 1; j < arr.length; j++) {
       if (arr[j][i] !== current) {
         return result.join('');
       }
