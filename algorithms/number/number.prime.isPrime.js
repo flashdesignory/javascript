@@ -45,7 +45,7 @@ function isPrimeTwo(number) {
 console.log(isPrimeTwo(137));
 console.log(isPrimeTwo(237));
 
-// npx jest algorithms/number/number.prime.js
+// npx jest algorithms/number/number.prime.isPrime.js
 describe('isPrime solutions', () => {
   test('isPrimeOne(137)', () => {
     expect(isPrimeOne(137)).toEqual(true);
