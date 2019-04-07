@@ -27,7 +27,7 @@ function rotateArrayOne(arr, k) {
 }
 
 // O(n) time & space
-function rotate(arr, left, right) {
+function reverse(arr, left, right) {
   while (left < right) {
     const temp = arr[left];
     arr[left] = arr[right];
@@ -42,10 +42,11 @@ function rotateArrayTwo(arr, k) {
   k %= arr.length; // if k is larger than arr.length
   if (k === 0) return arr;
 
-  arr.reverse();
+  // arr.reverse();
 
-  rotate(arr, 0, k - 1);
-  rotate(arr, k, arr.length - 1);
+  reverse(arr, 0, arr.length - 1);
+  reverse(arr, 0, k - 1);
+  reverse(arr, k, arr.length - 1);
 
   return arr;
 }
