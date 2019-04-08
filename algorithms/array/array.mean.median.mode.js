@@ -23,8 +23,8 @@ function mean(arr) {
 }
 
 // Median
-// It is middle element when n is odd and average
-// of middle two elements when n is even.
+// middle element when n is odd
+// average of middle two elements when n is even.
 function median(arr) {
   const sorted = arr.sort((a, b) => a - b);
   if (sorted.length % 2 === 0) {
@@ -39,7 +39,7 @@ function median(arr) {
 }
 
 // Mode
-// It is defined as the number or numbers that appear the most often
+// number or numbers that appear the most often
 function mode(arr) {
   const seen = {};
   let result = [];
