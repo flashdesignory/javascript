@@ -296,29 +296,29 @@ class BinarySearchTree {
     queue.enqueue(node);
 
     let levelValues = [];
-    let numCurrentChildren = 1;
-    let numNextChildren = 0;
+    let numSiblings = 1;
+    let numChildren = 0;
     let levelCount = 1;
 
     while (!queue.empty()) {
       const current = queue.dequeue();
       levelValues.push(current.value);
-      numCurrentChildren--;
+      numSiblings--;
 
       if (current.left) {
         queue.enqueue(current.left);
-        numNextChildren++;
+        numChildren++;
       }
 
       if (current.right) {
         queue.enqueue(current.right);
-        numNextChildren++;
+        numChildren++;
       }
 
-      if (numCurrentChildren === 0) {
+      if (numSiblings === 0) {
         result[levelCount - 1] = levelValues;
-        numCurrentChildren = numNextChildren;
-        numNextChildren = 0;
+        numSiblings = numChildren;
+        numChildren = 0;
         levelCount++;
         levelValues = [];
       }
@@ -365,18 +365,18 @@ class BinarySearchTree {
     }
 
     let current = this.root;
-    let successor = null;
+    let next = null;
 
     while (current) {
       if (current.value > value) {
-        successor = current;
+        next = current;
         current = current.left;
       } else {
         current = current.right;
       }
     }
 
-    return successor;
+    return next;
   }
 
   predecessor(value) {
@@ -390,18 +390,18 @@ class BinarySearchTree {
     }
 
     let current = this.root;
-    let predecessor = null;
+    let previous = null;
 
     while (current) {
       if (current.value < value) {
-        predecessor = current;
+        previous = current;
         current = current.right;
       } else {
         current = current.left;
       }
     }
 
-    return predecessor;
+    return previous;
   }
 
   ancestor(node, n1, n2) {
@@ -453,15 +453,15 @@ class BinarySearchTree {
     return sum;
   }
 
-  sumPath(node, sum) {
+  sumPath(node, value) {
     if (!node) return false;
 
-    if (node.value === sum && !node.left && !node.right) {
+    if (node.value === value && !node.left && !node.right) {
       return true;
     }
 
-    return this.sumPath(node.left, sum - node.value)
-       || this.sumPath(node.right, sum - node.value);
+    return this.sumPath(node.left, value - node.value)
+       || this.sumPath(node.right, value - node.value);
   }
 
   longestConsecutive(node) {
@@ -811,6 +811,9 @@ describe('BinarySearchTree Methods', () => {
   });
   it('BinarySearchTree.height()', () => {
     expect(tree.height(tree.root)).toBe(5);
+  });
+  it('BinarySearchTree.width()', () => {
+    expect(tree.width(tree.root, 2)).toBe(4);
   });
   it('BinarySearchTree.distance()', () => {
     expect(tree.distance(tree.root, 11)).toBe(3);
