@@ -179,7 +179,7 @@ function findPathInMatrix(matrix, src, dst) {
   return null;
 }
 
-// npx jest algorithms/matrix/matrix.path.js
+// npx jest algorithms/matrix/matrix.path.two.js
 test('findPathInMatrix()', () => {
   const matrix = [
     [1, 0, 1, 1, 1, 1, 0, 1, 1, 1],
