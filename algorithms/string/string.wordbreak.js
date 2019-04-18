@@ -20,11 +20,12 @@ function dictionaryContains(str) {
   return false;
 }
 
-// recursive
+// recursion
 function wordBreak(str) {
   const size = str.length;
   if (size === 0) return true;
 
+  // start at i equal to 1, stop at i equal to str.length
   for (let i = 1; i <= size; i++) {
     if (dictionaryContains(str.substr(0, i))
         && wordBreak(str.substr(i, size - i))) {
@@ -34,6 +35,7 @@ function wordBreak(str) {
   return false;
 }
 
+// tabulation
 function wordBreak2(str) {
   const size = str.length;
   if (size === 0) return true;
@@ -43,6 +45,7 @@ function wordBreak2(str) {
     result[i] = false;
   }
 
+  // start at i equal to 1, stop at i equal to str.length
   for (let i = 1; i <= size; i++) {
     if (result[i] === false
       && dictionaryContains(str.substr(0, i))) {
@@ -54,6 +57,7 @@ function wordBreak2(str) {
         return true;
       }
 
+      // start at j equal to i + 1, stop at j equal to j - i;
       for (let j = i + 1; j <= size; j++) {
         if (result[j] === false
           && dictionaryContains(str.substr(i, j - i))) {
