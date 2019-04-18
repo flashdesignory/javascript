@@ -12,7 +12,7 @@ function dictionaryContains(str) {
   const dictionary = ['mobile', 'samsung', 'sam', 'sung', 'man', 'mango', 'icecream', 'and', 'go', 'i', 'like', 'ice', 'cream'];
 
   for (let i = 0; i < dictionary.length; i++) {
-    if (dictionary[i].indexOf(str) === 0) {
+    if (dictionary[i].indexOf(str) === 0 && str.length === dictionary[i].length) {
       return true;
     }
   }
