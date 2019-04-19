@@ -60,12 +60,18 @@ class DoublyLinkedList {
     let current = this.head;
     let previous = null;
 
-    while (current.next) {
+    while (current) {
       if (current.value === value) {
+        // node to remove is the head
         if (!previous) {
-          // node to remove is the head
           this.head = current.next;
           current.next.previous = null;
+          return current;
+        }
+        // node to remove is the tail
+        if (!current.next) {
+          previous.next = null;
+          this.tail = previous;
           return current;
         }
         // node to remove is in the middle
@@ -75,13 +81,6 @@ class DoublyLinkedList {
       }
       previous = current;
       current = current.next;
-    }
-
-    if (current.value === value) {
-      // node to remove is the tail
-      previous.next = null;
-      this.tail = previous;
-      return current;
     }
 
     return null;
