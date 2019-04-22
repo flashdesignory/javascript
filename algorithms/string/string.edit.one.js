@@ -1,6 +1,6 @@
 /*
- * @title: One Edit Away
- * @description: Simple function to find one edit or more
+ * @title: String Edits
+ * @description: validate one edit between two strings
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
@@ -41,7 +41,7 @@ function oneEditAway(str1, str2) {
   return numEdits === 1;
 }
 
-// npx jest algorithms/string/string.onedit.js
+// npx jest algorithms/string/string.edit.one.js
 test('oneEditAway()', () => {
   expect(oneEditAway('car', 'cart')).toBe(true);
   expect(oneEditAway('car', 'cto')).toBe(false);
