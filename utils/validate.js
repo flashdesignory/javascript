@@ -29,7 +29,11 @@
 
 
 function isPrimitive(value) {
-  return (value !== Object(value));
+  return value !== Object(value);
+}
+
+function isObject(value) {
+	return value === Object(value);
 }
 
 // examples
