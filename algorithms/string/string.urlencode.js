@@ -45,7 +45,20 @@ function urlify(str) {
   return chars.join('');
 }
 
+// recursive
+function urlify2(str) {
+  if (str.length === 0) return str;
+  if (str.substr(0, 1) === ' ') {
+    return  '%20' + urlify2(str.substr(1)); // eslint-disable-line
+  }
+
+  return str.substr(0, 1) + urlify2(str.substr(1));
+}
+
 // npx jest algorithms/string/string.urlencode.js
 test('urlify()', () => {
   expect(urlify('Mr John Smith')).toEqual('Mr%20John%20Smith');
+});
+test('urlify2()', () => {
+  expect(urlify2('Mr John Smith')).toEqual('Mr%20John%20Smith');
 });
