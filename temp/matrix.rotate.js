@@ -5,14 +5,6 @@
  * @email: info@flashdesignory.com
  */
 
-/* [ 1, 2, 3 ],
-   [ 4, 5, 6 ],
-   [ 7, 8, 9 ]
-
-   [ 7, 4, 1 ],
-   [ 8, 5, 2 ],
-   [ 9, 6, 3 ] */
-
 function rotateMatrixClockwise(arr) {
   console.log(arr);
   const n = arr.length;
@@ -27,14 +19,6 @@ function rotateMatrixClockwise(arr) {
   }
   return arr;
 }
-
-/* [ 1, 2, 3 ],
-   [ 4, 5, 6 ],
-   [ 7, 8, 9 ]
-
-   [ 3, 6, 9 ],
-   [ 2, 5, 8 ],
-   [ 1, 4, 7 ] */
 
 function rotateMatrixCounterClock(arr) {
   console.log(arr);
