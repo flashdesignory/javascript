@@ -1,3 +1,11 @@
+/*
+ * @title: move zeros
+ * @description: move all zeros to end of array
+ * @author: Thorsten Kober
+ * @email: info@flashdesignory.com
+ */
+
+// sliding window - dynamic size
 function moveZeros(arr) {
   let lastNonZeroFoundAt = 0;
 
@@ -18,6 +26,7 @@ function moveZeros(arr) {
   return arr;
 }
 
+// sliding window - dynamic size
 function moveZeros2(arr) {
   let lastNonZeroFoundAt = 0;
   for (let i = 0; i < arr.length; i++) {
