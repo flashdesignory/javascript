@@ -85,8 +85,6 @@ class LRUCache {
 
     if (node.next) {
       node.next.previous = node.previous;
-    } else {
-      this.tail = node;
     }
 
     if (this.head) {
