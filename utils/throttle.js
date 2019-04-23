@@ -8,18 +8,18 @@
 function throttle(fn, wait) {
   let last = 0;
   return function (...args) {
-    const now = (new Date()).getTime();
+    const now = new Date().getTime();
     if (now - last < wait) {
       return;
     }
 
     last = now;
-    fn(args);
+    fn.apply(this, args);
   };
 }
 
 const throttled = throttle(() => {
-  console.log('yo throttled');
+  console.log('throttled');
 }, 250);
 
 window.addEventListener('mousemove', throttled);
