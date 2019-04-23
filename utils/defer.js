@@ -11,9 +11,19 @@
   };
 } */
 
-function defer(f, ms) {
+/* function defer(f, ms) {
   return function (...args) {
     setTimeout(() => f.apply(this, args), ms);
+  };
+} */
+
+function defer(fn, wait) {
+  return function (...args) {
+    const context = this;
+    const later = function () {
+      fn.apply(context, args);
+    };
+    setTimeout(later, wait);
   };
 }
 
