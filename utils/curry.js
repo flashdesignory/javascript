@@ -5,16 +5,12 @@
  * @email: info@flashdesignory.com
  */
 
-function curry(fn, arity = fn.length) {
-  return function curried() {
-   const args = [...arguments]; // eslint-disable-line
-    return function () {
-     args.push(Array.prototype.slice.call(arguments, 0)); //eslint-disable-line
-      if (args.length >= arity) {
-        return fn.apply(this, args);
-      }
-      return curried(args);
-    };
+function curry(fn, ...args) {
+  if (fn.length <= args.length) {
+    return fn(...args);
+  }
+  return function (...more) {
+    return curry(fn, ...args, ...more);
   };
 }
 
