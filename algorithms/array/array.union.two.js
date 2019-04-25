@@ -1,6 +1,6 @@
 /*
  * @title: Union Array
- * @description: find union of two arrays
+ * @description: find union of two arrays - sorted
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
