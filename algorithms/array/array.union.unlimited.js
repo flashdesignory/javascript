@@ -33,7 +33,7 @@ function union2() {
   return result;
 }
 
-// npx jest algorithms/array/array.union2.js
+// npx jest algorithms/array/array.union.unlimited.js
 test('union()', () => {
   const one = [7, 1, 5, 2, 3, 6];
   const two = [3, 8, 6, 20, 7];
