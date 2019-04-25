@@ -13,11 +13,11 @@ class Interval {
 }
 
 class Node {
-  constructor(value) {
-    this.value = value;
+  constructor(interval) {
+    this.value = interval;
     this.left = null;
     this.right = null;
-    this.max = value.high;
+    this.max = interval.high;
   }
 
   serialize() {
