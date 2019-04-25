@@ -114,43 +114,45 @@ class Graph {
     this.adjList[two].push(new WeightNode(one, weight));
   }
 
-  dijkstra(start, finish) {
+  dijkstra(source, target) {
     const queue = new PriorityQueue();
     const distances = {};
     const previous = {};
-    const path = [];
-    let current;
 
-    for (let vertex in this.adjList) { //eslint-disable-line
-      if (vertex === start) {
+    const vertices = Object.keys(this.adjList);
+
+    for (let i = 0; i < vertices.length; i++) {
+      const vertex = vertices[i];
+      if (vertex === source) {
         distances[vertex] = 0;
         queue.enqueue(vertex, 0);
       } else {
         distances[vertex] = Infinity;
         queue.enqueue(vertex, Infinity);
       }
-      previous[vertex] = null;
     }
 
     while (!queue.empty()) {
-      current = queue.dequeue();
+      const current = queue.dequeue();
 
-      if (current.value === finish) {
+      if (current.value === target) {
+        const path = [];
         let point = current.value;
         while (previous[point]) {
           path.push(point);
           point = previous[point];
         }
-        return path.concat(start).reverse();
+        return path.concat(source).reverse();
       }
 
-      for (let item in this.adjList[current.value]) { //eslint-disable-line
-        const node = this.adjList[current.value][item];
-        const distance = distances[current.value] + node.weight;
-        if (distance < distances[node.value]) {
-          distances[node.value] = distance;
-          previous[node.value] = current.value;
-          queue.enqueue(node.value, distance);
+      const edges = this.adjList[current.value];
+      for (let i = 0; i < edges.length; i++) {
+        const edge = edges[i];
+        const distance = distances[current.value] + edge.weight;
+        if (distance < distances[edge.value]) {
+          distances[edge.value] = distance;
+          previous[edge.value] = current.value;
+          queue.enqueue(edge.value, distance);
         }
       }
     }

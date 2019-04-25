@@ -135,16 +135,6 @@ class Graph {
         const edge = edges[i];
         if (!visited[edge]) {
           visited[edge] = true;
-          /* if (edge === target) {
-            const path = [edge];
-            path.push(current);
-            while (current !== source) {
-              current = previous[current];
-              path.push(current);
-            }
-            path.reverse();
-            return path;
-          } */
           previous[edge] = current;
           queue.enqueue(edge);
         }
