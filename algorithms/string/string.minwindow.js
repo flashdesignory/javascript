@@ -11,6 +11,7 @@
    Output: "BANC"
 */
 
+// sliding window - dynamic size
 function minwindow(str, pat) {
   const strLength = str.length;
   const patLength = pat.length;
