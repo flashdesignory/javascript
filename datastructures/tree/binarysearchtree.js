@@ -60,19 +60,23 @@ class BinarySearchTree {
     }
   }
 
-  range(node, start, end) {
-    if (!node) return;
+  range(node, start, end, result) {
+    result = result || [];
+    if (!node) return result;
+
     if (node.value > start) {
-      this.range(node.left, start, end);
+      this.range(node.left, start, end, result);
     }
 
     if (node.value >= start && node.value <= end) {
-      console.log(node.value);
+      result.push(node.value);
     }
 
     if (node.value < end) {
-      this.range(node.right, start, end);
+      this.range(node.right, start, end, result);
     }
+
+    return result;
   }
 
   min(node) {
@@ -808,6 +812,9 @@ describe('BinarySearchTree Methods', () => {
   });
   it('BinarySearchTree.max()', () => {
     expect(tree.max(tree.root).value).toBe(17);
+  });
+  it('BinarySearchTree.range()', () => {
+    expect(tree.range(tree.root, 4, 13)).toEqual([4, 5, 6, 8, 10, 11, 12, 13]);
   });
   it('BinarySearchTree.height()', () => {
     expect(tree.height(tree.root)).toBe(5);
