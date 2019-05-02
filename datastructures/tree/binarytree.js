@@ -6,7 +6,7 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print", "last"] }] */
+ ["print", "last", "maxPathSum"] }] */
 
 class Queue {
   constructor() {
@@ -150,6 +150,31 @@ class BinaryTree {
 
     return current;
   }
+
+  reverse(node) {
+    if (!node) return null;
+    const left = node.left; //eslint-disable-line
+    const right = node.right; //eslint-disable-line
+    node.left = this.reverse(right);
+    node.right = this.reverse(left);
+    return node;
+  }
+
+  maxPathSum(node) {
+    let maxSum = -Infinity;
+
+    function traverse(node) {
+      if (node === null) return 0;
+      const left = Math.max(traverse(node.left), 0);
+      const right = Math.max(traverse(node.right), 0);
+      maxSum = Math.max(maxSum, node.value + left + right);
+      return node.value + Math.max(left, right);
+    }
+
+    traverse(node);
+
+    return maxSum;
+  }
 }
 
 
@@ -175,5 +200,11 @@ describe('BinaryTree Methods', () => {
   });
   it('BinaryTree.last()', () => {
     expect(tree.last(tree.root).value).toEqual(7);
+  });
+  it('BinaryTree.reverse()', () => {
+    expect(tree.reverse(tree.root).value).toEqual(1);
+  });
+  it('BinaryTree.maxPathSum()', () => {
+    expect(tree.maxPathSum(tree.root)).toEqual(18);
   });
 });

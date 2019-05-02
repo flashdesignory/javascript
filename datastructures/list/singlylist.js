@@ -362,6 +362,19 @@ class SinglyLinkedList {
     previous.next = node;
     return node;
   }
+
+  reverse2(node) {
+    if (!node) return null;
+    if (!node.next) {
+      this.head = node;
+      return node;
+    }
+
+    const previous = this.reverse2(node.next);
+    previous.next = node;
+    node.next = null;
+    return node;
+  }
 }
 
 // npx jest datastructures/list/singlylist.js
@@ -402,6 +415,16 @@ describe('singly linked list data structure', () => {
       list.add(values[i]);
     }
     list.reverse();
+    expect(list.print()).toEqual([4, 5, 2, 1, 6, 3]);
+  });
+
+  it('reverse2() should equal [4, 5, 2, 1, 6, 3]', () => {
+    const list = new SinglyLinkedList();
+    const values = [3, 6, 1, 2, 5, 4];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.reverse2(list.head);
     expect(list.print()).toEqual([4, 5, 2, 1, 6, 3]);
   });
 
