@@ -175,6 +175,15 @@ class BinaryTree {
 
     return maxSum;
   }
+
+  isMirror(node1, node2) {
+    if (!node1 && !node2) return true;
+    if (node1 && node2 && node1.value === node2.value) {
+      return this.isMirror(node1.left, node2.right)
+        && this.isMirror(node1.right, node2.left);
+    }
+    return false;
+  }
 }
 
 
@@ -206,5 +215,20 @@ describe('BinaryTree Methods', () => {
   });
   it('BinaryTree.maxPathSum()', () => {
     expect(tree.maxPathSum(tree.root)).toEqual(18);
+  });
+});
+
+describe('BinaryTree is symmetrical', () => {
+  const tree = new BinaryTree();
+  tree.root = new Node(1);
+  tree.root.left = new Node(2);
+  tree.root.right = new Node(2);
+  tree.root.left.left = new Node(3);
+  tree.root.left.right = new Node(4);
+  tree.root.right.left = new Node(4);
+  tree.root.right.right = new Node(3);
+
+  it('BinaryTree.isMirror()', () => {
+    expect(tree.isMirror(tree.root, tree.root)).toBeTruthy();
   });
 });

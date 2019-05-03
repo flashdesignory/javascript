@@ -7,7 +7,7 @@
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
 ["min", "max", "breadthFirstSearch", "levelOrder", "getAllAncestors",
-"sumLeaves", "longestConsecutive", "longestPath"] }] */
+"sumLeaves", "longestConsecutive", "longestPath", "maxDepthAlt"] }] */
 
 class Node {
   constructor(value) {
@@ -558,6 +558,40 @@ class BinarySearchTree {
     return Math.min(this.minDepth(node.left), this.minDepth(node.right)) + length;
   }
 
+  maxDepth(node) {
+    if (!node) return 0;
+    if (!node.left && !node.right) return 1;
+
+    const length = 1;
+
+    if (!node.left) return this.maxDepth(node.right) + length;
+    if (!node.right) return this.maxDepth(node.left) + length;
+
+    return Math.max(
+      this.maxDepth(node.left),
+      this.maxDepth(node.right),
+    ) + length;
+  }
+
+  maxDepthAlt(node) {
+    if (!node) return 0;
+    let max = 0;
+
+    function traverse(node, count) {
+      if (!node) return;
+      count++;
+      if (!node.left && !node.right) {
+        if (count > max) max = count;
+      }
+      traverse(node.left, count);
+      traverse(node.right, count);
+    }
+
+    traverse(node, 0);
+
+    return max;
+  }
+
   // eslint-disable-next-line
   levelOrderMinDepth(node) {
     const queue = new Queue();
@@ -793,6 +827,12 @@ describe('BinarySearchTree Methods', () => {
   });
   it('BinarySearchTree.minDepth()', () => {
     expect(tree.minDepth(tree.root)).toEqual(3);
+  });
+  it('BinarySearchTree.maxDepth()', () => {
+    expect(tree.maxDepth(tree.root)).toEqual(5);
+  });
+  it('BinarySearchTree.maxDepthAlt()', () => {
+    expect(tree.maxDepthAlt(tree.root)).toEqual(5);
   });
   it('BinarySearchTree.levelOrderMinDepth()', () => {
     expect(tree.levelOrderMinDepth(tree.root)).toEqual(3);
