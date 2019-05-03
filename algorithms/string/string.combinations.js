@@ -1,11 +1,11 @@
 /*
- * @title: Combinations
- * @description: Calculate Combinations
+ * @title: String Combinations
+ * @description: String Combinations
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
 
-// itteration
+// itterative
 function combinations(str) {
   const result = [];
 
