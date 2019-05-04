@@ -6,6 +6,20 @@
  */
 
 // recursive
+function steps(num) {
+  const memo = [1, 1, 2];
+
+  function recurse(n) {
+    if (!memo[n]) {
+      memo[n] = recurse(n - 3) + recurse(n - 2) + recurse(n - 1);
+    }
+
+    return memo[n];
+  }
+
+  return recurse(num);
+}
+
 function steps1(n) {
   if (n === 1 || n === 0) return 1;
   if (n === 2) return 2;
@@ -24,6 +38,10 @@ function steps2(n) {
 }
 
 // npx jest algorithms/number/number.steps.js
+test('n steps recursive', () => {
+  expect(steps(4)).toEqual(7);
+});
+
 test('n steps recursive', () => {
   expect(steps1(4)).toEqual(7);
 });

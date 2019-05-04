@@ -6,7 +6,7 @@
  */
 
 function maxSubArraySum(arr) {
-  let maxSum = 0;
+  let maxSum = -Infinity;
   let maxLength = 0;
   let result = [];
   let start = 0;
