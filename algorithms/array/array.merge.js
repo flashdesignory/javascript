@@ -51,6 +51,28 @@ function mergeTwo(left, right) {
   return result;
 }
 
+function mergeThree(one, two) {
+  let index1 = one.length;
+  let index2 = two.length;
+
+  while (index1 > 0 && index2 > 0) {
+    if (one[index1 - 1] > two[index2 - 1]) {
+      one[index1 + index2 - 1] = one[index1 - 1];
+      index1--;
+    } else {
+      one[index1 + index2 - 1] = two[index2 - 1];
+      index2--;
+    }
+  }
+
+  while (index2 > 0) {
+    one[index2 - 1] = two[index2 - 1];
+    index2--;
+  }
+
+  return one;
+}
+
 // npx jest algorithms/array/array.merge.js
 describe('merge two arrays', () => {
   test('mergeOne()', () => {
@@ -58,5 +80,8 @@ describe('merge two arrays', () => {
   });
   test('mergeTwo', () => {
     expect(mergeTwo([2, 5, 6, 9], [1, 2, 3, 29])).toEqual([1, 2, 2, 3, 5, 6, 9, 29]);
+  });
+  test('mergeThree', () => {
+    expect(mergeThree([2, 5, 6, 9], [1, 2, 3, 29])).toEqual([1, 2, 2, 3, 5, 6, 9, 29]);
   });
 });
