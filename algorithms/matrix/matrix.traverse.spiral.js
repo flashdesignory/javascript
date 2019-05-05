@@ -6,6 +6,7 @@
  */
 
 function spiral(array) {
+  if (array.length === 0) return [];
   const rows = array.length;
   const columns = array[0].length;
   let topIndex = 0;
@@ -27,20 +28,24 @@ function spiral(array) {
     }
     rightIndex--;
     // bottom
-    for (let i = rightIndex; i >= leftIndex; i--) {
-      result.push(array[bottomIndex][i]);
+    if (topIndex <= bottomIndex) {
+      for (let i = rightIndex; i >= leftIndex; i--) {
+        result.push(array[bottomIndex][i]);
+      }
     }
     bottomIndex--;
     // left
-    for (let i = bottomIndex; i >= topIndex; i--) {
-      result.push(array[i][leftIndex]);
+    if (leftIndex <= rightIndex) {
+      for (let i = bottomIndex; i >= topIndex; i--) {
+        result.push(array[i][leftIndex]);
+      }
     }
     leftIndex++;
   }
   return result.join(',');
 }
 
-// npx jest algorithms/matrix/matrix.spiral.js
+// npx jest algorithms/matrix/matrix.traverse.spiral.js
 test('spiral()', () => {
   const matrix = [[1, 2, 3, 4],
     [5, 6, 7, 8],

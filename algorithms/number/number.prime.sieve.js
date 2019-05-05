@@ -24,7 +24,30 @@ function primes(n) {
   return result.reduce((acc, val, index) => (val ? acc.concat(index) : acc), []);
 }
 
+function primes2(n) {
+  const result = [];
+  for (let i = 0; i <= n; i++) {
+    result[i] = false;
+  }
+
+  let count = 0;
+  for (let i = 2; i < n; i++) {
+    if (result[i] === false) {
+      count++;
+      for (let j = 2; i * j < n; j++) {
+        result[i * j] = true;
+      }
+    }
+  }
+
+  return count;
+}
+
 // npx jest algorithms/number/number.prime.sieve.js
 test('findPrimes()', () => {
   expect(primes(10)).toEqual([2, 3, 5, 7]);
+});
+
+test('findPrimes2()', () => {
+  expect(primes2(10)).toEqual(4);
 });
