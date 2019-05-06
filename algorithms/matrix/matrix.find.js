@@ -12,6 +12,7 @@
  */
 
 function findPosition(matrix, num) {
+  if (!matrix.length || !matrix[0].length) return false;
   // start right top to let bottom
   let row = 0;
   let column = matrix.length - 1;

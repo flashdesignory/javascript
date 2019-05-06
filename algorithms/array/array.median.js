@@ -5,41 +5,36 @@
  * @email: info@flashdesignory.com
  */
 
-function getMedian(arr1, arr2) {
-  const length1 = arr1.length;
-  const length2 = arr2.length;
-  const totalLength = length1 + length2;
+function getMedian(nums1, nums2) {
+  const totalLength = nums1.length + nums2.length;
+  const middle = totalLength / 2;
   const isEven = totalLength % 2 === 0;
-  const middle = Math.floor(totalLength / 2);
-
   let index1 = 0;
   let index2 = 0;
+  let current;
+  let previous;
 
-  let current = null;
-
-  if (isEven) {
-    let previous = null;
-    for (let i = 0; i <= middle; i++) {
+  while (index1 + index2 <= middle) {
+    if (current) {
       previous = current;
-      if (arr1[index1] < arr2[index2]) {
-        current = arr1[index1++];
-      } else {
-        current = arr2[index2++];
-      }
     }
-
-    return (previous + current) / 2;
-  }
-
-  for (let i = 0; i <= middle; i++) {
-    if (arr1[index1] < arr2[index2]) {
-      current = arr1[index1++];
+    const selectOne = nums1[index1];
+    const selectTwo = nums2[index2];
+    if (selectOne === undefined) {
+      current = selectTwo;
+      index2++;
+    } else if (selectTwo === undefined) {
+      current = selectOne;
+      index1++;
+    } else if (selectOne < selectTwo) {
+      current = selectOne;
+      index1++;
     } else {
-      current = arr2[index2++];
+      current = selectTwo;
+      index2++;
     }
   }
-
-  return current;
+  return isEven ? (previous + current) / 2 : current;
 }
 
 // npx jest algorithms/array/array.median.js

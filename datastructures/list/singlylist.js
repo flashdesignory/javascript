@@ -5,6 +5,9 @@
  * @email: info@flashdesignory.com
  */
 
+/* eslint class-methods-use-this: ["error", { "exceptMethods":
+  ["isPalindrome"] }] */
+
 class Node {
   constructor(value) {
     this.value = value;
@@ -181,7 +184,7 @@ class SinglyLinkedList {
     return current.value;
   }
 
-  isPalindrome() {
+  isPalindromeStack() {
     if (!this.head) return false;
 
     const stack = new Stack();
@@ -202,6 +205,51 @@ class SinglyLinkedList {
       }
       current = current.next;
       last = stack.pop();
+    }
+
+    return true;
+  }
+
+  isPalindrome() {
+    if (!this.head) return false;
+
+    const middle = function (node) {
+      let fast = node;
+      let slow = node;
+
+      while (fast && fast.next) {
+        fast = fast.next.next;
+        if (!fast) break;
+        slow = slow.next;
+      }
+      return slow;
+    };
+
+    const reverse = function (node) {
+      let current = node;
+      let previous = null;
+      let next = null;
+
+      while (current) {
+        next = current.next; // eslint-disable-line
+        current.next = previous;
+        previous = current;
+        current = next;
+      }
+      node = previous;
+      return node;
+    };
+
+    const midPoint = middle(this.head);
+    let tail = reverse(midPoint);
+    let current = this.head;
+
+    while (current) {
+      if (current.value !== tail.value) {
+        return false;
+      }
+      current = current.next;
+      tail = tail.next;
     }
 
     return true;
