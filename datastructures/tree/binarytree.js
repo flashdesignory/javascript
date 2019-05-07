@@ -184,6 +184,15 @@ class BinaryTree {
     }
     return false;
   }
+
+  isSame(node1, node2) {
+    if (!node1 && !node2) return true;
+    if (node1 && node2 && node1.value === node2.value) {
+      return this.isSame(node1.left, node2.left)
+        && this.isSame(node1.right, node2.right);
+    }
+    return false;
+  }
 }
 
 
@@ -230,5 +239,21 @@ describe('BinaryTree is symmetrical', () => {
 
   it('BinaryTree.isMirror()', () => {
     expect(tree.isMirror(tree.root, tree.root)).toBeTruthy();
+  });
+});
+
+describe('BinaryTree is identical', () => {
+  const tree1 = new BinaryTree();
+  tree1.root = new Node(1);
+  tree1.root.left = new Node(2);
+  tree1.root.right = new Node(3);
+
+  const tree2 = new BinaryTree();
+  tree2.root = new Node(1);
+  tree2.root.left = new Node(2);
+  tree2.root.right = new Node(3);
+
+  it('BinaryTree.isSame()', () => {
+    expect(tree1.isSame(tree1.root, tree2.root)).toBeTruthy();
   });
 });
