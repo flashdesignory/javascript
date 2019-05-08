@@ -33,7 +33,7 @@ function maxSubArraySum(arr) {
   return maxSum;
 }
 
-// npx jest algorithms/array/array.maxsub.js
+// npx jest algorithms/array/array.maxsub.sum.js
 test('maxSubArraySum()', () => {
   expect(maxSubArraySum([-2, -3, 4, -1, -2, 1, 5, -3])).toEqual(7);
 });

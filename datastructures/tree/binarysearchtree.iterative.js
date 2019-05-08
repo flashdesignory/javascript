@@ -178,5 +178,7 @@ describe('BinarySearchTree Methods', () => {
   for (let i = 0; i < values.length; i++) {
     tree.insert(values[i]);
   }
-  expect(tree.contains(13)).toBeTruthy();
+  it('BinarySearchTree.contains()', () => {
+    expect(tree.contains(13)).toBeTruthy();
+  });
 });

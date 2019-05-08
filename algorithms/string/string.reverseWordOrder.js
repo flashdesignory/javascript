@@ -30,6 +30,19 @@ function reverseWords(arr) {
   return arr.join('');
 }
 
+function reverseWords2(str) {
+  const arr = str.split(' ');
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === '') {
+      arr.splice(i, 1);
+      i--;
+    }
+  }
+
+  reverseWord(arr, 0, arr.length - 1);
+  return arr.join(' ').trim();
+}
+
 // npx jest algorithms/string/string.reverseWordOrder.js
 test('test reverse words', () => {
   const message = ['c', 'a', 'k', 'e', ' ',
@@ -37,4 +50,9 @@ test('test reverse words', () => {
     's', 't', 'e', 'a', 'l'];
 
   expect(reverseWords(message)).toEqual('steal pound cake');
+});
+
+test('test reverse words', () => {
+  const message = 'the  sky   is blue';
+  expect(reverseWords2(message)).toEqual('blue is sky the');
 });
