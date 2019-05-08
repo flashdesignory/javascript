@@ -6,8 +6,8 @@
  */
 
 // sliding window
-function maxSum(arr, n, k) {
-  if (n < k) return null;
+function maxSum(arr, k) {
+  if (arr.length < k) return null;
   let max = 0;
 
   for (let i = 0; i < k; i++) {
@@ -15,7 +15,7 @@ function maxSum(arr, n, k) {
   }
 
   let currentSum = max;
-  for (let i = k; i < n; i++) {
+  for (let i = k; i < arr.length; i++) {
     currentSum += arr[i] - arr[i - k];
     max = Math.max(currentSum, max);
   }
@@ -27,6 +27,5 @@ function maxSum(arr, n, k) {
 test('maxSum()', () => {
   const nums = [1, 4, 2, 10, 2, 3, 1, 0, 20];
   const k = 4;
-  const n = nums.length;
-  expect(maxSum(nums, n, k)).toEqual(24);
+  expect(maxSum(nums, k)).toEqual(24);
 });

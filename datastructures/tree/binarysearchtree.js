@@ -7,7 +7,7 @@
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
 ["min", "max", "breadthFirstSearch", "levelOrder", "getAllAncestors",
-"sumLeaves", "longestConsecutive", "longestPath", "maxDepthAlt"] }] */
+"sumLeaves", "longestConsecutive", "longestPath", "maxDepthAlt", "printLevelOrderZigZag"] }] */
 
 class Node {
   constructor(value) {
@@ -330,31 +330,19 @@ class BinarySearchTree {
     return result;
   }
 
-  collectNodesAtLevel(node, k, arr, reverse) {
-    if (!node) return arr;
-    if (k === 0) {
-      if (arr) {
-        arr.push(node.value);
-      }
-    } else {
-      // eslint-disable-next-line
-       if (reverse) {
-        arr = this.collectNodesAtLevel(node.right, k - 1, arr, reverse);
-        arr = this.collectNodesAtLevel(node.left, k - 1, arr, reverse);
-      } else {
-        arr = this.collectNodesAtLevel(node.left, k - 1, arr, reverse);
-        arr = this.collectNodesAtLevel(node.right, k - 1, arr, reverse);
-      }
-    }
-    return arr;
-  }
-
   printLevelOrderZigZag(node) {
     const result = [];
-    const height = this.height(node);
-    for (let i = 0; i < height; i++) {
-      result.push(this.collectNodesAtLevel(node, i, [], i % 2 === 0));
+
+    function traverse(node, level) {
+      if (!node) return;
+      if (!result[level]) result[level] = [];
+      level % 2 === 0 ? result[level].unshift(node.value) : result[level].push(node.value);
+      traverse(node.left, level + 1);
+      traverse(node.right, level + 1);
     }
+
+    traverse(node, 0);
+
     return result;
   }
 
