@@ -1,3 +1,10 @@
+/*
+ * @title: Binary Search Tree Creation
+ * @description:Create BST from array
+ * @author: Thorsten Kober
+ * @email: info@flashdesignory.com
+ */
+
 class BSTNode {
   constructor(value) {
     this.value = value;

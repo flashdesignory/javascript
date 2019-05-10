@@ -1,3 +1,10 @@
+/*
+ * @title: Binary Search Tree Flattening
+ * @description:Flatten BST to SinglyList
+ * @author: Thorsten Kober
+ * @email: info@flashdesignory.com
+ */
+
 class Node {
   constructor(value) {
     this.value = value;
