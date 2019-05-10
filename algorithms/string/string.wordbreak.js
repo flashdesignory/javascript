@@ -36,7 +36,29 @@ function wordBreak(str) {
 }
 
 // tabulation
-function wordBreak2(str) {
+function wordBreak2(str, dict) {
+  if (!dict || dict.length === 0) return false;
+
+  const result = [];
+  for (let i = 1; i <= str.length; i++) {
+    result[i] = false;
+  }
+  result[0] = true;
+
+  for (let i = 1; i <= str.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (result[j] && dict.indexOf(str.substring(j, i)) >= 0) {
+        result[i] = true;
+        break;
+      }
+    }
+  }
+
+  return result[str.length];
+}
+
+// tabulation
+function wordBreak3(str) {
   const size = str.length;
   if (size === 0) return true;
 
@@ -98,22 +120,44 @@ describe('wordbreak recursive', () => {
 });
 
 describe('wordbreak tabulation', () => {
+  const dictionary = ['mobile', 'samsung', 'sam', 'sung', 'man', 'mango', 'icecream', 'and', 'go', 'i', 'like', 'ice', 'cream'];
   test('wordBreak2(ilikesamsung)', () => {
-    expect(wordBreak2('ilikesamsung')).toEqual(true);
+    expect(wordBreak2('ilikesamsung', dictionary)).toEqual(true);
   });
   test('wordBreak2(iiiiiiii)', () => {
-    expect(wordBreak2('iiiiiiii')).toEqual(true);
+    expect(wordBreak2('iiiiiiii', dictionary)).toEqual(true);
   });
   test('wordBreak2()', () => {
-    expect(wordBreak2('')).toEqual(true);
+    expect(wordBreak2('', dictionary)).toEqual(true);
   });
   test('wordBreak2(ilikelikeimangoiii)', () => {
-    expect(wordBreak2('ilikelikeimangoiii')).toEqual(true);
+    expect(wordBreak2('ilikelikeimangoiii', dictionary)).toEqual(true);
   });
   test('wordBreak2(samsungandmango)', () => {
-    expect(wordBreak2('samsungandmango')).toEqual(true);
+    expect(wordBreak2('samsungandmango', dictionary)).toEqual(true);
   });
   test('wordBreak2(samsungandmangok)', () => {
-    expect(wordBreak2('samsungandmangok')).toEqual(false);
+    expect(wordBreak2('samsungandmangok', dictionary)).toEqual(false);
+  });
+});
+
+describe('wordbreak tabulation', () => {
+  test('wordBreak3(ilikesamsung)', () => {
+    expect(wordBreak3('ilikesamsung')).toEqual(true);
+  });
+  test('wordBreak3(iiiiiiii)', () => {
+    expect(wordBreak3('iiiiiiii')).toEqual(true);
+  });
+  test('wordBreak3()', () => {
+    expect(wordBreak3('')).toEqual(true);
+  });
+  test('wordBreak3(ilikelikeimangoiii)', () => {
+    expect(wordBreak3('ilikelikeimangoiii')).toEqual(true);
+  });
+  test('wordBreak3(samsungandmango)', () => {
+    expect(wordBreak3('samsungandmango')).toEqual(true);
+  });
+  test('wordBreak3(samsungandmangok)', () => {
+    expect(wordBreak3('samsungandmangok')).toEqual(false);
   });
 });

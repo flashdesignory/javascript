@@ -145,6 +145,27 @@ class SinglyLinkedList {
     return length;
   }
 
+  removeFromEnd(n) {
+    if (!this.head) return null;
+
+    const temp = new Node(null);
+    temp.next = this.head;
+    let fast = temp;
+    let slow = temp;
+
+    for (let i = 0; i < n + 1; i++) {
+      fast = fast.next;
+    }
+
+    while (fast) {
+      fast = fast.next;
+      slow = slow.next;
+    }
+
+    slow.next = slow.next.next;
+    return temp.next;
+  }
+
   findFromEnd(n) {
     if (!this.head) return null;
 
@@ -589,5 +610,15 @@ describe('singly linked list data structure', () => {
       list.addSorted(values[i]);
     }
     expect(list.print()).toEqual([2, 4, 5, 6, 8, 9, 10, 11]);
+  });
+
+  it('removeFromEnd() should remove element from end', () => {
+    const list = new SinglyLinkedList();
+    const values = [1, 2, 3, 4, 5];
+    for (let i = 0; i < values.length; i++) {
+      list.add(values[i]);
+    }
+    list.removeFromEnd(2);
+    expect(list.print()).toEqual([1, 2, 3, 5]);
   });
 });
