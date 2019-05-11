@@ -64,7 +64,7 @@ function pathsTopLeftBottomRightRestricted(numRows, numCols) {
   return result;
 }
 
-// npx jest algorithms/matrix/matrix.topleftrightbottom.js
+// npx jest algorithms/matrix/matrix.tlrb.all.js
 test('paths top left right bottom', () => {
   expect(pathsTopLeftBottomRight(4, 4)).toEqual(184);
 });
