@@ -7,7 +7,8 @@
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
 ["min", "max", "breadthFirstSearch", "levelOrder", "getAllAncestors",
-"sumLeaves", "longestConsecutive", "longestPath", "maxDepthAlt", "printLevelOrderZigZag"] }] */
+"sumLeaves", "longestConsecutive", "longestPath", "maxDepthAlt",
+"printLevelOrderZigZag", "sumRootLeaves"] }] */
 
 class Node {
   constructor(value) {
@@ -456,6 +457,33 @@ class BinarySearchTree {
        || this.sumPath(node.right, value - node.value);
   }
 
+  sumRootLeaves(node) {
+    if (!node) return 0;
+    let sum = 0;
+    const result = [];
+
+    function traverse(node, current) {
+      if (!node) return;
+
+      current.push(node.value);
+      if (!node.left && !node.right) {
+        result.push(Number(current.join('')));
+        return;
+      }
+
+      traverse(node.left, [...current]);
+      traverse(node.right, [...current]);
+    }
+
+    traverse(node, []);
+
+    for (let i = 0; i < result.length; i++) {
+      sum += result[i];
+    }
+
+    return sum;
+  }
+
   longestConsecutive(node) {
     let result = 0;
 
@@ -800,6 +828,9 @@ describe('BinarySearchTree Methods', () => {
   });
   it('BinarySearchTree.sumLeaves()', () => {
     expect(tree.sumLeaves(tree.root)).toBe(54);
+  });
+  it('BinarySearchTree.sumRootLeaves()', () => {
+    expect(tree.sumRootLeaves(tree.root)).toEqual(20530264);
   });
   it('BinarySearchTree.sumPath()', () => {
     expect(tree.sumPath(tree.root, 48)).toBe(true);
