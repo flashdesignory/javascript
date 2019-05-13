@@ -6,8 +6,11 @@
  */
 
 function findMissingNumber(nums) {
-  if (nums.length === 0) return 0;
-  if (nums.length === 1) return 1;
+  if (nums.length === 1) {
+    if (nums[0] === 0) return 1;
+    if (nums[0] === 1) return 0;
+    return 0;
+  }
 
   const n = nums.length;
   const expectedSum = n * (n + 1) / 2;
