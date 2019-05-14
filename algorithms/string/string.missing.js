@@ -1,6 +1,6 @@
 /*
  * @title: find missing letter
- * @description: find missign letter in string
+ * @description: find missign letter from alphabet
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
