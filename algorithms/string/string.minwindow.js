@@ -58,7 +58,7 @@ function minwindow(str, pat) {
       }
 
       const length = i - start + 1;
-      if (minLength > length) {
+      if (minLength >= length) {
         minLength = length;
         startIndex = start;
       }
