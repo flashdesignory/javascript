@@ -27,9 +27,9 @@ function dfs(matrix, row, column, origValue, newValue) {
 
 function paintFill(matrix, point, value) {
   const originalValue = matrix[point.row][point.column];
+  if (originalValue === value) return matrix;
 
   dfs(matrix, point.row, point.column, originalValue, value);
-
   return matrix;
 }
 

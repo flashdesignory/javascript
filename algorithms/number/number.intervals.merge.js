@@ -5,6 +5,24 @@
  * @email: info@flashdesignory.com
  */
 
+function mergeIntervalsSimple(intervals) {
+  if (intervals.length === 0) return [];
+
+  intervals.sort((a, b) => a[0] - b[0]);
+  const result = [intervals[0]];
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i][0] <= result[result.length - 1][1]) {
+      if (intervals[i][1] > result[result.length - 1][1]) {
+        result[result.length - 1][1] = intervals[i][1]; // eslint-disable-line
+      }
+    } else {
+      result.push(intervals[i]);
+    }
+  }
+
+  return result;
+}
+
 class Stack {
   constructor() {
     this.data = {};
@@ -66,5 +84,9 @@ describe('merge conflicting intervals', () => {
   test('mergeIntervals()', () => {
     const nums = [[6, 8], [1, 9], [2, 4], [4, 7]];
     expect(mergeIntervals(nums)).toEqual([[1, 9]]);
+  });
+  test('mergeIntervalsSimple()', () => {
+    const nums = [[6, 8], [1, 9], [2, 4], [4, 7]];
+    expect(mergeIntervalsSimple(nums)).toEqual([[1, 9]]);
   });
 });
