@@ -367,6 +367,16 @@ class SinglyLinkedList {
     let next = null;
     let count = 0;
 
+    /*  If the number of nodes is not a multiple of k then left-out
+        nodes in the end should remain as it is. Uncomment below */
+
+    /*
+    let tail = node;
+    for (let i = 0; i < k; i++) {
+      tail = tail.next;
+      if (!tail) return node;
+    } */
+
     while (current && count < k) {
       next = current.next; //eslint-disable-line
       current.next = previous;

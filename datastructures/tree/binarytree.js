@@ -6,7 +6,7 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print", "last", "maxPathSum"] }] */
+ ["print", "last", "maxPathSum", "lowestCommonAncestor"] }] */
 
 class Queue {
   constructor() {
@@ -193,6 +193,27 @@ class BinaryTree {
     }
     return false;
   }
+
+  lowestCommonAncestor(node, value1, value2) {
+    let ancestor = null;
+
+    function traverse(node, p, q) {
+      if (!node) return false;
+
+      const left = traverse(node.left, p, q) ? 1 : 0;
+      const right = traverse(node.right, p, q) ? 1 : 0;
+      const middle = (node.value === p) || (node.value === q) ? 1 : 0;
+
+      if (middle + left + right >= 2) {
+        ancestor = node;
+      }
+
+      return (middle + left + right > 0);
+    }
+
+    traverse(node, value1, value2);
+    return ancestor.value;
+  }
 }
 
 
@@ -255,5 +276,20 @@ describe('BinaryTree is identical', () => {
 
   it('BinaryTree.isSame()', () => {
     expect(tree1.isSame(tree1.root, tree2.root)).toBeTruthy();
+  });
+});
+
+describe('BinaryTree lowest Common Ancestor', () => {
+  const tree = new BinaryTree();
+  tree.root = new Node(1);
+  tree.root.left = new Node(2);
+  tree.root.right = new Node(3);
+  tree.root.left.left = new Node(4);
+  tree.root.left.right = new Node(5);
+  tree.root.right.left = new Node(6);
+  tree.root.right.right = new Node(7);
+
+  it('BinaryTree.lowestCommonAncestor()', () => {
+    expect(tree.lowestCommonAncestor(tree.root, 4, 5)).toEqual(2);
   });
 });
