@@ -18,12 +18,12 @@ class Node {
 }
 
 class LRUCache {
-  constructor(limit) {
-    this.limit = limit;
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.size = 0;
     this.head = null;
     this.tail = null;
     this.map = {};
-    this.size = 0;
   }
 
   print() {
@@ -36,65 +36,64 @@ class LRUCache {
     return result;
   }
 
-  set(key, value) {
-    let node;
-    if (this.map[key]) {
-      node = this.map[key];
-      node.value = value;
-
-      if (node.previous) {
-        node.previous.next = node.next;
-      }
-
-      if (node.next) {
-        node.next.previous = node.previous;
-      }
-    } else {
-      if (this.size >= this.limit) {
-        const key = this.tail.key; // eslint-disable-line
-        this.tail = this.tail.previous;
-        if (this.tail) this.tail.next = null;
-        delete this.map[key];
-      } else {
-        this.size++;
-      }
-
-      node = new Node(key, value);
-      this.map[key] = node;
-    }
-
-    if (this.head) {
-      this.head.previous = node;
-      node.next = this.head;
-    }
-
-    this.head = node;
-    if (!this.tail) this.tail = node;
-    return node;
-  }
-
   get(key) {
-    if (!this.map[key]) return null;
+    if (!this.map[key]) return -1;
 
     const node = this.map[key];
-    if (this.head === node) return node;
+    const previous = node.previous; // eslint-disable-line
+    const next = node.next; // eslint-disable-line
 
-    if (node.previous) {
-      node.previous.next = node.next;
+    if (previous) previous.next = next;
+    if (next) next.previous = previous || next.previous;
+
+    if (this.tail === node) {
+      this.tail = previous || node;
     }
 
-    if (node.next) {
-      node.next.previous = node.previous;
-    }
+    node.previous = null;
 
-    if (this.head) {
-      this.head.previous = node;
+    if (this.head !== node) {
       node.next = this.head;
+      this.head.previous = node;
     }
 
     this.head = node;
-    if (!this.tail) this.tail = node;
-    return node;
+    return node.value;
+  }
+
+  put(key, value) {
+    if (this.map[key]) {
+      this.map[key].value = value;
+      this.get(key);
+    } else {
+      const node = new Node(key, value);
+      this.map[key] = node;
+      if (this.head) {
+        this.head.previous = node;
+        node.next = this.head;
+      }
+
+      this.head = node;
+
+      if (!this.tail) {
+        this.tail = node;
+      }
+
+      this.size++;
+    }
+
+    if (this.size > this.capacity) {
+      const keyToDelete = this.tail.key;
+
+      if (this.tail.previous) {
+        this.tail.previous.next = null;
+        this.tail = this.tail.previous;
+        this.map[keyToDelete].previous = null;
+      }
+
+      delete this.map[keyToDelete];
+      this.size -= 1;
+    }
   }
 }
 
@@ -102,31 +101,31 @@ class LRUCache {
 describe('LRUCache should hold 5 most recent values', () => {
   it('adding 1-5, should equal [[5,5], [4,4], [3,3], [2,2], [1,1]]', () => {
     const cache = new LRUCache(5);
-    cache.set(1, 1);
-    cache.set(2, 2);
-    cache.set(3, 3);
-    cache.set(4, 4);
-    cache.set(5, 5);
+    cache.put(1, 1);
+    cache.put(2, 2);
+    cache.put(3, 3);
+    cache.put(4, 4);
+    cache.put(5, 5);
     expect(cache.print()).toEqual([[5, 5], [4, 4], [3, 3], [2, 2], [1, 1]]);
   });
   it('adding (6,6) should equal [[6,6], [5,5], [4,4], [3,3], [2,2]]', () => {
     const cache = new LRUCache(5);
-    cache.set(1, 1);
-    cache.set(2, 2);
-    cache.set(3, 3);
-    cache.set(4, 4);
-    cache.set(5, 5);
-    cache.set(6, 6);
+    cache.put(1, 1);
+    cache.put(2, 2);
+    cache.put(3, 3);
+    cache.put(4, 4);
+    cache.put(5, 5);
+    cache.put(6, 6);
     expect(cache.print()).toEqual([[6, 6], [5, 5], [4, 4], [3, 3], [2, 2]]);
   });
   it('getting (3) should equal [[3,3], [6,6], [5,5], [4,4], [2,2]]', () => {
     const cache = new LRUCache(5);
-    cache.set(1, 1);
-    cache.set(2, 2);
-    cache.set(3, 3);
-    cache.set(4, 4);
-    cache.set(5, 5);
-    cache.set(6, 6);
+    cache.put(1, 1);
+    cache.put(2, 2);
+    cache.put(3, 3);
+    cache.put(4, 4);
+    cache.put(5, 5);
+    cache.put(6, 6);
     cache.get(3);
     expect(cache.print()).toEqual([[3, 3], [6, 6], [5, 5], [4, 4], [2, 2]]);
   });
