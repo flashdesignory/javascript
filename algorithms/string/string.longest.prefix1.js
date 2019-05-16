@@ -31,7 +31,7 @@ function getPrefix(arr) {
   return result.join('');
 }
 
-// npx jest algorithms/string/string.longestPrefix.js
+// npx jest algorithms/string/string.longest.prefix1.js
 test('getPrefix()', () => {
   expect(getPrefix(['geeksforgeeks', 'geeks', 'geek', 'geezer'])).toEqual('gee');
   expect(getPrefix(['apple', 'ape', 'april'])).toEqual('ap');

@@ -26,7 +26,7 @@ function dfs(matrix, row, col, visited, current, result) {
   visited[row][col] = true;
   current += matrix[row][col];
   if (dictionaryContains(current)) {
-    result.push(current);
+    if (result.indexOf(current) === -1) result.push(current);
   }
 
   for (let i = 0; i < 8; i++) {
