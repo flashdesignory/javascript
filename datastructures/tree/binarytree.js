@@ -6,7 +6,7 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print", "last", "maxPathSum", "lowestCommonAncestor"] }] */
+ ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter"] }] */
 
 class Queue {
   constructor() {
@@ -96,6 +96,22 @@ class BinaryTree {
       queue.enqueue(current.right);
     }
     return node;
+  }
+
+  diameter(node) {
+    let result = 0;
+
+    function dfs(node) {
+      if (!node) return 0;
+      const left = dfs(node.left);
+      const right = dfs(node.right);
+      result = Math.max(result, (left + right));
+      return Math.max(left, right) + 1;
+    }
+
+    dfs(node);
+
+    return result;
   }
 
   preorder(node, result) {
@@ -227,6 +243,9 @@ describe('BinaryTree Methods', () => {
 
   it('BinaryTree.contains()', () => {
     expect(tree.contains(tree.root, 2)).toBeTruthy();
+  });
+  it('BinaryTree.diameter()', () => {
+    expect(tree.diameter(tree.root)).toEqual(4);
   });
   it('BinaryTree.preorder()', () => {
     expect(tree.preorder(tree.root)).toEqual([1, 2, 4, 5, 3, 6, 7]);
