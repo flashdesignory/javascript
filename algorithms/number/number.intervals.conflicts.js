@@ -63,11 +63,11 @@ describe('return conflicting intervals', () => {
 describe('return conflicting intervals', () => {
   test('findConflicts2()', () => {
     const nums = [[1, 5], [3, 7], [2, 6], [10, 15], [5, 6], [4, 100]];
-    expect(findConflicts2(nums)).toEqual([[ 2, 6 ], [ 3, 7 ], [ 4, 100 ]]);
+    expect(findConflicts2(nums)).toEqual([[2, 6], [3, 7], [4, 100]]);
   });
   test('findConflicts2()', () => {
     const nums = [[1, 3], [5, 7], [2, 4], [6, 8]];
-    expect(findConflicts2(nums)).toEqual([[ 2, 4 ], [ 6, 8 ]]);
+    expect(findConflicts2(nums)).toEqual([[2, 4], [6, 8]]);
   });
   test('findConflicts2()', () => {
     const nums = [[1, 3], [7, 9], [4, 6], [10, 13]];
