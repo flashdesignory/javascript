@@ -47,6 +47,7 @@ function pathsTopLeftBottomRight(numRows, numCols) {
   return result;
 }
 
+// recursive
 function pathsTopLeftBottomRightRestricted(numRows, numCols) {
   let result = 0;
 
@@ -64,6 +65,33 @@ function pathsTopLeftBottomRightRestricted(numRows, numCols) {
   return result;
 }
 
+// tabulation
+function pathsTopLeftBottomRightRestricted2(m, n) {
+  const result = [];
+  for (let i = 0; i < m; i++) {
+    result[i] = [];
+    for (let j = 0; j < n; j++) {
+      result[i][j] = 0;
+    }
+  }
+
+  for (let i = 0; i < m; i++) {
+    result[i][0] = 1;
+  }
+
+  for (let i = 0; i < n; i++) {
+    result[0][i] = 1;
+  }
+
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      result[i][j] = result[i - 1][j] + result[i][j - 1];
+    }
+  }
+
+  return result[m - 1][n - 1];
+}
+
 // npx jest algorithms/matrix/matrix.tlrb.all.js
 test('paths top left right bottom', () => {
   expect(pathsTopLeftBottomRight(4, 4)).toEqual(184);
@@ -71,4 +99,8 @@ test('paths top left right bottom', () => {
 
 test('paths top left right bottom restricted', () => {
   expect(pathsTopLeftBottomRightRestricted(4, 4)).toEqual(20);
+});
+
+test('paths top left right bottom restricted 2', () => {
+  expect(pathsTopLeftBottomRightRestricted2(4, 4)).toEqual(20);
 });
