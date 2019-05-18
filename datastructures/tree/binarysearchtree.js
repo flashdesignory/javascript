@@ -8,7 +8,7 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
 ["min", "max", "breadthFirstSearch", "levelOrder", "getAllAncestors",
 "sumLeaves", "longestConsecutive", "longestPath", "maxDepthAlt",
-"printLevelOrderZigZag", "sumRootLeaves"] }] */
+"printLevelOrderZigZag", "sumRootLeaves", "successor2", "predecessor2"] }] */
 
 class Node {
   constructor(value) {
@@ -372,6 +372,24 @@ class BinarySearchTree {
     return next;
   }
 
+  successor2(node, value) {
+    let next = null;
+
+    function traverse(node, value) {
+      if (!node) return;
+
+      if (node.value > value) {
+        next = node;
+        traverse(node.left, value);
+      } else {
+        traverse(node.right, value);
+      }
+    }
+
+    traverse(node, value);
+    return next;
+  }
+
   predecessor(value) {
     const node = this.contains(value);
 
@@ -394,6 +412,24 @@ class BinarySearchTree {
       }
     }
 
+    return previous;
+  }
+
+  predecessor2(node, value) {
+    let previous = null;
+
+    function traverse(node, value) {
+      if (!node) return;
+
+      if (node.value < value) {
+        previous = node;
+        traverse(node.right, value);
+      } else {
+        traverse(node.left, value);
+      }
+    }
+
+    traverse(node, value);
     return previous;
   }
 
@@ -712,7 +748,8 @@ class BinarySearchTree {
     let end = sorted.length - 1;
 
     while (start < end) {
-      if (sorted[start] + sorted[end] === target) {
+      const sum = sorted[start] + sorted[end];
+      if (sum === target) {
         start++;
         end--;
         // console.log(`pair is: ${sorted[start]}, ${sorted[end]}`);
@@ -720,12 +757,8 @@ class BinarySearchTree {
         // and collect all matches
         return true;
       }
-      if (sorted[start] + sorted[end] > target) {
-        end--;
-      }
-      if (sorted[start] + sorted[end] < target) {
-        start++;
-      }
+      if (sum > target) end--;
+      if (sum < target) start++;
     }
     return false;
   }
@@ -736,7 +769,7 @@ class BinarySearchTree {
     this.deleteTree(node.left);
     this.deleteTree(node.right);
 
-    this.remove(this.root, node.value);
+    this.delete(this.root, node.value);
 
     if (this.height(this.root) === 1) {
       this.root = null;
