@@ -40,8 +40,10 @@ class PriorityQueue {
         const temp = this.data[parent];
         this.data[parent] = this.data[index];
         this.data[index] = temp;
+        index = parent;
+      } else {
+        break;
       }
-      index = parent;
     }
   }
 
@@ -49,19 +51,16 @@ class PriorityQueue {
     while (index < this.data.length) {
       const left = Math.floor((index * 2) + 1);
       const right = Math.floor((index * 2) + 2);
-
       let smallest = index;
 
-      if (left < this.data.length - 1) {
-        if (this.data[index].priority > this.data[left].priority) {
-          smallest = left;
-        }
+      if (left < this.data.length
+        && this.data[left].priority < this.data[smallest].priority) {
+        smallest = left;
       }
 
-      if (right < this.data.length - 1) {
-        if (this.data[index].priority > this.data[right].priority) {
-          smallest = right;
-        }
+      if (right < this.data.length
+        && this.data[right].priority < this.data[smallest].priority) {
+        smallest = right;
       }
 
       if (smallest !== index) {

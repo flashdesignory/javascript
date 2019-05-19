@@ -29,28 +29,25 @@ class BinaryMinHeap {
         const temp = this.data[parent];
         this.data[parent] = this.data[index];
         this.data[index] = temp;
+        index = parent;
+      } else {
+        break;
       }
-      index = parent;
     }
   }
 
   bubbleDown(index) {
-    while (true) { // eslint-disable-line
-      const left = Math.floor((index * 2) + 1);
-      const right = Math.floor((index * 2) + 2);
-
+    while (index < this.data.length) {
+      const left = 2 * index + 1;
+      const right = 2 * index + 2;
       let smallest = index;
 
-      if (left < this.data.length - 1) {
-        if (this.data[index] > this.data[left]) {
-          smallest = left;
-        }
+      if (left < this.data.length && this.data[left] < this.data[smallest]) {
+        smallest = left;
       }
 
-      if (right < this.data.length - 1) {
-        if (this.data[index] > this.data[right]) {
-          smallest = right;
-        }
+      if (right < this.data.length && this.data[right] < this.data[smallest]) {
+        smallest = right;
       }
 
       if (smallest !== index) {
