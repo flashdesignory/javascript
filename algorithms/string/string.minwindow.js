@@ -12,7 +12,7 @@
 */
 
 // sliding window - dynamic size
-function minwindow(str, pat) {
+function minWindow(str, pat) {
   const strLength = str.length;
   const patLength = pat.length;
 
@@ -69,7 +69,53 @@ function minwindow(str, pat) {
   return str.substr(startIndex, minLength);
 }
 
+// sliding window
+function minWindow2(s, t) {
+  let result = '';
+
+  const freqMap = {};
+  t.split('').forEach(ch => freqMap[ch] = (freqMap[ch] || 0) + 1); // eslint-disable-line
+
+  // number of unique characters in t
+  let count = Object.keys(freqMap).length;
+
+  let left = 0;
+  let right = -1;
+
+  while (right < s.length) {
+    // if count is 0, we have a window with all chars
+    if (count === 0) {
+      if (!result || right - left + 1 < result.length) {
+        result = s.slice(left, right + 1);
+      }
+
+      const current = s[left];
+      if (freqMap[current] !== undefined) {
+        freqMap[current]++;
+      }
+      if (freqMap[current] > 0) {
+        count++;
+      }
+      left++;
+    } else {
+      right++;
+      const current = s[right];
+      if (freqMap[current] !== undefined) {
+        freqMap[current]--;
+      }
+      // decrease count since we have enough of this char
+      if (freqMap[current] === 0) {
+        count--;
+      }
+    }
+  }
+  return result;
+}
+
 // npx jest algorithms/string/string.minwindow.js
-test('minwindow()', () => {
-  expect(minwindow('ADOBECODEBANC', 'ABC')).toEqual('BANC');
+test('minWindow()', () => {
+  expect(minWindow('ADOBECODEBANC', 'ABC')).toEqual('BANC');
+});
+test('minWindow2()', () => {
+  expect(minWindow2('ADOBECODEBANC', 'ABC')).toEqual('BANC');
 });
