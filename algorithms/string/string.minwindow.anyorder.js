@@ -1,6 +1,6 @@
 /*
  * @title: min window
- * @description: find missign letter in string
+ * @description: find all chars random order
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
