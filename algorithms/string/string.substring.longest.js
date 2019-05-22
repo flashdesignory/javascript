@@ -6,6 +6,7 @@
  */
 
 function longestSubstring1(s) {
+  if (s.length < 2) return s.length;
   let max = '';
   let current = '';
 
@@ -26,19 +27,21 @@ function longestSubstring1(s) {
 }
 
 function longestSubstring2(s) {
-  let start = 0;
-  let max = 0;
-  const chars = {};
+  if (s.length < 2) return s.length;
+  let startIndex = 0;
+  let maxLength = 0;
+  const freqMap = {};
 
   for (let i = 0; i < s.length; i++) {
-    const current = s[i];
-    if (chars[current] >= start) start = chars[current] + 1;
-    chars[current] = i;
+    const letter = s[i];
+    if (freqMap[letter] >= startIndex) startIndex = freqMap[letter] + 1;
+    freqMap[letter] = i;
 
-    if (i - start + 1 > max) max = i - start + 1;
+    const currentLength = i - startIndex + 1;
+    if (currentLength > maxLength) maxLength = currentLength;
   }
 
-  return max;
+  return maxLength;
 }
 
 // npx jest algorithms/string/string.substring.longest.js
