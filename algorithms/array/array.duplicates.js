@@ -11,19 +11,6 @@
  */
 
 function removeDuplicates1(arr) {
-  let counter = 0;
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] !== arr[counter]) {
-      counter++;
-      const temp = arr[counter];
-      arr[counter] = arr[i];
-      arr[i] = temp;
-    }
-  }
-  return arr.slice(0, counter + 1);
-}
-
-function removeDuplicates(arr) {
   let i = arr.length - 1;
   const seen = {};
   while (i >= 0) {
@@ -59,23 +46,39 @@ function removeDuplicates4(arr) {
   return [...new Set(arr)];
 }
 
+function removeDuplicates5(nums) {
+  let count = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums.indexOf(nums[i]) !== i) {
+      count++;
+    } else {
+      nums[i - count] = nums[i];
+    }
+  }
+  return nums.slice(0, nums.length - count);
+}
+
 // npx jest algorithms/array/array.duplicates.js
 describe('remove duplicates in array', () => {
-  const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
-
-  test('removeDuplicates()', () => {
-    expect(removeDuplicates(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
-  });
   test('removeDuplicates1()', () => {
+    const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
     expect(removeDuplicates1(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
   });
   test('removeDuplicates2()', () => {
+    const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
     expect(removeDuplicates2(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
   });
   test('removeDuplicates3()', () => {
-    expect(removeDuplicates3(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
+    const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
+    expect(removeDuplicates3(nums)).toEqual([1, 3, 5, 2, 4, 8, 6]);
   });
   test('removeDuplicates4()', () => {
-    expect(removeDuplicates4(nums)).toEqual([1, 2, 8, 6, 4, 5, 3]);
+    const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
+    expect(removeDuplicates4(nums)).toEqual([1, 3, 5, 2, 4, 8, 6]);
+  });
+  test('removeDuplicates5()', () => {
+    const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
+    expect(removeDuplicates5(nums)).toEqual([1, 3, 5, 2, 4, 8, 6]);
   });
 });
