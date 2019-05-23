@@ -1,12 +1,12 @@
 /*
- * @title: Max Sum of K-size
+ * @title: Max Sum of K-size Window
  * @description: sliding window algo to find max sum
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
 
-function maxSum(arr, length, k) {
-  if (length < k) return null;
+function SumSlidingWindow(arr, k) {
+  if (arr.length < k) return null;
   let max = 0;
 
   for (let i = 0; i < k; i++) {
@@ -14,7 +14,7 @@ function maxSum(arr, length, k) {
   }
 
   let current = max;
-  for (let i = k; i < length; i++) {
+  for (let i = k; i < arr.length; i++) {
     current += arr[i] - arr[i - k];
     max = Math.max(current, max);
   }
@@ -22,10 +22,9 @@ function maxSum(arr, length, k) {
   return max;
 }
 
-// npx jest algorithms/number/number.sum.slidingwindow.js
+// npx jest algorithms/array/array.slidingwindow.sum.js
 test('return max sum of k-size window', () => {
   const nums = [1, 4, 2, 10, 2, 3, 1, 0, 20];
   const k = 4;
-  const n = nums.length;
-  expect(maxSum(nums, n, k)).toEqual(24);
+  expect(SumSlidingWindow(nums, k)).toEqual(24);
 });

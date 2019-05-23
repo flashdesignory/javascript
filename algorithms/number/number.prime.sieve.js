@@ -5,7 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-function primes(n) {
+function findPrimes(n) {
   const result = [];
   for (let i = 0; i <= n; i++) {
     result[i] = true;
@@ -24,7 +24,7 @@ function primes(n) {
   return result.reduce((acc, val, index) => (val ? acc.concat(index) : acc), []);
 }
 
-function primes2(n) {
+function countPrimes(n) {
   const result = [];
   for (let i = 0; i <= n; i++) {
     result[i] = false;
@@ -45,9 +45,9 @@ function primes2(n) {
 
 // npx jest algorithms/number/number.prime.sieve.js
 test('findPrimes()', () => {
-  expect(primes(10)).toEqual([2, 3, 5, 7]);
+  expect(findPrimes(10)).toEqual([2, 3, 5, 7]);
 });
 
-test('findPrimes2()', () => {
-  expect(primes2(10)).toEqual(4);
+test('countPrimes()', () => {
+  expect(countPrimes(10)).toEqual(4);
 });

@@ -6,19 +6,19 @@
  */
 
 function findPrimes(n) {
-  const factors = [];
+  const result = [];
   let divisor = 2;
 
   while (n > 2) {
     if (n % divisor === 0) {
-      factors.push(divisor);
+      result.push(divisor);
       n = n / divisor; // eslint-disable-line
     } else {
       divisor++;
     }
   }
 
-  return factors;
+  return result;
 }
 
 // npx jest algorithms/number/number.prime.factors.js

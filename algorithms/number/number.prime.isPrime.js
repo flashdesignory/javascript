@@ -17,9 +17,6 @@ function isPrimeOne(number) {
   return true;
 }
 
-console.log(isPrimeOne(137));
-console.log(isPrimeOne(237));
-
 function isPrimeTwo(number) {
   let divisor = 3;
   const limit = Math.sqrt(number);
@@ -41,9 +38,6 @@ function isPrimeTwo(number) {
 
   return true;
 }
-
-console.log(isPrimeTwo(137));
-console.log(isPrimeTwo(237));
 
 // npx jest algorithms/number/number.prime.isPrime.js
 describe('isPrime solutions', () => {

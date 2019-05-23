@@ -61,7 +61,7 @@ function medianSlidingWindow2(nums, k) {
 }
 
 // npx jest algorithms/array/array.slidingwindow.median.js
-test('Container With Most Water', () => {
+test('return median of k-size windowr', () => {
   expect(medianSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3)).toEqual([1, -1, -1, 3, 5, 6]);
   expect(medianSlidingWindow2([1, 3, -1, -3, 5, 3, 6, 7], 3)).toEqual([1, -1, -1, 3, 5, 6]);
 });
