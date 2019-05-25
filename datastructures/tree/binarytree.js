@@ -6,7 +6,8 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter", "levelorder", "boundary"] }] */
+ ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter",
+ "levelorder", "boundary", "getNode"] }] */
 
 class Queue {
   constructor() {
@@ -70,6 +71,31 @@ class BinaryTree {
       || this.contains(node.right, value);
   }
 
+  getNode(node, value) {
+    if (!node) return null;
+    if (node.value === value) return node;
+
+    const queue = new Queue();
+    queue.enqueue(node);
+
+    while (!queue.empty()) {
+      const current = queue.dequeue();
+      if (current.value === value) {
+        return current;
+      }
+
+      if (current.left) {
+        queue.enqueue(current.left);
+      }
+
+      if (current.right) {
+        queue.enqueue(current.right);
+      }
+    }
+
+    return null;
+  }
+
   insert(node, value) {
     if (!node) {
       node = new Node(value);
@@ -95,6 +121,35 @@ class BinaryTree {
       }
       queue.enqueue(current.right);
     }
+    return node;
+  }
+
+  removeFromParent(node, value) {
+    if (!node || node.value === value) return null;
+
+    if (node.left && node.left.value === value) {
+      node.left = null;
+      return node;
+    }
+    if (node.right && node.right.value === value) {
+      node.right = null;
+      return node;
+    }
+    return this.removeFromParent(node.left, value) || this.removeFromParent(node.right, value);
+  }
+
+  remove(node, value) {
+    if (!node) return null;
+    // get reference to node to delete
+    const toDeleteNode = this.getNode(node, value);
+    // get last node
+    const last = this.last(node);
+    // get parent from last
+    // const parent = this.parent(node, last.value);
+    // remove from parent
+    this.removeFromParent(node, last.value);
+    // update node to delete with last node's value
+    toDeleteNode.value = last.value;
     return node;
   }
 
