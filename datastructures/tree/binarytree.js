@@ -6,7 +6,7 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter"] }] */
+ ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter", "levelorder", "boundary"] }] */
 
 class Queue {
   constructor() {
@@ -144,6 +144,23 @@ class BinaryTree {
     return result;
   }
 
+  levelorder(node) {
+    const result = [];
+    if (!node) return result;
+
+    const queue = new Queue();
+    queue.enqueue(node);
+
+    while (!queue.empty()) {
+      const current = queue.dequeue();
+      result.push(current.value);
+      if (current.left) queue.enqueue(current.left);
+      if (current.right) queue.enqueue(current.right);
+    }
+
+    return result;
+  }
+
   last(node) {
     if (!node) return null;
 
@@ -210,15 +227,26 @@ class BinaryTree {
     return false;
   }
 
+  invert(node) {
+    if (!node) return null;
+    const left = node.left; //eslint-disable-line
+    const right = node.right; //eslint-disable-line
+
+    node.left = this.invert(right);
+    node.right = this.invert(left);
+
+    return node;
+  }
+
   lowestCommonAncestor(node, value1, value2) {
     let ancestor = null;
 
-    function traverse(node, p, q) {
+    function traverse(node, value1, value2) { //eslint-disable-line
       if (!node) return false;
 
-      const left = traverse(node.left, p, q) ? 1 : 0;
-      const right = traverse(node.right, p, q) ? 1 : 0;
-      const middle = (node.value === p) || (node.value === q) ? 1 : 0;
+      const left = traverse(node.left, value1, value2) ? 1 : 0;
+      const right = traverse(node.right, value1, value2) ? 1 : 0;
+      const middle = (node.value === value1) || (node.value === value2) ? 1 : 0;
 
       if (middle + left + right >= 2) {
         ancestor = node;
@@ -229,6 +257,52 @@ class BinaryTree {
 
     traverse(node, value1, value2);
     return ancestor.value;
+  }
+
+  boundary(node) {
+    const result = [];
+    if (!node) return result;
+    result.push(node.value);
+
+    function getLeft(node, result) { // eslint-disable-line
+      if (!node) return;
+
+      if (node.left) {
+        result.push(node.value);
+        getLeft(node.left, result);
+      } else if (node.right) {
+        result.push(node.value);
+        getLeft(node.right, result);
+      }
+    }
+
+    function getRight(node, result) { // eslint-disable-line
+      if (!node) return;
+
+      if (node.right) {
+        getRight(node.right, result);
+        result.push(node.value);
+      } else if (node.left) {
+        getRight(node.left, result);
+        result.push(node.value);
+      }
+    }
+
+    function getLeaves(node, result) { // eslint-disable-line
+      if (!node) return;
+
+      getLeaves(node.left, result);
+      if (!node.left && !node.right) {
+        result.push(node.value);
+      }
+      getLeaves(node.right, result);
+    }
+
+    getLeft(node.left, result);
+    getLeaves(node.left, result);
+    getLeaves(node.right, result);
+    getRight(node.right, result);
+    return result;
   }
 }
 
@@ -255,6 +329,9 @@ describe('BinaryTree Methods', () => {
   });
   it('BinaryTree.postorder()', () => {
     expect(tree.postorder(tree.root)).toEqual([4, 5, 2, 6, 7, 3, 1]);
+  });
+  it('BinaryTree.levelorder()', () => {
+    expect(tree.levelorder(tree.root)).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });
   it('BinaryTree.last()', () => {
     expect(tree.last(tree.root).value).toEqual(7);
@@ -298,6 +375,22 @@ describe('BinaryTree is identical', () => {
   });
 });
 
+describe('BinaryTree inversion', () => {
+  const tree = new BinaryTree();
+  tree.root = new Node(1);
+  tree.root.left = new Node(2);
+  tree.root.left.left = new Node(4);
+  tree.root.left.right = new Node(5);
+  tree.root.right = new Node(3);
+  tree.root.right.left = new Node(6);
+  tree.root.right.right = new Node(7);
+
+  const inverted = tree.invert(tree.root);
+  it('BinaryTree.invert()', () => {
+    expect(tree.levelorder(inverted)).toEqual([1, 3, 2, 7, 6, 5, 4]);
+  });
+});
+
 describe('BinaryTree lowest Common Ancestor', () => {
   const tree = new BinaryTree();
   tree.root = new Node(1);
@@ -310,5 +403,21 @@ describe('BinaryTree lowest Common Ancestor', () => {
 
   it('BinaryTree.lowestCommonAncestor()', () => {
     expect(tree.lowestCommonAncestor(tree.root, 4, 5)).toEqual(2);
+  });
+});
+
+describe('BinaryTree print boundary', () => {
+  const tree = new BinaryTree();
+  tree.root = new Node(20);
+  tree.root.left = new Node(8);
+  tree.root.left.left = new Node(4);
+  tree.root.left.right = new Node(12);
+  tree.root.left.right.left = new Node(10);
+  tree.root.left.right.right = new Node(14);
+  tree.root.right = new Node(22);
+  tree.root.right.right = new Node(25);
+
+  it('BinaryTree.boundary()', () => {
+    expect(tree.boundary(tree.root)).toEqual([20, 8, 4, 10, 14, 25, 22]);
   });
 });

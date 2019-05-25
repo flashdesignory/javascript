@@ -28,10 +28,36 @@ function isIsomorphic(str1, str2) {
   return true;
 }
 
+function isIsomorphic2(s, t) {
+  if (s.length !== t.length) return false;
+  if (s === t) return true;
+
+  const one = {};
+  const two = {};
+
+  for (let i = 0; i < s.length; i++) {
+    if (!one[s[i]]) one[s[i]] = t[i];
+    if (!two[t[i]]) two[t[i]] = s[i];
+
+    if (one[s[i]] !== t[i] || two[t[i]] !== s[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 // npx jest algorithms/string/string.isomorphic.js
 test('isIsomorphic()', () => {
   expect(isIsomorphic('foo', 'app')).toBe(true);
   expect(isIsomorphic('bar', 'foo')).toBe(false);
   expect(isIsomorphic('turtle', 'tletur')).toBe(true);
   expect(isIsomorphic('ab', 'ca')).toBe(true);
+});
+
+test('isIsomorphic2()', () => {
+  expect(isIsomorphic2('foo', 'app')).toBe(true);
+  expect(isIsomorphic2('bar', 'foo')).toBe(false);
+  expect(isIsomorphic2('turtle', 'tletur')).toBe(true);
+  expect(isIsomorphic2('ab', 'ca')).toBe(true);
 });

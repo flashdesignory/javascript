@@ -13,8 +13,8 @@ class Node {
 }
 
 function addTwoNumbers(l1, l2) {
-  const list = new Node(0);
-  let head = list;
+  let head = null;
+  let current = null;
   let sum = 0;
   let carry = 0;
 
@@ -31,16 +31,21 @@ function addTwoNumbers(l1, l2) {
 
     if (sum >= 10) {
       carry = 1;
-      sum -= 10;
+      sum = sum % 10; // eslint-disable-line
     }
 
-    head.next = new Node(sum);
-    head = head.next;
+    if (!head) {
+      head = new Node(sum);
+      current = head;
+    } else {
+      current.next = new Node(sum);
+      current = current.next;
+    }
 
     sum = carry;
     carry = 0;
   }
-  return list.next;
+  return head;
 }
 
 // npx jest datastructures/list/singlylist.add.js
