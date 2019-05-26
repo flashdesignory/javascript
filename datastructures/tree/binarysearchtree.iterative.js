@@ -6,7 +6,7 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print"] }] */
+ ["print", "preorder", "postorder", "inorder"] }] */
 
 class Node {
   constructor(value) {
@@ -169,6 +169,20 @@ class BinarySearchTree {
       }
     }
   }
+
+  preorder(node) {
+    if (!node) return [];
+    const result = [];
+    const stack = [node];
+
+    while (stack.length) {
+      const current = stack.pop();
+      result.push(current.value);
+      if (current.right) stack.push(current.right);
+      if (current.left) stack.push(current.left);
+    }
+    return result;
+  }
 }
 
 // npx jest datastructures/tree/binarysearchtree.iterative.js
@@ -180,5 +194,8 @@ describe('BinarySearchTree Methods', () => {
   }
   it('BinarySearchTree.contains()', () => {
     expect(tree.contains(13)).toBeTruthy();
+  });
+  it('BinarySearchTree.preorder()', () => {
+    expect(tree.inorder(tree.root)).toEqual([10, 5, 2, 1, 3, 4, 6, 8, 15, 12, 11, 13, 17]);
   });
 });
