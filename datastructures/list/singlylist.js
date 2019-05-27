@@ -287,12 +287,39 @@ class SinglyLinkedList {
       fast = fast.next.next;
       slow = slow.next;
 
-      if (slow.value === fast.value) {
+      if (slow === fast) {
         return true;
       }
     }
 
     return false;
+  }
+
+  getCycleStart() {
+    if (!this.head || !this.head.next) return false;
+    if (this.head.value === this.head.next.value) return true;
+
+    let fast = this.head;
+    let slow = this.head;
+
+    while (fast && fast.next) {
+      fast = fast.next.next;
+      slow = slow.next;
+
+      if (slow === fast) {
+        break;
+      }
+    }
+
+    if (!fast || !fast.next) return null;
+
+    slow = this.head;
+    while (slow !== fast) {
+      slow = slow.next;
+      fast = fast.next;
+    }
+
+    return fast;
   }
 
   removeDuplicates() {

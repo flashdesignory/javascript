@@ -1,6 +1,6 @@
 /*
  * @title: Matrix Consecutive Path
- * @description: find longest path
+ * @description: find longest consecutive path
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
