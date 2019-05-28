@@ -5,6 +5,9 @@
  * @email: info@flashdesignory.com
  */
 
+/* eslint class-methods-use-this: ["error", { "exceptMethods":
+  ["levelorder", "preorder2", "postorder2", "preorder3", "postorder3"] }] */
+
 class Queue {
   constructor() {
     this.data = {};
@@ -157,12 +160,111 @@ class Tree {
     });
   }
 
+  preorder2(node) {
+    function dfs(node, result) {
+      result = result || [];
+      if (!node) return result;
+      result.push(node.value);
+      for (let i = 0; i < node.children.length; i++) {
+        dfs(node.children[i], result);
+      }
+      return result;
+    }
+    return dfs(node);
+  }
+
+  preorder3(node) {
+    const result = [];
+    if (!node) return result;
+    const stack = [node];
+
+    while (stack.length > 0) {
+      const current = stack.pop();
+      result.push(current.value);
+      const { children } = current;
+      for (let i = children.length - 1; i >= 0; i--) {
+        stack.push(children[i]);
+      }
+    }
+    return result;
+  }
+
   postorder(node, fn) {
     if (!node) return;
     node.children.forEach((child) => {
       this.postorder(child, fn);
     });
     fn(node);
+  }
+
+  postorder2(node) {
+    function dfs(node, result) {
+      result = result || [];
+      if (!node) return result;
+      for (let i = 0; i < node.children.length; i++) {
+        dfs(node.children[i], result);
+      }
+      result.push(node.value);
+      return result;
+    }
+    return dfs(node);
+  }
+
+  postorder3(node) {
+    const result = [];
+    if (!node) return result;
+    const stack = [node];
+
+    while (stack.length > 0) {
+      const current = stack.pop();
+      const { children } = current;
+      for (let i = 0; i < children.length; i++) {
+        stack.push(children[i]);
+      }
+      result.unshift(current.value);
+    }
+    return result;
+  }
+
+  levelorder(node) {
+    const result = [];
+    if (!node) return result;
+
+    const queue = new Queue();
+    queue.enqueue(node);
+
+    let level = [];
+    let numSiblings = 1;
+    let numChildren = 0;
+
+    while (!queue.empty()) {
+      const current = queue.dequeue();
+      level.push(current.val);
+      numSiblings--;
+      const { children } = current;
+      for (let i = 0; i < children.length; i++) {
+        queue.enqueue(children[i]);
+        numChildren++;
+      }
+
+      if (numSiblings === 0) {
+        result.push(level);
+        level = [];
+        numSiblings = numChildren;
+        numChildren = 0;
+      }
+    }
+
+    return result;
+  }
+
+  maxDepth(node) {
+    if (!node) return 0;
+    let max = 0;
+    for (let i = 0; i < node.children.length; i++) {
+      max = Math.max(this.maxDepth(node.children[i]), max);
+    }
+    return max;
   }
 }
 
