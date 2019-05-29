@@ -64,7 +64,7 @@ class BSTIterator {
   }
 }
 
-// npx jest datastructures/tree/binarytree.iterator.js
+// npx jest datastructures/tree/binarysearchtree.iterator.js
 describe('create a binary tree iterator', () => {
   it('should create a bt from postorder and inorder array()', () => {
     const root = new Node(7);
