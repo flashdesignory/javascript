@@ -433,6 +433,18 @@ class BinarySearchTree {
     return previous;
   }
 
+  parent(node, value) {
+    if (!node || node.value === value) return null;
+    if (!node.left && !node.right) return null;
+
+    if (node.left && node.left.value === value) return node.value;
+    if (node.right && node.right.value === value) return node.value;
+
+    if (node.value > value) return this.parent(node.left, value);
+    if (node.value < value) return this.parent(node.right, value);
+    return null;
+  }
+
   ancestor(node, n1, n2) {
     if (!node) return null;
 
