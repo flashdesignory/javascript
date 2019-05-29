@@ -419,24 +419,26 @@ class SinglyLinkedList {
   }
 
   rotate(k) {
-    if (!this.head) return;
-    let fast = this.head;
-    let slow = this.head;
-    let tail = null;
-    for (let i = 0; i < k - 1; i++) {
-      if (!fast.next) return;
-      fast = fast.next;
+    if (!this.head) return null;
+    let tail = this.head;
+    let length = 1;
+
+    while (tail.next) {
+      tail = tail.next;
+      length++;
     }
 
-    while (fast.next) {
-      fast = fast.next;
-      tail = slow;
-      slow = slow.next;
+    tail.next = this.head;
+    let count = length - (k % length);
+
+    while (count > 0) {
+      this.head = this.head.next;
+      tail = tail.next;
+      count--;
     }
 
     tail.next = null;
-    fast.next = this.head;
-    this.head = slow;
+    return this.head;
   }
 
   addSorted(value) {

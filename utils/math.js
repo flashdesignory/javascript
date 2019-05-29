@@ -10,3 +10,17 @@ function roundTo(num, decimals) {
 }
 
 roundTo(4.3940397802, 2); // 4.39
+
+function countDigits(n) {
+  let count = 0;
+  if (n >= 1) count++;
+
+  while (n / 10 >= 1) {
+    n /= 10;
+    count++;
+  }
+
+  return count;
+}
+
+countDigits(12321); // 5
