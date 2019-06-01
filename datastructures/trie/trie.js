@@ -24,12 +24,9 @@ class Trie {
     for (let i = 0; i < word.length; i++) {
       const letter = word[i];
       if (!current.children[letter]) {
-        const node = new Node(letter);
-        current.children[letter] = node;
-        current = node;
-      } else {
-        current = current.children[letter];
+        current.children[letter] = new Node(letter);
       }
+      current = current.children[letter];
     }
     current.isLast = true;
   }
@@ -97,10 +94,11 @@ class Trie {
     }
 
     function traverse(node, letters) {
+      if (!node) return;
       Object.values(node.children).forEach((child) => {
         letters += child.value;
         if (child.isLast) {
-          return result.push(letters);
+          result.push(letters);
         }
         traverse(child, letters);
         letters = letters.substr(0, letters.length - 1);
