@@ -36,18 +36,15 @@ function wordBreak(str) {
 }
 
 // tabulation
-function wordBreak2(str, dict) {
-  if (!dict || dict.length === 0) return false;
-
-  const result = [];
+function wordBreak2(str) {
+  const result = [true];
   for (let i = 1; i <= str.length; i++) {
     result[i] = false;
   }
-  result[0] = true;
 
   for (let i = 1; i <= str.length; i++) {
     for (let j = 0; j < i; j++) {
-      if (result[j] && dict.indexOf(str.substring(j, i)) >= 0) {
+      if (result[j] && dictionaryContains(str.substring(j, i))) {
         result[i] = true;
         break;
       }
@@ -120,24 +117,23 @@ describe('wordbreak recursive', () => {
 });
 
 describe('wordbreak tabulation', () => {
-  const dictionary = ['mobile', 'samsung', 'sam', 'sung', 'man', 'mango', 'icecream', 'and', 'go', 'i', 'like', 'ice', 'cream'];
   test('wordBreak2(ilikesamsung)', () => {
-    expect(wordBreak2('ilikesamsung', dictionary)).toEqual(true);
+    expect(wordBreak2('ilikesamsung')).toEqual(true);
   });
   test('wordBreak2(iiiiiiii)', () => {
-    expect(wordBreak2('iiiiiiii', dictionary)).toEqual(true);
+    expect(wordBreak2('iiiiiiii')).toEqual(true);
   });
   test('wordBreak2()', () => {
-    expect(wordBreak2('', dictionary)).toEqual(true);
+    expect(wordBreak2('')).toEqual(true);
   });
   test('wordBreak2(ilikelikeimangoiii)', () => {
-    expect(wordBreak2('ilikelikeimangoiii', dictionary)).toEqual(true);
+    expect(wordBreak2('ilikelikeimangoiii')).toEqual(true);
   });
   test('wordBreak2(samsungandmango)', () => {
-    expect(wordBreak2('samsungandmango', dictionary)).toEqual(true);
+    expect(wordBreak2('samsungandmango')).toEqual(true);
   });
   test('wordBreak2(samsungandmangok)', () => {
-    expect(wordBreak2('samsungandmangok', dictionary)).toEqual(false);
+    expect(wordBreak2('samsungandmangok')).toEqual(false);
   });
 });
 

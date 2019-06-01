@@ -43,14 +43,14 @@ class LRUCache {
     const previous = node.previous; // eslint-disable-line
     const next = node.next; // eslint-disable-line
 
-    if (previous) previous.next = next;
+    if (previous) previous.next = next || null;
     if (next) next.previous = previous || next.previous;
+
+    node.previous = null;
 
     if (this.tail === node) {
       this.tail = previous || this.tail;
     }
-
-    node.previous = null;
 
     if (this.head !== node) {
       node.next = this.head;
