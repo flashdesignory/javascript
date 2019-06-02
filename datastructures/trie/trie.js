@@ -93,6 +93,10 @@ class Trie {
       current = current.children[letter];
     }
 
+    if (current.isLast) {
+      result.push(word);
+    }
+
     function traverse(node, letters) {
       if (!node) return;
       Object.values(node.children).forEach((child) => {
