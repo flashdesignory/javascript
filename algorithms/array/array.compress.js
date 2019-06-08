@@ -11,30 +11,28 @@
   */
 
 function compressArray(arr) {
-  let start = arr[0];
-  let end = start;
-  let result = '';
+  const result = [];
+  if (arr.length === 0) return result;
 
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] === end + 1) {
-      end = arr[i];
+  let start = 0;
+  let end = start;
+
+  // notice that we loop one additional time
+  for (let i = 1; i <= arr.length; i++) {
+    if (arr[i] === arr[end] + 1) {
+      end++;
     } else {
       if (start === end) {
-        result += `${start},`;
+        result.push(`${arr[start]}`);
       } else {
-        result += `${start}-${end},`;
+        result.push(`${arr[start]}-${arr[end]}`);
       }
-      start = arr[i];
+      start = i;
       end = start;
     }
   }
 
-  if (start === end) {
-    result += start;
-  } else {
-    result += `${start}-${end}`;
-  }
-  return result;
+  return result.join(',').toString();
 }
 
 // npx jest algorithms/array/array.compress.js
