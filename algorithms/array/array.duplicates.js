@@ -59,6 +59,18 @@ function removeDuplicates5(nums) {
   return nums.slice(0, nums.length - count);
 }
 
+// remove from sorted array
+function removeDuplicates6(nums) {
+  let count = 0;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] !== nums[count]) {
+      count++;
+      nums[count] = nums[i];
+    }
+  }
+  return nums.slice(0, count + 1);
+}
+
 // npx jest algorithms/array/array.duplicates.js
 describe('remove duplicates in array', () => {
   test('removeDuplicates1()', () => {
@@ -80,5 +92,9 @@ describe('remove duplicates in array', () => {
   test('removeDuplicates5()', () => {
     const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
     expect(removeDuplicates5(nums)).toEqual([1, 3, 5, 2, 4, 8, 6]);
+  });
+  test('removeDuplicates6()', () => {
+    const nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+    expect(removeDuplicates6(nums)).toEqual([0, 1, 2, 3, 4]);
   });
 });
