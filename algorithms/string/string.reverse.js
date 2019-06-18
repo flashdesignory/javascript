@@ -47,6 +47,7 @@ function reverseStringFour(str) {
     return '';
   }
   return reverseStringFour(str.substr(1)) + str.charAt(0);
+  // return str.charAt(str.length - 1) + reverseStringFour(str.substr(0, str.length - 1));
 }
 
 function reverseStringFive(str) {
