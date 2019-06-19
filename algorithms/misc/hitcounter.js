@@ -12,8 +12,8 @@ class HitCounter {
     this.hits = [];
 
     for (let i = 0; i < range; i++) {
-      this.times[i] = [];
-      this.hits[i] = [];
+      this.times[i] = 0;
+      this.hits[i] = 0;
     }
   }
 
@@ -22,7 +22,7 @@ class HitCounter {
 
     if (this.times[index] !== time) {
       this.times[index] = time;
-      this.hits[index]++;
+      this.hits[index] = 1;
     } else {
       this.hits[index]++;
     }
