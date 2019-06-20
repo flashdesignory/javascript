@@ -8,7 +8,7 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
 ["min", "max", "breadthFirstSearch", "levelOrder", "getAllAncestors",
 "sumLeaves", "longestConsecutive", "longestPath", "maxDepthAlt",
-"printLevelOrderZigZag", "sumRootLeaves", "successor2", "predecessor2"] }] */
+"printLevelOrderZigZag", "sumRootLeaves", "successor2", "predecessor2", "sumPathAll"] }] */
 
 class Node {
   constructor(value) {
@@ -503,6 +503,24 @@ class BinarySearchTree {
 
     return this.sumPath(node.left, value - node.value)
        || this.sumPath(node.right, value - node.value);
+  }
+
+  sumPathAll(node, value) {
+    const result = [];
+
+    function traverse(node, sum, path) {
+      if (!node) return null;
+      sum -= node.value;
+      path.push(node.value);
+      if (sum === 0 && !node.left && !node.right) {
+        result.push(path.slice(0));
+      }
+
+      return traverse(node.left, sum, path.slice(0)) || traverse(node.right, sum, path.slice(0));
+    }
+
+    traverse(node, value, []);
+    return result;
   }
 
   sumRootLeaves(node) {

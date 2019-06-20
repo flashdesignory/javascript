@@ -32,10 +32,6 @@ function isPrimitive(value) {
   return value !== Object(value);
 }
 
-function isObject(value) {
-	return value === Object(value);
-}
-
 // examples
 console.log(isPrimitive(100));
 /* eslint-disable-next-line */
@@ -43,6 +39,12 @@ console.log(isPrimitive(new Number(100)));
 console.log(isPrimitive(true));
 console.log(isPrimitive('100'));
 
+function isObject(value) {
+  return value === Object(value);
+}
+
+// examples
+console.log(isObject({}));
 
 function isArray(value) {
   return Array.isArray(value);
@@ -94,3 +96,51 @@ function isAlphaNumeric2(str) {
 
 isAlphaNumeric1('huiwl490sk');
 isAlphaNumeric2('huiwl490sk');
+
+/*
+ * @title: Valid Number
+ * @description: Validate if a given string can be interpreted as a decimal number.
+ * Numbers 0-9
+ * Exponent - "e"
+ * Positive/negative sign - "+"/"-"
+ * Decimal point - "."
+ * @author: Thorsten Kober
+ * @email: info@flashdesignory.com
+ */
+
+function validNumber(str, decimal = false) {
+  let dotCount = 0;
+  let digitCount = 0;
+  const startIndex = (str[0] === '-' || str[0] === '+') ? 1 : 0;
+
+  for (let i = startIndex; i < str.length; i++) {
+    if (str[i] === '.') dotCount++;
+    if (str[i] >= '0' && str[i] <= '9') digitCount++;
+    if ((str[i] < '0' || str[i] > '9') && str[i] !== '.') return false;
+  }
+
+  return digitCount > 0 && ((decimal && dotCount === 0) || (!decimal && dotCount <= 1));
+}
+
+function isNumber(str) {
+  str = str.trim();
+
+  if (str.indexOf('e') !== -1) {
+    const parts = str.split('e');
+
+    if (parts.length !== 2 || parts[0] === '' || parts[1] === '') {
+      return false;
+    }
+
+    return validNumber(parts[0]) && validNumber(parts[1], true);
+  }
+
+  return validNumber(str);
+}
+
+console.log(isNumber('0'));
+console.log(isNumber('0.1'));
+console.log(isNumber('abc')); // false
+console.log(isNumber('2e10'));
+console.log(isNumber(' -90e3'));
+console.log(isNumber('2e10e5')); // false

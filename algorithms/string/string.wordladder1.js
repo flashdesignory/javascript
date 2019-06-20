@@ -34,7 +34,41 @@ class Queue {
   }
 }
 
+function canMutate(a, b) {
+  let count = 0;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) count++;
+    if (count > 1) break;
+  }
+  return count === 1;
+}
+
 function ladderLength(beginWord, endWord, wordList) {
+  if (wordList.indexOf(endWord) < 0) return 0;
+
+  const visited = [];
+  for (let i = 0; i < wordList.length; i++) {
+    visited[i] = false;
+  }
+
+  const queue = new Queue();
+  queue.enqueue({ value: beginWord, length: 1 });
+
+  while (!queue.empty()) {
+    const current = queue.dequeue();
+    if (current.value === endWord) return current.length;
+    for (let i = 0; i < wordList.length; i++) {
+      const word = wordList[i];
+      if (canMutate(current.value, word) && !visited[i]) {
+        queue.enqueue({ value: word, length: current.length + 1 });
+        visited[i] = true;
+      }
+    }
+  }
+  return 0;
+}
+
+function ladderLength2(beginWord, endWord, wordList) {
   const queue = new Queue();
   queue.enqueue(beginWord);
 
@@ -86,5 +120,8 @@ function ladderLength(beginWord, endWord, wordList) {
 describe('return shortest tranformation', () => {
   test('ladderLength()', () => {
     expect(ladderLength('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog'])).toEqual(5);
+  });
+  test('ladderLength()', () => {
+    expect(ladderLength2('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog'])).toEqual(5);
   });
 });
