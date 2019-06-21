@@ -54,7 +54,7 @@ const updateMatrix = function (matrix) {
   const visited = [];
   for (let i = 0; i < matrix.length; i++) {
     visited[i] = [];
-    for (let j = 0; j < matrix[i].lengt; j++) {
+    for (let j = 0; j < matrix[i].length; j++) {
       visited[i][j] = false;
     }
   }
@@ -64,6 +64,7 @@ const updateMatrix = function (matrix) {
     for (let j = 0; j < matrix[i].length; j++) {
       if (matrix[i][j] === 0) {
         queue.enqueue({ row: i, column: j });
+        visited[i][j] = true;
       }
     }
   }
@@ -72,7 +73,6 @@ const updateMatrix = function (matrix) {
     const current = queue.dequeue();
     const row = current.row; // eslint-disable-line
     const column = current.column; // eslint-disable-line
-    visited[row][column] = true;
 
     for (let i = 0; i < 4; i++) {
       const nextRow = row + rowNum[i];
