@@ -7,7 +7,7 @@
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
  ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter",
- "levelorder", "boundary", "getNode"] }] */
+ "levelorder", "boundary", "getNode", "width"] }] */
 
 class Queue {
   constructor() {
@@ -151,6 +151,27 @@ class BinaryTree {
     // update node to delete with last node's value
     toDeleteNode.value = last.value;
     return node;
+  }
+
+  width(node) {
+    const mins = [0];
+    let max = 0;
+
+    function dfs(node, level, position) {
+      if (!node) return;
+
+      if (level === mins.length) {
+        mins[level] = position;
+      }
+
+      const delta = position - mins[level];
+      max = Math.max(max, delta + 1);
+      dfs(node.left, level + 1, delta * 2);
+      dfs(node.right, level + 1, delta * 2 + 1);
+    }
+
+    dfs(node, 0, 0);
+    return max;
   }
 
   diameter(node) {
@@ -301,13 +322,13 @@ class BinaryTree {
 
       const left = traverse(node.left, value1, value2) ? 1 : 0;
       const right = traverse(node.right, value1, value2) ? 1 : 0;
-      const middle = (node.value === value1) || (node.value === value2) ? 1 : 0;
+      const middle = node.value === value1 || node.value === value2 ? 1 : 0;
 
       if (middle + left + right >= 2) {
         ancestor = node;
       }
 
-      return (middle + left + right > 0);
+      return middle + left + right > 0;
     }
 
     traverse(node, value1, value2);
