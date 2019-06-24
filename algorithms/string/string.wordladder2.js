@@ -20,48 +20,48 @@ function canMutate(a, b) {
 }
 
 function ladderLength(beginWord, endWord, wordList) {
+  if (wordList.indexOf(endWord) < 0) return 0;
+
   const visited1 = [beginWord];
   const visited2 = [endWord];
   let queue1 = [beginWord];
   let queue2 = [endWord];
+
   let count = 1;
   let nodes = [];
   let found = false;
-  let currentNode = -1;
-
-  if (wordList.indexOf(endWord) < 0) { return 0; }
+  let currentQueue = -1;
 
   while (queue1.length > 0 && queue2.length > 0 && !found) {
     if (queue2.length >= queue1.length && queue1.length > 0) {
       nodes = queue1;
       queue1 = [];
-      currentNode = 1;
+      currentQueue = 1;
     } else {
       nodes = queue2;
       queue2 = [];
-      currentNode = 2;
+      currentQueue = 2;
     }
 
-    for (let index = 0; index < nodes.length; index++) {
-      const node = nodes[index];
-      for (let i = 0; i < wordList.length; i++) {
-        if (canMutate(node, wordList[i])) {
-          if (currentNode === 1) {
-            if (visited2.indexOf(wordList[i]) >= 0) {
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
+      for (let j = 0; j < wordList.length; j++) {
+        const word = wordList[j];
+        if (canMutate(node, word)) {
+          if (currentQueue === 1) {
+            if (visited2.indexOf(word) >= 0) {
               found = true;
               break;
-            } else if (visited1.indexOf(wordList[i]) < 0) {
-              visited1.push(wordList[i]);
-              queue1.push(wordList[i]);
+            } else if (visited1.indexOf(word) < 0) {
+              visited1.push(word);
+              queue1.push(word);
             }
-          } else if (currentNode === 2) {
-            if (visited1.indexOf(wordList[i]) >= 0) {
-              found = true;
-              break;
-            } else if (visited2.indexOf(wordList[i]) < 0) {
-              visited2.push(wordList[i]);
-              queue2.push(wordList[i]);
-            }
+          } else if (visited1.indexOf(word) >= 0) {
+            found = true;
+            break;
+          } else if (visited2.indexOf(word) < 0) {
+            visited2.push(word);
+            queue2.push(word);
           }
         }
       }
@@ -69,11 +69,11 @@ function ladderLength(beginWord, endWord, wordList) {
     count++;
   }
 
-  if (!found) { return 0; }
+  if (!found) return 0;
   return count;
 }
 
-// npx jest algorithms/string/string.wordladder1.js
+// npx jest algorithms/string/string.wordladder2.js
 describe('return shortest tranformation', () => {
   test('ladderLength()', () => {
     expect(ladderLength('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog'])).toEqual(5);
