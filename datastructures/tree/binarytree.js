@@ -335,6 +335,15 @@ class BinaryTree {
     return ancestor.value;
   }
 
+  lowestCommonAncestor2(node, p, q) {
+    if (!node || node.value === p || node.value === q) return node;
+    const left = this.lowestCommonAncestor2(node.left, p, q);
+    const right = this.lowestCommonAncestor2(node.right, p, q);
+    if (!left) return right;
+    if (!right) return left;
+    return node;
+  }
+
   boundary(node) {
     const result = [];
     if (!node) return result;
