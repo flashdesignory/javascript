@@ -27,11 +27,11 @@ function combinationsTwo(arr) {
 
   function combine(arr, output) {
     if (arr.length === 0) {
-      result.push(output.slice(0));
+      result.push(output.slice());
       return;
     }
 
-    combine(arr.slice(0, arr.length - 1), output.slice(0));
+    combine(arr.slice(0, arr.length - 1), output.slice());
     const temp = output.slice();
     temp.push(arr[arr.length - 1]);
     combine(arr.slice(0, arr.length - 1), temp);
@@ -42,6 +42,25 @@ function combinationsTwo(arr) {
 }
 
 function combinationsThree(arr) {
+  const result = [];
+
+  function combine(arr, output) {
+    if (arr.length === 0) {
+      result.push([...output]);
+      return;
+    }
+
+    const endIndex = arr.length - 1;
+    const endElement = arr[endIndex];
+    combine(arr.slice(0, endIndex), [...output]);
+    combine(arr.slice(0, endIndex), [...output, endElement]);
+  }
+
+  combine(arr, []);
+  return result.filter(arr => arr.length);
+}
+
+function combinationsFour(arr) {
   const result = [];
 
   function combine(arr, index, output) {
@@ -61,12 +80,12 @@ function combinationsThree(arr) {
   return result;
 }
 
-function combinationsFour(arr) {
+function combinationsFive(arr) {
   const result = [];
 
   function combine(arr, index, output) {
     if (index === arr.length) {
-      result.push(output.slice());
+      result.push([...output]);
       return;
     }
     combine(arr, index + 1, output);
@@ -91,11 +110,16 @@ test('combinationsTwo()', () => {
 });
 
 test('combinationsThree()', () => {
-  const result = [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]];
+  const result = [[1], [2], [2, 1], [3], [3, 1], [3, 2], [3, 2, 1]];
   expect(combinationsThree([1, 2, 3])).toEqual(result);
 });
 
 test('combinationsFour()', () => {
   const result = [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]];
   expect(combinationsFour([1, 2, 3])).toEqual(result);
+});
+
+test('combinationsFive()', () => {
+  const result = [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]];
+  expect(combinationsFive([1, 2, 3])).toEqual(result);
 });
