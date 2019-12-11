@@ -75,6 +75,17 @@ function reverse5(arr) {
   return result;
 }
 
+// recursion
+// time complexity O(n)
+// space complexity O(n)
+function reverse6(arr) {
+  if (arr.length === 0) {
+    return [];
+  }
+
+  return [arr.pop()].concat(reverse6(arr));
+}
+
 // npx jest algorithms/array/array.reverse.js
 describe('reverse array', () => {
   test('reverse1()', () => {
@@ -96,5 +107,9 @@ describe('reverse array', () => {
   test('reverse5()', () => {
     const nums = [1, 2, 3, 4, 5, 6, 7];
     expect(reverse5(nums)).toEqual([7, 6, 5, 4, 3, 2, 1]);
+  });
+  test('reverse6()', () => {
+    const nums = [1, 2, 3, 4, 5, 6, 7];
+    expect(reverse6(nums)).toEqual([7, 6, 5, 4, 3, 2, 1]);
   });
 });
