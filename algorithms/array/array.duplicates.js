@@ -5,11 +5,9 @@
  * @email: info@flashdesignory.com
  */
 
-/*
- * input: [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
- * output: [ 1, 2, 8, 6, 4, 5, 3 ]
- */
-
+// while loop - extra obj
+// time complexity O(n)
+// space complexity O(n)
 function removeDuplicates1(arr) {
   let i = arr.length - 1;
   const seen = {};
@@ -24,6 +22,9 @@ function removeDuplicates1(arr) {
   return arr;
 }
 
+// recursion - extra obj
+// time complexity O(n)
+// space complexity O(n)
 function removeDuplicates2(arr) {
   function remove(arr, index, seen) {
     if (index < 0) return arr;
@@ -38,38 +39,59 @@ function removeDuplicates2(arr) {
   return remove(arr, arr.length - 1);
 }
 
+// array filter - extra arr
+// time complexity O(n)
+// space complexity O(n)
 function removeDuplicates3(arr) {
   return arr.filter((elem, index) => index === arr.indexOf(elem));
 }
 
+// set - extra obj
+// time complexity O(n)
+// space complexity O(n)
 function removeDuplicates4(arr) {
   return [...new Set(arr)];
 }
 
-function removeDuplicates5(nums) {
+// for loop with counter
+// time complexity O(n)
+// space complexity O(1)
+function removeDuplicates5(arr) {
   let count = 0;
 
-  for (let i = 0; i < nums.length; i++) {
-    if (nums.indexOf(nums[i]) !== i) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.indexOf(arr[i]) !== i) {
       count++;
     } else {
-      nums[i - count] = nums[i];
+      arr[i - count] = arr[i];
     }
   }
-  return nums.slice(0, nums.length - count);
+  return arr.slice(0, arr.length - count);
 }
 
+// arr reduce & include - extra arr;
+// time complexity O(n)
+// space complexity O(n)
+function removeDuplicates6(arr) {
+  return arr.reduce((acc, value) => (acc.includes(value) ? acc : [...acc, value]), []);
+}
+
+
 // remove from sorted array
-function removeDuplicates6(nums) {
+// for loop with counter
+// time complexity O(n)
+// space complexity O(1)
+function removeDuplicates7(arr) {
   let count = 0;
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] !== nums[count]) {
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] !== arr[count]) {
       count++;
-      nums[count] = nums[i];
+      arr[count] = arr[i];
     }
   }
-  return nums.slice(0, count + 1);
+  return arr.slice(0, count + 1);
 }
+
 
 // npx jest algorithms/array/array.duplicates.js
 describe('remove duplicates in array', () => {
@@ -94,7 +116,11 @@ describe('remove duplicates in array', () => {
     expect(removeDuplicates5(nums)).toEqual([1, 3, 5, 2, 4, 8, 6]);
   });
   test('removeDuplicates6()', () => {
+    const nums = [1, 3, 5, 2, 3, 4, 8, 6, 4, 5, 5, 3];
+    expect(removeDuplicates6(nums)).toEqual([1, 3, 5, 2, 4, 8, 6]);
+  });
+  test('removeDuplicates7()', () => {
     const nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
-    expect(removeDuplicates6(nums)).toEqual([0, 1, 2, 3, 4]);
+    expect(removeDuplicates7(nums)).toEqual([0, 1, 2, 3, 4]);
   });
 });

@@ -83,7 +83,8 @@ function reverse6(arr) {
     return [];
   }
 
-  return [arr.pop()].concat(reverse6(arr));
+  // return [arr.pop()].concat(reverse6(arr));
+  return [arr.pop(), ...reverse6(arr)];
 }
 
 // npx jest algorithms/array/array.reverse.js
