@@ -78,7 +78,8 @@ function removeDuplicates6(arr) {
 
 
 // remove from sorted array
-// for loop with counter
+// see array.countUnique.js for similar algorithm
+// sliding window - dynamic size
 // time complexity O(n)
 // space complexity O(1)
 function removeDuplicates7(arr) {

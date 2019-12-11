@@ -6,19 +6,20 @@
  */
 
 // sliding window - dynamic size
+// see array.duplicates.js for similar algorithm
 function countUnique(arr) {
-  // move all unique values to the front (left) and
+  // move all unique values to the front (count) and
   // duplicates to the right
-  // left index will be last index of unique partition
+  // count index will be last index of unique partition
 
-  let left = 0;
+  let count = 0;
   for (let i = 1; i < arr.length; i++) {
-    if (arr[left] !== arr[i]) {
-      left++;
-      arr[left] = arr[i];
+    if (arr[count] !== arr[i]) {
+      count++;
+      arr[count] = arr[i];
     }
   }
-  return left + 1;
+  return count + 1;
 }
 
 // npx jest algorithms/array/array.countunique.js
