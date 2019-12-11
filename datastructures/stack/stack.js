@@ -33,6 +33,10 @@ class Stack {
     return this.size === 0;
   }
 
+  size() {
+    return this.size;
+  }
+
   print() {
     const result = [];
     Object.values(this.data).forEach((value) => {
