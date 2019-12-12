@@ -30,7 +30,7 @@ function clone(obj) {
   if (obj instanceof Object) {
     copy = {};
     /* eslint-disable-next-line */
-    for (var prop in obj) {
+    for (const prop in obj) {
       /* eslint-disable-next-line */
       if (obj.hasOwnProperty(prop)) copy[prop] = clone(obj[prop]);
     }

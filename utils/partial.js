@@ -14,8 +14,16 @@ function partial(fn) {
   };
 }
 
+function partialTwo(fn, ...args) {
+  return function (...more) {
+    return fn.apply(this, [...args, ...more]);
+  };
+}
+
 const multiply = (a, b) => a * b;
 
 const double = partial(multiply, 2);
+const doubleTwo = partialTwo(multiply, 2);
 
 double(3);
+doubleTwo(4);
