@@ -482,12 +482,13 @@ class BinarySearchTree {
     let sum = 0;
 
     function traverse(node) {
+      if (!node) return;
       if (!node.left && !node.right) {
         sum += node.value;
-      } else {
-        if (node.left) traverse(node.left);
-        if (node.right) traverse(node.right);
+        return;
       }
+      traverse(node.left);
+      traverse(node.right);
     }
 
     traverse(node);

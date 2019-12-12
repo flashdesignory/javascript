@@ -12,14 +12,14 @@
  * @email: info@flashdesignory.com
  */
 
-function medianSlidingWindow(nums, k) {
-  if (!nums.length) return [];
+function medianSlidingWindow(arr, k) {
+  if (!arr.length) return [];
 
   const result = [];
-  const queue = nums.slice(0, k);
+  const queue = arr.slice(0, k);
   let index = k;
 
-  while (index <= nums.length) {
+  while (index <= arr.length) {
     const current = queue.slice(0);
     current.sort((a, b) => a - b);
     const length = current.length; //eslint-disable-line
@@ -33,27 +33,27 @@ function medianSlidingWindow(nums, k) {
       result.push(current[middle]);
     }
     queue.shift();
-    queue.push(nums[index]);
+    queue.push(arr[index]);
     index++;
   }
 
   return result;
 }
 
-function medianSlidingWindow2(nums, k) {
+function medianSlidingWindow2(arr, k) {
   const result = [];
-  for (let i = 0; i < nums.length - k + 1; i++) {
-    const arr = nums.slice(i, k + i);
-    arr.sort((a, b) => a - b);
-    const length = arr.length; //eslint-disable-line
+  for (let i = 0; i < arr.length - k + 1; i++) {
+    const current = arr.slice(i, i + k);
+    current.sort((a, b) => a - b);
+    const length = current.length; //eslint-disable-line
     const middle = Math.floor(length / 2);
     const isEven = length % 2 === 0;
     if (isEven) {
-      const left = arr[middle - 1];
-      const right = arr[middle];
+      const left = current[middle - 1];
+      const right = current[middle];
       result.push((left + right) / 2);
     } else {
-      result.push(arr[middle]);
+      result.push(current[middle]);
     }
   }
 
