@@ -303,17 +303,6 @@ class BinaryTree {
     return false;
   }
 
-  invert(node) {
-    if (!node) return null;
-    const left = node.left; //eslint-disable-line
-    const right = node.right; //eslint-disable-line
-
-    node.left = this.invert(right);
-    node.right = this.invert(left);
-
-    return node;
-  }
-
   lowestCommonAncestor(node, value1, value2) {
     let ancestor = null;
 
