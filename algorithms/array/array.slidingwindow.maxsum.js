@@ -5,7 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-function SumSlidingWindow(arr, k) {
+function sumSlidingWindow(arr, k) {
   if (arr.length < k) return null;
   let max = 0;
 
@@ -22,9 +22,9 @@ function SumSlidingWindow(arr, k) {
   return max;
 }
 
-// npx jest algorithms/array/array.slidingwindow.sum.js
+// npx jest algorithms/array/array.slidingwindow.maxsum.js
 test('return max sum of k-size window', () => {
   const nums = [1, 4, 2, 10, 2, 3, 1, 0, 20];
   const k = 4;
-  expect(SumSlidingWindow(nums, k)).toEqual(24);
+  expect(sumSlidingWindow(nums, k)).toEqual(24);
 });
