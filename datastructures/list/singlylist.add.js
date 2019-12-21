@@ -18,7 +18,7 @@ function addTwoNumbers(l1, l2) {
   let sum = 0;
   let carry = 0;
 
-  while (l1 || l2 || sum) {
+  while (l1 || l2 || carry) {
     if (l1) {
       sum += l1.value;
       l1 = l1.next;
