@@ -510,14 +510,17 @@ class BinarySearchTree {
     const result = [];
 
     function traverse(node, sum, path) {
-      if (!node) return null;
+      if (!node) return;
+
       sum -= node.value;
       path.push(node.value);
+
       if (sum === 0 && !node.left && !node.right) {
         result.push(path.slice(0));
       }
 
-      return traverse(node.left, sum, path.slice(0)) || traverse(node.right, sum, path.slice(0));
+      traverse(node.left, sum, path.slice(0));
+      traverse(node.right, sum, path.slice(0));
     }
 
     traverse(node, value, []);
