@@ -100,13 +100,18 @@ class Trie {
     function traverse(node, letters) {
       if (!node) return;
       Object.values(node.children).forEach((child) => {
-        letters += child.value;
+        /* letters += child.value;
         if (child.isLast) {
           result.push(letters);
         }
         traverse(child, letters);
         letters = letters.substr(0, letters.length - 1);
-        return letters;
+        return letters; */
+        const selection = letters + child.value;
+        if (child.isLast) {
+          result.push(selection);
+        }
+        traverse(child, selection);
       });
     }
 
