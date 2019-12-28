@@ -5,72 +5,76 @@
  * @email: info@flashdesignory.com
  */
 
-function mergeOne(left, right) {
+function mergeOne(arr1, arr2) {
   const result = [];
-  const lLen = left.length;
-  const rLen = right.length;
-  let l = 0;
-  let r = 0;
+  const length1 = arr1.length;
+  const length2 = arr2.length;
+  let index1 = 0;
+  let index2 = 0;
 
-  while (l < lLen && r < rLen) {
-    if (left[l] < right[r]) {
-      result.push(left[l++]);
+  while (index1 < length1 && index2 < length2) {
+    if (arr1[index1] < arr2[index2]) {
+      result.push(arr1[index1++]);
     } else {
-      result.push(right[r++]);
+      result.push(arr2[index2++]);
     }
   }
 
-  return result.concat(left.slice(l)).concat(right.slice(r));
+  // return result.concat(arr1.slice(index1)).concat(arr2.slice(index2));
+  return [...result, ...arr1.slice(index1), ...arr2.slice(index2)];
 }
 
-function mergeTwo(left, right) {
+function mergeTwo(arr1, arr2) {
   const result = [];
-  let a = left[0];
-  let b = right[0];
-  let i = 1;
-  let j = 1;
+  let current1 = arr1[0];
+  let current2 = arr2[0];
+  let index1 = 1;
+  let index2 = 1;
 
-  if (left.length === 0) {
-    return right;
+  if (arr1.length === 0) {
+    return arr2;
   }
 
-  if (right.length === 0) {
-    return left;
+  if (arr2.length === 0) {
+    return arr1;
   }
 
-  while (a || b) {
-    if (a && a < b) {
-      result.push(a);
-      a = left[i++];
+  while (current1 || current2) {
+    if (current1 && current1 < current2) {
+      result.push(current1);
+      current1 = arr1[index1++];
     } else {
-      result.push(b);
-      b = right[j++];
+      result.push(current2);
+      current2 = arr2[index2++];
     }
   }
 
   return result;
 }
 
-function mergeThree(one, two) {
-  let index1 = one.length;
-  let index2 = two.length;
+function mergeThree(arr1, arr2) {
+  let index1 = arr1.length - 1;
+  let index2 = arr2.length - 1;
+  let newIndex = arr1.length + arr2.length - 1;
 
-  while (index1 > 0 && index2 > 0) {
-    if (one[index1 - 1] > two[index2 - 1]) {
-      one[index1 + index2 - 1] = one[index1 - 1];
+  while (index1 >= 0 && index2 >= 0) {
+    if (arr1[index1] > arr2[index2]) {
+      arr1[newIndex] = arr1[index1];
       index1--;
     } else {
-      one[index1 + index2 - 1] = two[index2 - 1];
+      arr1[newIndex] = arr2[index2];
       index2--;
     }
+    newIndex--;
   }
 
-  while (index2 > 0) {
-    one[index2 - 1] = two[index2 - 1];
+  while (index2 >= 0) {
+    arr1[newIndex] = arr2[index2];
     index2--;
+    newIndex--;
   }
 
-  return one;
+  return arr1;
 }
 
 // npx jest algorithms/array/array.merge.js

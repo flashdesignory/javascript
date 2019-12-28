@@ -19,7 +19,7 @@ function caesarCipher(string, k) {
   for (let i = 0; i < input.length; i++) {
     const letter = input[i];
     let index = alphabet.indexOf(letter);
-    if (alphabet.indexOf(letter) === -1) {
+    if (index === -1) {
       result.push(letter);
     } else {
       index += k % 26;

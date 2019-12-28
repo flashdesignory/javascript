@@ -12,19 +12,19 @@
 
 class Queue {
   constructor() {
-    this.storage = {};
+    this.data = {};
     this.first = 0;
     this.last = 0;
   }
 
   enqueue(value) {
-    this.storage[this.last] = value;
+    this.data[this.last] = value;
     this.last++;
   }
 
   dequeue() {
-    const temp = this.storage[this.first];
-    delete this.storage[this.first];
+    const temp = this.data[this.first];
+    delete this.data[this.first];
     this.first++;
     return temp;
   }
