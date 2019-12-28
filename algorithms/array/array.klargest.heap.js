@@ -24,16 +24,13 @@ class BinaryMinHeap {
   }
 
   bubbleUp(index) {
-    while (index > 0) {
-      const parent = Math.floor((index - 1) / 2);
-      if (this.data[parent] > this.data[index]) {
-        const temp = this.data[parent];
-        this.data[parent] = this.data[index];
-        this.data[index] = temp;
-        index = parent;
-      } else {
-        break;
-      }
+    const parent = Math.floor((index - 1) / 2);
+
+    if (this.data[parent] > this.data[index]) {
+      const temp = this.data[parent];
+      this.data[parent] = this.data[index];
+      this.data[index] = temp;
+      this.bubbleUp(parent);
     }
   }
 
@@ -59,6 +56,20 @@ class BinaryMinHeap {
   }
 
   /*
+  // itterative
+  bubbleUp(index) {
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+      if (this.data[parent] > this.data[index]) {
+        const temp = this.data[parent];
+        this.data[parent] = this.data[index];
+        this.data[index] = temp;
+        index = parent;
+      } else {
+        break;
+      }
+    }
+  }
   bubbleDown(index) {
     while (index < this.data.length) { // eslint-disable-line
     const left = 2*index+1;
