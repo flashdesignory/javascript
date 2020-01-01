@@ -6,7 +6,7 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print", "preorder", "postorder", "inorder"] }] */
+ ["print", "preorder", "postorder", "inorder", "ancestor1", "ancestor2"] }] */
 
 class Node {
   constructor(value) {
@@ -183,6 +183,53 @@ class BinarySearchTree {
     }
     return result;
   }
+
+  ancestor1(node, n1, n2) {
+    let parent = null;
+    let current = node;
+
+    while (current) {
+      if (current.value > n1 && current.value > n2) {
+        parent = current;
+        current = current.left;
+      } else if (current.value < n1 && current.value < n2) {
+        parent = current;
+        current = current.right;
+      } else {
+        parent = current;
+        return parent;
+      }
+    }
+
+    return parent;
+  }
+
+  ancestor2(node, n1, n2) {
+    const min = Math.min(n1, n2);
+    const max = Math.max(n1, n2);
+
+    let current = node;
+
+    while (current) {
+      if (
+        current.value === min
+        || current.value === max
+        || (current.value > min && current.value) < max
+      ) {
+        return current;
+      }
+
+      if (current.left && max < current.value) {
+        current = current.left;
+      }
+
+      if (current.right && min > current.value) {
+        current = current.right;
+      }
+    }
+
+    return null;
+  }
 }
 
 // npx jest datastructures/tree/binarysearchtree.iterative.js
@@ -196,6 +243,12 @@ describe('BinarySearchTree Methods', () => {
     expect(tree.contains(13)).toBeTruthy();
   });
   it('BinarySearchTree.preorder()', () => {
-    expect(tree.inorder(tree.root)).toEqual([10, 5, 2, 1, 3, 4, 6, 8, 15, 12, 11, 13, 17]);
+    expect(tree.preorder(tree.root)).toEqual([10, 5, 2, 1, 3, 4, 6, 8, 15, 12, 11, 13, 17]);
+  });
+  it('BinarySearchTree.ancestor1()', () => {
+    expect(tree.ancestor1(tree.root, 3, 6).value).toBe(5);
+  });
+  it('BinarySearchTree.ancestor2()', () => {
+    expect(tree.ancestor2(tree.root, 3, 6).value).toBe(5);
   });
 });
