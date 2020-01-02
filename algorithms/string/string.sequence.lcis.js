@@ -24,16 +24,18 @@ function lcis1(arr) {
 }
 
 function lcis2(arr) {
-  let count = 0;
-  let max = 1;
   if (arr.length <= 1) return arr.length;
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] <= arr[i - 1]) {
-      max = Math.max(i - count, max);
-      count = i;
+
+  let start = 0;
+  let max = 1;
+
+  for (let i = 1; i <= arr.length; i++) {
+    if (!arr[i] || arr[i] <= arr[i - 1]) {
+      max = Math.max(i - start, max);
+      start = i;
     }
   }
-  max = Math.max(arr.length - count, max);
+
   return max;
 }
 

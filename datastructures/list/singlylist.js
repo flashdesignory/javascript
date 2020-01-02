@@ -99,6 +99,30 @@ class SinglyLinkedList {
     return null;
   }
 
+  remove2(value) {
+    if (!this.head) return null;
+
+    let current = this.head;
+    let previous = null;
+
+    while (current) {
+      if (current.value === value) {
+        if (!previous) {
+          // node to remove is the head
+          this.head = current.next;
+          return current;
+        }
+        // node to remove is in the middle
+        previous.next = current.next;
+        return current;
+      }
+      previous = current;
+      current = current.next;
+    }
+
+    return null;
+  }
+
   reverse() {
     if (!this.head) return;
 
