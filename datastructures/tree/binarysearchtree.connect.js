@@ -13,7 +13,7 @@ class Node {
     this.value = value;
     this.left = null;
     this.right = null;
-    this.nextRight = null;
+    this.next = null;
   }
 
   serialize() {
@@ -21,7 +21,7 @@ class Node {
     result.value = this.value;
     result.left = this.left ? this.left.serialize() : null;
     result.right = this.right ? this.right.serialize() : null;
-    result.nextRight = this.nextRight ? this.nextRight.serialize() : null;
+    result.next = this.next ? this.next.serialize() : null;
     return result;
   }
 }
@@ -102,32 +102,32 @@ class BinarySearchTree {
     const queue = new Queue();
     queue.enqueue(node);
 
-    let currentNumChildren = 1;
-    let nextNumChildren = 0;
+    let numSiblings = 1;
+    let numChildren = 0;
     let level = [];
 
     while (!queue.empty()) {
       const current = queue.dequeue();
       level.push(current.value);
-      currentNumChildren--;
+      numSiblings--;
 
       if (current.left) {
         queue.enqueue(current.left);
-        nextNumChildren++;
+        numChildren++;
       }
 
       if (current.right) {
         queue.enqueue(current.right);
-        nextNumChildren++;
+        numChildren++;
       }
 
-      if (currentNumChildren === 0) {
+      if (numSiblings === 0) {
         result.push(level);
         level = [];
-        currentNumChildren = nextNumChildren;
-        nextNumChildren = 0;
+        numSiblings = numChildren;
+        numChildren = 0;
       } else {
-        current.nextRight = queue.peek();
+        current.next = queue.peek();
       }
     }
     return result;
@@ -145,6 +145,19 @@ class BinarySearchTree {
   }
 }
 
+const connect = (node) => {
+  if (!node || !node.left) {
+    return node;
+  }
+
+  node.left.next = node.right;
+  node.right.next = node.next ? node.next.left : null;
+
+  connect(node.left);
+  connect(node.right);
+  return node;
+};
+
 // npx jest datastructures/tree/binarysearchtree.connect.js
 describe('Binary Search Tree should', () => {
   it('connect nodes on same level', () => {
@@ -154,7 +167,17 @@ describe('Binary Search Tree should', () => {
       tree.insert(tree.root, values[i]);
     }
     tree.levelorderTraversal(tree.root);
-    expect(tree.getNode(tree.root, 5).nextRight).not.toBeNull();
-    expect(tree.getNode(tree.root, 15).nextRight).toBeNull();
+    expect(tree.getNode(tree.root, 5).next).not.toBeNull();
+    expect(tree.getNode(tree.root, 15).next).toBeNull();
+  });
+  it('connect nodes on same level2', () => {
+    const values = [10, 15, 5, 2, 3, 12, 17, 4, 6, 13, 11, 8, 1];
+    const tree = new BinarySearchTree();
+    for (let i = 0; i < values.length; i++) {
+      tree.insert(tree.root, values[i]);
+    }
+    connect(tree.root);
+    expect(tree.getNode(tree.root, 5).next).not.toBeNull();
+    expect(tree.getNode(tree.root, 15).next).toBeNull();
   });
 });
