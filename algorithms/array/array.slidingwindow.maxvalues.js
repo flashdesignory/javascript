@@ -30,5 +30,5 @@ function maxSlidingWindow(arr, k) {
 test('return max sum of k-size window', () => {
   const nums = [1, 3, -1, -3, 5, 3, 6, 7];
   const k = 3;
-  expect(maxSlidingWindow(nums, k)).toEqual([1, 3, -1, -3, 5, 3, 6, 7]);
+  expect(maxSlidingWindow(nums, k)).toEqual([3, 3, 5, 5, 6, 7]);
 });
