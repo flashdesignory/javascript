@@ -107,8 +107,8 @@ const findKthLargest = function (arr, k) {
   for (let i = k; i < arr.length; i++) {
     const min = heap.data[0];
     if (arr[i] > min) {
-      heap.extractMin(heap);
-      heap.add(arr[i], heap);
+      heap.extractMin();
+      heap.add(arr[i]);
     }
   }
 
