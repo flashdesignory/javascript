@@ -6,7 +6,8 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
- ["print", "preorder", "postorder", "inorder", "ancestor1", "ancestor2"] }] */
+ ["print", "preorder", "postorder", "inorder", "ancestor1",
+ "ancestor2", "longestConsecutiveAlt"] }] */
 
 class Node {
   constructor(value) {
@@ -229,6 +230,33 @@ class BinarySearchTree {
     }
 
     return null;
+  }
+
+  longestConsecutiveAlt(node) {
+    let result = 0;
+
+    function traverse(node) {
+      if (!node) return 0;
+
+      let length = 1;
+      const left = traverse(node.left);
+      const right = traverse(node.right);
+
+      if (node.left && node.left.value === node.value - 1) {
+        length = Math.max(length, left + 1);
+      }
+
+      if (node.right && node.right.value === node.value + 1) {
+        length = Math.max(length, right + 1);
+      }
+
+      result = Math.max(length, result);
+      return length;
+    }
+
+    traverse(node);
+
+    return result;
   }
 }
 

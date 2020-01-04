@@ -555,30 +555,20 @@ class BinarySearchTree {
   }
 
   longestConsecutive(node) {
-    let result = 0;
+    let max = 0;
 
-    function traverse(node) {
-      if (!node) return 0;
+    function traverse(node, parent, length) {
+      if (!node) return;
 
-      let length = 1;
-      const left = traverse(node.left);
-      const right = traverse(node.right);
-
-      if (node.left && node.left.value === node.value - 1) {
-        length = Math.max(length, left + 1);
-      }
-
-      if (node.right && node.right.value === node.value + 1) {
-        length = Math.max(length, right + 1);
-      }
-
-      result = Math.max(length, result);
-      return length;
+      length = (parent && node.value === parent.value + 1) ? length + 1 : 1;
+      max = Math.max(max, length);
+      parent = node;
+      traverse(node.left, node, length);
+      traverse(node.right, node, length);
     }
 
-    traverse(node);
-
-    return result;
+    traverse(node, null, 0);
+    return max;
   }
 
   shortestPath(node, src, dst) {
