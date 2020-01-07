@@ -7,7 +7,9 @@
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
  ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter",
- "levelorder", "boundary", "getNode", "width"] }] */
+ "levelorder", "boundary", "getNode", "width", "kDistanceNodes1",
+ "kDistanceNodes2"
+] }] */
 
 class Queue {
   constructor() {
@@ -376,6 +378,81 @@ class BinaryTree {
     getLeaves(node.left, result);
     getLeaves(node.right, result);
     getRight(node.right, result);
+    return result;
+  }
+
+  kDistanceNodes1(start, target, k) {
+    function addParent(node, parent) {
+      if (!node) return;
+      node.parent = parent;
+      addParent(node.left, node);
+      addParent(node.right, node);
+    }
+
+    function findNodes(node, previous, k) { // eslint-disable-line
+      if (k === 0) {
+        return [node.value];
+      }
+
+      let left = [];
+      let right = [];
+      let subtree = [];
+
+      if (node.left && node.left !== previous) {
+        left = findNodes(node.left, node, k - 1);
+      }
+
+      if (node.right && node.right !== previous) {
+        right = findNodes(node.right, node, k - 1);
+      }
+
+      if (node.parent && node.paretn !== previous) {
+        subtree = findNodes(node.parent, node, k - 1);
+      }
+
+      return [...left, ...right, ...subtree];
+    }
+
+    addParent(start, null);
+    return findNodes(target, target, k);
+  }
+
+  kDistanceNodes2(start, target, k) {
+    if (!start) return [];
+    let distance = 0;
+    let path = {};
+    const result = [];
+
+    function shortestPath(node, target, dst, route) { // eslint-disable-line
+      if (!node) return 0;
+      route[node.val] = true;
+
+      if (node.val === target.val) {
+        distance = dst;
+        path = { ...route };
+      }
+
+      if (node.left) shortestPath(node.left, target, dst + 1, { ...route });
+      if (node.right) shortestPath(node.right, target, dst + 1, { ...route });
+    }
+
+    function findNodes(node, dst) {
+      if (!node) return;
+      if (dst === k) {
+        result.push(node.val);
+      }
+
+      if (node.left) {
+        path[node.left.val] ? findNodes(node.left, dst - 1) : findNodes(node.left, dst + 1);
+      }
+
+      if (node.right) {
+        path[node.right.val] ? findNodes(node.right, dst - 1) : findNodes(node.right, dst + 1);
+      }
+    }
+
+    shortestPath(start, target, 0, {});
+    findNodes(start, distance);
     return result;
   }
 }
