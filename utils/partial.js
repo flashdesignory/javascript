@@ -20,12 +20,14 @@ function partialTwo(fn, ...args) {
   };
 }
 
-const multiply = (a, b) => a * b;
+test('utils.partial', () => {
+  const multiply = (a, b) => a * b;
+  const double = partial(multiply, 2);
+  expect(double(3)).toEqual(6);
+});
 
-const double = partial(multiply, 2);
-const doubleTwo = partialTwo(multiply, 2);
-
-double(3);
-doubleTwo(4);
-
-test.skip('skip', () => {});
+test('utils.partial', () => {
+  const multiply = (a, b) => a * b;
+  const double = partialTwo(multiply, 2);
+  expect(double(3)).toEqual(6);
+});

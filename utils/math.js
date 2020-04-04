@@ -9,8 +9,6 @@ function roundTo(num, decimals) {
   return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals); //eslint-disable-line
 }
 
-roundTo(4.3940397802, 2); // 4.39
-
 function countDigits(n) {
   let count = 0;
   if (n >= 1) count++;
@@ -23,6 +21,10 @@ function countDigits(n) {
   return count;
 }
 
-countDigits(12321); // 5
+test('utils.roundTo', () => {
+  expect(roundTo(4.3940397802, 2)).toEqual(4.39);
+});
 
-test.skip('skip', () => {});
+test('utils.countDigits', () => {
+  expect(countDigits(12321)).toEqual(5);
+});

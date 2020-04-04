@@ -26,10 +26,16 @@ function curry2(fn, arity = fn.length) {
   }([]);
 }
 
-const multiply = (a, b, c) => a * b * c;
-const curried = curry(multiply);
-const curried2 = curry2(multiply);
-curried(3)(2)(2);
-curried2(3)(2)(2);
+test('utils.curry', () => {
+  const multiply = (a, b, c) => a * b * c;
+  const curried = curry(multiply);
+  const result = curried(3)(2)(2);
+  expect(result).toEqual(12);
+});
 
-test.skip('skip', () => {});
+test('utils.curry2', () => {
+  const multiply = (a, b, c) => a * b * c;
+  const curried2 = curry2(multiply);
+  const result = curried2(3)(2)(2);
+  expect(result).toEqual(12);
+});

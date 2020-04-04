@@ -32,42 +32,51 @@ function freeze(obj) {
   return Object.freeze(obj);
 }
 
-const obj1 = {
-  name: 'foo',
-  data: [1, 2, 3, 4, 5],
-  meta: {
-    text: 'fooball',
-  },
-};
+test('utils.deepfreeze', () => {
+  const obj = {
+    name: 'foo',
+    data: [1, 2, 3, 4, 5],
+    meta: {
+      text: 'fooball',
+    },
+  };
 
-console.log(obj1);
-console.log('***********');
-obj1.meta.tags = 'yoyoyo';
-console.log(obj1);
-console.log('***********');
-deepFreeze(obj1);
-obj1.meta.something = 'ja';
-console.log(obj1);
-obj1.bar = 'baz';
-console.log(obj1);
+  const expected = {
+    name: 'foo',
+    data: [1, 2, 3, 4, 5],
+    meta: {
+      text: 'fooball',
+      tags: 'yoyoyo',
+    },
+  };
 
-const obj2 = {
-  name: 'foo',
-  data: [1, 2, 3, 4, 5],
-  meta: {
-    text: 'fooball',
-  },
-};
+  obj.meta.tags = 'yoyoyo';
+  deepFreeze(obj);
+  obj.meta.something = 'ja';
+  obj.bar = 'baz';
 
-console.log(obj2);
-console.log('***********');
-obj2.meta.tags = 'yoyoyo';
-console.log(obj2);
-console.log('***********');
-freeze(obj2);
-obj2.meta.something = 'ja';
-console.log(obj2);
-obj2.bar = 'baz';
-console.log(obj2);
+  expect(obj).toEqual(expected);
+});
 
-test.skip('skip', () => {});
+test('utils.freeze', () => {
+  const obj = {
+    name: 'foo',
+    data: [1, 2, 3, 4, 5],
+    meta: {
+      text: 'fooball',
+    },
+  };
+
+  const expected = {
+    name: 'foo',
+    data: [1, 2, 3, 4, 5],
+    meta: {
+      text: 'fooball',
+    },
+  };
+
+  freeze(obj);
+  obj.meta.something = 'ja';
+  obj.bar = 'baz';
+  expect(obj).toEqual(expected);
+});

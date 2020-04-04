@@ -34,36 +34,35 @@ const mergeAll = function (...args) {
   return clone;
 };
 
-// example
-const a = {
-  error: null,
-  loaded: true,
-  ids: [1, 2, 3],
-  flowProperties: {
+test('utils.mergeAll', () => {
+  const a = {
+    error: null,
     loaded: true,
-    path: 'nothing',
-  },
-};
+    ids: [1, 2, 3],
+    flowProperties: {
+      loaded: true,
+      path: 'nothing',
+    },
+  };
 
-mergeAll(a, {
-  error: 'foo',
-  flowProperties: {
-    path: 'something',
-    error: false,
-  },
+  const b = {
+    error: 'foo',
+    flowProperties: {
+      path: 'something',
+      error: false,
+    },
+  };
+
+  const expected = {
+    error: 'foo',
+    loaded: true,
+    ids: [1, 2, 3],
+    flowProperties: {
+      loaded: true,
+      path: 'something',
+      error: false,
+    },
+  };
+
+  expect(mergeAll(a, b)).toEqual(expected);
 });
-
-/*
-{
-  error: 'foo',
-  loaded: true,
-  ids: [1, 2, 3],
-  flowProperties: {
-    loaded: true,
-    path: 'something',
-    error: false,
-  }
-}
-*/
-
-test.skip('skip', () => {});

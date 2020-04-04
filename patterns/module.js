@@ -9,7 +9,7 @@ const Module = (function () {
   let _privateVar = 'foo';
 
   function privateFunction() {
-    console.log('privateFunction()');
+    return 'privateFunction()';
   }
 
   return {
@@ -20,18 +20,13 @@ const Module = (function () {
       return _privateVar;
     },
     publicFunction: function () {
-      console.log('publicFunction()');
+      return 'publicFunction()';
     },
     callPrivateFunction: function () {
       privateFunction();
     },
   };
 })();
-
-// example
-Module.publicFunction();
-console.log(Module.getPrivateVar());
-console.log(Module._privateVar); // undefined
 
 const ModuleTwo = (function () {
   let _privateVar = 'foo';
@@ -58,8 +53,14 @@ const ModuleTwo = (function () {
   return publicInterface;
 })();
 
-// example
-ModuleTwo.publicFunction();
-console.log(ModuleTwo._privateVar); // undefined
+test('pattners.module', () => {
+  expect(Module.publicFunction()).toEqual('publicFunction()');
+  expect(Module.getPrivateVar()).toEqual('foo');
+  expect(Module._privateVar).toBeUndefined();
+});
 
-test.skip('skip', () => {});
+test('pattners.module2', () => {
+  console.log = jest.fn();
+  ModuleTwo.publicFunction();
+  expect(console.log).toHaveBeenCalledTimes(3);
+});

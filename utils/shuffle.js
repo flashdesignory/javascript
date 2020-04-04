@@ -27,9 +27,10 @@ class ShuffleArray {
   }
 }
 
-const shuffled = new ShuffleArray([1, 2, 3]);
-console.log(shuffled.shuffle());
-console.log(shuffled.reset());
-console.log(shuffled.shuffle());
-
-test.skip('skip', () => {});
+test('utils.shuffle', () => {
+  const arr = [1, 2, 3];
+  const shuffled = new ShuffleArray(arr);
+  expect(shuffled.shuffle()).not.toBe(arr);
+  expect(shuffled.reset()).toBe(arr);
+  expect(shuffled.shuffle()).not.toBe(arr);
+});

@@ -41,15 +41,13 @@ function clone(obj) {
   throw new Error('clone failed...');
 }
 
-// example
-const obj = {
-  name: 'john',
-  init: function () { console.log('init()'); },
-  something: { year: 2017 },
-  enabled: false,
-};
-console.log(obj);
-const newObj = clone(obj);
-console.log(newObj);
-
-test.skip('skip', () => {});
+test('utils.clone', () => {
+  const obj = {
+    name: 'john',
+    init: function () { console.log('init()'); },
+    something: { year: 2017 },
+    enabled: false,
+  };
+  const newObj = clone(obj);
+  expect(newObj).toEqual(obj);
+});
