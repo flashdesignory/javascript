@@ -28,9 +28,8 @@ const singleton = (function () {
   };
 })();
 
-const foo = singleton.getInstance();
-console.log(foo.getId());
-const bar = singleton.getInstance();
-console.log(bar.getId());
-
-test.skip('skip', () => {});
+test('patterns.singleton', () => {
+  const foo = singleton.getInstance();
+  const bar = singleton.getInstance();
+  expect(foo.getId()).toEqual(bar.getId());
+});

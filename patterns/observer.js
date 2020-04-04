@@ -33,13 +33,15 @@ class Observer {
   }
 }
 
-const subj = new Subject();
-const o1 = new Observer('foo');
-const o2 = new Observer('bar');
-const o3 = new Observer('baz');
-subj.subscribe(o1);
-subj.subscribe(o2);
-subj.subscribe(o3);
-subj.notify('hello world');
-
-test.skip('skip', () => {});
+test('patterns.observer', () => {
+  console.log = jest.fn();
+  const subj = new Subject();
+  const o1 = new Observer('foo');
+  const o2 = new Observer('bar');
+  const o3 = new Observer('baz');
+  subj.subscribe(o1);
+  subj.subscribe(o2);
+  subj.subscribe(o3);
+  subj.notify('hello world');
+  expect(console.log).toHaveBeenCalledTimes(3);
+});
