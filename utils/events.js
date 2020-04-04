@@ -47,3 +47,5 @@ var Events = (function(){ // eslint-disable-line
     },
   };
 })();
+
+test.skip('skip', () => {});

@@ -24,3 +24,5 @@ const resultFunction = wrap(() => 'Foo');
 
 console.log(errorFunction && errorFunction());
 console.log(resultFunction && resultFunction());
+
+test.skip('skip', () => {});

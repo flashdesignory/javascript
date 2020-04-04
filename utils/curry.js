@@ -31,3 +31,5 @@ const curried = curry(multiply);
 const curried2 = curry2(multiply);
 curried(3)(2)(2);
 curried2(3)(2)(2);
+
+test.skip('skip', () => {});

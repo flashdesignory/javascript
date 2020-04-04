@@ -42,3 +42,5 @@ function reverseBits3(n) {
   expect(reverseBits2(00000010100101000001111010011100)).toEqual(43261596);
   expect(reverseBits3(00000010100101000001111010011100)).toEqual(43261596);
 }); */
+
+test.skip('skip', () => {});

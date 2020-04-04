@@ -23,3 +23,5 @@ const throttled = throttle(() => {
 }, 250);
 
 window.addEventListener('mousemove', throttled);
+
+test.skip('skip', () => {});

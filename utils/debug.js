@@ -31,3 +31,5 @@ var Debug = (function(window) { // eslint-disable-line
     },
   };
 })(window);
+
+test.skip('skip', () => {});

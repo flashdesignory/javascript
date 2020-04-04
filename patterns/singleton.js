@@ -32,3 +32,5 @@ const foo = singleton.getInstance();
 console.log(foo.getId());
 const bar = singleton.getInstance();
 console.log(bar.getId());
+
+test.skip('skip', () => {});

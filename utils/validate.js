@@ -144,3 +144,5 @@ console.log(isNumber('abc')); // false
 console.log(isNumber('2e10'));
 console.log(isNumber(' -90e3'));
 console.log(isNumber('2e10e5')); // false
+
+test.skip('skip', () => {});

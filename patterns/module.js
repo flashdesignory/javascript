@@ -61,3 +61,5 @@ const ModuleTwo = (function () {
 // example
 ModuleTwo.publicFunction();
 console.log(ModuleTwo._privateVar); // undefined
+
+test.skip('skip', () => {});

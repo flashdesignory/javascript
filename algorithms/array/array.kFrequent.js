@@ -16,7 +16,7 @@ const topKFrequentSimple = function (nums, k) {
 
   const result = [];
   for (let i = 0; i < k; i++) {
-    result.push(temp[i][0]);
+    result.push(Number(temp[i][0]));
   }
 
   return result;
@@ -106,15 +106,15 @@ const topKFrequent = (arr, k) => {
 
   const result = [];
   for (let i = 0; i < k; i++) {
-    result.push(heap.dequeue().value);
+    result.push(Number(heap.dequeue().value));
   }
   return result;
 };
 
 // npx jest algorithms/array/array.kFrequent.js
-test('findKthLargest()', () => {
+test('topKFrequent()', () => {
   expect(topKFrequent([1, 1, 1, 2, 2, 3], 2)).toEqual([1, 2]);
 });
-test('findKthLargest()', () => {
+test('topKFrequentSimple()', () => {
   expect(topKFrequentSimple([1, 1, 1, 2, 2, 3], 2)).toEqual([1, 2]);
 });

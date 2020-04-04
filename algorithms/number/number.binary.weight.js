@@ -32,3 +32,4 @@ function hammingWeight2(n) {
 // eslint-disable-next-line
 // console.log(hammingWeight1(00000000000000000000000000001011));
 // console.log(hammingWeight2(00000000000000000000000000001011));
+test.skip('skip', () => {});

@@ -24,3 +24,5 @@ function countDigits(n) {
 }
 
 countDigits(12321); // 5
+
+test.skip('skip', () => {});

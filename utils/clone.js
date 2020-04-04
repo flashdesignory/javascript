@@ -51,3 +51,5 @@ const obj = {
 console.log(obj);
 const newObj = clone(obj);
 console.log(newObj);
+
+test.skip('skip', () => {});

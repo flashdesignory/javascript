@@ -47,3 +47,5 @@ console.log(c.getId());
 c.setName('bo');
 console.log(c.getName());
 console.log('--------------------');
+
+test.skip('skip', () => {});

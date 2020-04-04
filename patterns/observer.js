@@ -41,3 +41,5 @@ subj.subscribe(o1);
 subj.subscribe(o2);
 subj.subscribe(o3);
 subj.notify('hello world');
+
+test.skip('skip', () => {});

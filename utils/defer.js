@@ -33,3 +33,5 @@ function sayHi(name) {
 
 const sayHiDeferred = defer(sayHi, 500);
 sayHiDeferred('world');
+
+test.skip('skip', () => {});

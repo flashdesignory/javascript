@@ -39,3 +39,5 @@ var Classes = (function(){// eslint-disable-line
     },
   };
 })();
+
+test.skip('skip', () => {});

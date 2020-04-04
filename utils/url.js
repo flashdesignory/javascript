@@ -18,11 +18,13 @@ const getUrlParam = (name) => {
 };
 
 const getUrlParameter = (name) => {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
   const regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
-  const results = regex.exec(location.search);
+  const results = regex.exec(window.location.search);
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
 console.log(getUrlParam('q'));
 console.log(getUrlParameter('q'));
+
+test.skip('skip', () => {});

@@ -73,3 +73,5 @@ const compareProp = (prop) => { // eslint-disable-line
   };
 };
 console.log(cars.sort(compareProp('color')));
+
+test.skip('skip', () => {});

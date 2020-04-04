@@ -67,3 +67,5 @@ runner.setMax(4);
 runner.push(task);// 6
 runner.push(task('7', 3000));
 runner.push(task('8', 1500));
+
+test.skip('skip', () => {});

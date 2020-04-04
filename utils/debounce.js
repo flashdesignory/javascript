@@ -43,3 +43,5 @@ const debouncedSimple = debounceSimple(() => {
 
 window.addEventListener('mousemove', debounced);
 window.addEventListener('mousedown', debouncedSimple);
+
+test.skip('skip', () => {});

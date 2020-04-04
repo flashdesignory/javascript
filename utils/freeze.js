@@ -69,3 +69,5 @@ obj2.meta.something = 'ja';
 console.log(obj2);
 obj2.bar = 'baz';
 console.log(obj2);
+
+test.skip('skip', () => {});

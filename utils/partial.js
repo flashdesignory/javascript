@@ -27,3 +27,5 @@ const doubleTwo = partialTwo(multiply, 2);
 
 double(3);
 doubleTwo(4);
+
+test.skip('skip', () => {});

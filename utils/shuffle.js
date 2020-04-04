@@ -31,3 +31,5 @@ const shuffled = new ShuffleArray([1, 2, 3]);
 console.log(shuffled.shuffle());
 console.log(shuffled.reset());
 console.log(shuffled.shuffle());
+
+test.skip('skip', () => {});

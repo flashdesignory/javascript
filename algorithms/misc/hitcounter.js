@@ -6,7 +6,7 @@
  */
 
 class HitCounter {
-  constructor(range = 300) {
+  constructor(range = 500) {
     this.range = range;
     this.times = [];
     this.hits = [];
