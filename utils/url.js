@@ -14,7 +14,7 @@ const getUrlParam = (name) => {
       return pair[1];
     }
   }
-  return null;
+  return '';
 };
 
 const getUrlParameter = (name) => {
@@ -24,7 +24,11 @@ const getUrlParameter = (name) => {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
-console.log(getUrlParam('q'));
-console.log(getUrlParameter('q'));
-
-test.skip('skip', () => {});
+test('utils.url', () => {
+  delete window.location;
+  window.location = { search: '?q=javascript' };
+  expect(getUrlParam('q')).toEqual('javascript');
+  expect(getUrlParameter('q')).toEqual('javascript');
+  expect(getUrlParam('f')).toEqual('');
+  expect(getUrlParameter('f')).toEqual('');
+});

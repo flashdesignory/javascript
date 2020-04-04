@@ -17,16 +17,19 @@ function memoize(fn) {
   };
 }
 
-let count = 0;
-function fibonacci(n) {
-  console.log(++count);
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}
+test('utils.memoize', () => {
+  let count = 0;
+  function fibonacci(n) {
+    // console.log(++count);
+    ++count;
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
 
-fibonacci(12); // n:144, count:465
-fibonacci = memoize(fibonacci); //eslint-disable-line
-count = 0;
-fibonacci(12); // n:144, count:13
-
-test.skip('skip', () => {});
+  fibonacci(12); // n:144, count:465
+  expect(count).toBe(465);
+  fibonacci = memoize(fibonacci); //eslint-disable-line
+  count = 0;
+  fibonacci(12); // n:144, count:13
+  expect(count).toBe(13);
+});

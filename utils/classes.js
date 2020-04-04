@@ -40,4 +40,13 @@ var Classes = (function(){// eslint-disable-line
   };
 })();
 
-test.skip('skip', () => {});
+test('utils.classes', () => {
+  const node = document.createElement('div');
+  Classes.addClass(node, 'foo');
+  expect(node.getAttribute('class')).toMatch(/foo/);
+  Classes.addClass(node, 'bar');
+  expect(node.getAttribute('class')).toMatch(/bar/);
+  Classes.removeClass(node, 'foo');
+  expect(Classes.hasClass(node, 'foo')).toBeFalsy();
+  expect(Classes.hasClass(node, 'bar')).toBeTruthy();
+});

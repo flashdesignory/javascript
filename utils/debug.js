@@ -32,4 +32,8 @@ var Debug = (function(window) { // eslint-disable-line
   };
 })(window);
 
-test.skip('skip', () => {});
+test('utils.debug', () => {
+  console.log = jest.fn();
+  Debug.log('one', 'some message');
+  expect(console.log).toHaveBeenCalledTimes(1);
+});
