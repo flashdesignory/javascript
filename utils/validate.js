@@ -27,53 +27,30 @@
   * source: https://developer.mozilla.org/en-US/docs/Glossary/Primitive
 * */
 
-
-function isPrimitive(value) {
-  return value !== Object(value);
-}
-
-// examples
-console.log(isPrimitive(100));
-/* eslint-disable-next-line */
-console.log(isPrimitive(new Number(100)));
-console.log(isPrimitive(true));
-console.log(isPrimitive('100'));
-
-function isObject(value) {
-  return value === Object(value);
-}
-
-// examples
-console.log(isObject({}));
-
-function isArray(value) {
-  return Array.isArray(value);
-}
-
-console.log(isArray([1, 2, 3]));
-console.log(isArray([]));
-console.log(isArray({}));
-
-function getType(elem) {
-  // return Object.prototype.toString.call(elem);
-  // remove the first 'Object' trace '[object Object]'
-  return Object.prototype.toString.call(elem).slice(8, -1);
-}
-
-console.log(getType([]));
-
 /* polyfill for Number.isNaN */
 Number.isNaN = Number.isNaN || function (value) {
   return value !== value; //eslint-disable-line
 };
 
-/* validate integer */
+function isPrimitive(value) {
+  return value !== Object(value);
+}
+
+function isObject(value) {
+  return value === Object(value);
+}
+
+function isArray(value) {
+  return Array.isArray(value);
+}
+
 function isInteger(x) {
   return typeof x === 'number' && (x % 1 === 0);
 }
-console.log(isInteger(5)); // true
-console.log(isInteger(0.001)); // false
 
+function getType(elem) {
+  return Object.prototype.toString.call(elem).slice(8, -1);
+}
 
 /* alphanumeric */
 // using regex
@@ -94,8 +71,38 @@ function isAlphaNumeric2(str) {
   return true;
 }
 
-isAlphaNumeric1('huiwl490sk');
-isAlphaNumeric2('huiwl490sk');
+test('utils.validate.isPrimitive', () => {
+  expect(isPrimitive(100)).toBeTruthy();
+  /* eslint-disable-next-line */
+  expect(isPrimitive(new Number(100))).toBeFalsy();
+  expect(isPrimitive(true)).toBeTruthy();
+  expect(isPrimitive('100')).toBeTruthy();
+});
+
+test('utils.validate.isObject', () => {
+  expect(isObject({})).toBeTruthy();
+  expect(isObject(1)).toBeFalsy();
+});
+
+test('utils.validate.isArray', () => {
+  expect(isArray([1, 2, 3])).toBeTruthy();
+  expect(isArray([])).toBeTruthy();
+  expect(isArray({})).toBeFalsy();
+});
+
+test('utils.validate.isInteger', () => {
+  expect(isInteger(5)).toBeTruthy();
+  expect(isInteger(0.001)).toBeFalsy();
+});
+
+test('utils.validate.getType', () => {
+  expect(getType([])).toEqual('Array');
+});
+
+test('utils.validate.isAlphaNumeric', () => {
+  expect(isAlphaNumeric1('huiwl490sk')).toBeTruthy();
+  expect(isAlphaNumeric2('huiwl490sk')).toBeTruthy();
+});
 
 /*
  * @title: Valid Number
@@ -138,11 +145,11 @@ function isNumber(str) {
   return validNumber(str);
 }
 
-console.log(isNumber('0'));
-console.log(isNumber('0.1'));
-console.log(isNumber('abc')); // false
-console.log(isNumber('2e10'));
-console.log(isNumber(' -90e3'));
-console.log(isNumber('2e10e5')); // false
-
-test.skip('skip', () => {});
+test('utils.validate.isNumber', () => {
+  expect(isNumber('0')).toBeTruthy();
+  expect(isNumber('0.1')).toBeTruthy();
+  expect(isNumber('abc')).toBeFalsy(); // false
+  expect(isNumber('2e10')).toBeTruthy();
+  expect(isNumber(' -90e3')).toBeTruthy();
+  expect(isNumber('2e10e5')).toBeFalsy(); // false
+});

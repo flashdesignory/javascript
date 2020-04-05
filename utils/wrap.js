@@ -16,13 +16,13 @@ function wrap(fn) {
   };
 }
 
-const errorFunction = wrap(() => {
-  throw new Error('Error');
+test('utils.wrap', () => {
+  const errorFunction = wrap(() => {
+    throw new Error('Error');
+  });
+
+  const resultFunction = wrap(() => 'Foo');
+
+  expect(errorFunction && errorFunction()).toBeNull();
+  expect(resultFunction && resultFunction()).toEqual('Foo');
 });
-
-const resultFunction = wrap(() => 'Foo');
-
-console.log(errorFunction && errorFunction());
-console.log(resultFunction && resultFunction());
-
-test.skip('skip', () => {});
