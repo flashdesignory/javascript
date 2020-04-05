@@ -27,11 +27,16 @@ function defer(fn, wait) {
   };
 }
 
-function sayHi(name) {
-  console.log(`Hello ${name}`);
-}
+test('utils.defer', () => {
+  console.log = jest.fn();
 
-const sayHiDeferred = defer(sayHi, 500);
-sayHiDeferred('world');
+  function sayHi(name) {
+    console.log(`Hello ${name}`);
+  }
 
-test.skip('skip', () => {});
+  const sayHiDeferred = defer(sayHi, 500);
+  jest.useFakeTimers();
+  sayHiDeferred('world');
+  jest.runOnlyPendingTimers();
+  expect(console.log).toHaveBeenCalledTimes(1);
+});
