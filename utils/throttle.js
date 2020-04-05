@@ -18,10 +18,16 @@ function throttle(fn, wait) {
   };
 }
 
-const throttled = throttle(() => {
-  console.log('throttled');
-}, 250);
+test('utils.throttle', () => {
+  console.log = jest.fn();
+  const throttled = throttle(() => {
+    console.log('throttled');
+  }, 250);
 
-window.addEventListener('mousemove', throttled);
+  // window.addEventListener('mousemove', throttled);
 
-test.skip('skip', () => {});
+  jest.useFakeTimers();
+  throttled();
+  jest.runOnlyPendingTimers();
+  expect(console.log).toHaveBeenCalledTimes(1);
+});
