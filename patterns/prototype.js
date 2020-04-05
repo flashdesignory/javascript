@@ -36,16 +36,14 @@ ExtendedBase.prototype.getName = function () {
   return this.name;
 };
 
-const b = new Base('foo');
-b.init();
-console.log(b.getId());
-console.log('--------------------');
+test.skip('patterns.prototype', () => {
+  const b = new Base('foo');
+  b.init();
+  expect(b.getId()).toEqual('foo');
 
-const c = new ExtendedBase('baba');
-c.init();
-console.log(c.getId());
-c.setName('bo');
-console.log(c.getName());
-console.log('--------------------');
-
-test.skip('skip', () => {});
+  const c = new ExtendedBase('baba');
+  c.init();
+  expect(c.getId()).toEqual('baba');
+  c.setName('bo');
+  expect(c.getName()).toEqual('bo');
+});

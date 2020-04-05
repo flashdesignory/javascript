@@ -30,16 +30,14 @@ ExtendedBase.getName = function () {
   return this.name;
 };
 
-const b = Object.create(Base);
-b.init('foo');
-console.log(b.getId());
-console.log('--------------------');
+test('patterns.delegation', () => {
+  const b = Object.create(Base);
+  b.init('foo');
+  expect(b.getId()).toEqual('foo');
 
-const c = Object.create(ExtendedBase);
-c.init('baba');
-console.log(c.getId());
-c.setName('bo');
-console.log(c.getName());
-console.log('--------------------');
-
-test.skip('skip', () => {});
+  const c = Object.create(ExtendedBase);
+  c.init('baba');
+  expect(c.getId()).toEqual('baba');
+  c.setName('bo');
+  expect(c.getName()).toEqual('bo');
+});

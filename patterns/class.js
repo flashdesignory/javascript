@@ -46,18 +46,14 @@
   window.ExtendedBase = ExtendedBase;
 })();
 
-const b = new window.Base('foo');
-b.init();
-console.log(b.getId());
-b.setId('baba');
-console.log(b.getId());
-console.log('--------------------');
-
-const c = new window.ExtendedBase('baba');
-c.init();
-console.log(c.getId());
-c.setName('bo');
-console.log(c.getName());
-console.log('--------------------');
-
-test.skip('skip', () => {});
+test('patterns.class', () => {
+  const b = new window.Base('foo');
+  b.init();
+  b.getId();
+  b.setId('baba');
+  expect(b.getId()).toBe('baba');
+  const c = new window.ExtendedBase('baba');
+  c.init();
+  c.setName('bo');
+  expect(c.getName()).toBe('bo');
+});

@@ -33,16 +33,14 @@ function extendedBase(id) {
   return _base;
 }
 
-const b = base('foo');
-b.init();
-console.log(b.getId());
-console.log('--------------------');
+test.skip('patterns.functional', () => {
+  const b = base('foo');
+  b.init();
+  expect(b.getId()).toEqual('foo');
 
-const c = extendedBase('baba');
-c.init();
-console.log(c.getId());
-c.setName('bo');
-console.log(c.getName());
-console.log('--------------------');
-
-test.skip('skip', () => {});
+  const c = extendedBase('baba');
+  c.init();
+  expect(c.getId()).toEqual('baba');
+  c.setName('bo');
+  expect(c.getName()).toEqual('bo');
+});
