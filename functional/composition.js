@@ -18,6 +18,8 @@ function compose(...fns) {
   return pipe(...fns.reverse());
 }
 
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args));
+
 // npx jest functional/composition.js
 describe('it should compose functions', () => {
   const increment = x => x + 1;
@@ -33,5 +35,16 @@ describe('it should compose functions', () => {
   it('should execute functions right to left', () => {
     const p = pipe(half, increment, double, decrement);
     expect(p(3)).toBe(4);
+  });
+
+  it('should call all functions with the same arguments', () => {
+    const one = jest.fn();
+    const two = jest.fn();
+    const three = jest.fn();
+
+    callAll(one, two, three)('some arg');
+    expect(one).toHaveBeenCalledWith('some arg');
+    expect(two).toHaveBeenCalledWith('some arg');
+    expect(three).toHaveBeenCalledWith('some arg');
   });
 });
