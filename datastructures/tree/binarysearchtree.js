@@ -169,12 +169,10 @@ class BinarySearchTree {
 
     if (node.value > value) {
       node.left = this.insert(node.left, value);
+      return node;
     }
 
-    if (node.value < value) {
-      node.right = this.insert(node.right, value);
-    }
-
+    node.right = this.insert(node.right, value);
     return node;
   }
 
