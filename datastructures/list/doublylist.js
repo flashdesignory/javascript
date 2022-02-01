@@ -90,7 +90,6 @@ class DoublyLinkedList {
     if (!this.head) return;
 
     let current = this.head;
-    let previous = null;
     let next = null;
 
     this.head = this.tail;
@@ -99,11 +98,8 @@ class DoublyLinkedList {
     while (current) {
       // capture values
       next = current.next; //eslint-disable-line
-      previous = current.previous; //eslint-disable-line
-      // switch next / previous
-      current.next = previous;
-      current.previous = next;
-      // go to next node
+      current.next = current.previous;
+      current.previous = current;
       current = next;
     }
   }
