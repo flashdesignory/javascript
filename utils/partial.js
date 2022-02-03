@@ -20,6 +20,7 @@ function partialTwo(fn, ...args) {
   };
 }
 
+// npx jest utils/partial.js
 test('utils.partial', () => {
   const multiply = (a, b) => a * b;
   const double = partial(multiply, 2);

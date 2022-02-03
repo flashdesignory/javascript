@@ -21,6 +21,7 @@ function countDigits(n) {
   return count;
 }
 
+// npx jest utils/math.js
 test('utils.roundTo', () => {
   expect(roundTo(4.3940397802, 2)).toEqual(4.39);
 });

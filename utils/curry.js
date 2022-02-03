@@ -26,6 +26,7 @@ function curry2(fn, arity = fn.length) {
   }([]);
 }
 
+// npx jest utils/curry.js
 test('utils.curry', () => {
   const multiply = (a, b, c) => a * b * c;
   const curried = curry(multiply);

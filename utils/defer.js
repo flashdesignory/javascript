@@ -27,6 +27,7 @@ function defer(fn, wait) {
   };
 }
 
+// npx jest utils/defer.js
 test('utils.defer', () => {
   console.log = jest.fn();
 

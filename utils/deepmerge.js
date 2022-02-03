@@ -19,7 +19,7 @@ const deepMerge = (target, source) => {
     if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
       target[key] = targetValue.concat(sourceValue);
     } else if (isObject(targetValue) && isObject(sourceValue)) {
-      target[key] = deepMerge(Object.assign({}, targetValue), sourceValue);
+      target[key] = deepMerge(targetValue, sourceValue);
     } else {
       target[key] = sourceValue;
     }
@@ -34,6 +34,7 @@ const mergeAll = function (...args) {
   return clone;
 };
 
+// npx jest utils/deepmerge.js
 test('utils.mergeAll', () => {
   const a = {
     error: null,

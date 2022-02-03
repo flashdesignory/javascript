@@ -32,6 +32,7 @@ function freeze(obj) {
   return Object.freeze(obj);
 }
 
+// npx jest utils/deepfreeze.js
 test('utils.deepfreeze', () => {
   const obj = {
     name: 'foo',

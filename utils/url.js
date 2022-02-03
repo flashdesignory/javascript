@@ -24,6 +24,7 @@ const getUrlParameter = (name) => {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
+// npx jest utils/url.js
 test('utils.url', () => {
   delete window.location;
   window.location = { search: '?q=javascript' };

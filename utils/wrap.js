@@ -16,6 +16,7 @@ function wrap(fn) {
   };
 }
 
+// npx jest utils/wrap.js
 test('utils.wrap', () => {
   const errorFunction = wrap(() => {
     throw new Error('Error');

@@ -44,6 +44,10 @@ function isArray(value) {
   return Array.isArray(value);
 }
 
+function isDate(value) {
+  return (new Date(value) !== "Invalid Date") && !isNaN(new Date(value));
+}
+
 function isInteger(x) {
   return typeof x === 'number' && (x % 1 === 0);
 }
@@ -71,6 +75,7 @@ function isAlphaNumeric2(str) {
   return true;
 }
 
+// npx jest utils/validate.js
 test('utils.validate.isPrimitive', () => {
   expect(isPrimitive(100)).toBeTruthy();
   /* eslint-disable-next-line */

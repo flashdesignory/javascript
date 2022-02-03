@@ -41,6 +41,7 @@ function clone(obj) {
   throw new Error('clone failed...');
 }
 
+// npx jest utils/clone.js
 test('utils.clone', () => {
   const obj = {
     name: 'john',

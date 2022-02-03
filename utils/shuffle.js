@@ -27,6 +27,7 @@ class ShuffleArray {
   }
 }
 
+// npx jest utils/shuffle.js
 test('utils.shuffle', () => {
   const arr = [1, 2, 3];
   const shuffled = new ShuffleArray(arr);

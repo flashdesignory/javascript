@@ -40,6 +40,7 @@ var Classes = (function(){// eslint-disable-line
   };
 })();
 
+// npx jest utils/classes.js
 test('utils.classes', () => {
   const node = document.createElement('div');
   Classes.addClass(node, 'foo');

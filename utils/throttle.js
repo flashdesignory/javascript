@@ -18,6 +18,7 @@ function throttle(fn, wait) {
   };
 }
 
+// npx jest utils/throttle.js
 test('utils.throttle', () => {
   console.log = jest.fn();
   const throttled = throttle(() => {

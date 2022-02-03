@@ -32,6 +32,7 @@ var Debug = (function(window) { // eslint-disable-line
   };
 })(window);
 
+// npx jest utils/debug.js
 test('utils.debug', () => {
   console.log = jest.fn();
   Debug.log('one', 'some message');

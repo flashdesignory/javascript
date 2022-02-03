@@ -17,6 +17,7 @@ function memoize(fn) {
   };
 }
 
+// npx jest utils/memoize.js
 test('utils.memoize', () => {
   let count = 0;
   function fibonacci(n) {

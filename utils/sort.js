@@ -43,6 +43,7 @@ const compareProp = (prop) => { // eslint-disable-line
   };
 };
 
+// npx jest utils/sort.js
 test('simple string sorting', () => {
   const fruits = ['banana', 'orange', 'apple'];
   expect(fruits.sort()).toEqual(['apple', 'banana', 'orange']);
