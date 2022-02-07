@@ -24,12 +24,25 @@ const getUrlParameter = (name) => {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
+const getUrlParamByName = (name) => {
+  let paramString = window.location.search.substring(1);
+  let queryString = new URLSearchParams(paramString);
+
+  for (let pair of queryString.entries()) {
+    if (pair[0] === name) return pair[1];
+  }
+
+  return '';
+}
+
 // npx jest utils/url.js
 test('utils.url', () => {
   delete window.location;
   window.location = { search: '?q=javascript' };
   expect(getUrlParam('q')).toEqual('javascript');
   expect(getUrlParameter('q')).toEqual('javascript');
+  expect(getUrlParamByName('q')).toEqual('javascript');
   expect(getUrlParam('f')).toEqual('');
   expect(getUrlParameter('f')).toEqual('');
+  expect(getUrlParamByName('f')).toEqual('');
 });
