@@ -21,6 +21,11 @@ function countDigits(n) {
   return count;
 }
 
+function countDigitsTwo(num) {
+  if(num === 0 ) return 1
+  return Math.floor(Math.log10(Math.abs(num))) + 1
+}
+
 // npx jest utils/math.js
 test('utils.roundTo', () => {
   expect(roundTo(4.3940397802, 2)).toEqual(4.39);
@@ -28,4 +33,8 @@ test('utils.roundTo', () => {
 
 test('utils.countDigits', () => {
   expect(countDigits(12321)).toEqual(5);
+});
+
+test('utils.countDigits', () => {
+  expect(countDigitsTwo(12321)).toEqual(5);
 });
