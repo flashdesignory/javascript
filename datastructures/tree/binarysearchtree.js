@@ -118,8 +118,9 @@ class BinarySearchTree {
   }
 
   contains(node, value) {
-    if (!node || node.value === value) {
-      return node;
+    if (!node) return false;
+    if (node.value === value) {
+      return true;
     }
 
     if (node.value > value) {
@@ -127,6 +128,18 @@ class BinarySearchTree {
     }
 
     return this.contains(node.right, value);
+  }
+
+  getNode(node, value) {
+    if (!node || node.value === value) {
+      return node;
+    }
+
+    if (node.value > value) {
+      return this.getNode(node.left, value);
+    }
+
+    return this.getNode(node.right, value);
   }
 
   isValid(node, min, max) {
@@ -209,32 +222,32 @@ class BinarySearchTree {
     return node;
   }
 
-  preorderTraversal(node, result) {
+  preorder(node, result) {
     result = result || [];
     if (!node) return result;
 
     result.push(node.value);
-    result = this.preorderTraversal(node.left, result);
-    result = this.preorderTraversal(node.right, result);
+    result = this.preorder(node.left, result);
+    result = this.preorder(node.right, result);
     return result;
   }
 
-  inorderTraversal(node, result) {
+  inorder(node, result) {
     result = result || [];
     if (!node) return result;
 
-    result = this.inorderTraversal(node.left, result);
+    result = this.inorder(node.left, result);
     result.push(node.value);
-    result = this.inorderTraversal(node.right, result);
+    result = this.inorder(node.right, result);
     return result;
   }
 
-  postorderTraversal(node, result) {
+  postorder(node, result) {
     result = result || [];
     if (!node) return result;
 
-    result = this.postorderTraversal(node.left, result);
-    result = this.postorderTraversal(node.right, result);
+    result = this.postorder(node.left, result);
+    result = this.postorder(node.right, result);
     result.push(node.value);
     return result;
   }
@@ -285,6 +298,7 @@ class BinarySearchTree {
 
     if (k === 0) {
       result.push(node.value);
+      return result;
     }
 
     this.findNodesAtLevel(node.left, k - 1, result);
@@ -346,7 +360,8 @@ class BinarySearchTree {
   }
 
   successor(value) {
-    const node = this.contains(value);
+    const node = this.getNode(value);
+    if (!node) return null;
 
     if (node === this.root) {
       if (node.right) {
@@ -389,7 +404,8 @@ class BinarySearchTree {
   }
 
   predecessor(value) {
-    const node = this.contains(value);
+    const node = this.getNode(value);
+    if (!node) return null;
 
     if (node === this.root) {
       if (node.left) {
@@ -476,7 +492,20 @@ class BinarySearchTree {
     return result;
   }
 
-  sumLeaves(node) {
+  sumLeaves(node, result) {
+    result = result || 0;
+    if (!node) return result;
+
+    if (!node.left && !node.right) {
+      result += node.value;
+    }
+
+    result = this.sumLeaves(node.left, result);
+    result = this.sumLeaves(node.right, result);
+    return result;
+  }
+
+  sumLeaves2(node) {
     let sum = 0;
 
     function traverse(node) {
@@ -762,7 +791,7 @@ class BinarySearchTree {
   }
 
   isPairPresent(node, target) {
-    const sorted = this.inorderTraversal(node);
+    const sorted = this.inorder(node);
     let start = 0;
     let end = sorted.length - 1;
 
@@ -825,7 +854,11 @@ describe('BinarySearchTree Methods', () => {
     expect(tree.distance(tree.root, 11)).toBe(3);
   });
   it('BinarySearchTree.contains()', () => {
-    expect(tree.contains(tree.root, 3).value).toEqual(3);
+    expect(tree.contains(tree.root, 3)).toBeTruthy();
+    expect(tree.contains(tree.root, 225)).toBeFalsy();
+  });
+  it('BinarySearchTree.getNode()', () => {
+    expect(tree.getNode(tree.root, 3).value).toEqual(3);
   });
   it('BinarySearchTree.isValid()', () => {
     expect(tree.isValid(tree.root, Number.MIN_VALUE, Number.MAX_VALUE)).toBeTruthy();
@@ -836,16 +869,16 @@ describe('BinarySearchTree Methods', () => {
   it('BinarySearchTree.isFull()', () => {
     expect(tree.isFull(tree.root)).toBeFalsy();
   });
-  it('BinarySearchTree.preorderTraversal()', () => {
-    expect(tree.preorderTraversal(tree.root))
+  it('BinarySearchTree.preorder()', () => {
+    expect(tree.preorder(tree.root))
       .toEqual([10, 5, 2, 1, 3, 4, 6, 8, 15, 12, 11, 13, 17]);
   });
-  it('BinarySearchTree.inorderTraversal()', () => {
-    expect(tree.inorderTraversal(tree.root))
+  it('BinarySearchTree.inorder()', () => {
+    expect(tree.inorder(tree.root))
       .toEqual([1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 15, 17]);
   });
-  it('BinarySearchTree.postorderTraversal()', () => {
-    expect(tree.postorderTraversal(tree.root))
+  it('BinarySearchTree.postorder()', () => {
+    expect(tree.postorder(tree.root))
       .toEqual([1, 4, 3, 2, 8, 6, 5, 11, 13, 12, 17, 15, 10]);
   });
   it('BinarySearchTree.breadthFirstSearch()', () => {
