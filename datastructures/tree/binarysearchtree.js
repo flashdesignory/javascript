@@ -652,8 +652,8 @@ class BinarySearchTree {
   minDepth(node) {
     if (!node) return 0;
 
-    if (!node.left) return this.minDepth(node.right) + 1;
-    if (!node.right) return this.minDepth(node.left) + 1;
+    // if (!node.left) return this.minDepth(node.right) + 1;
+    // if (!node.right) return this.minDepth(node.left) + 1;
 
     return Math.min(
       this.minDepth(node.left),
@@ -664,8 +664,8 @@ class BinarySearchTree {
   maxDepth(node) {
     if (!node) return 0;
 
-    if (!node.left) return this.maxDepth(node.right) + 1;
-    if (!node.right) return this.maxDepth(node.left) + 1;
+    // if (!node.left) return this.maxDepth(node.right) + 1;
+    // if (!node.right) return this.maxDepth(node.left) + 1;
 
     return Math.max(
       this.maxDepth(node.left),
