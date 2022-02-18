@@ -8,29 +8,28 @@
 // Big O(n log n) time Big O(1) space
 function merge(left, right) {
   const result = [];
-  const lLen = left.length;
-  const rLen = right.length;
-  let lIndx = 0;
-  let rIndx = 0;
+  let leftIndex = 0;
+  let rightIndex = 0;
 
-  while (lIndx < lLen && rIndx < rLen) {
-    if (left[lIndx] < right[rIndx]) {
-      result.push(left[lIndx++]);
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex++]);
     } else {
-      result.push(right[rIndx++]);
+      result.push(right[rightIndex++]);
     }
   }
 
-  return result.concat(left.slice(lIndx)).concat(right.slice(rIndx));
+  return result
+          .concat(left.slice(leftIndex))
+          .concat(right.slice(rightIndex));
 }
 
 function mergeSort(arr) {
-  const len = arr.length;
-  if (len < 2) {
+  if (arr.length < 2) {
     return arr;
   }
 
-  const mid = Math.floor(len / 2);
+  const mid = Math.floor(arr.length / 2);
   const left = mergeSort(arr.slice(0, mid));
   const right = mergeSort(arr.slice(mid));
 

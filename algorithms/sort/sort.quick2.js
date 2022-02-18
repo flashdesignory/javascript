@@ -6,42 +6,41 @@
  */
 
 // Big O(n log n) time Big O(1) space
-function swap(items, first, second) {
-  const temp = items[first];
-  items[first] = items[second];
-  items[second] = temp;
+function swap(arr, first, second) {
+  const temp = arr[first];
+  arr[first] = arr[second];
+  arr[second] = temp;
 }
 
-function partition(items, start, end) {
+function partition(arr, start, end) {
   // using start as pivot index
-  const pivot = items[start];
+  const pivot = arr[start];
   let index = start;
 
   for (let i = start + 1; i <= end; i++) {
-    if (pivot > items[i]) {
+    if (pivot > arr[i]) {
       index++;
-      swap(items, index, i);
+      swap(arr, index, i);
     }
   }
 
   // swap pivot from start with current index
-  swap(items, start, index);
+  swap(arr, start, index);
   return index;
 }
 
-function quickSort(items, left, right) {
-  let index;
-  if (left < right) { // or use items.length > 1
-    index = partition(items, left, right);
+function quickSort(arr, left, right) {
+  if (left < right) { // or use arr.length > 1
+    const index = partition(arr, left, right);
 
     // left
-    quickSort(items, left, index - 1);
+    quickSort(arr, left, index - 1);
 
     // right
-    quickSort(items, index + 1, right);
+    quickSort(arr, index + 1, right);
   }
 
-  return items;
+  return arr;
 }
 
 // npx jest algorithms/sort/sort.quick2.js
