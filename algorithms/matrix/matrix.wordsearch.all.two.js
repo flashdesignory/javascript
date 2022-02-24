@@ -89,7 +89,7 @@ const findWords = (matrix, words) => {
   return result;
 };
 
-// npx jest algorithms/matrix/matrix.wordsearch.all2.js
+// npx jest algorithms/matrix/matrix.wordsearch.all.two.js
 test('findWords()', () => {
   const board = [
     ['o', 'a', 'a', 'n'],

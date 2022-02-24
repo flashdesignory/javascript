@@ -50,8 +50,8 @@ function maze(matrix) {
 }
 
 // npx jest algorithms/matrix/matrix.maze.js
-describe('binary search for matrix', () => {
-  test('findPosition()', () => {
+describe('maze', () => {
+  test('maze()', () => {
     const matrix = [
       [1, 0, 0, 0],
       [1, 1, 0, 1],

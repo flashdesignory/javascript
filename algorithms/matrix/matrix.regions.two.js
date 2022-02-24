@@ -85,7 +85,7 @@ function numIslands(grid) {
   return count;
 }
 
-// npx jest algorithms/matrix/matrix.regions2.js
+// npx jest algorithms/matrix/matrix.regions.two.js
 test('numIslands()', () => {
   const matrix = [
     [0, 0, 1, 1, 0],

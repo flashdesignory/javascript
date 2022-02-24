@@ -46,7 +46,7 @@ function diagonalSnake(matrix) {
   return result;
 }
 
-// npx jest algorithms/matrix/matrix.traverse.diagonal3.js
+// npx jest algorithms/matrix/matrix.traverse.diagonal.three.js
 test('diagonalSnake()', () => {
   const input = [
     [1, 2, 3],

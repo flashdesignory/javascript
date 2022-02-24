@@ -65,7 +65,7 @@ function mineSweeper(matrix, position) {
   return matrix;
 }
 
-// npx jest algorithms/matrix/matrix.minesweeper2.js
+// npx jest algorithms/matrix/matrix.minesweeper.two.js
 describe('mineSweeper', () => {
   test('mineSweeper move', () => {
     const input = [['E', 'E', 'E', 'E', 'E'],

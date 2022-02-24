@@ -67,7 +67,7 @@ function setZeros(matrix) {
   return matrix;
 }
 
-// npx jest algorithms/matrix/matrix.zero2.js
+// npx jest algorithms/matrix/matrix.zero.two.js
 it('should set rows and cols to 0 if found', () => {
   const matrix = [
     [1, 0, 1, 1, 0],

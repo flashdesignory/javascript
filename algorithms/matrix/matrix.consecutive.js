@@ -70,7 +70,7 @@ function findLongestPath(matrix) {
 }
 
 // npx jest algorithms/matrix/matrix.consecutive.js
-test('findPathInMatrix()', () => {
+test('findLongestPath()', () => {
   const matrix = [
     [1, 2, 9],
     [5, 3, 8],

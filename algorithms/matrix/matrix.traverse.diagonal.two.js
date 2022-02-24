@@ -51,7 +51,7 @@ function diagonal2(matrix) {
   return result;
 }
 
-// npx jest algorithms/matrix/matrix.traverse.diagonal2.js
+// npx jest algorithms/matrix/matrix.traverse.diagonal.two.js
 test('diagonal()', () => {
   const matrix = [
     [1, 2, 3, 4],

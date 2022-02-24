@@ -45,9 +45,9 @@ function maze(matrix) {
   return dfs(matrix, 0, 0, visited);
 }
 
-// npx jest algorithms/matrix/matrix.maze2.js
-describe('binary search for matrix', () => {
-  test('findPosition()', () => {
+// npx jest algorithms/matrix/matrix.maze.two.js
+describe('maze', () => {
+  test('maze()', () => {
     const matrix = [
       [1, 0, 0, 0],
       [1, 1, 0, 1],
