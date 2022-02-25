@@ -5,6 +5,12 @@
  * @email: info@flashdesignory.com
  */
 
+/*
+Given an m x n grid of characters board and a string word, return true if word exists in the grid.
+The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are 
+horizontally or vertically neighboring. The same letter cell may not be used more than once.
+*/
+
 const rowNums = [-1, 0, 0, 1];
 const colNums = [0, -1, 1, 0];
 
@@ -15,7 +21,6 @@ function isValid(row, column, numRows, numCols) {
 function dfs(matrix, row, column, visited, word, output) {
   output += matrix[row][column];
   if (output === word) {
-    console.log('found');
     return true;
   }
 
@@ -34,7 +39,6 @@ function dfs(matrix, row, column, visited, word, output) {
   }
 
   visited[row][column] = false;
-  output.slice(0, output.length - 1);
   return result;
 }
 
@@ -54,7 +58,6 @@ function findWord(board, word) {
     for (let j = 0; j < board[i].length; j++) {
       if (!visited[i][j] && board[i][j] === word[0]) {
         const result = dfs(board, i, j, visited, word, '');
-
         if (result) return true;
       }
     }

@@ -11,7 +11,8 @@ const colNum = [-1, 0, 1, -1, 1, -1, 0, 1];
 function dictionaryContains(str) {
   const dictionary = ['GEEKS', 'FOR', 'QUIZ', 'GO'];
   for (let i = 0; i < dictionary.length; i++) {
-    if (dictionary[i].indexOf(str) === 0 && str.length === dictionary[i].length) {
+    // if (dictionary[i].indexOf(str) === 0 && str.length === dictionary[i].length) {
+    if (dictionary[i] === str) {
       return true;
     }
   }
@@ -37,10 +38,8 @@ function dfs(matrix, row, col, visited, current, result) {
       dfs(matrix, nextRow, nextCol, visited, current, result);
     }
   }
-
-
+  
   visited[row][col] = false;
-  current = current.substr(0, current.length - 1);
 }
 
 function findWords(matrix) {
