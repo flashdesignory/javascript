@@ -24,12 +24,13 @@ function dfs(matrix, row, column, visited) {
     const nextRow = row + rowNum[i];
     const nextColumn = column + colNum[i];
     if (isValid(nextRow, nextColumn, matrix.length, matrix[0].length)
-      && !visited[nextRow][nextColumn]) {
+      && !visited[nextRow][nextColumn] && matrix[nextRow][nextColumn]) {
       result = dfs(matrix, nextRow, nextColumn, visited);
       if (result) return true;
     }
   }
 
+  visited[row][column] = false;
   return result;
 }
 
