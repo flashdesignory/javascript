@@ -239,7 +239,7 @@ class Tree {
 
     while (!queue.empty()) {
       const current = queue.dequeue();
-      level.push(current.val);
+      level.push(current.value);
       numSiblings--;
       const { children } = current;
       for (let i = 0; i < children.length; i++) {
