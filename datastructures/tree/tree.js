@@ -120,7 +120,7 @@ class Tree {
     if (!this.root) return null;
     if (this.root.value === value) {
       this.root = null;
-      return this.root;
+      return null;
     }
 
     const queue = new Queue();
@@ -130,7 +130,7 @@ class Tree {
       const current = queue.dequeue();
 
       for (let i = 0; i < current.children.length; i++) {
-        if (current.children[i] === value) {
+        if (current.children[i].value === value) {
           return current.children.splice(i, 1);
         }
         queue.enqueue(current.children[i]);
