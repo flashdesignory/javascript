@@ -38,11 +38,11 @@ function reverse(arr, left, right) {
 }
 
 function rotateArrayTwo(arr, k) {
-  // If one or less, return array 
+  // If one or less, return array
   // since there's no way to rotate anything.
   if (arr.length < 2) return arr;
   // Make sure k is less than arr.length.
-  k %= arr.length; 
+  k %= arr.length;
   if (k === 0) return arr;
 
   reverse(arr, 0, arr.length - 1);

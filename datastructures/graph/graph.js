@@ -28,12 +28,12 @@ class Graph {
   }
 
   print() {
-    Object.keys(this.adjList).forEach(vertex => {
+    Object.keys(this.adjList).forEach((vertex) => {
       let result = `${vertex} -> `;
       const edges = this.adjList[vertex];
       result += edges.join(',');
       console.log(result);
-    })
+    });
   }
 
   addVertex(v) {
@@ -51,6 +51,7 @@ class Graph {
 
   breadthFirstSearch(v) {
     const visited = [];
+    // eslint-disable-next-line
     Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
 
     const result = [];
@@ -63,12 +64,12 @@ class Graph {
       const current = queue.dequeue();
       result.push(current);
       const edges = this.adjList[current];
-      edges.forEach(edge => {
+      edges.forEach((edge) => {
         if (!visited[edge]) {
           visited[edge] = true;
           queue.enqueue(edge);
         }
-      })
+      });
     }
 
     return result;
@@ -76,6 +77,7 @@ class Graph {
 
   depthFirstSearch(v) {
     const visited = [];
+    // eslint-disable-next-line
     Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
 
     return this.traverse(v, visited, []);
@@ -85,7 +87,8 @@ class Graph {
     visited[v] = true;
     result.push(v);
     const edges = this.adjList[v];
-    edges.forEach(edge => {
+    // eslint-disable-next-line
+    edges.forEach((edge) => {
       if (!visited[edge]) {
         return this.traverse(edge, visited, result);
       }
@@ -95,6 +98,7 @@ class Graph {
 
   pathFromTo(source, target) {
     const visited = [];
+    // eslint-disable-next-line
     Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
 
     const queue = new Queue();
@@ -103,7 +107,7 @@ class Graph {
 
     const previous = {};
 
-    while(!queue.empty()) {
+    while (!queue.empty()) {
       let current = queue.dequeue();
       if (current === target) {
         const path = [];
@@ -115,8 +119,8 @@ class Graph {
       }
 
       const edges = this.adjList[current];
-      edges.forEach(edge => {
-        if(!visited[edge]) {
+      edges.forEach((edge) => {
+        if (!visited[edge]) {
           visited[edge] = true;
           previous[edge] = current;
           queue.enqueue(edge);
@@ -128,6 +132,7 @@ class Graph {
 
   hasCycle() {
     const visited = [];
+    // eslint-disable-next-line
     Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
 
     const vertices = Object.keys(this.adjList);
