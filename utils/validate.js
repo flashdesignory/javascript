@@ -45,7 +45,8 @@ function isArray(value) {
 }
 
 function isDate(value) {
-  return (new Date(value) !== "Invalid Date") && !isNaN(new Date(value));
+  // eslint-disable-next-line
+  return (new Date(value) !== 'Invalid Date') && !isNaN(new Date(value));
 }
 
 function isInteger(x) {
@@ -87,6 +88,11 @@ test('utils.validate.isPrimitive', () => {
 test('utils.validate.isObject', () => {
   expect(isObject({})).toBeTruthy();
   expect(isObject(1)).toBeFalsy();
+});
+
+test('utils.validate.isDate', () => {
+  expect(isDate('foo')).toBeFalsy();
+  expect(isDate('05/01/2000')).toBeTruthy();
 });
 
 test('utils.validate.isArray', () => {

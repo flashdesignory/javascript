@@ -22,8 +22,8 @@ function countDigits(n) {
 }
 
 function countDigitsTwo(num) {
-  if(num === 0 ) return 1
-  return Math.floor(Math.log10(Math.abs(num))) + 1
+  if (num === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
 }
 
 // npx jest utils/math.js

@@ -33,7 +33,7 @@ function findLongestSequenceTwo(arr) {
   let start = 0;
   for (let i = 1; i < arr.length; i++) {
     // if previous is the same as current - 1
-    if (!(arr[i] - 1 === arr[i-1])) {
+    if (!(arr[i] - 1 === arr[i - 1])) {
       // if start index is not i - 1
       // meaning there has to be more than 1 value in a sequence
       if (start !== i - 1) {

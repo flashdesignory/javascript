@@ -20,8 +20,8 @@ function merge(left, right) {
   }
 
   return result
-          .concat(left.slice(leftIndex))
-          .concat(right.slice(rightIndex));
+    .concat(left.slice(leftIndex))
+    .concat(right.slice(rightIndex));
 }
 
 function mergeSort(arr) {

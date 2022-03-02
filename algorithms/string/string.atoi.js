@@ -18,15 +18,14 @@ function atoi(str) {
   str = str.trim();
 
   // check if string starts with "+" or "-"
-  if (str[start] === "+" || str[start] === "-") {
-    if (str[start] === "-") {
+  if (str[start] === '+' || str[start] === '-') {
+    if (str[start] === '-') {
       isNegative = true;
     }
     start++;
   }
 
   for (let i = start; i < str.length; i++) {
-
     // Valid number values range from 48 to 57.
     // We want to append the current value to the result
     // and therefore we don't want a range from 48 to 57

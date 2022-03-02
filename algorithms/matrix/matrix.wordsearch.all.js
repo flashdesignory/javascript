@@ -38,7 +38,7 @@ function dfs(matrix, row, col, visited, current, result) {
       dfs(matrix, nextRow, nextCol, visited, current, result);
     }
   }
-  
+
   visited[row][col] = false;
 }
 

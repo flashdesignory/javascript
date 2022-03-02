@@ -504,7 +504,7 @@ class BinarySearchTree {
     result = this.sumLeaves(node.right, result);
     return result;
   }
-
+  // eslint-disable-next-line
   sumLeaves2(node) {
     let sum = 0;
 

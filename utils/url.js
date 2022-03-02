@@ -25,15 +25,16 @@ const getUrlParameter = (name) => {
 };
 
 const getUrlParamByName = (name) => {
-  let paramString = window.location.search.substring(1);
-  let queryString = new URLSearchParams(paramString);
+  const paramString = window.location.search.substring(1);
+  const queryString = new URLSearchParams(paramString);
 
-  for (let pair of queryString.entries()) {
+  // eslint-disable-next-line
+  for (const pair of queryString.entries()) {
     if (pair[0] === name) return pair[1];
   }
 
   return '';
-}
+};
 
 // npx jest utils/url.js
 test('utils.url', () => {
