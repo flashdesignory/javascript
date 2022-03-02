@@ -17,10 +17,6 @@ class Queue {
     return temp;
   }
 
-  peek() {
-    return this.data[this.first];
-  }
-
   empty() {
     return this.first === this.last;
   }
@@ -29,22 +25,19 @@ class Queue {
 class Graph {
   constructor() {
     this.adjList = {};
-    this.numVertices = 0;
   }
 
   print() {
-    const vertices = Object.keys(this.adjList);
-    for (let i = 0; i < vertices.length; i++) {
-      let result = `${vertices[i]} -> `;
-      const edges = this.adjList[vertices[i]];
+    Object.keys(this.adjList).forEach(vertex => {
+      let result = `${vertex} -> `;
+      const edges = this.adjList[vertex];
       result += edges.join(',');
       console.log(result);
-    }
+    })
   }
 
   addVertex(v) {
     this.adjList[v] = [];
-    this.numVertices++;
   }
 
   addEdge(one, two) {
@@ -58,36 +51,32 @@ class Graph {
 
   breadthFirstSearch(v) {
     const visited = [];
-    for (let i = 0; i < this.numVertices; i++) {
-      visited[i] = false;
-    }
+    Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
+
+    const result = [];
 
     const queue = new Queue();
     queue.enqueue(v);
     visited[v] = true;
 
-    const result = [];
-
     while (!queue.empty()) {
       const current = queue.dequeue();
       result.push(current);
       const edges = this.adjList[current];
-      for (let i = 0; i < edges.length; i++) {
-        const edge = edges[i];
+      edges.forEach(edge => {
         if (!visited[edge]) {
           visited[edge] = true;
           queue.enqueue(edge);
         }
-      }
+      })
     }
+
     return result;
   }
 
   depthFirstSearch(v) {
     const visited = [];
-    for (let i = 0; i < this.numVertices; i++) {
-      visited[i] = false;
-    }
+    Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
 
     return this.traverse(v, visited, []);
   }
@@ -96,20 +85,17 @@ class Graph {
     visited[v] = true;
     result.push(v);
     const edges = this.adjList[v];
-    edges.forEach((edge) => {
+    edges.forEach(edge => {
       if (!visited[edge]) {
         return this.traverse(edge, visited, result);
       }
-      return null;
     });
     return result;
   }
 
   pathFromTo(source, target) {
     const visited = [];
-    for (let i = 0; i < this.numVertices; i++) {
-      visited[i] = false;
-    }
+    Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
 
     const queue = new Queue();
     queue.enqueue(source);
@@ -117,9 +103,8 @@ class Graph {
 
     const previous = {};
 
-    while (!queue.empty()) {
+    while(!queue.empty()) {
       let current = queue.dequeue();
-
       if (current === target) {
         const path = [];
         while (current) {
@@ -130,27 +115,23 @@ class Graph {
       }
 
       const edges = this.adjList[current];
-
-      for (let i = 0; i < edges.length; i++) {
-        const edge = edges[i];
-        if (!visited[edge]) {
+      edges.forEach(edge => {
+        if(!visited[edge]) {
           visited[edge] = true;
           previous[edge] = current;
           queue.enqueue(edge);
         }
-      }
+      });
     }
     return [];
   }
 
   hasCycle() {
     const visited = [];
-    Object.keys(this.adjList).forEach((vertex) => {
-      visited[vertex] = false;
-    });
+    Object.keys(this.adjList).forEach(vertex => visited[vertex] = false);
 
     const vertices = Object.keys(this.adjList);
-    for (let i = 0; i < this.numVertices; i++) {
+    for (let i = 0; i < vertices.length; i++) {
       const vertex = vertices[i];
       if (!visited[vertex]) {
         if (this.isCyclic(vertex, visited, null)) {
@@ -158,7 +139,6 @@ class Graph {
         }
       }
     }
-
     return false;
   }
 
@@ -167,7 +147,6 @@ class Graph {
     const edges = this.adjList[vertex];
     for (let i = 0; i < edges.length; i++) {
       const edge = edges[i];
-
       if (!visited[edge]) {
         if (this.isCyclic(edge, visited, vertex)) {
           return true;
