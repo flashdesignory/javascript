@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint **/*.js --quiet --fix",
     "lint-win": "node node_modules\\eslint\\bin\\eslint **/*.js --quiet --fix",
-    "test": "jest",
+    "test": "jest --env=jsdom",
     "test-watch": "jest --watchAll"
   },
   "jest": {
@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/flashdesignory/javascript#readme",
   "dependencies": {
-    "eslint": "^5.16.0",
+    "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.19.1",
-    "jest": "^23.6.0"
+    "jest": "^27.5.1"
   }
 }
