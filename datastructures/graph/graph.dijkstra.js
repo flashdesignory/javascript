@@ -30,10 +30,6 @@ class PriorityQueue {
     return min;
   }
 
-  empty() {
-    return this.data.length === 0;
-  }
-
   bubbleUp(index) {
     while (index > 0) {
       const parent = Math.floor((index - 1) / 2);
@@ -41,8 +37,10 @@ class PriorityQueue {
         const temp = this.data[parent];
         this.data[parent] = this.data[index];
         this.data[index] = temp;
+        index = parent;
+      } else {
+        break;
       }
-      index = parent;
     }
   }
 
@@ -50,19 +48,16 @@ class PriorityQueue {
     while (index < this.data.length) {
       const left = Math.floor((index * 2) + 1);
       const right = Math.floor((index * 2) + 2);
-
       let smallest = index;
 
-      if (left < this.data.length - 1) {
-        if (this.data[index].priority > this.data[left].priority) {
-          smallest = left;
-        }
+      if (left < this.data.length
+        && this.data[left].priority < this.data[smallest].priority) {
+        smallest = left;
       }
 
-      if (right < this.data.length - 1) {
-        if (this.data[index].priority > this.data[right].priority) {
-          smallest = right;
-        }
+      if (right < this.data.length
+        && this.data[right].priority < this.data[smallest].priority) {
+        smallest = right;
       }
 
       if (smallest !== index) {
@@ -76,8 +71,11 @@ class PriorityQueue {
       }
     }
   }
-}
 
+  empty() {
+    return this.data.length === 0;
+  }
+}
 
 class WeightNode {
   constructor(value, weight) {
@@ -89,7 +87,6 @@ class WeightNode {
 class Graph {
   constructor() {
     this.adjList = {};
-    this.numVertices = 0;
   }
 
   print() {
@@ -106,7 +103,6 @@ class Graph {
 
   addVertex(v) {
     this.adjList[v] = [];
-    this.numVertices++;
   }
 
   addEdge(one, two, weight) {
@@ -136,13 +132,14 @@ class Graph {
       const current = queue.dequeue();
 
       if (current.value === target) {
-        const path = [];
-        let point = current.value;
-        while (previous[point]) {
-          path.push(point);
-          point = previous[point];
+        const points = [];
+        let currentValue = current.value;
+
+        while (currentValue) {
+          points.push(currentValue);
+          currentValue = previous[currentValue];
         }
-        return path.concat(source).reverse();
+        return points.reverse();
       }
 
       const edges = this.adjList[current.value];

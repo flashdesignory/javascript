@@ -74,6 +74,10 @@ class PriorityQueue {
       }
     }
   }
+
+  empty() {
+    return this.data.length === 0;
+  }
 }
 
 // npx jest datastructures/heap/heap.priority.js

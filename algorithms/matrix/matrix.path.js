@@ -65,7 +65,6 @@ function findPathInMatrix(matrix, src, dst) {
     }
   }
 
-  const points = [];
   const previous = {};
 
   // set src point to visited = true;
@@ -80,6 +79,8 @@ function findPathInMatrix(matrix, src, dst) {
 
     if (current.row === dst.r && current.column === dst.c) {
       const { distance } = current;
+      const points = [];
+
       while (current) {
         points.push({ r: current.row, c: current.column });
         current = previous[[current.row, current.column]];
