@@ -13,62 +13,70 @@ class Node {
   }
 }
 
-function inorderPostorder(inorder, postorder) {
-  let postIndex = inorder.length - 1;
-  function build(start, end) {
+/*
+The last element of postorder will always be the root of a subtree. 
+We can furter determine its left and right subtree by finding its position in the inorder array.
+*/
+const inorderPostorder = (inorder, postorder) => {
+  const hash = {};
+  for (let i = 0; i < inorder.length; i++) {
+    hash[inorder[i]] = i;
+  }
+
+  const build = (start, end) => {
     if (start > end) return null;
 
-    const node = new Node(postorder[postIndex--]);
-
-    if (start === end) return node;
-
-    const index = inorder.indexOf(node.value);
-
-    node.right = build(index + 1, end);
-    node.left = build(start, index - 1);
+    const value = postorder.pop();
+    const node = new Node(value);
+    node.right = build(hash[value] + 1, end);
+    node.left = build(start, hash[value] - 1);
     return node;
   }
+  
   return build(0, inorder.length - 1);
 }
 
-function preorderInorder(preorder, inorder) {
-  let preIndex = 0;
-  function build(start, end) {
-    if (start > end) return null;
+// recursive
+const inorderPostorder2 = function(inorder, postorder) {
+  if (inorder.length === 0) return null;
+ 
+   const node = new Node(postorder.pop());
+   const index = inorder.indexOf(node.value);
+ 
+   const leftInorder = inorder.slice(0, index);
+   const rightInorder = inorder.slice(index + 1);
+ 
+   node.right = inorderPostorder2(rightInorder, postorder);
+   node.left = inorderPostorder2(leftInorder, postorder);
+   return node;
+ };
 
-    const node = new Node(preorder[preIndex++]);
+/*
+The first element of preorder will always be the root of a subtree. 
+We can furter determine its left and right subtree by finding its position in the inorder array.
+*/
+const preorderInorder = (preorder, inorder) => {
+  const hash = {};
+  for (let i = 0; i < inorder.length; i++) {
+    hash[inorder[i]] = i;
+  }
 
-    if (start === end) return node;
+  const build = (start, end) => {
+     if (start > end) return null;
 
-    const index = inorder.indexOf(node.value);
-
-    node.left = build(start, index - 1);
-    node.right = build(index + 1, end);
+    const value = preorder.shift();
+    const node = new Node(value);
+    node.left = build(start, hash[value] - 1);
+    node.right = build(hash[value] + 1, end);
     return node;
   }
 
   return build(0, inorder.length - 1);
 }
 
-function inorderPostorder2(inorder, postorder) {
-  if (inorder.length === 0) return null;
-
-  const node = new Node(postorder[postorder.length - 1]);
-  const index = inorder.indexOf(node.value);
-  const leftInorder = inorder.slice(0, index);
-  const rightInorder = inorder.slice(index + 1);
-
-  const leftPostorder = postorder.slice(0, leftInorder.length);
-  const rightPostorder = postorder.slice(leftInorder.length, postorder.length - 1);
-
-  node.left = inorderPostorder2(leftInorder, leftPostorder);
-  node.right = inorderPostorder2(rightInorder, rightPostorder);
-
-  return node;
-}
-
-function preorderInorder2(preorder, inorder) {
-  if (inorder.length === 0) return null;
+// recursive
+const preorderInorder2 = function(preorder, inorder) {
+    if (inorder.length === 0) return null;
 
   const node = new Node(preorder.shift());
   const index = inorder.indexOf(node.value);
@@ -79,7 +87,7 @@ function preorderInorder2(preorder, inorder) {
   node.left = preorderInorder2(preorder, leftInorder);
   node.right = preorderInorder2(preorder, rightInorder);
   return node;
-}
+}; 
 
 // npx jest datastructures/tree/binarytree.create.js
 describe('create a binary tree', () => {
