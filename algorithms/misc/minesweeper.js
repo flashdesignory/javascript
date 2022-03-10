@@ -64,10 +64,6 @@ class Queue {
   [r: 0, c:-1][         ][r: 0, c:1];
   [r: 1, c:-1][r: 1, c:0][r: 1, c:1]; */
 
-// clockwise starting left top:
-const rowNum = [-1, -1, -1, 0, 1, 1, 1, 0];
-const colNum = [-1, 0, 1, 1, 1, 0, -1, -1];
-
 // by rows
 const directions = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
 
@@ -94,8 +90,6 @@ const updateBoard = (matrix, position) => {
     // Count the adjacent mines
     let count = 0;
     for (let index = 0; index < 8; index++) {
-      // const nextRow = currentRow + rowNum[index];
-      // const nextColumn = currentColumn + colNum[index];
       const nextRow = currentRow + directions[index][0];
       const nextColumn = currentColumn + directions[index][1];
 
@@ -116,8 +110,8 @@ const updateBoard = (matrix, position) => {
 
       // and all of its adjacent unrevealed squares should be revealed recursively.
       for (let index = 0; index < 8; index++) {
-        const nextRow = currentRow + rowNum[index];
-        const nextColumn = currentColumn + colNum[index];
+        const nextRow = currentRow + directions[index][0];
+        const nextColumn = currentColumn + directions[index][1];
 
         if (isValid(nextRow, nextColumn, numRows, numColumns) && matrix[nextRow][nextColumn] === 'E') {
           queue.enqueue([nextRow, nextColumn]);

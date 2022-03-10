@@ -5,50 +5,59 @@
  * @email: info@flashdesignory.com
  */
 
-const rowNum = [-1, -1, -1, 0, 0, 1, 1, 1];
-const colNum = [-1, 0, 1, -1, 1, -1, 0, 1];
+const directions = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
 
-function isValid(row, column, rowLength, columnLength) {
-  return row >= 0 && row < rowLength && column >= 0 && column < columnLength;
-}
+const isValid = (row, column, numRows, numColumns) => 
+  row >= 0 
+  && row < numRows 
+  && column >= 0 
+  && column < numColumns;
 
-function dfs(matrix, r, c, visited, count) {
-  visited[r][c] = true;
-  for (let i = 0; i < 8; i++) {
-    const nextRow = r + rowNum[i];
-    const nextCol = c + colNum[i];
-    if (isValid(nextRow, nextCol, matrix.length, matrix[0].length)
-    && matrix[nextRow][nextCol]
-    && !visited[nextRow][nextCol]) {
-      count++;
-      count = dfs(matrix, nextRow, nextCol, visited, count);
+const dfs = (matrix, row, column, visited, length, output) => {  
+  visited[row][column] = true;
+  for (let i = 0; i < directions.length; i++) {
+    const nextRow = row + directions[i][0];
+    const nextColumn = column + directions[i][1];
+    
+    if (isValid(nextRow, nextColumn, matrix.length, matrix[0].length)
+      && !visited[nextRow][nextColumn]
+      && matrix[nextRow][nextColumn] === 1) {
+      output.push([nextRow, nextColumn])
+      length++;
+      length = dfs(matrix, nextRow, nextColumn, visited, length, output);
     }
   }
-  return count;
+  
+  return length;
 }
 
-function largestRegion(matrix) {
+const largestRegion = (matrix) => {
   const visited = [];
-  for (let r = 0; r < matrix.length; r++) {
-    visited[r] = [];
-    for (let c = 0; c < matrix[r].length; c++) {
-      visited[r][c] = false;
+  for (let i = 0; i < matrix.length; i++) {
+    visited[i] = [];
+    for (let j = 0; j < matrix[i].length; j++) {
+      visited[i][j] = false;
     }
   }
 
-  let result = 0;
+  let max = 0;
+  let maxPoints = [];
 
-  for (let r = 0; r < matrix.length; r++) {
-    for (let c = 0; c < matrix[r].length; c++) {
-      // matrix[r][c] returns true if value is 1, false if value is 0
-      if (matrix[r][c] && !visited[r][c]) {
-        const count = dfs(matrix, r, c, visited, 1);
-        result = Math.max(result, count);
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] && !visited[i][j]) {
+        const points = [[i, j]];
+        const length = dfs(matrix, i, j, visited, 1, points);
+        if (length > max) {
+          max = length;
+          maxPoints = [...points];
+        }
       }
     }
   }
 
-  return result;
+  console.log(maxPoints);
+  return max;
 }
 
 // npx jest algorithms/matrix/matrix.region.js

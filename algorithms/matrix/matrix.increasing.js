@@ -5,8 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-const rowNum = [-1, 0, 0, 1]; // results in left and right
-const colNum = [0, -1, 1, 0]; // results in top and bottom
+const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 
 function isValid(row, column, rowLength, columnLength) {
   return row >= 0 && row < rowLength && column >= 0 && column < columnLength;
@@ -18,8 +17,8 @@ function dfs(matrix, row, column, visited) {
     return visited[row][column];
   }
   for (let i = 0; i < 4; i++) {
-    const nextRow = row + rowNum[i];
-    const nextColumn = column + colNum[i];
+    const nextRow = row + directions[i][0];
+    const nextColumn = column + directions[i][1];
     if (isValid(nextRow, nextColumn, matrix.length, matrix[0].length)
       && matrix[nextRow][nextColumn] > matrix[row][column]) {
       max = Math.max(max, dfs(matrix, nextRow, nextColumn, visited) + 1);
@@ -31,17 +30,17 @@ function dfs(matrix, row, column, visited) {
 
 
 const longestIncreasingPath = function (matrix) {
-  let length = 0;
+  let max = 0;
   const visited = [];
   for (let i = 0; i < matrix.length; i++) {
     visited.push(new Array(matrix[0].length).fill(0));
   }
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[0].length; j++) {
-      length = Math.max(length, dfs(matrix, i, j, visited));
+      max = Math.max(max, dfs(matrix, i, j, visited));
     }
   }
-  return length;
+  return max;
 };
 
 // npx jest algorithms/matrix/matrix.increasing.js

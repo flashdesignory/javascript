@@ -15,25 +15,26 @@
  with the condition that the adjacent cells have a difference of 1.
 */
 
-const rowNum = [-1, 0, 0, 1]; // results in left and right
-const colNum = [0, -1, 1, 0]; // results in top and bottom
+const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 
-function isValid(row, column, rowLength, columnLength) {
-  return row >= 0 && row < rowLength && column >= 0 && column < columnLength;
-}
+const isValid = (row, column, numRows, numColumns) => 
+  row >= 0 
+  && row < numRows 
+  && column >= 0 
+  && column < numColumns;
 
-function dfs(matrix, row, column, visited, length, output) {
+const dfs = (matrix, row, column, visited, length, output) => {  
   visited[row][column] = true;
-  for (let i = 0; i < 4; i++) {
-    const nextRow = row + rowNum[i];
-    const nextCol = column + colNum[i];
-
-    if (isValid(nextRow, nextCol, matrix.length, matrix[0].length)
-      && (!visited[nextRow][nextCol]
-      && matrix[row][column] + 1 === matrix[nextRow][nextCol])) {
-      output.push(matrix[nextRow][nextCol]);
+  for (let i = 0; i < directions.length; i++) {
+    const nextRow = row + directions[i][0];
+    const nextColumn = column + directions[i][1];
+    
+    if (isValid(nextRow, nextColumn, matrix.length, matrix[0].length)
+      && !visited[nextRow][nextColumn]
+      && matrix[nextRow][nextColumn] === matrix[row][column] + 1) {
+      output.push([nextRow, nextColumn])
       length++;
-      length = dfs(matrix, nextRow, nextCol, visited, length, output);
+      length = dfs(matrix, nextRow, nextColumn, visited, length, output);
     }
   }
 
@@ -41,9 +42,8 @@ function dfs(matrix, row, column, visited, length, output) {
   return length;
 }
 
-function findLongestPath(matrix) {
+const longestConsecutive = (matrix) => {
   const visited = [];
-
   for (let i = 0; i < matrix.length; i++) {
     visited[i] = [];
     for (let j = 0; j < matrix[i].length; j++) {
@@ -51,30 +51,30 @@ function findLongestPath(matrix) {
     }
   }
 
-  let maxLength = 1;
+  let max = 0;
   let maxPoints = [];
-  let tempPoints = [];
 
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
-      tempPoints = [matrix[i][j]];
-      const length = dfs(matrix, i, j, visited, 1, tempPoints);
-      if (length > maxLength) {
-        maxLength = length;
-        maxPoints = [...tempPoints];
+      const points = [[i, j]];
+      const length = dfs(matrix, i, j, visited, 1, points);
+      if (length > max) {
+        max = length;
+        maxPoints = [...points];
       }
     }
   }
+
   console.log(maxPoints);
-  return maxLength;
+  return max;
 }
 
 // npx jest algorithms/matrix/matrix.consecutive.js
-test('findLongestPath()', () => {
+test('longestConsecutive()', () => {
   const matrix = [
     [1, 2, 9],
     [5, 3, 8],
     [4, 6, 7],
   ];
-  expect(findLongestPath(matrix)).toEqual(4);
+  expect(longestConsecutive(matrix)).toEqual(4);
 });
