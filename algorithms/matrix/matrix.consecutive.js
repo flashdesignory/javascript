@@ -17,22 +17,21 @@
 
 const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 
-const isValid = (row, column, numRows, numColumns) => 
-  row >= 0 
-  && row < numRows 
-  && column >= 0 
+const isValid = (row, column, numRows, numColumns) => row >= 0
+  && row < numRows
+  && column >= 0
   && column < numColumns;
 
-const dfs = (matrix, row, column, visited, length, output) => {  
+const dfs = (matrix, row, column, visited, length, output) => {
   visited[row][column] = true;
   for (let i = 0; i < directions.length; i++) {
     const nextRow = row + directions[i][0];
     const nextColumn = column + directions[i][1];
-    
+
     if (isValid(nextRow, nextColumn, matrix.length, matrix[0].length)
       && !visited[nextRow][nextColumn]
       && matrix[nextRow][nextColumn] === matrix[row][column] + 1) {
-      output.push([nextRow, nextColumn])
+      output.push([nextRow, nextColumn]);
       length++;
       length = dfs(matrix, nextRow, nextColumn, visited, length, output);
     }
@@ -40,7 +39,7 @@ const dfs = (matrix, row, column, visited, length, output) => {
 
   visited[row][column] = false;
   return length;
-}
+};
 
 const longestConsecutive = (matrix) => {
   const visited = [];
@@ -67,7 +66,7 @@ const longestConsecutive = (matrix) => {
 
   console.log(maxPoints);
   return max;
-}
+};
 
 // npx jest algorithms/matrix/matrix.consecutive.js
 test('longestConsecutive()', () => {
