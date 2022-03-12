@@ -6,8 +6,8 @@
  */
 
 /*
-You are given an n x n integer matrix board where the cells are labeled from 1 to n2 
-in a Boustrophedon style starting from the bottom left of the board (i.e. board[n - 1][0]) 
+You are given an n x n integer matrix board where the cells are labeled from 1 to n2
+in a Boustrophedon style starting from the bottom left of the board (i.e. board[n - 1][0])
 and alternating direction each row.
 
 You start on square 1 of the board. In each move, starting from square curr, do the following:
@@ -15,7 +15,7 @@ You start on square 1 of the board. In each move, starting from square curr, do 
   Choose a destination square next with a label in the range [curr + 1, min(curr + 6, n2)].
     This choice simulates the result of a standard 6-sided die roll: i.e., there are always at most
     6 destinations, regardless of the size of the board.
-  If next has a snake or ladder, you must move to the destination of that snake or ladder. 
+  If next has a snake or ladder, you must move to the destination of that snake or ladder.
     Otherwise,you move to next.
   The game ends when you reach the square n2.
 
@@ -65,7 +65,7 @@ const getPosition = (index, length) => {
   // rows increase from last row to first row
   row = length - row - 1;
   return [row, column];
-}
+};
 
 const snakesAndLadders = (matrix) => {
   const distances = [];
@@ -96,7 +96,7 @@ const snakesAndLadders = (matrix) => {
 
 
   return -1;
-}
+};
 
 // npx jest algorithms/matrix/matrix.snakesandledders.js
 test('snakesandledders()', () => {

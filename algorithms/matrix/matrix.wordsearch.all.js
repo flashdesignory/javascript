@@ -5,10 +5,9 @@
  * @email: info@flashdesignory.com
  */
 
-const isValid = (row, column, numRows, numColumns) => 
-  row >= 0 
-  && row < numRows 
-  && column >= 0 
+const isValid = (row, column, numRows, numColumns) => row >= 0
+  && row < numRows
+  && column >= 0
   && column < numColumns;
 
 const directions = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
@@ -21,12 +20,12 @@ const dictionaryContains = (dictionary, str) => {
   }
 
   return false;
-}
+};
 
 const dfs = (matrix, row, column, visited, dictionary, current, result) => {
   visited[row][column] = true;
   current += matrix[row][column];
-  
+
   if (dictionaryContains(dictionary, current)) {
     if (result.indexOf(current) === -1) {
       result.push(current);
@@ -37,7 +36,7 @@ const dfs = (matrix, row, column, visited, dictionary, current, result) => {
     const nextRow = row + directions[i][0];
     const nextColumn = column + directions[i][1];
 
-    if (isValid(nextRow, nextColumn, matrix.length, matrix[0].length) 
+    if (isValid(nextRow, nextColumn, matrix.length, matrix[0].length)
        && !visited[nextRow][nextColumn]) {
       dfs(matrix, nextRow, nextColumn, visited, dictionary, current, result);
     }
@@ -45,7 +44,7 @@ const dfs = (matrix, row, column, visited, dictionary, current, result) => {
 
 
   visited[row][column] = false;
-}
+};
 
 const findWords = (matrix, dictionary) => {
   const visited = [];
@@ -62,20 +61,20 @@ const findWords = (matrix, dictionary) => {
     for (let j = 0; j < matrix[i].length; j++) {
       if (!visited[i][j]) {
         dfs(matrix, i, j, visited, dictionary, '', result);
-      }    
+      }
     }
   }
-  
+
   return result;
-}
+};
 
 // npx jest algorithms/matrix/matrix.wordsearch.all.js
 test('findWords()', () => {
   const dictionary = [
-    'GEEKS', 
-    'FOR', 
-    'QUIZ', 
-    'GO'
+    'GEEKS',
+    'FOR',
+    'QUIZ',
+    'GO',
   ];
 
   const words = [

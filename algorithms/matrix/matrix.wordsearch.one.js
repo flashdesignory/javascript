@@ -11,10 +11,9 @@ The word can be constructed from letters of sequentially adjacent cells, where a
 horizontally or vertically neighboring. The same letter cell may not be used more than once.
 */
 
-const isValid = (row, column, numRows, numColumns) => 
-  row >= 0 
-  && row < numRows 
-  && column >= 0 
+const isValid = (row, column, numRows, numColumns) => row >= 0
+  && row < numRows
+  && column >= 0
   && column < numColumns;
 
 const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
@@ -22,7 +21,7 @@ const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 const dfs = (matrix, row, column, visited, word, current) => {
   current += matrix[row][column];
   visited[row][column] = true;
-  
+
   if (current === word) {
     return true;
   }
@@ -34,7 +33,7 @@ const dfs = (matrix, row, column, visited, word, current) => {
     const nextCol = column + directions[i][1];
 
     if (isValid(nextRow, nextCol, matrix.length, matrix[0].length)
-       && !visited[nextRow][nextCol] 
+       && !visited[nextRow][nextCol]
         && matrix[nextRow][nextCol] === word[current.length]) {
       result = dfs(matrix, nextRow, nextCol, visited, word, current);
       if (result) return true;
@@ -43,7 +42,7 @@ const dfs = (matrix, row, column, visited, word, current) => {
 
   visited[row][column] = false;
   return result;
-}
+};
 
 const findWord = (matrix, word) => {
   if (matrix.length === 0) return false;
@@ -67,7 +66,7 @@ const findWord = (matrix, word) => {
   }
 
   return false;
-}
+};
 
 // npx jest algorithms/matrix/matrix.wordsearch.one.js
 test('findWord()', () => {
