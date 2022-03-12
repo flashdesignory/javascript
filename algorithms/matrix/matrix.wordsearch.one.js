@@ -11,29 +11,32 @@ The word can be constructed from letters of sequentially adjacent cells, where a
 horizontally or vertically neighboring. The same letter cell may not be used more than once.
 */
 
-const rowNums = [-1, 0, 0, 1];
-const colNums = [0, -1, 1, 0];
+const isValid = (row, column, numRows, numColumns) => 
+  row >= 0 
+  && row < numRows 
+  && column >= 0 
+  && column < numColumns;
 
-function isValid(row, column, numRows, numCols) {
-  return row >= 0 && row < numRows && column >= 0 && column < numCols;
-}
+const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 
-function dfs(matrix, row, column, visited, word, output) {
-  output += matrix[row][column];
-  if (output === word) {
+const dfs = (matrix, row, column, visited, word, current) => {
+  current += matrix[row][column];
+  visited[row][column] = true;
+  
+  if (current === word) {
     return true;
   }
 
-  visited[row][column] = true;
   let result = false;
 
-  for (let i = 0; i < 4; i++) {
-    const nextRow = row + rowNums[i];
-    const nextCol = column + colNums[i];
+  for (let i = 0; i < directions.length; i++) {
+    const nextRow = row + directions[i][0];
+    const nextCol = column + directions[i][1];
 
     if (isValid(nextRow, nextCol, matrix.length, matrix[0].length)
-       && !visited[nextRow][nextCol] && matrix[nextRow][nextCol] === word[output.length]) {
-      result = dfs(matrix, nextRow, nextCol, visited, word, output);
+       && !visited[nextRow][nextCol] 
+        && matrix[nextRow][nextCol] === word[current.length]) {
+      result = dfs(matrix, nextRow, nextCol, visited, word, current);
       if (result) return true;
     }
   }
@@ -42,22 +45,22 @@ function dfs(matrix, row, column, visited, word, output) {
   return result;
 }
 
-function findWord(board, word) {
-  if (board.length === 0) return false;
+const findWord = (matrix, word) => {
+  if (matrix.length === 0) return false;
   if (word.length === 0) return false;
 
   const visited = [];
-  for (let i = 0; i < board.length; i++) {
+  for (let i = 0; i < matrix.length; i++) {
     visited[i] = [];
-    for (let j = 0; j < board[i].length; j++) {
+    for (let j = 0; j < matrix[i].length; j++) {
       visited[i][j] = false;
     }
   }
 
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      if (!visited[i][j] && board[i][j] === word[0]) {
-        const result = dfs(board, i, j, visited, word, '');
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (!visited[i][j] && matrix[i][j] === word[0]) {
+        const result = dfs(matrix, i, j, visited, word, '');
         if (result) return true;
       }
     }
