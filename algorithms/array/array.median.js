@@ -9,6 +9,7 @@ function getMedian(nums1, nums2) {
   const totalLength = nums1.length + nums2.length;
   const middle = totalLength / 2;
   const isEven = totalLength % 2 === 0;
+
   let index1 = 0;
   let index2 = 0;
   let current = null;
@@ -18,29 +19,19 @@ function getMedian(nums1, nums2) {
     if (current) {
       previous = current;
     }
-    const selectOne = nums1[index1];
-    const selectTwo = nums2[index2];
-    if (!selectOne || selectTwo < selectOne) {
-      current = selectTwo;
+
+    const one = nums1[index1];
+    const two = nums2[index2];
+
+    if (!one || two < one) {
+      current = two;
       index2++;
     } else {
-      current = selectOne;
+      current = one;
       index1++;
-    }
-    /* if (selectOne === undefined) {
-      current = selectTwo;
-      index2++;
-    } else if (selectTwo === undefined) {
-      current = selectOne;
-      index1++;
-    } else if (selectOne < selectTwo) {
-      current = selectOne;
-      index1++;
-    } else {
-      current = selectTwo;
-      index2++;
-    } */
+    } 
   }
+
   return isEven ? (previous + current) / 2 : current;
 }
 

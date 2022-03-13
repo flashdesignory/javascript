@@ -85,10 +85,13 @@ function minWindow2(s, t) {
   while (right < s.length) {
     // if count is 0, we have a window with all chars
     if (count === 0) {
+      // we found a match, let's assign to result if it's longer
       if (!result || right - left + 1 < result.length) {
         result = s.slice(left, right + 1);
       }
 
+      // resetting the first character (on the left)
+      // moving the window to the right and continue
       const current = s[left];
       if (freqMap[current] !== undefined) {
         freqMap[current]++;

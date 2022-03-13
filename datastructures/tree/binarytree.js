@@ -276,9 +276,17 @@ class BinaryTree {
 
     function traverse(node) {
       if (node === null) return 0;
+      // max sum on the left and right sub-trees of node
+      // if value is negative, use 0 as the value.
       const left = Math.max(traverse(node.left), 0);
       const right = Math.max(traverse(node.right), 0);
-      maxSum = Math.max(maxSum, node.value + left + right);
+      // current sum
+      const sum = node.value + left + right;
+      // update maxSum
+      maxSum = Math.max(maxSum, sum);
+
+      // return the max gain if continue the same path
+      // max gain is the node and one/zero of its subtrees (left or right)
       return node.value + Math.max(left, right);
     }
 
