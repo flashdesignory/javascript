@@ -29,7 +29,7 @@ function getMedian(nums1, nums2) {
     } else {
       current = one;
       index1++;
-    } 
+    }
   }
 
   return isEven ? (previous + current) / 2 : current;
