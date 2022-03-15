@@ -47,9 +47,13 @@ class HashTable {
     let hash = 0;
     if (key.length === 0) return hash;
     for (let i = 0; i < key.length; i++) {
+      // hash = (hash * 32) - hash
+      // left bitwise shift
       hash = (hash << 5) - hash; // eslint-disable-line
       hash += key.charCodeAt(i);
+      // ensures 32 bit unsigned integer
       hash &= hash; // eslint-disable-line
+      // hash = hash & hash
     }
     return hash;
   }

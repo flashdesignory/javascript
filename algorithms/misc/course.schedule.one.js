@@ -21,9 +21,12 @@ const canFinish = function (numCourses, prerequisites) {
     if (degree === 0) queue.push(i);
   });
 
+  const result = [];
+
   while (queue.length !== 0) {
     const finished = queue.shift();
     numCourses--;
+    result.push(finished)
     prerequisites.forEach((prerequisite) => {
       if (prerequisite[1] === finished) {
         degrees[prerequisite[0]]--;
@@ -33,6 +36,8 @@ const canFinish = function (numCourses, prerequisites) {
       }
     });
   }
+
+  console.log('result', result);
 
   return numCourses === 0;
 };
