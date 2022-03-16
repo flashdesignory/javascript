@@ -463,6 +463,28 @@ class BinaryTree {
     findNodes(start, distance);
     return result;
   }
+
+  findLeaves(node) {
+    const result = {};
+
+    const dfs = (node) => {
+      if (!node) return 0;
+      const depth = Math.max(dfs(node.left), dfs(node.right));
+
+      console.log('depth', depth, 'value', node.value);
+
+      if (result[depth]) {
+        result[depth].push(node.value);
+      } else {
+        result[depth] = [node.value];
+      }
+
+      return depth + 1;
+    }
+    
+    dfs(node);
+    return Object.values(result);
+  }
 }
 
 
@@ -501,6 +523,9 @@ describe('BinaryTree Methods', () => {
   it('BinaryTree.maxPathSum()', () => {
     expect(tree.maxPathSum(tree.root)).toEqual(18);
   });
+  it('BinaryTree.findLeaves()', () => {
+    expect(tree.findLeaves(tree.root)).toEqual([[7, 6, 5, 4], [3, 2], [1]]);
+  })
 });
 
 describe('BinaryTree is symmetrical', () => {
