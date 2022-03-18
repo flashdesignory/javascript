@@ -459,6 +459,7 @@ class BinarySearchTree {
     return null;
   }
 
+  // lowest common ancestor (lca)
   ancestor(node, n1, n2) {
     if (!node) return null;
 
@@ -614,6 +615,12 @@ class BinarySearchTree {
     }
 
     return 0;
+  }
+
+  shortestPath2(node, src, dst) {
+    if (!node) return 0;
+    const lca = this.ancestor(node, src, dst);
+    return this.distance(lca, src) + this.distance(lca, dst);
   }
 
   longestPath(node) {
@@ -922,6 +929,9 @@ describe('BinarySearchTree Methods', () => {
   });
   it('BinarySearchTree.shortestPath()', () => {
     expect(tree.shortestPath(tree.root, 3, 11)).toEqual(6);
+  });
+  it('BinarySearchTree.shortestPath2()', () => {
+    expect(tree.shortestPath2(tree.root, 3, 11)).toEqual(6);
   });
   it('BinarySearchTree.longestPath()', () => {
     expect(tree.longestPath(tree.root)).toEqual(5);
