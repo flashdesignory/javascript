@@ -239,6 +239,17 @@ class BinaryTree {
     return result;
   }
 
+  distance(node, value, distance = 0, path = []) {
+    if (!node) return 0;
+    if (node.value === value) {
+      path.push(value);
+      console.log(path);
+      return distance;
+    }
+
+    return this.distance(node.left, value, distance + 1, [...path, node.value]) || this.distance(node.right, value, distance + 1, [...path, node.value])
+  }
+
   last(node) {
     if (!node) return null;
 
@@ -313,34 +324,19 @@ class BinaryTree {
     return false;
   }
 
-  lowestCommonAncestor(node, value1, value2) {
-    let ancestor = null;
-
-    function traverse(node, value1, value2) { //eslint-disable-line
-      if (!node) return false;
-
-      const left = traverse(node.left, value1, value2) ? 1 : 0;
-      const right = traverse(node.right, value1, value2) ? 1 : 0;
-      const middle = node.value === value1 || node.value === value2 ? 1 : 0;
-
-      if (middle + left + right >= 2) {
-        ancestor = node;
-      }
-
-      return middle + left + right > 0;
-    }
-
-    traverse(node, value1, value2);
-    return ancestor.value;
-  }
-
-  lowestCommonAncestor2(node, p, q) {
+  lowestCommonAncestor(node, p, q) {
     if (!node || node.value === p || node.value === q) return node;
-    const left = this.lowestCommonAncestor2(node.left, p, q);
-    const right = this.lowestCommonAncestor2(node.right, p, q);
+    const left = this.lowestCommonAncestor(node.left, p, q);
+    const right = this.lowestCommonAncestor(node.right, p, q);
     if (!left) return right;
     if (!right) return left;
     return node;
+  }
+
+  shortestPath(node, src, dst) {
+    if (!node) return 0;
+    const lca = this.lowestCommonAncestor(node, src, dst);
+    return this.distance(lca, src) + this.distance(lca, dst);
   }
 
   boundary(node) {
@@ -570,7 +566,7 @@ describe('BinaryTree lowest Common Ancestor', () => {
   tree.root.right.right = new Node(7);
 
   it('BinaryTree.lowestCommonAncestor()', () => {
-    expect(tree.lowestCommonAncestor(tree.root, 4, 5)).toEqual(2);
+    expect(tree.lowestCommonAncestor(tree.root, 4, 5).value).toEqual(2);
   });
 });
 
