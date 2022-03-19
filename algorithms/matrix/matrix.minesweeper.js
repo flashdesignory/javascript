@@ -24,29 +24,18 @@ class Queue {
     return temp;
   }
 
-  peek() {
-    return this.data[this.first];
-  }
-
   empty() {
     return this.first === this.last;
   }
-
-  print() {
-    const result = [];
-    Object.values(this.data).forEach((value) => {
-      result.push(value);
-    });
-    return result;
-  }
 }
 
-const rowNum = [-1, -1, -1, 0, 1, 1, 1, 0];
-const colNum = [-1, 0, 1, 1, 1, 0, -1, -1];
+const directions = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]];
 
-function isValid(row, column, numRows, numCols) {
-  return row >= 0 && row < numRows && column >= 0 && column < numCols;
-}
+const isValid = (row, column, numRows, numColumns) => 
+  row >= 0
+  && row < numRows
+  && column >= 0
+  && column < numColumns;
 
 function mineSweeper(matrix, position) {
   const [row, column] = position;
@@ -66,10 +55,11 @@ function mineSweeper(matrix, position) {
     // Count the adjacent mines
     let count = 0;
     for (let index = 0; index < 8; index++) {
-      const nextRow = currentRow + rowNum[index];
-      const nextColumn = currentColumn + colNum[index];
+      const nextRow = currentRow + directions[index][0];
+      const nextColumn = currentColumn + directions[index][1];
 
-      if (isValid(nextRow, nextColumn, numRows, numColumns) && matrix[nextRow][nextColumn] === 'M') {
+      if (isValid(nextRow, nextColumn, numRows, numColumns) 
+        && matrix[nextRow][nextColumn] === 'M') {
         count++;
       }
     }
@@ -88,7 +78,8 @@ function mineSweeper(matrix, position) {
         const nextRow = currentRow + rowNum[index];
         const nextColumn = currentColumn + colNum[index];
 
-        if (isValid(nextRow, nextColumn, numRows, numColumns) && matrix[nextRow][nextColumn] === 'E') {
+        if (isValid(nextRow, nextColumn, numRows, numColumns)
+          && matrix[nextRow][nextColumn] === 'E') {
           queue.enqueue([nextRow, nextColumn]);
           matrix[nextRow][nextColumn] = 'B';
         }
