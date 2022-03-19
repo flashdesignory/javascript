@@ -26,7 +26,7 @@ const canFinish = function (numCourses, prerequisites) {
   while (queue.length !== 0) {
     const finished = queue.shift();
     numCourses--;
-    result.push(finished)
+    result.push(finished);
     prerequisites.forEach((prerequisite) => {
       if (prerequisite[1] === finished) {
         degrees[prerequisite[0]]--;

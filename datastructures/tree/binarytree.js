@@ -247,7 +247,7 @@ class BinaryTree {
       return distance;
     }
 
-    return this.distance(node.left, value, distance + 1, [...path, node.value]) || this.distance(node.right, value, distance + 1, [...path, node.value])
+    return this.distance(node.left, value, distance + 1, [...path, node.value]) || this.distance(node.right, value, distance + 1, [...path, node.value]);
   }
 
   last(node) {
@@ -476,8 +476,8 @@ class BinaryTree {
       }
 
       return depth + 1;
-    }
-    
+    };
+
     dfs(node);
     return Object.values(result);
   }
@@ -521,7 +521,7 @@ describe('BinaryTree Methods', () => {
   });
   it('BinaryTree.findLeaves()', () => {
     expect(tree.findLeaves(tree.root)).toEqual([[7, 6, 5, 4], [3, 2], [1]]);
-  })
+  });
 });
 
 describe('BinaryTree is symmetrical', () => {

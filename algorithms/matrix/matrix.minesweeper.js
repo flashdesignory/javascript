@@ -31,8 +31,7 @@ class Queue {
 
 const directions = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]];
 
-const isValid = (row, column, numRows, numColumns) => 
-  row >= 0
+const isValid = (row, column, numRows, numColumns) => row >= 0
   && row < numRows
   && column >= 0
   && column < numColumns;
@@ -58,7 +57,7 @@ function mineSweeper(matrix, position) {
       const nextRow = currentRow + directions[index][0];
       const nextColumn = currentColumn + directions[index][1];
 
-      if (isValid(nextRow, nextColumn, numRows, numColumns) 
+      if (isValid(nextRow, nextColumn, numRows, numColumns)
         && matrix[nextRow][nextColumn] === 'M') {
         count++;
       }
@@ -75,8 +74,8 @@ function mineSweeper(matrix, position) {
       matrix[currentRow][currentColumn] = 'B';
 
       for (let index = 0; index < 8; index++) {
-        const nextRow = currentRow + rowNum[index];
-        const nextColumn = currentColumn + colNum[index];
+        const nextRow = currentRow + directions[index][0];
+        const nextColumn = currentColumn + directions[index][1];
 
         if (isValid(nextRow, nextColumn, numRows, numColumns)
           && matrix[nextRow][nextColumn] === 'E') {
