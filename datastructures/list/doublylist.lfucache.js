@@ -143,12 +143,12 @@ class LFUCache {
   }
 
   put(key, value) {
-    if (!this.capacity) return;
+    if (!this.capacity) return null;
 
     if (this.map[key]) {
       this.map[key].value = value;
       this.get(key);
-      return;
+      return null;
     }
 
     if (this.count === 0) {

@@ -315,7 +315,7 @@ class BinarySearchTree {
     let levelValues = [];
     let numSiblings = 1;
     let numChildren = 0;
-    let levelCount = 1;
+    let levelCount = 0;
 
     while (!queue.empty()) {
       const current = queue.dequeue();
@@ -659,9 +659,6 @@ class BinarySearchTree {
   minDepth(node) {
     if (!node) return 0;
 
-    // if (!node.left) return this.minDepth(node.right) + 1;
-    // if (!node.right) return this.minDepth(node.left) + 1;
-
     return Math.min(
       this.minDepth(node.left),
       this.minDepth(node.right),
@@ -670,9 +667,6 @@ class BinarySearchTree {
 
   maxDepth(node) {
     if (!node) return 0;
-
-    // if (!node.left) return this.maxDepth(node.right) + 1;
-    // if (!node.right) return this.maxDepth(node.left) + 1;
 
     return Math.max(
       this.maxDepth(node.left),

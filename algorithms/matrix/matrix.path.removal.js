@@ -53,7 +53,10 @@ class Node {
   }
 }
 
-const isValid = (row, column, rowLength, columnLength) => row >= 0 && row < rowLength && column >= 0 && column < columnLength;
+const isValid = (row, column, rowLength, columnLength) => row >= 0
+  && row < rowLength
+  && column >= 0
+  && column < columnLength;
 
 const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]];
 
@@ -85,16 +88,19 @@ const shortestPath = (matrix, k) => {
 
       // discard if it is outside the matrix bounary
       if (!isValid(nextRow, nextColumn, matrix.length, matrix[0].length)) {
+        // eslint-disable-next-line
         continue;
       }
 
       // discard if it is an obstacle and we can't eliminate it anymore
       if (matrix[nextRow][nextColumn] === 1 && current.itemsToRemove === 0) {
+        // eslint-disable-next-line
         continue;
       }
 
       // if it is an obstacle, decrease k by 1, otherwise it stays the same
-      const nextK = matrix[nextRow][nextColumn] === 1 ? current.itemsToRemove - 1 : current.itemsToRemove;
+      const nextK = matrix[nextRow][nextColumn] === 1
+        ? current.itemsToRemove - 1 : current.itemsToRemove;
 
       // key for the next state
       const key = `${nextRow}-${nextColumn}-${nextK}`;

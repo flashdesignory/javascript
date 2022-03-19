@@ -8,7 +8,7 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods":
  ["print", "last", "maxPathSum", "lowestCommonAncestor", "diameter",
  "levelorder", "boundary", "getNode", "width", "kDistanceNodes1",
- "kDistanceNodes2"
+ "kDistanceNodes2", "findLeaves"
 ] }] */
 
 class Queue {
@@ -247,7 +247,10 @@ class BinaryTree {
       return distance;
     }
 
-    return this.distance(node.left, value, distance + 1, [...path, node.value]) || this.distance(node.right, value, distance + 1, [...path, node.value]);
+    return (
+      this.distance(node.left, value, distance + 1, [...path, node.value])
+      || this.distance(node.right, value, distance + 1, [...path, node.value])
+    );
   }
 
   last(node) {

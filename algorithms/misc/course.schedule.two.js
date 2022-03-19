@@ -1,16 +1,17 @@
 /*
- * @title: Course Schedule can finish
+ * @title: Course Schedule find order
  * @description:
  * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1.
  * You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you
  * must take course bi first if you want to take course ai.
  * For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
- * Return true if you can finish all courses. Otherwise, return false.
+ * Return the ordering of courses you should take to finish all courses. If there are many valid
+ * answers, return any of them. If it is impossible to finish all courses, return an empty array.
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
 
-const canFinish = function (numCourses, prerequisites) {
+const findOrder = (numCourses, prerequisites) => {
   const degrees = (new Array(numCourses)).fill(0);
   const queue = [];
   prerequisites.forEach((prerequisite) => {
@@ -39,14 +40,14 @@ const canFinish = function (numCourses, prerequisites) {
 
   console.log('result', result);
 
-  return numCourses === 0;
+  return numCourses === 0 ? result : [];
 };
 
-// npx jest algorithms/misc/course.schedule.one.js
+// npx jest algorithms/misc/course.schedule.two.js
 test('example-one', () => {
-  expect(canFinish(2, [[1, 0]])).toBeTruthy();
+  expect(findOrder(2, [[1, 0]])).toEqual([0, 1]);
 });
 
 test('example-two', () => {
-  expect(canFinish(2, [[1, 0], [0, 1]])).toBeFalsy();
+  expect(findOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]])).toEqual([0, 1, 2, 3]);
 });
