@@ -176,6 +176,8 @@ class BinaryTree {
     return max;
   }
 
+  // The diameter of a binary tree is the length of the longest path between
+  // any two nodes in a tree.
   diameter(node) {
     let result = 0;
 
@@ -191,6 +193,8 @@ class BinaryTree {
 
     return result;
   }
+
+
 
   preorder(node, result) {
     result = result || [];
@@ -288,12 +292,12 @@ class BinaryTree {
   maxPathSum(node) {
     let maxSum = -Infinity;
 
-    function traverse(node) {
+    function dfs(node) {
       if (node === null) return 0;
       // max sum on the left and right sub-trees of node
       // if value is negative, use 0 as the value.
-      const left = Math.max(traverse(node.left), 0);
-      const right = Math.max(traverse(node.right), 0);
+      const left = Math.max(dfs(node.left), 0);
+      const right = Math.max(dfs(node.right), 0);
       // current sum
       const sum = node.value + left + right;
       // update maxSum
@@ -304,7 +308,7 @@ class BinaryTree {
       return node.value + Math.max(left, right);
     }
 
-    traverse(node);
+    dfs(node);
 
     return maxSum;
   }
