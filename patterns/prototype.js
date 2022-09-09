@@ -36,14 +36,17 @@ ExtendedBase.prototype.getName = function () {
   return this.name;
 };
 
-test.skip('patterns.prototype', () => {
-  const b = new Base('foo');
-  b.init();
-  expect(b.getId()).toEqual('foo');
-
-  const c = new ExtendedBase('baba');
-  c.init();
-  expect(c.getId()).toEqual('baba');
-  c.setName('bo');
-  expect(c.getName()).toEqual('bo');
+// npx jest patterns/prototype.js
+describe('patterns/prototype', () => {
+  it('should extend the prototype', () => {
+    const b = new Base('foo');
+    b.init();
+    expect(b.getId()).toEqual('foo');
+  
+    const c = new ExtendedBase('baba');
+    c.init();
+    expect(c.getId()).toEqual('baba');
+    c.setName('bo');
+    expect(c.getName()).toEqual('bo');
+  });
 });

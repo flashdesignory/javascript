@@ -53,14 +53,17 @@ const ModuleTwo = (function () {
   return publicInterface;
 })();
 
-test('pattners.module', () => {
-  expect(Module.publicFunction()).toEqual('publicFunction()');
-  expect(Module.getPrivateVar()).toEqual('foo');
-  expect(Module._privateVar).toBeUndefined();
-});
-
-test('pattners.module2', () => {
-  console.log = jest.fn();
-  ModuleTwo.publicFunction();
-  expect(console.log).toHaveBeenCalledTimes(3);
+// npx jest patterns/module.js
+describe('patterns/module', () => {
+  it('should keep private vars private', () => {
+    expect(Module.publicFunction()).toEqual('publicFunction()');
+    expect(Module.getPrivateVar()).toEqual('foo');
+    expect(Module._privateVar).toBeUndefined();
+  });
+  
+  it('should call public functions', () => {
+    console.log = jest.fn();
+    ModuleTwo.publicFunction();
+    expect(console.log).toHaveBeenCalledTimes(3);
+  });
 });

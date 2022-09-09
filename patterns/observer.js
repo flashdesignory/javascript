@@ -5,7 +5,7 @@
  * @email: info@flashdesignory.com
  */
 
-class Subject {
+class Observable {
   constructor() {
     this.observers = [];
   }
@@ -15,11 +15,11 @@ class Subject {
   }
 
   unsubscribe(obj) {
-    this.observers = this.observers.filter(subscriber => subscriber !== obj);
+    this.observers = this.observers.filter(observer  => observer  !== obj);
   }
 
   notify(data) {
-    this.observers.forEach(subscriber => subscriber.update(data));
+    this.observers.forEach(observer  => observer .notify(data));
   }
 }
 
@@ -28,20 +28,23 @@ class Observer {
     this.id = id;
   }
 
-  update(data) {
-    console.log(this.id, 'update', data);
+  notify(data) {
+    console.log(this.id, 'notify', data);
   }
 }
 
-test('patterns.observer', () => {
-  console.log = jest.fn();
-  const subj = new Subject();
-  const o1 = new Observer('foo');
-  const o2 = new Observer('bar');
-  const o3 = new Observer('baz');
-  subj.subscribe(o1);
-  subj.subscribe(o2);
-  subj.subscribe(o3);
-  subj.notify('hello world');
-  expect(console.log).toHaveBeenCalledTimes(3);
+// npx jest patterns/observer.js
+describe('patterns/observer', () => {
+  it('should notify all subscribers', () => {
+    console.log = jest.fn();
+    const subj = new Observable();
+    const o1 = new Observer('foo');
+    const o2 = new Observer('bar');
+    const o3 = new Observer('baz');
+    subj.subscribe(o1);
+    subj.subscribe(o2);
+    subj.subscribe(o3);
+    subj.notify('hello world');
+    expect(console.log).toHaveBeenCalledTimes(3);
+  });
 });

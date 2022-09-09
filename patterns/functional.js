@@ -33,14 +33,17 @@ function extendedBase(id) {
   return _base;
 }
 
-test.skip('patterns.functional', () => {
-  const b = base('foo');
-  b.init();
-  expect(b.getId()).toEqual('foo');
-
-  const c = extendedBase('baba');
-  c.init();
-  expect(c.getId()).toEqual('baba');
-  c.setName('bo');
-  expect(c.getName()).toEqual('bo');
+// npx jest patterns/functional.js
+describe('patterns/functional', () => {
+  it('should extend another function', () => {
+    const b = base('foo');
+    b.init();
+    expect(b.getId()).toEqual('foo');
+  
+    const c = extendedBase('baba');
+    c.init();
+    expect(c.getId()).toEqual('baba');
+    c.setName('bo');
+    expect(c.getName()).toEqual('bo');
+  });
 });

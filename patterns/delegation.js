@@ -30,14 +30,17 @@ ExtendedBase.getName = function () {
   return this.name;
 };
 
-test('patterns.delegation', () => {
-  const b = Object.create(Base);
-  b.init('foo');
-  expect(b.getId()).toEqual('foo');
-
-  const c = Object.create(ExtendedBase);
-  c.init('baba');
-  expect(c.getId()).toEqual('baba');
-  c.setName('bo');
-  expect(c.getName()).toEqual('bo');
+// npx jest patterns/delegation.js
+describe('patterns/delegation', () => {
+  it('should extend another object', () => {
+    const b = Object.create(Base);
+    b.init('foo');
+    expect(b.getId()).toEqual('foo');
+  
+    const c = Object.create(ExtendedBase);
+    c.init('baba');
+    expect(c.getId()).toEqual('baba');
+    c.setName('bo');
+    expect(c.getName()).toEqual('bo');
+  });
 });
