@@ -1,59 +1,56 @@
 /*
- * @title: simple Class
+ * @title: Components
  * @description: Generic Class
  * @author: Thorsten Kober
  * @email: info@flashdesignory.com
  */
-(function () {
-  function Base(id) {
-    let _id = id;
 
-    this.getId = function () {
-      return _id;
-    };
+class Person {
+  constructor({
+    type,
+  }) {
+    this._type = type;
+  };
 
-    this.setId = function (value) {
-      _id = value;
-    };
-
-    this.init = function () {
-      console.log('init()');
-    };
+  set name(value) {
+    this._name = value;
   }
-  window.Base = Base;
-})();
 
-(function () {
-  function ExtendedBase(id) {
-    const _super = new window.Base(id);
-    let _name;
-
-    /* eslint-disable-next-line */
-    for (let name in _super) {
-      this[name] = _super[name];
-    }
-
-    this.setName = function (value) {
-      _name = value;
-    };
-
-    this.getName = function () {
-      return _name;
-    };
-
-    this.constructor = window.Base;
+  get name() {
+    return this._name;
   }
-  window.ExtendedBase = ExtendedBase;
-})();
 
+  greet() {
+    return `Hello, my name is ${this._name}`;
+  }
+}
+
+class Student extends Person {
+  constructor({
+    type,
+    school
+  }) {
+    super({ type });
+    this._school = school;
+  }
+
+  says(msg) {
+    return `${this._name} says: "${msg}"`;
+  }
+
+  greet() {
+    return `Hello, my name is ${this._name}, I am going to ${this._school}`;
+  }
+}
+
+// npx jest patterns/class.js
 test('patterns.class', () => {
-  const b = new window.Base('foo');
-  b.init();
-  b.getId();
-  b.setId('baba');
-  expect(b.getId()).toBe('baba');
-  const c = new window.ExtendedBase('baba');
-  c.init();
-  c.setName('bo');
-  expect(c.getName()).toBe('bo');
+  const a = new Person({ type: 'person' });
+  a.name = 'Fred';
+  expect(a.greet()).toEqual('Hello, my name is Fred');
+
+  const b = new Student({ type: 'person', school: 'FancyPants' });
+  b.name = 'Steve';
+  expect(b.greet()).toEqual('Hello, my name is Steve, I am going to FancyPants');
+  expect(b.says('yo')).toEqual('Steve says: "yo"');
 });
