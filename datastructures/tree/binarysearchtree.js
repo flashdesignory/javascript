@@ -315,7 +315,7 @@ class BinarySearchTree {
     let levelValues = [];
     let numSiblings = 1;
     let numChildren = 0;
-    let levelCount = 0;
+    let levelCount = 1;
 
     while (!queue.empty()) {
       const current = queue.dequeue();

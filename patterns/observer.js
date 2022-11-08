@@ -15,11 +15,11 @@ class Observable {
   }
 
   unsubscribe(obj) {
-    this.observers = this.observers.filter(observer  => observer  !== obj);
+    this.observers = this.observers.filter(observer => observer !== obj);
   }
 
   notify(data) {
-    this.observers.forEach(observer  => observer .notify(data));
+    this.observers.forEach(observer => observer.notify(data));
   }
 }
 

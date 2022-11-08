@@ -8,7 +8,7 @@
 class Singleton {
   constructor() {
     if (this.instance) {
-      throw new Error("You can only create one instance!")
+      throw new Error('You can only create one instance!');
     }
 
     this._id = Math.random() * 1000;
@@ -24,7 +24,7 @@ class Singleton {
     }
     return this.instance;
   }
-};
+}
 
 const FunctionalSingleton = (function () {
   let instance;

@@ -60,7 +60,7 @@ describe('patterns/module', () => {
     expect(Module.getPrivateVar()).toEqual('foo');
     expect(Module._privateVar).toBeUndefined();
   });
-  
+
   it('should call public functions', () => {
     console.log = jest.fn();
     ModuleTwo.publicFunction();

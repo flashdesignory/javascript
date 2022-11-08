@@ -39,7 +39,7 @@ describe('patterns/functional', () => {
     const b = base('foo');
     b.init();
     expect(b.getId()).toEqual('foo');
-  
+
     const c = extendedBase('baba');
     c.init();
     expect(c.getId()).toEqual('baba');

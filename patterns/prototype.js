@@ -42,7 +42,7 @@ describe('patterns/prototype', () => {
     const b = new Base('foo');
     b.init();
     expect(b.getId()).toEqual('foo');
-  
+
     const c = new ExtendedBase('baba');
     c.init();
     expect(c.getId()).toEqual('baba');

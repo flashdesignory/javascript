@@ -36,7 +36,7 @@ describe('patterns/delegation', () => {
     const b = Object.create(Base);
     b.init('foo');
     expect(b.getId()).toEqual('foo');
-  
+
     const c = Object.create(ExtendedBase);
     c.init('baba');
     expect(c.getId()).toEqual('baba');

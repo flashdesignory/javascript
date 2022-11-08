@@ -10,7 +10,7 @@ class Person {
     type,
   }) {
     this._type = type;
-  };
+  }
 
   set name(value) {
     this._name = value;
@@ -28,9 +28,9 @@ class Person {
 class Student extends Person {
   constructor({
     type,
-    school
+    school,
   }) {
-    super({ type });
+    super({ type: type });
     this._school = school;
   }
 
@@ -49,11 +49,10 @@ describe('patterns/class', () => {
     const a = new Person({ type: 'person' });
     a.name = 'Fred';
     expect(a.greet()).toEqual('Hello, my name is Fred');
-  
+
     const b = new Student({ type: 'person', school: 'FancyPants' });
     b.name = 'Steve';
     expect(b.greet()).toEqual('Hello, my name is Steve, I am going to FancyPants');
     expect(b.says('yo')).toEqual('Steve says: "yo"');
   });
 });
-

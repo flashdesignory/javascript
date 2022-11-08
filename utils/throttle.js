@@ -6,8 +6,8 @@
  */
 
 // simple throttle:
-// fires initial event and waits 
-function simple_throttle(fn, wait) {
+// fires initial event and waits
+function simpleThrottle(fn, wait) {
   let last = 0;
   return function (...args) {
     const now = new Date().getTime();
@@ -27,32 +27,32 @@ const throttle = (fn, delay, { leading = true, trailing = true } = {}) => {
   let last = 0;
   let timeout;
   return function (...args) {
-      const now = new Date().getTime();
-      timeout ?? clearTimeout(timeout);
+    const now = new Date().getTime();
+    if (timeout) clearTimeout(timeout);
 
-      // if first event shouldn't fire, update last var early
-      if (!leading && last === 0) {
-          last = now;
+    // if first event shouldn't fire, update last var early
+    if (!leading && last === 0) {
+      last = now;
+    }
+
+    if (now - last < delay) {
+      if (trailing) {
+        const difference = now - last;
+        const leftOverDelay = delay - difference;
+        timeout = setTimeout(() => fn.apply(this, args), leftOverDelay);
       }
+      return;
+    }
 
-      if (now - last < delay) {
-          if (trailing) {
-              const difference = now - last;
-              const leftOverDelay = delay - difference;
-              timeout = setTimeout(() => fn.apply(this, args), leftOverDelay);
-          }
-          return;
-      }
-
-      last = now
-      fn.apply(this, args);
-  }
-}
+    last = now;
+    fn.apply(this, args);
+  };
+};
 
 // npx jest utils/throttle.js
 test('utils.simple_throttle', () => {
   console.log = jest.fn();
-  const throttled = simple_throttle(() => {
+  const throttled = simpleThrottle(() => {
     console.log('throttled');
   }, 250);
 

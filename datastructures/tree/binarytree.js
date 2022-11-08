@@ -195,7 +195,6 @@ class BinaryTree {
   }
 
 
-
   preorder(node, result) {
     result = result || [];
     if (!node) return result;
