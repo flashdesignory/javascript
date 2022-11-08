@@ -7,24 +7,35 @@
  * @email: info@flashdesignory.com
  */
 
-function gcd(a, b) {
+
+const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+
+const gcd1 = (a, b) => {
+  if (b === 0) {
+    return a;
+  }
+
+  return gcd1(b, a % b);
+};
+
+const gcd2 = (a, b) => {
   if (a === 0 || b === 0) return 0;
   if (a === b) return a;
-  if (a > b) return gcd(a - b, b);
-  return gcd(a, b - a);
-}
+  if (a > b) return gcd2(a - b, b);
+  return gcd2(a, b - a);
+};
 
 // euclid
-function gcd1(a, b) {
-  // simple way to ensure a is min and b is max
+const gcd3 = (a, b) => {
+  // simple way to ensure min is a and max is b.
   const min = Math.min(a, b);
   const max = Math.max(a, b);
 
   if (max % min === 0) return min;
-  return gcd1(min, max % min);
-}
+  return gcd3(min, max % min);
+};
 
-function gcd2(a, b) {
+const gcd4 = (a, b) => {
   if (a < 2 || b < 2) return 1;
 
   let divisor = 2;
@@ -37,16 +48,7 @@ function gcd2(a, b) {
     divisor++;
   }
   return greatest;
-}
-
-function gcd3(a, b) {
-  if (b === 0) {
-    return a;
-  }
-
-  return gcd2(b, a % b);
-}
-
+};
 
 // npx jest algorithms/number/number.gcd.js
 describe('gcd()', () => {
@@ -61,5 +63,8 @@ describe('gcd()', () => {
   });
   test('gcd3();', () => {
     expect(gcd3(14, 21)).toEqual(7);
+  });
+  test('gcd4();', () => {
+    expect(gcd4(14, 21)).toEqual(7);
   });
 });
